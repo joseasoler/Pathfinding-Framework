@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<PF_DebugLogLabel>Debug log</PF_DebugLogLabel>
+	<PF_DebugLogHover>Display additional messages in the log. Useful for debugging bugs.</PF_DebugLogHover>
+	<PF_MovementTypesReportLabel>Movement types report</PF_MovementTypesReportLabel>
+	<PF_MovementTypesReportHover>Generates a detailed report about the path costs of each movement type currently in use and displays it in the log.</PF_MovementTypesReportHover>
+	<PF_ResetSettingsLabel>Reset</PF_ResetSettingsLabel>
+	<PF_ResetSettingsHover>Reset all options of the mod to their default values.</PF_ResetSettingsHover>
+</LanguageData>

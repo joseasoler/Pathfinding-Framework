@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<PathfindingFramework.MovementTypeDef>
+		<defName>PF_Aquatic</defName>
+		<label>aquatic</label>
+		<tagCosts>
+			<PF_DeepWater>0</PF_DeepWater>
+			<PF_ChestWater>5</PF_ChestWater>
+			<PF_ShallowWater>10</PF_ShallowWater>
+		</tagCosts>
+		<defaultCost>Avoid</defaultCost>
+	</PathfindingFramework.MovementTypeDef>
+</Defs>
