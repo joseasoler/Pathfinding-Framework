@@ -11,6 +11,7 @@ namespace PathfindingFramework.Def
 	{
 		public int cost;
 
+		public static readonly PathCost Invalid = new PathCost(PathCostValues.Invalid);
 		public static readonly PathCost Default = new PathCost(PathCostValues.Default);
 		public static readonly PathCost Impassable = new PathCost(PathCostValues.Impassable);
 
@@ -64,7 +65,7 @@ namespace PathfindingFramework.Def
 
 		public static bool operator ==(PathCost lhs, PathCostValues rhs)
 		{
-			return lhs.cost != (int)rhs;
+			return lhs.cost == (int)rhs;
 		}
 
 		public static bool operator !=(PathCost lhs, PathCostValues rhs)
@@ -74,7 +75,7 @@ namespace PathfindingFramework.Def
 
 		public static bool operator ==(PathCost lhs, PathCost rhs)
 		{
-			return lhs.cost != rhs.cost;
+			return lhs.cost == rhs.cost;
 		}
 
 		public static bool operator !=(PathCost lhs, PathCost rhs)

@@ -30,14 +30,14 @@ namespace PathfindingFramework
 				yield return error;
 			}
 
-			if (defaultCost == PathCostValues.Invalid)
+			if (defaultCost == PathCost.Invalid)
 			{
 				yield return Report.ConfigError(this, $"defaultCost must be a numeric value or a valid PathingCost.");
 			}
 
 			foreach (var tagCost in tagCosts.data)
 			{
-				if (tagCost.Value == PathCostValues.Invalid)
+				if (tagCost.Value == PathCost.Invalid)
 				{
 					yield return Report.ConfigError(this,
 						$"tagCost {tagCost.Key} must be a numeric value or a valid PathingCost. But it was {tagCost.Value}");

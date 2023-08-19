@@ -15,9 +15,9 @@ namespace PathfindingFramework.Def
 		{
 			data = new Dictionary<string, PathCost>();
 			var tagCosts = DirectXmlToObject.ListFromXml<TerrainTagPathCost>(xmlRoot);
-			foreach (var tagCost in tagCosts)
+			foreach (TerrainTagPathCost tagCost in tagCosts)
 			{
-				data[tagCost.tag] = tagCost.cost;
+				data.Add(tagCost.tag, tagCost.cost);
 			}
 		}
 	}
