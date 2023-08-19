@@ -7,7 +7,8 @@
 	</supportedVersions>
 	<url>github.com/joseasoler/pathfinding-framework</url>
 	<packageId>pathfinding.framework</packageId>
-	<description><![CDATA[<h2><b><color=teal>Pathfinding Framework</color></b></h2>
+	<!-- &lt;size=18&gt;&lt;b&gt;&lt;color=teal&gt;Pathfinding Framework&lt;/color&gt;&lt;/b&gt;&lt;/size&gt; -->
+	<description><![CDATA[<size=18><b><color=teal>Pathfinding Framework</color></b></size>
 
 Enables the creation of custom movement rules for pawns.
 
