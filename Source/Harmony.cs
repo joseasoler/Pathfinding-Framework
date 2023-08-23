@@ -1,12 +1,11 @@
 ﻿using System;
-using Verse;
 
-namespace PathfindingFramework.HarmonyPatches
+namespace PathfindingFramework
 {
 	/// <summary>
 	/// Handles the application of harmony patches.
 	/// </summary>
-	public static class HarmonyHandler
+	public static class Harmony
 	{
 		/// <summary>
 		/// Apply harmony patches to the game.
@@ -15,7 +14,7 @@ namespace PathfindingFramework.HarmonyPatches
 		{
 			try
 			{
-				var harmonyInstance = new HarmonyLib.Harmony(Mod.PathfindingFramework.PackageId);
+				var harmonyInstance = new HarmonyLib.Harmony(Mod.Mod.PackageId);
 				harmonyInstance.PatchAll();
 				Report.Debug("Harmony patching applied.");
 			}

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Defs>
-	<PathfindingFramework.MovementTypeDef>
+<Defs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../../Schemas/MovementDef.xsd">
+	<PathfindingFramework.MovementDef>
 		<defName>PF_Aquatic</defName>
 		<label>aquatic</label>
 		<tagCosts>
@@ -9,5 +10,5 @@
 			<PF_ShallowWater>10</PF_ShallowWater>
 		</tagCosts>
 		<defaultCost>Avoid</defaultCost>
-	</PathfindingFramework.MovementTypeDef>
+	</PathfindingFramework.MovementDef>
 </Defs>

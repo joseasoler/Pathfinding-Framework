@@ -19,18 +19,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="MovementTypes\MovementTypesHandler.cs" />
+		<Compile Include="Harmony.cs" />
+		<Compile Include="Movements.cs" />
 		<Compile Include="Parse\ParseHandler.cs" />
 		<Compile Include="Parse\PathCost.cs" />
 		<Compile Include="Parse\PathCostValues.cs" />
 		<Compile Include="Parse\TerrainTagPathCost.cs" />
-		<Compile Include="HarmonyPatches\HarmonyHandler.cs" />
-		<Compile Include="Mod\PathfindingFramework.cs" />
+		<Compile Include="Mod.cs" />
 		<Compile Include="Report.cs" />
-		<Compile Include="Mod\Settings.cs" />
-		<Compile Include="MovementTypeDef.cs" />
+		<Compile Include="MovementDef.cs" />
 		<Compile Include="Parse\TerrainTagPathCosts.cs" />
 		<Compile Include="Properties\AssemblyInfo.cs" />
+		<Compile Include="Settings.cs" />
+		<Compile Include="SettingsWindow.cs" />
 		<Reference Include="System" />
 		<Reference Include="System.Xml" />
 		<PackageReference Include="Krafs.Publicizer" Version="2.2.1">

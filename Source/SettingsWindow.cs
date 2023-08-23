@@ -1,43 +1,16 @@
-using PathfindingFramework.Def;
-using PathfindingFramework.HarmonyPatches;
-using PathfindingFramework.MovementTypes;
+﻿using PathfindingFramework.Mod;
 using UnityEngine;
 using Verse;
 
-namespace PathfindingFramework.Mod
+namespace PathfindingFramework
 {
-	/// <summary>
-	/// Main class of the mod. Handles initialization order and settings loading. Defines the settings UI.
-	/// </summary>
-	public class PathfindingFramework : Verse.Mod
+	public static class SettingsWindow
 	{
-		public const string PackageId = "pathfinding.framework";
-
-		/// <summary>
-		/// Handles the initialization of every component of this mod.
-		/// </summary>
-		/// <param name="content">Content pack data of this mod.</param>
-		public PathfindingFramework(ModContentPack content) : base(content)
-		{
-			HarmonyHandler.Initialize();
-			ParseHandler.Initialize();
-			LongEventHandler.ExecuteWhenFinished(InitializeWhenLoadingFinished);
-		}
-
-		/// <summary>
-		/// Initialization steps that must be taken after the game has finished loading.
-		/// </summary>
-		private void InitializeWhenLoadingFinished()
-		{
-			GetSettings<Settings>();
-			MovementTypesHandler.Initialize();
-		}
-
 		/// <summary>
 		/// Name of the mod in the settings list.
 		/// </summary>
 		/// <returns>Name of the mod in the settings list.</returns>
-		public override string SettingsCategory()
+		public static string SettingsCategory()
 		{
 			return Report.Name;
 		}
@@ -46,7 +19,7 @@ namespace PathfindingFramework.Mod
 		/// Contents of the mod settings window.
 		/// </summary>
 		/// <param name="inRect">Available area for drawing the settings.</param>
-		public override void DoSettingsWindowContents(Rect inRect)
+		public static void DoWindowContents(Rect inRect)
 		{
 			var listing = new Listing_Standard();
 			listing.Begin(inRect);
@@ -62,7 +35,7 @@ namespace PathfindingFramework.Mod
 			var movementTypeReportRect = new Rect(buttonsRect.x, buttonsRect.y, buttonWidth, buttonsRect.height);
 			if (Widgets.ButtonText(movementTypeReportRect, "PF_MovementTypesReportLabel".Translate()))
 			{
-				MovementTypesHandler.ShowReport();
+				Movements.ShowReport();
 			}
 			TooltipHandler.TipRegion(movementTypeReportRect, "PF_MovementTypesReportHover".Translate());
 
@@ -74,7 +47,6 @@ namespace PathfindingFramework.Mod
 			TooltipHandler.TipRegion(resetRect, "PF_ResetSettingsHover".Translate());
 
 			listing.End();
-			base.DoSettingsWindowContents(inRect);
 		}
 	}
 }

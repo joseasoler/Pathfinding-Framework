@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using PathfindingFramework.Def;
+using PathfindingFramework.Parse;
 
 namespace PathfindingFramework
 {
 	/// <summary>
 	/// A movement type is defined by a set of custom pathing rules that pawns must follow.
 	/// </summary>
-	public class MovementTypeDef : Verse.Def
+	public class MovementDef : Verse.Def
 	{
 		/// <summary>
-		/// Customize the path cost of specific terrain tags for this movement type.
+		/// Maps terrain tags to their path costs in this movement type.
 		/// Setting a value lower than 10000 for an impassable terrain will let it be passable for this movement type.
 		/// If a terrain has more than one matching tag, the largest tag value will be used.
 		/// </summary>
@@ -21,7 +21,6 @@ namespace PathfindingFramework
 		/// defaultPathCost cannot make impassable terrain passable.
 		/// </summary>
 		public PathCost defaultCost;
-
 
 		public override IEnumerable<string> ConfigErrors()
 		{

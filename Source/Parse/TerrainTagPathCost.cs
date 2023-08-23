@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 using Verse;
 
-namespace PathfindingFramework.Def
+namespace PathfindingFramework.Parse
 {
 	/// <summary>
 	/// Maps a terrain tag to a pathing cost.

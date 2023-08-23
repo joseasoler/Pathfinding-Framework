@@ -1,0 +1,33 @@
+﻿<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="Defs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="PathfindingFramework.MovementDef" type="MovementDef" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="TerrainTagPathCosts">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:any processContents="lax" namespace="##local"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MovementDef">
+		<xs:annotation>
+			<xs:documentation>A movement type is defined by a set of custom pathing rules that pawns must follow.</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="defName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="label" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="tagCosts" type="TerrainTagPathCosts" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Maps terrain tags to their path costs in this movement type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="defaultCost" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Default cost for terrains not present in other fields.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+</xs:schema>

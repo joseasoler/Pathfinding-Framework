@@ -1,21 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using PathfindingFramework.Def;
+using PathfindingFramework.Parse;
 using Verse;
 
-namespace PathfindingFramework.MovementTypes
+namespace PathfindingFramework
 {
 	/// <summary>
 	/// Parses movement types from XML and stores them in memory, allowing faster access and usage.
 	/// This class relies on Defs having an index field that starts at zero. 
 	/// </summary>
-	public class MovementTypesHandler
+	public class Movements
 	{
 		/// <summary>
-		/// List of movement types and their path costs. Accessed by [MovementTypeDef.index][TerrainDef.index].
+		/// Stores a list of terrain path costs for each movement type.
 		/// </summary>
-		private static List<List<int>> PathCostsByMovementTypeIndex;
+		private static int[] _costs;
+
+		/// <summary>
+		/// Number of TerrainDefs loaded in the game.
+		/// </summary>
+		private static int _terrainCount;
+
 
 		/// <summary>
 		/// Obtain the largest pathing cost of the tags of a specific terrain.  
@@ -23,7 +29,7 @@ namespace PathfindingFramework.MovementTypes
 		/// <param name="terrain">Terrain being evaluated</param>
 		/// <param name="pathCostData">Pathing cost of each tag for a certain movement type.</param>
 		/// <returns>Default if no tag was found, the maximum pathing cost otherwise.</returns>
-		private static int GetMaxTagCost(TerrainDef terrain, Dictionary<string, PathCost> pathCostData)
+		private static int CalculateMaxTagCost(TerrainDef terrain, Dictionary<string, PathCost> pathCostData)
 		{
 			var maxTagCost = PathCost.Default.cost;
 
@@ -49,19 +55,24 @@ namespace PathfindingFramework.MovementTypes
 		/// <param name="defaultCost">Default cost defined in the movement type.</param>
 		/// <param name="terrainPathCost">Vanilla path cost.</param>
 		/// <returns>Cost to use for pathing.</returns>
-		private static int GetPathCost(int maxTagCost, Traversability passability, PathCost defaultCost,
+		private static int CalculatePathCost(int maxTagCost, Traversability passability, PathCost defaultCost,
 			int terrainPathCost)
 		{
 			if (maxTagCost > PathCost.Default.cost)
 			{
 				return maxTagCost;
 			}
-			else if (passability == Traversability.Impassable)
+			if (passability == Traversability.Impassable)
 			{
 				return PathCost.Impassable.cost;
 			}
 
-			return (defaultCost == PathCost.Default) ? defaultCost.cost : terrainPathCost;
+			if (defaultCost == PathCost.Default)
+			{
+				return terrainPathCost;
+			}
+
+			return defaultCost.cost;
 		}
 
 		/// <summary>
@@ -69,26 +80,29 @@ namespace PathfindingFramework.MovementTypes
 		/// </summary>
 		private static void SetMovementPathCosts()
 		{
-			PathCostsByMovementTypeIndex = new List<List<int>>();
+			var movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
+			var terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
+			var movementCount = movementDefs.Count;
+			_terrainCount = terrainDefs.Count;
+			_costs = new int[movementDefs.Count * terrainDefs.Count];
 
-			foreach (var movementType in DefDatabase<MovementTypeDef>.AllDefsListForReading)
+			for (var movementIndex = 0; movementIndex < movementCount; ++movementIndex)
 			{
-				PathCostsByMovementTypeIndex.Add(new List<int>());
+				var movementDef = movementDefs[movementIndex];
+				var defaultCost = movementDef.defaultCost;
 
-				PathCostsByMovementTypeIndex[PathCostsByMovementTypeIndex.Count - 1] = new List<int>();
-				var pathCosts = PathCostsByMovementTypeIndex[PathCostsByMovementTypeIndex.Count - 1];
-				var defaultCost = movementType.defaultCost;
-
-				foreach (var terrain in DefDatabase<TerrainDef>.AllDefsListForReading)
+				for (var terrainIndex = 0; terrainIndex < _terrainCount; ++terrainIndex)
 				{
-					var maxTagCost = GetMaxTagCost(terrain, movementType.tagCosts.data);
-					pathCosts.Add(GetPathCost(maxTagCost, terrain.passability, defaultCost, terrain.pathCost));
+					var terrainDef = terrainDefs[terrainIndex];
+					var maxTagCost = CalculateMaxTagCost(terrainDef, movementDef.tagCosts.data);
+					_costs[movementIndex * _terrainCount + terrainIndex] = CalculatePathCost(maxTagCost, terrainDef.passability,
+						defaultCost, terrainDef.pathCost);
 				}
 			}
 		}
 
 		/// <summary>
-		/// Movement type initialization.
+		/// Movement path cost initialization.
 		/// </summary>
 		public static void Initialize()
 		{
@@ -104,18 +118,23 @@ namespace PathfindingFramework.MovementTypes
 			}
 		}
 
+		public static int Get(int movementIndex, int terrainIndex)
+		{
+			return _costs[movementIndex * _terrainCount + terrainIndex];
+		}
+
 		/// <summary>
 		/// Append a movement types report to the game log.
 		/// </summary>
 		public static void ShowReport()
 		{
 			StringBuilder sb = new StringBuilder("Movement types report:\n");
-			foreach (var movementType in DefDatabase<MovementTypeDef>.AllDefsListForReading)
+			foreach (var movementType in DefDatabase<MovementDef>.AllDefsListForReading)
 			{
 				sb.AppendLine($"{movementType.defName}:");
 				foreach (var terrain in DefDatabase<TerrainDef>.AllDefsListForReading)
 				{
-					sb.AppendLine($"\t{terrain}: {PathCostsByMovementTypeIndex[movementType.index][terrain.index]}");
+					sb.AppendLine($"\t{terrain}: {Get(movementType.index, terrain.index)}");
 				}
 			}
 

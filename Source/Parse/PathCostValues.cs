@@ -1,4 +1,4 @@
-﻿namespace PathfindingFramework.Def
+﻿namespace PathfindingFramework.Parse
 {
 	/// <summary>
 	/// Defines specific pathfinding cost values which can be referenced by name.

@@ -1,7 +1,7 @@
 ﻿using System;
 using Verse;
 
-namespace PathfindingFramework.Def
+namespace PathfindingFramework.Parse
 {
 	/// <summary>
 	/// Wraps an integer path cost value with some utility functions to convert to and from specific values defined in
