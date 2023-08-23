@@ -18,8 +18,14 @@ namespace PathfindingFramework.Mod
 		public bool MovementTypesReport = false;
 	}
 
+	/// <summary>
+	/// Allows the rest of the mod to access a SettingValues instance. Handles resetting, save and load.
+	/// </summary>
 	public class Settings : ModSettings
 	{
+		/// <summary>
+		/// Single instance of the setting values of this mod. Uses static for performance reasons.
+		/// </summary>
 		public static SettingValues Values = new SettingValues();
 
 		/// <summary>

@@ -9,8 +9,15 @@ namespace PathfindingFramework.Def
 	/// </summary>
 	public class TerrainTagPathCosts
 	{
+		/// <summary>
+		/// Maps terrain tags to their path costs.
+		/// </summary>
 		public Dictionary<string, PathCost> data;
 
+		/// <summary>
+		/// Parse an instance of this class from XML.
+		/// </summary>
+		/// <param name="xmlRoot">XML node to parse.</param>
 		public void LoadDataFromXmlCustom(XmlNode xmlRoot)
 		{
 			data = new Dictionary<string, PathCost>();

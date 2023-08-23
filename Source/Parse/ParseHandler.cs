@@ -1,11 +1,10 @@
 ﻿using System;
 using Verse;
-using Verse.AI;
 
 namespace PathfindingFramework.Def
 {
 	/// <summary>
-	/// Handles Pathfinding Framework custom parsing code.
+	/// Handles the initialization of custom parsing code.
 	/// </summary>
 	public class ParseHandler
 	{
@@ -22,7 +21,7 @@ namespace PathfindingFramework.Def
 			catch (Exception exception)
 			{
 				Report.Error("Parser initialization failed:");
-				Report.Error($"{exception.ToString()}");
+				Report.Error($"{exception}");
 			}
 		}
 

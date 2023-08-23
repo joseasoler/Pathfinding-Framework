@@ -6,8 +6,15 @@ using Verse;
 
 namespace PathfindingFramework.MovementTypes
 {
+	/// <summary>
+	/// Parses movement types from XML and stores them in memory, allowing faster access and usage.
+	/// This class relies on Defs having an index field that starts at zero. 
+	/// </summary>
 	public class MovementTypesHandler
 	{
+		/// <summary>
+		/// List of movement types and their path costs. Accessed by [MovementTypeDef.index][TerrainDef.index].
+		/// </summary>
 		private static List<List<int>> PathCostsByMovementTypeIndex;
 
 		/// <summary>
@@ -26,7 +33,7 @@ namespace PathfindingFramework.MovementTypes
 				{
 					if (pathCostData.TryGetValue(tag, out var tagCost))
 					{
-						maxTagCost = Math.Max(maxTagCost, tagCost);
+						maxTagCost = Math.Max(maxTagCost, tagCost.cost);
 					}
 				}
 			}
@@ -51,10 +58,10 @@ namespace PathfindingFramework.MovementTypes
 			}
 			else if (passability == Traversability.Impassable)
 			{
-				return PathCost.Impassable;
+				return PathCost.Impassable.cost;
 			}
 
-			return (defaultCost == PathCost.Default) ? defaultCost : terrainPathCost;
+			return (defaultCost == PathCost.Default) ? defaultCost.cost : terrainPathCost;
 		}
 
 		/// <summary>
@@ -97,6 +104,9 @@ namespace PathfindingFramework.MovementTypes
 			}
 		}
 
+		/// <summary>
+		/// Append a movement types report to the game log.
+		/// </summary>
 		public static void ShowReport()
 		{
 			StringBuilder sb = new StringBuilder("Movement types report:\n");

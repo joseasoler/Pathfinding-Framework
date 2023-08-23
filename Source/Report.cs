@@ -10,13 +10,28 @@ namespace PathfindingFramework
 	/// </summary>
 	public static class Report
 	{
+		/// <summary>
+		/// Assembly of the mod.
+		/// </summary>
 		private static readonly Assembly Reference = typeof(Report).Assembly;
+
+		/// <summary>
+		/// Display name of the assembly.
+		/// </summary>
 		public static readonly string Name = Reference.GetName().Name;
+
+		/// <summary>
+		/// Current version of the assembly.
+		/// </summary>
 		private static readonly Version Version = Reference.GetName().Version;
+
+		/// <summary>
+		/// Prefix used in configuration errors and logs.
+		/// </summary>
 		private static readonly string Prefix = $"[{Name} v{Version}] ";
 
 		/// <summary>
-		/// Adds the mod name and version to every log message.
+		/// Prepends the identification prefix to some text to be used in a report.
 		/// </summary>
 		/// <param name="original">Text to be prefixed.</param>
 		/// <returns>Text with the prefix.</returns>
@@ -55,6 +70,12 @@ namespace PathfindingFramework
 			Log.Error(AddPrefix(message));
 		}
 
+		/// <summary>
+		/// Generate a configuration error string to be yielded in a Def.ConfigErrors call.
+		/// </summary>
+		/// <param name="def">Def with a configuration error.</param>
+		/// <param name="error">Error to show.</param>
+		/// <returns>Configuration error string.</returns>
 		public static string ConfigError(Verse.Def def, string error)
 		{
 			return $"{Prefix} [{def.defName}]: {error}";

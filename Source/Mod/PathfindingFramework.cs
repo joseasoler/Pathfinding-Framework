@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using PathfindingFramework.Def;
 using PathfindingFramework.HarmonyPatches;
 using PathfindingFramework.MovementTypes;
@@ -8,6 +6,9 @@ using Verse;
 
 namespace PathfindingFramework.Mod
 {
+	/// <summary>
+	/// Main class of the mod. Handles initialization order and settings loading. Defines the settings UI.
+	/// </summary>
 	public class PathfindingFramework : Verse.Mod
 	{
 		public const string PackageId = "pathfinding.framework";
@@ -71,7 +72,6 @@ namespace PathfindingFramework.Mod
 				Settings.Reset();
 			}
 			TooltipHandler.TipRegion(resetRect, "PF_ResetSettingsHover".Translate());
-
 
 			listing.End();
 			base.DoSettingsWindowContents(inRect);

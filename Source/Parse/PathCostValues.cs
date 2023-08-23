@@ -16,7 +16,7 @@
 		Avoid = 2000,
 
 		/// <summary>
-		/// Impassable terrain. Use with caution.
+		/// Impassable terrain. Marking too many terrains as impassable might result in spawning issues and other problems.
 		/// </summary>
 		Impassable = 10000,
 
