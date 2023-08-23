@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using PathfindingFramework.Parse;
 using Verse;
 
@@ -123,22 +122,5 @@ namespace PathfindingFramework
 			return _costs[movementIndex * _terrainCount + terrainIndex];
 		}
 
-		/// <summary>
-		/// Append a movement types report to the game log.
-		/// </summary>
-		public static void ShowReport()
-		{
-			StringBuilder sb = new StringBuilder("Movement types report:\n");
-			foreach (var movementType in DefDatabase<MovementDef>.AllDefsListForReading)
-			{
-				sb.AppendLine($"{movementType.defName}:");
-				foreach (var terrain in DefDatabase<TerrainDef>.AllDefsListForReading)
-				{
-					sb.AppendLine($"\t{terrain}: {Get(movementType.index, terrain.index)}");
-				}
-			}
-
-			Report.Notice(sb.ToString());
-		}
 	}
 }

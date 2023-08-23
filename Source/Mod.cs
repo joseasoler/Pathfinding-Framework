@@ -2,7 +2,7 @@ using PathfindingFramework.Parse;
 using UnityEngine;
 using Verse;
 
-namespace PathfindingFramework.Mod
+namespace PathfindingFramework
 {
 	/// <summary>
 	/// Main class of the mod. Handles initialization order and settings loading. Defines the settings UI.
@@ -10,6 +10,7 @@ namespace PathfindingFramework.Mod
 	public class Mod : Verse.Mod
 	{
 		public const string PackageId = "pathfinding.framework";
+		public const string Name = "Pathfinding Framework";
 
 		/// <summary>
 		/// Handles the initialization of every component of this mod.

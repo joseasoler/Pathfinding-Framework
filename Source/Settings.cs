@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace PathfindingFramework.Mod
+namespace PathfindingFramework
 {
 	/// <summary>
 	/// Contains data for all settings values. The default values of this object are the initial default settings for the mod.
@@ -11,11 +11,6 @@ namespace PathfindingFramework.Mod
 		/// Write additional debug information to the game log.
 		/// </summary>
 		public bool DebugLog = false;
-
-		/// <summary>
-		/// Write a report of all loaded movement types to the game log after game load.
-		/// </summary>
-		public bool MovementTypesReport = false;
 	}
 
 	/// <summary>
@@ -43,7 +38,6 @@ namespace PathfindingFramework.Mod
 		{
 			base.ExposeData();
 			Scribe_Values.Look(ref Values.DebugLog, "DebugLog");
-			Scribe_Values.Look(ref Values.MovementTypesReport, "MovementTypesReport");
 		}
 	}
 }

@@ -1,5 +1,4 @@
-﻿using PathfindingFramework.Mod;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace PathfindingFramework
@@ -12,7 +11,7 @@ namespace PathfindingFramework
 		/// <returns>Name of the mod in the settings list.</returns>
 		public static string SettingsCategory()
 		{
-			return Report.Name;
+			return Mod.Name;
 		}
 
 		/// <summary>
@@ -26,24 +25,18 @@ namespace PathfindingFramework
 
 			listing.CheckboxLabeled("PF_DebugLogLabel".Translate(), ref Settings.Values.DebugLog,
 				"PF_DebugLogHover".Translate());
-			
+
 
 			listing.Gap();
 			var buttonsRect = listing.GetRect(30.0F);
 			var buttonWidth = buttonsRect.width / 5.0F;
-
-			var movementTypeReportRect = new Rect(buttonsRect.x, buttonsRect.y, buttonWidth, buttonsRect.height);
-			if (Widgets.ButtonText(movementTypeReportRect, "PF_MovementTypesReportLabel".Translate()))
-			{
-				Movements.ShowReport();
-			}
-			TooltipHandler.TipRegion(movementTypeReportRect, "PF_MovementTypesReportHover".Translate());
 
 			var resetRect = new Rect(buttonsRect.width - buttonWidth, buttonsRect.y, buttonWidth, buttonsRect.height);
 			if (Widgets.ButtonText(resetRect, "PF_ResetSettingsLabel".Translate()))
 			{
 				Settings.Reset();
 			}
+
 			TooltipHandler.TipRegion(resetRect, "PF_ResetSettingsHover".Translate());
 
 			listing.End();

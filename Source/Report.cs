@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using PathfindingFramework.Mod;
 using Verse;
 
 namespace PathfindingFramework
@@ -16,11 +15,6 @@ namespace PathfindingFramework
 		private static readonly Assembly Reference = typeof(Report).Assembly;
 
 		/// <summary>
-		/// Display name of the assembly.
-		/// </summary>
-		public static readonly string Name = Reference.GetName().Name;
-
-		/// <summary>
 		/// Current version of the assembly.
 		/// </summary>
 		private static readonly Version Version = Reference.GetName().Version;
@@ -28,7 +22,7 @@ namespace PathfindingFramework
 		/// <summary>
 		/// Prefix used in configuration errors and logs.
 		/// </summary>
-		private static readonly string Prefix = $"[{Name} v{Version}] ";
+		private static readonly string Prefix = $"[{Mod.Name} v{Version}] ";
 
 		/// <summary>
 		/// Prepends the identification prefix to some text to be used in a report.

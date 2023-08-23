@@ -14,7 +14,7 @@ namespace PathfindingFramework
 		{
 			try
 			{
-				var harmonyInstance = new HarmonyLib.Harmony(Mod.Mod.PackageId);
+				var harmonyInstance = new HarmonyLib.Harmony(Mod.PackageId);
 				harmonyInstance.PatchAll();
 				Report.Debug("Harmony patching applied.");
 			}

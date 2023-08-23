@@ -19,6 +19,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="Debug\MovementCost.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="Movements.cs" />
 		<Compile Include="Parse\ParseHandler.cs" />
