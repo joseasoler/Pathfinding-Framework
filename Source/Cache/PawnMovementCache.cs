@@ -14,7 +14,7 @@ namespace PathfindingFramework.Cache
 		private static readonly Dictionary<int, int> MovementByPawn = new Dictionary<int, int>();
 
 		/// <summary>
-		/// Add all movement definitions obtained from apparel.
+		/// Add all movement definitions obtained from apparel to the set.
 		/// </summary>
 		/// <param name="pawn">Pawn being evaluated</param>
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
@@ -39,13 +39,17 @@ namespace PathfindingFramework.Cache
 		}
 
 		/// <summary>
-		/// Check MovementExtensions of the pawn's genes and return the one with the largest sameTypePriority.
+		/// Add the MovementExtensions of the pawn's genes to the set.
 		/// </summary>
 		/// <param name="pawn">Pawn being evaluated</param>
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
 		private static void FromGenes(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
-			var geneList = pawn.genes.GenesListForReading;
+			var geneList = pawn.genes?.GenesListForReading;
+			if (geneList.NullOrEmpty())
+			{
+				return;
+			}
 
 			for (int index = 0; index < geneList.Count; ++index)
 			{
@@ -64,7 +68,32 @@ namespace PathfindingFramework.Cache
 		}
 
 		/// <summary>
-		/// Get the MovementDef of the current life stage, if any.
+		/// Add the MovementExtensions of the pawn's hediffs to the set.
+		/// </summary>
+		/// <param name="pawn">Pawn being evaluated</param>
+		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
+		private static void FromHediffs(Pawn pawn, ref HashSet<MovementDef> movementDefs)
+		{
+			var hediffList = pawn.health?.hediffSet?.hediffs;
+			if (hediffList.NullOrEmpty())
+			{
+				return;
+			}
+
+			for (int index = 0; index < hediffList.Count; ++index)
+			{
+				var hediff = hediffList[index];
+
+				var extension = MovementExtensionCache.GetExtension(hediff.def);
+				if (extension != null)
+				{
+					movementDefs.Add(extension.movementDef);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Add the MovementDef of the current life stage (if any) to the set.
 		/// </summary>
 		/// <param name="pawn">Pawn being evaluated.</param>
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
@@ -78,7 +107,7 @@ namespace PathfindingFramework.Cache
 		}
 
 		/// <summary>
-		/// Get the MovementDef of the ThingDef associated with this pawn.
+		/// Add the MovementDef of the ThingDef associated with this pawn, if any.
 		/// </summary>
 		/// <param name="pawn">Pawn being evaluated.</param>
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
@@ -109,6 +138,7 @@ namespace PathfindingFramework.Cache
 				FromGenes(pawn, ref movementDefs);
 			}
 
+			FromHediffs(pawn, ref movementDefs);
 			FromLifeStage(pawn, ref movementDefs);
 			FromRace(pawn, ref movementDefs);
 
@@ -132,7 +162,7 @@ namespace PathfindingFramework.Cache
 			{
 				return result;
 			}
-			
+
 			Report.ErrorOnce($"Pawn {pawn.ThingID} is missing from the {nameof(PawnMovementCache)} cache.");
 			return MovementDefOf.PF_Terrestrial.index;
 		}

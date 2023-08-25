@@ -22,6 +22,7 @@
 		<Compile Include="Cache\MovementExtensionCache.cs" />
 		<Compile Include="Cache\MovementPathCostCache.cs" />
 		<Compile Include="Cache\PawnMovementCache.cs" />
+		<Compile Include="Debug\HediffDefGenerator_Movement.cs" />
 		<Compile Include="Debug\MovementCostDebugOutput.cs" />
 		<Compile Include="Debug\PawnMovementDebugOutput.cs" />
 		<Compile Include="Harmony.cs" />
@@ -32,9 +33,12 @@
 		<Compile Include="Parse\PathCostValues.cs" />
 		<Compile Include="Parse\TerrainTagPathCost.cs" />
 		<Compile Include="Mod.cs" />
+		<Compile Include="Patches\Debug\DefGenerator_GenerateImpliedDefs_PreResolve_Patch.cs" />
 		<Compile Include="Patches\DisplayMovementInStats\Pawn_SpecialDisplayStats_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostAdd_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostRemove_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Hediff_PostAdd_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Hediff_PostRemoved_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_AgeTracker_PostResolveLifeStageChange_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_ApparelTracker_Remove_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_ApparelTracker_Wear_Patch.cs" />

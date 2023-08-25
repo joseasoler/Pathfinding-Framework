@@ -4,10 +4,10 @@ using Verse;
 
 namespace PathfindingFramework.Patches.MovementMayHaveChanged
 {
-	[HarmonyPatch(typeof(Gene), nameof(Gene.PostRemove))]
-	internal static class Gene_PostRemove_Patch
+	[HarmonyPatch(typeof(Hediff), nameof(Hediff.PostRemoved))]
+	internal static class Hediff_PostRemoved_Patch
 	{
-		internal static void Postfix(Gene __instance)
+		internal static void Postfix(Hediff __instance)
 		{
 			if (__instance.pawn.Spawned && MovementExtensionCache.Contains(__instance.def))
 			{
