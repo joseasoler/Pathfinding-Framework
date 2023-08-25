@@ -13,12 +13,19 @@
 	</xs:complexType>
 	<xs:complexType name="MovementDef">
 		<xs:annotation>
-			<xs:documentation>A movement type is defined by a set of custom pathing rules that pawns must follow.</xs:documentation>
+			<xs:documentation>A movement type is defined by a set of custom pathing rules that pawns must follow.
+			</xs:documentation>
 		</xs:annotation>
 		<xs:all>
 			<xs:element name="defName" type="xs:string" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="label" type="xs:string" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="tagCosts" type="TerrainTagPathCosts" minOccurs="1" maxOccurs="1">
+			<xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="priority" type="xs:integer" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Used to choose when two or more movement types are available.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tagCosts" type="TerrainTagPathCosts" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Maps terrain tags to their path costs in this movement type.</xs:documentation>
 				</xs:annotation>
@@ -29,5 +36,8 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:all>
+		<xs:attribute name="Name" type="xs:string"/>
+		<xs:attribute name="ParentName" type="xs:string"/>
+		<xs:attribute name="Abstract" type="xs:string"/>
 	</xs:complexType>
 </xs:schema>

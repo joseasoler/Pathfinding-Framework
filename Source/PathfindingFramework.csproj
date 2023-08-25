@@ -19,14 +19,27 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="Debug\MovementCost.cs" />
+		<Compile Include="Cache\MovementExtensionCache.cs" />
+		<Compile Include="Cache\MovementPathCostCache.cs" />
+		<Compile Include="Cache\PawnMovementCache.cs" />
+		<Compile Include="Debug\MovementCostDebugOutput.cs" />
+		<Compile Include="Debug\PawnMovementDebugOutput.cs" />
 		<Compile Include="Harmony.cs" />
-		<Compile Include="Movements.cs" />
+		<Compile Include="MovementDefOf.cs" />
+		<Compile Include="MovementExtension.cs" />
 		<Compile Include="Parse\ParseHandler.cs" />
 		<Compile Include="Parse\PathCost.cs" />
 		<Compile Include="Parse\PathCostValues.cs" />
 		<Compile Include="Parse\TerrainTagPathCost.cs" />
 		<Compile Include="Mod.cs" />
+		<Compile Include="Patches\DisplayMovementInStats\Pawn_SpecialDisplayStats_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostAdd_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostRemove_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Pawn_AgeTracker_PostResolveLifeStageChange_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Pawn_ApparelTracker_Remove_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Pawn_ApparelTracker_Wear_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Pawn_DeSpawn_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Pawn_SpawnSetup_Patch.cs" />
 		<Compile Include="Report.cs" />
 		<Compile Include="MovementDef.cs" />
 		<Compile Include="Parse\TerrainTagPathCosts.cs" />

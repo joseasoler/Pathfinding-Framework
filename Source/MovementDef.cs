@@ -9,6 +9,11 @@ namespace PathfindingFramework
 	public class MovementDef : Verse.Def
 	{
 		/// <summary>
+		/// Used to choose when two or more movement types are available.
+		/// </summary>
+		public int priority;
+
+		/// <summary>
 		/// Maps terrain tags to their path costs in this movement type.
 		/// Setting a value lower than 10000 for an impassable terrain will let it be passable for this movement type.
 		/// If a terrain has more than one matching tag, the largest tag value will be used.
@@ -34,12 +39,15 @@ namespace PathfindingFramework
 				yield return Report.ConfigError(this, $"defaultCost must be a numeric value or a valid PathingCost.");
 			}
 
-			foreach (var tagCost in tagCosts.data)
+			if (tagCosts != null)
 			{
-				if (tagCost.Value == PathCost.Invalid)
+				foreach (var tagCost in tagCosts.data)
 				{
-					yield return Report.ConfigError(this,
-						$"tagCost {tagCost.Key} must be a numeric value or a valid PathingCost. But it was {tagCost.Value}");
+					if (tagCost.Value == PathCost.Invalid)
+					{
+						yield return Report.ConfigError(this,
+							$"tagCost {tagCost.Key} must be a numeric value or a valid PathingCost. But it was {tagCost.Value}");
+					}
 				}
 			}
 		}

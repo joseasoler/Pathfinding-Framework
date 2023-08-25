@@ -1,3 +1,4 @@
+using PathfindingFramework.Cache;
 using PathfindingFramework.Parse;
 using UnityEngine;
 using Verse;
@@ -29,7 +30,9 @@ namespace PathfindingFramework
 		private void InitializeWhenLoadingFinished()
 		{
 			GetSettings<Settings>();
-			Movements.Initialize();
+			// Caches which require DefDatabase being fully initialized.
+			MovementPathCostCache.Initialize();
+			MovementExtensionCache.Initialize();
 		}
 
 		/// <summary>

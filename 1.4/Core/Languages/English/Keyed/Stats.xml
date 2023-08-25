@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<PF_Locomotion>Locomotion</PF_Locomotion>
+	<PF_LocomotionReportText>Type of locomotion used by this character to move across the world.</PF_LocomotionReportText>
+</LanguageData>

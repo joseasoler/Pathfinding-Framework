@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../../Schemas/MovementDef.xsd">
+	<!-- Should correspond to vanilla. Used by default if no other type is found. -->
+	<PathfindingFramework.MovementDef>
+		<defName>PF_Terrestrial</defName>
+		<label>terrestrial</label>
+		<priority>0</priority>
+		<defaultCost>Default</defaultCost>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef Name="AquaticBase" Abstract="True">
+		<tagCosts>
+			<PF_DeepWater>0</PF_DeepWater>
+			<PF_ChestWater>5</PF_ChestWater>
+			<PF_ShallowWater>10</PF_ShallowWater>
+		</tagCosts>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef ParentName="AquaticBase">
+		<defName>PF_Aquatic</defName>
+		<label>aquatic</label>
+		<priority>1000</priority>
+		<defaultCost>Avoid</defaultCost>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef ParentName="AquaticBase">
+		<defName>PF_Amphibious</defName>
+		<label>amphibious</label>
+		<priority>2000</priority>
+		<defaultCost>Default</defaultCost>
+	</PathfindingFramework.MovementDef>
+
+</Defs>

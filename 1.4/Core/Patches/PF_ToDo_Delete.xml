@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- ToDo delete this file after the initial testing phase. -->
+<Patch>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/LifeStageDef[defName="HumanlikePreTeenager"]</xpath>
+		<value>
+			<li Class="PathfindingFramework.MovementExtension">
+				<movementDef>PF_Aquatic</movementDef>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="Apparel_CowboyHat" or defName="Alpaca"]</xpath>
+		<value>
+			<li Class="PathfindingFramework.MovementExtension">
+				<movementDef>PF_Aquatic</movementDef>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/GeneDef[defName="FoamSpray"]</xpath>
+		<value>
+			<li Class="PathfindingFramework.MovementExtension">
+				<movementDef>PF_Amphibious</movementDef>
+			</li>
+		</value>
+	</Operation>
+
+</Patch>
