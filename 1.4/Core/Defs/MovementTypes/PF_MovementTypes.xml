@@ -31,4 +31,11 @@
 		<defaultCost>Default</defaultCost>
 	</PathfindingFramework.MovementDef>
 
+	<PathfindingFramework.MovementDef>
+		<defName>PF_Flying</defName>
+		<label>flying</label>
+		<priority>10000</priority>
+		<defaultCost>0</defaultCost>
+	</PathfindingFramework.MovementDef>
+
 </Defs>
