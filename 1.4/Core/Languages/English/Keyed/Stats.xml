@@ -2,4 +2,5 @@
 <LanguageData>
 	<PF_Locomotion>Locomotion</PF_Locomotion>
 	<PF_LocomotionReportText>Type of locomotion used by this character to move across the world.</PF_LocomotionReportText>
+	<PF_GrantsLocomotion>Gives locomotion type:</PF_GrantsLocomotion>
 </LanguageData>
