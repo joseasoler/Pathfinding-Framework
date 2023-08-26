@@ -23,9 +23,10 @@
 		<Compile Include="Cache\Global\MovementPathCostCache.cs" />
 		<Compile Include="Cache\Global\PawnMovementCache.cs" />
 		<Compile Include="Cache\Local\MapPathCostCache.cs" />
-		<Compile Include="Debug\HediffDefGenerator_Movement.cs" />
-		<Compile Include="Debug\MovementCostDebugOutput.cs" />
-		<Compile Include="Debug\PawnMovementDebugOutput.cs" />
+		<Compile Include="DevTool\HediffDefGenerator_Movement.cs" />
+		<Compile Include="DevTool\MovementCostDebugOutput.cs" />
+		<Compile Include="DevTool\PathCostInspectorDrawer.cs" />
+		<Compile Include="DevTool\PawnMovementDebugOutput.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="MovementDefOf.cs" />
 		<Compile Include="MovementExtension.cs" />
@@ -34,7 +35,9 @@
 		<Compile Include="Parse\PathCostValues.cs" />
 		<Compile Include="Parse\TerrainTagPathCost.cs" />
 		<Compile Include="Mod.cs" />
-		<Compile Include="Patches\Debug\DefGenerator_GenerateImpliedDefs_PreResolve_Patch.cs" />
+		<Compile Include="Patches\DevTool\DevToolDefGeneration\DefGenerator_GenerateImpliedDefs_PreResolve_Patch.cs" />
+		<Compile Include="Patches\DevTool\PathCostInspector\UIRoot_UIRootOnGUI_Patch.cs" />
+		<Compile Include="Patches\DevTool\PathCostInspector\UIRoot_UIRootUpdate_Patch.cs" />
 		<Compile Include="Patches\DisplayMovementInStats\Pawn_SpecialDisplayStats_Patch.cs" />
 		<Compile Include="Patches\FireGrid\Fire_RecalcPathsOnAndAroundMe_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostAdd_Patch.cs" />
@@ -67,6 +70,16 @@
 		<Reference Include="UnityEngine.CoreModule">
 			<HintPath Condition="$([MSBuild]::IsOSPlatform('Windows'))">..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
 			<HintPath Condition="$([MSBuild]::IsOSPlatform('Linux'))">..\..\..\RimWorldLinux_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="UnityEngine.IMGUIModule">
+			<HintPath Condition="$([MSBuild]::IsOSPlatform('Windows'))">..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+			<HintPath Condition="$([MSBuild]::IsOSPlatform('Linux'))">..\..\..\RimWorldLinux_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="UnityEngine.InputLegacyModule">
+			<HintPath Condition="$([MSBuild]::IsOSPlatform('Windows'))">..\..\..\RimWorldWin64_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+			<HintPath Condition="$([MSBuild]::IsOSPlatform('Linux'))">..\..\..\RimWorldLinux_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
 			<Private>False</Private>
 		</Reference>
 		<Reference Include="UnityEngine.TextRenderingModule">

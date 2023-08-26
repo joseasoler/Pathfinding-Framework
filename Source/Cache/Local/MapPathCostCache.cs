@@ -129,5 +129,10 @@ namespace PathfindingFramework.Cache.Local
 				_fireGrid[adjacentCellIndex] += spawned ? adjacentCellCost : -adjacentCellCost;
 			}
 		}
+
+		public int FireCost(int cellIndex)
+		{
+			return _fireGrid[cellIndex];
+		}
 	}
 }
