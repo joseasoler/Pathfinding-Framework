@@ -2,4 +2,8 @@
 <LanguageData>
 	<PF_PathCostsLabel>Path costs</PF_PathCostsLabel>
 	<PF_FirePathCostLabel>Fire</PF_FirePathCostLabel>
+	<PF_ThingsPathCostLabel>Things</PF_ThingsPathCostLabel>
+	<PF_NonIgnoreRepeatersPathCostLabel>Non-ignore repeaters</PF_NonIgnoreRepeatersPathCostLabel>
+	<PF_HasIgnoreRepeatersLabel>Has ignore repeaters</PF_HasIgnoreRepeatersLabel>
+	<PF_HasDoorLabel>Has door</PF_HasDoorLabel>
 </LanguageData>

@@ -1,5 +1,6 @@
 ﻿using System;
 using PathfindingFramework.Cache.Local;
+using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;
@@ -13,7 +14,7 @@ namespace PathfindingFramework.Debug
 	public class PathCostInspectorDrawer
 	{
 		private const float DistFromMouse = 26.0F;
-		private const float LabelColumnWidth = 130.0F;
+		private const float LabelColumnWidth = 160.0F;
 		private const float InfoColumnWidth = 100.0F;
 		private const float WindowPadding = 12.0F;
 		private const float ColumnPadding = 12.0F;
@@ -92,10 +93,18 @@ namespace PathfindingFramework.Debug
 			var cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
 			var snowCost = SnowUtility.MovementTicksAddOn(map.snowGrid.GetCategory(cell));
 			var fireCost = mapPathCostCache.FireCost(cellIndex);
+			var thingsCost = mapPathCostCache.ThingsCost(cellIndex);
+			var nonIgnoreRepeaterThingsCost = mapPathCostCache.NonIgnoreRepeaterThingsCost(cellIndex);
+			var hasIgnoreRepeater = mapPathCostCache.HasIgnoreRepeater(cellIndex) ? "Yes" : "No";
+			var hasDoor = mapPathCostCache.HasDoor(cellIndex) ? "Yes" : "No";
 
 			DrawHeader((string)"PF_PathCostsLabel".Translate());
 			DrawRow((string)"Snow".Translate(), snowCost.ToString());
 			DrawRow((string)"PF_FirePathCostLabel".Translate(), fireCost.ToString());
+			DrawRow((string)"PF_ThingsPathCostLabel".Translate(), thingsCost.ToString());
+			DrawRow((string)"PF_NonIgnoreRepeatersPathCostLabel".Translate(), nonIgnoreRepeaterThingsCost.ToString());
+			DrawRow((string)"PF_HasIgnoreRepeatersLabel".Translate(), hasIgnoreRepeater.Translate());
+			DrawRow((string)"PF_HasDoorLabel".Translate(), hasDoor.Translate());
 
 			Text.WordWrap = true;
 			Text.Anchor = TextAnchor.UpperLeft;

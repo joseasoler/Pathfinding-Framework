@@ -1,4 +1,6 @@
-﻿namespace PathfindingFramework.Parse
+﻿using Verse.AI;
+
+namespace PathfindingFramework.Parse
 {
 	/// <summary>
 	/// Defines specific pathfinding cost values which can be referenced by name.
@@ -18,7 +20,7 @@
 		/// <summary>
 		/// Impassable terrain. Marking too many terrains as impassable might result in spawning issues and other problems.
 		/// </summary>
-		Impassable = 10000,
+		Impassable = PathGrid.ImpassableCost,
 
 
 		/// <summary>

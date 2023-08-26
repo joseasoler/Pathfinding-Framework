@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PathfindingFramework.Parse;
+using RimWorld;
 using Verse;
+using Verse.AI;
 
 namespace PathfindingFramework.Cache.Local
 {
@@ -25,12 +28,43 @@ namespace PathfindingFramework.Cache.Local
 		private int _gridSize;
 
 		/// <summary>
+		/// Reference to the current map. Avoid using expensive methods through it and prefer local utility methods instead.
+		/// </summary>
+		private readonly Map _map;
+
+		/// <summary>
 		/// Keeps track of pathfinding costs associated with fire presence.
 		/// In vanilla, Verse.AI.PathGrid.CalculatedCostAt calculates this cost when perceivedStatic is set to true.
 		/// In the Pathfinding Framework, a precalculated copy of this information is used to calculate all path grids.
 		/// PF ignores costs from fires attached to pawns to improve performance.
 		/// </summary>
 		private readonly int[] _fireGrid;
+
+		/// <summary>
+		/// Path cost of things contained in the cell.
+		/// Follows the same logic as Verse.AI.PathGrid.CalculatedCostAt for generating the pathCost in the first
+		/// ThingsListAt loop.
+		/// </summary>
+		private readonly int[] _thingGrid;
+
+		/// <summary>
+		/// Path cost of things with IsPathCostIgnoreRepeater returning false in the cell.
+		/// Follows the same logic as Verse.AI.PathGrid.CalculatedCostAt for generating the pathCost in the first
+		/// ThingsListAt loop.
+		/// </summary>
+		private readonly int[] _nonIgnoreRepeaterThingGrid;
+
+		/// <summary>
+		/// True if the cell contains one or more things with IsPathCostIgnoreRepeater returning true.
+		/// </summary>
+		private readonly bool[] _hasIgnoreRepeaterGrid;
+
+		/// <summary>
+		/// True for cells containing a door.
+		/// Used to replicate Verse.AI.PathGrid.CalculatedCostAt logic to increase path costs if both the previous and
+		/// current tiles have doors.
+		/// </summary>
+		private readonly bool[] _hasDoorGrid;
 
 		/// <summary>
 		/// Obtain the map path cost cache of a specific map.
@@ -58,9 +92,18 @@ namespace PathfindingFramework.Cache.Local
 		{
 			_gridSize = map.cellIndices.NumGridCells;
 			_mapSizeX = map.Size.x;
-			_fireGrid = new int[_gridSize];
+			_map = map;
 
-			// ToDo initialize grids which do not have a default cost of zero.
+			_fireGrid = new int[_gridSize];
+			_thingGrid = new int[_gridSize];
+			_nonIgnoreRepeaterThingGrid = new int[_gridSize];
+			_hasIgnoreRepeaterGrid = new bool[_gridSize];
+			_hasDoorGrid = new bool[_gridSize];
+
+			foreach (var cell in map.AllCells)
+			{
+				UpdateThings(cell, true);
+			}
 		}
 
 		/// <summary>
@@ -103,7 +146,7 @@ namespace PathfindingFramework.Cache.Local
 		/// Update the fire grid after a fire instance is created or removed.
 		/// </summary>
 		/// <param name="cell">Position of the fire.</param>
-		/// <param name="spawned">True for spawning fires, false for despawning fires.</param>
+		/// <param name="spawned">True for spawning fires, false for de-spawning fires.</param>
 		public void UpdateFire(IntVec3 cell, bool spawned)
 		{
 			var cellIndex = ToIndex(cell);
@@ -112,7 +155,6 @@ namespace PathfindingFramework.Cache.Local
 				return;
 			}
 
-			// See Verse.AI.PathGrid.CalculatedCostAt for the original implementation.
 			const int centerCellCost = (int)PathCostValues.Impassable;
 			_fireGrid[cellIndex] += spawned ? centerCellCost : -centerCellCost;
 
@@ -140,6 +182,101 @@ namespace PathfindingFramework.Cache.Local
 		public int FireCost(int cellIndex)
 		{
 			return _fireGrid[cellIndex];
+		}
+
+		/// <summary>
+		/// Update pathing costs related to things present in a cell.
+		/// </summary>
+		/// <param name="cell">Cell to be updated.</param>
+		/// <param name="onCreation">Perform extra calculations only required during the cache initialization.</param>
+		public void UpdateThings(IntVec3 cell, bool onCreation = false)
+		{
+			var cellIndex = ToIndex(cell);
+			// Get references to the relevant values of this cell.
+			ref int thingCostRef = ref _thingGrid[cellIndex];
+			ref int nonIgnoreRepeaterThingCostRef = ref _nonIgnoreRepeaterThingGrid[cellIndex];
+			ref bool hasIgnoreRepeaterRef = ref _hasIgnoreRepeaterGrid[cellIndex];
+			ref bool hasDoorRef = ref _hasDoorGrid[cellIndex];
+
+			// Reset the current values.
+			thingCostRef = 0;
+			nonIgnoreRepeaterThingCostRef = 0;
+			hasIgnoreRepeaterRef = false;
+			hasDoorRef = false;
+
+			var thingList = _map.thingGrid.ThingsListAtFast(cellIndex);
+			for (int thingIndex = 0; thingIndex < thingList.Count; ++thingIndex)
+			{
+				var thing = thingList[thingIndex];
+
+				if (thing.def.passability == Traversability.Impassable)
+				{
+					thingCostRef = (int)PathCostValues.Impassable;
+					nonIgnoreRepeaterThingCostRef = (int)PathCostValues.Impassable;
+					break;
+				}
+
+				var currentThingCost = thing.def.pathCost;
+				thingCostRef = Math.Max(thingCostRef, currentThingCost);
+
+				if (!PathGrid.IsPathCostIgnoreRepeater(thing.def))
+				{
+					nonIgnoreRepeaterThingCostRef = Math.Max(nonIgnoreRepeaterThingCostRef, currentThingCost);
+				}
+				else
+				{
+					hasIgnoreRepeaterRef = true;
+				}
+
+				hasDoorRef = hasDoorRef || thing is Building_Door;
+
+				// Fire is already spawned before this step.
+				if (onCreation && thing is Fire)
+				{
+					UpdateFire(cell, true);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Path cost of things in the cell.
+		/// </summary>
+		/// <param name="cellIndex">Index to check.</param>
+		/// <returns>Path cost.</returns>
+		public int ThingsCost(int cellIndex)
+		{
+			return _thingGrid[cellIndex];
+		}
+
+		/// <summary>
+		/// Path cost of things with IsPathCostIgnoreRepeater returning false in the cell.
+		/// </summary>
+		/// <param name="cellIndex">Index to check.</param>
+		/// <returns>Path cost.</returns>
+		public int NonIgnoreRepeaterThingsCost(int cellIndex)
+		{
+			return _nonIgnoreRepeaterThingGrid[cellIndex];
+		}
+
+		/// <summary>
+		/// True if the cell contains one or more things with IsPathCostIgnoreRepeater returning true.
+		/// </summary>
+		/// <param name="cellIndex">Index to check.</param>
+		/// <returns>Boolean flag.</returns>
+		public bool HasIgnoreRepeater(int cellIndex)
+		{
+			return _hasIgnoreRepeaterGrid[cellIndex];
+		}
+
+
+		/// <summary>
+		/// True if the cell contains a door.
+		/// </summary>
+		/// <param name="cellIndex">Index to check.</param>
+		/// <returns>Boolean flag.</returns>
+		public bool HasDoor(int cellIndex)
+		{
+			return _hasDoorGrid[cellIndex];
 		}
 	}
 }

@@ -22,7 +22,7 @@ namespace PathfindingFramework.Patches.FireGrid
 			var map = __instance.Map;
 			if (map != null)
 			{
-				MapPathCostCache.Get(map.uniqueID).UpdateFire(__instance.Position, true);
+				MapPathCostCache.Get(map.uniqueID)?.UpdateFire(__instance.Position, true);
 			}
 		}
 	}

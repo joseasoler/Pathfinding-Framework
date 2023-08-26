@@ -42,7 +42,7 @@
 		<Compile Include="Patches\FireGrid\Fire_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\FireGrid\Fire_SpawnSetup_Patch.cs" />
 		<Compile Include="Patches\MapChanges\Game_DeinitAndRemoveMap_NewTemp_Patch.cs" />
-		<Compile Include="Patches\MapChanges\Map_ConstructComponents_Patch.cs" />
+		<Compile Include="Patches\MapChanges\Map_FinalizeInit_Patch.cs" />
 		<Compile Include="Patches\MapChanges\MemoryUtility_ClearAllMapsAndWorld_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostAdd_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostRemove_Patch.cs" />
@@ -53,6 +53,7 @@
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_ApparelTracker_Wear_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_SpawnSetup_Patch.cs" />
+		<Compile Include="Patches\ThingGrids\Pathing_RecalculatePerceivedPathCostAt_Patch.cs" />
 		<Compile Include="Report.cs" />
 		<Compile Include="MovementDef.cs" />
 		<Compile Include="Parse\TerrainTagPathCosts.cs" />
@@ -95,6 +96,7 @@
 	<ItemGroup>
 		<Publicize Include="Assembly-CSharp:Verse.ParseHelper.parsers" />
 		<Publicize Include="Assembly-CSharp:Verse.DirectXmlToObject.ListFromXml" />
+		<Publicize Include="Assembly-CSharp:Verse.AI.PathGrid.IsPathCostIgnoreRepeater" />
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
