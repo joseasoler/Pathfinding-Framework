@@ -6,10 +6,8 @@ namespace PathfindingFramework.Cache.Local
 {
 	/// <summary>
 	/// Stores and keeps updated different pathfinding grids for a specific map.
-	/// The life cycle of this class is managed by being a MapComponent, but for performance reasons access requests
-	/// should go through the global map cache.
 	/// </summary>
-	public class MapPathCostCache : MapComponent
+	public class MapPathCostCache
 	{
 		/// <summary>
 		/// Associates a map path cost cache to each map.uniqueID value.
@@ -51,7 +49,6 @@ namespace PathfindingFramework.Cache.Local
 
 		/// <summary>
 		/// Clear all map path cost caches.
-		/// Required for cleaning up path costs after going back to the main menu.
 		/// </summary>
 		public static void Clear()
 		{
@@ -62,29 +59,30 @@ namespace PathfindingFramework.Cache.Local
 		/// Create an instance of the cache for a specific map.
 		/// </summary>
 		/// <param name="map">Parent map of this cache.</param>
-		public MapPathCostCache(Map map) : base(map)
+		public MapPathCostCache(Map map)
 		{
 			_mapUniqueId = map.uniqueID;
 			_gridSize = map.cellIndices.NumGridCells;
 			_mapSizeX = map.Size.x;
 			_fireGrid = new int[_gridSize];
+
+			// ToDo initialize grids which do not have a default cost of zero.
 		}
 
 		/// <summary>
 		/// Start accepting pathfinding update calls after the map is fully initialized.
 		/// </summary>
-		public override void FinalizeInit()
+		public static void Add(Map map)
 		{
-			GlobalMapCache.Add(_mapUniqueId, this);
-			// ToDo RecalculateAllPerceivedPathCosts
+			GlobalMapCache.Add(map.uniqueID, new MapPathCostCache(map));
 		}
 
 		/// <summary>
 		/// Clean up the global map cache and stop accepting pathfinding update calls.
 		/// </summary>
-		public override void MapRemoved()
+		public static void Remove(Map map)
 		{
-			GlobalMapCache.Remove(_mapUniqueId);
+			GlobalMapCache.Remove(map.uniqueID);
 		}
 
 		/// <summary>
@@ -144,7 +142,7 @@ namespace PathfindingFramework.Cache.Local
 		/// Pathfinding cost of fire at a specific cell index.
 		/// </summary>
 		/// <param name="cellIndex">Index to check.</param>
-		/// <returns>Firte path cost.</returns>
+		/// <returns>Fire path cost.</returns>
 		public int FireCost(int cellIndex)
 		{
 			return _fireGrid[cellIndex];
