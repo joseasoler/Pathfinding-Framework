@@ -22,7 +22,6 @@ namespace PathfindingFramework.Cache
 		/// </summary>
 		private static int _terrainCount;
 
-
 		/// <summary>
 		/// Obtain the largest pathing cost of the tags of a specific terrain.
 		/// </summary>

@@ -19,9 +19,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="Cache\MovementExtensionCache.cs" />
-		<Compile Include="Cache\MovementPathCostCache.cs" />
-		<Compile Include="Cache\PawnMovementCache.cs" />
+		<Compile Include="Cache\Global\MovementExtensionCache.cs" />
+		<Compile Include="Cache\Global\MovementPathCostCache.cs" />
+		<Compile Include="Cache\Global\PawnMovementCache.cs" />
 		<Compile Include="Debug\HediffDefGenerator_Movement.cs" />
 		<Compile Include="Debug\MovementCostDebugOutput.cs" />
 		<Compile Include="Debug\PawnMovementDebugOutput.cs" />
