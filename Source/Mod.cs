@@ -1,4 +1,5 @@
 using PathfindingFramework.Cache;
+using PathfindingFramework.Cache.Global;
 using PathfindingFramework.Parse;
 using UnityEngine;
 using Verse;

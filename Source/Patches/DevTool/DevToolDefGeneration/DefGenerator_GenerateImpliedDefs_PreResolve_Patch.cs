@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Debug;
+using PathfindingFramework.DevTool;
 using RimWorld;
 
-namespace PathfindingFramework.Patches.Debug
+namespace PathfindingFramework.Patches.DevTool.DevToolDefGeneration
 {
 	[HarmonyPatch(typeof(DefGenerator), nameof(DefGenerator.GenerateImpliedDefs_PreResolve))]
 	internal static class DefGenerator_GenerateImpliedDefs_PreResolve_Patch

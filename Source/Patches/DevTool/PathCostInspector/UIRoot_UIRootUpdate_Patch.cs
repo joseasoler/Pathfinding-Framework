@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Debug;
+using PathfindingFramework.DevTool;
 using Verse;
 
-namespace PathfindingFramework.Patches.Debug.PathCostInspector
+namespace PathfindingFramework.Patches.DevTool.PathCostInspector
 {
 	/// <summary>
 	/// Enable or disable the path cost inspector window depending on mod settings and current game state.

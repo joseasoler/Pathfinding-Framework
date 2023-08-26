@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using PathfindingFramework.Cache;
+using PathfindingFramework.Cache.Global;
 using RimWorld;
 using Verse;
 

@@ -1,11 +1,10 @@
 ﻿using System;
 using PathfindingFramework.Cache.Local;
-using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
-namespace PathfindingFramework.Debug
+namespace PathfindingFramework.DevTool
 {
 	/// <summary>
 	/// Shows a path cost inspector drawer when a mod setting is enabled and a hotkey is kept pressed.

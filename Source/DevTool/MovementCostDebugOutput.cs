@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using PathfindingFramework.Cache;
+﻿using PathfindingFramework.Cache.Global;
 using Verse;
 
-namespace PathfindingFramework.Debug
+namespace PathfindingFramework.DevTool
 {
 	public static class MovementCostDebugOutput
 	{

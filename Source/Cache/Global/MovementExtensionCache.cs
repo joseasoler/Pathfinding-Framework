@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
-namespace PathfindingFramework.Cache
+namespace PathfindingFramework.Cache.Global
 {
 	/// <summary>
 	/// Caches every valid def with a MovementExtension.

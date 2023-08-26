@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using PathfindingFramework.Cache.Global;
 using PathfindingFramework.Parse;
-using RimWorld;
 using Verse;
 using Verse.AI;
 

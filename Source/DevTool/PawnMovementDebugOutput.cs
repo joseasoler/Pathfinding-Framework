@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using PathfindingFramework.Cache;
 using Verse;
 
-namespace PathfindingFramework.Debug
+namespace PathfindingFramework.DevTool
 {
 	public static class PawnMovementDebugOutput
 	{

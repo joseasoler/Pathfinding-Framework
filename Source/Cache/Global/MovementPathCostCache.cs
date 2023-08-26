@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using PathfindingFramework.Parse;
 using Verse;
 
-namespace PathfindingFramework.Cache
+namespace PathfindingFramework.Cache.Global
 {
 	/// <summary>
 	/// Parses movement types from XML and stores them in memory, allowing faster access and usage.

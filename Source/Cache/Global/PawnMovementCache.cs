@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PathfindingFramework.Cache.Global;
 using PathfindingFramework.Cache.Local;
 using Verse;
 

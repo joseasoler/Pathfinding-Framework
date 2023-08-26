@@ -1,6 +1,5 @@
 ﻿using HarmonyLib;
 using PathfindingFramework.Cache.Local;
-using RimWorld;
 using Verse;
 
 namespace PathfindingFramework.Patches.MapChanges

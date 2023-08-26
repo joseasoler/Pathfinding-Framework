@@ -2,7 +2,7 @@
 using RimWorld;
 using Verse;
 
-namespace PathfindingFramework.Debug
+namespace PathfindingFramework.DevTool
 {
 	/// <summary>
 	/// Generate implied HediffDefs intended for debugging purposes.
