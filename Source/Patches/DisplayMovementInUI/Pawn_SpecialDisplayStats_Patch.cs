@@ -4,7 +4,7 @@ using PathfindingFramework.Cache;
 using RimWorld;
 using Verse;
 
-namespace PathfindingFramework.Patches.DisplayMovementInStats
+namespace PathfindingFramework.Patches.DisplayMovementInUI
 {
 	[HarmonyPatch(typeof(Pawn), nameof(Pawn.SpecialDisplayStats))]
 	internal static class Pawn_SpecialDisplayStats_Patch
