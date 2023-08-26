@@ -11,7 +11,7 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 		{
 			if (__instance.pawn.Spawned && MovementExtensionCache.Contains(__instance.def))
 			{
-				PawnMovementCache.Recalculate(__instance.pawn);
+				PawnMovementCache.AddOrUpdate(__instance.pawn);
 			}
 		}
 	}

@@ -124,7 +124,7 @@ namespace PathfindingFramework.Cache
 		/// Set the MovementDef to use for this pawn. See MovementExtension for detail.
 		/// </summary>
 		/// <param name="pawn">Pawn to evaluate.</param>
-		public static void Recalculate(Pawn pawn)
+		public static void AddOrUpdate(Pawn pawn)
 		{
 			/*
 			 * Recalculate this. Now, MovementDef has a priority. And MovementExtension can combine.
@@ -154,6 +154,11 @@ namespace PathfindingFramework.Cache
 			}
 
 			MovementByPawn[pawn.thingIDNumber] = movementDef?.index ?? MovementDefOf.PF_Terrestrial.index;
+		}
+
+		public static void Remove(Pawn pawn)
+		{
+			MovementByPawn.Remove(pawn.thingIDNumber);
 		}
 
 		public static int Get(Pawn pawn)
