@@ -41,6 +41,8 @@
 		<Compile Include="Patches\DisplayMovementInStats\Pawn_SpecialDisplayStats_Patch.cs" />
 		<Compile Include="Patches\FireGrid\Fire_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\FireGrid\Fire_SpawnSetup_Patch.cs" />
+		<Compile Include="Patches\HasDoor\Building_Door_DeSpawn_Patch.cs" />
+		<Compile Include="Patches\HasDoor\Building_Door_SpawnSetup_Patch.cs" />
 		<Compile Include="Patches\MapChanges\Game_DeinitAndRemoveMap_NewTemp_Patch.cs" />
 		<Compile Include="Patches\MapChanges\Map_ConstructComponents_Patch.cs" />
 		<Compile Include="Patches\MapChanges\MemoryUtility_ClearAllMapsAndWorld_Patch.cs" />

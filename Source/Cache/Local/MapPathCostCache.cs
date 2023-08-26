@@ -196,13 +196,11 @@ namespace PathfindingFramework.Cache.Local
 			ref int thingCostRef = ref _thingGrid[cellIndex];
 			ref int nonIgnoreRepeaterThingCostRef = ref _nonIgnoreRepeaterThingGrid[cellIndex];
 			ref bool hasIgnoreRepeaterRef = ref _hasIgnoreRepeaterGrid[cellIndex];
-			ref bool hasDoorRef = ref _hasDoorGrid[cellIndex];
 
 			// Reset the current values.
 			thingCostRef = 0;
 			nonIgnoreRepeaterThingCostRef = 0;
 			hasIgnoreRepeaterRef = false;
-			hasDoorRef = false;
 
 			var thingList = _map.thingGrid.ThingsListAtFast(cellIndex);
 			for (int thingIndex = 0; thingIndex < thingList.Count; ++thingIndex)
@@ -227,8 +225,6 @@ namespace PathfindingFramework.Cache.Local
 				{
 					hasIgnoreRepeaterRef = true;
 				}
-
-				hasDoorRef = hasDoorRef || thing is Building_Door;
 			}
 		}
 
@@ -262,6 +258,15 @@ namespace PathfindingFramework.Cache.Local
 			return _hasIgnoreRepeaterGrid[cellIndex];
 		}
 
+		/// <summary>
+		/// Update the has door grid when a door spawns or de-spawns.
+		/// </summary>
+		/// <param name="cell">Position of the door</param>
+		/// <param name="value">New value.</param>
+		public void SetHasDoor(IntVec3 cell, bool value)
+		{
+			_hasDoorGrid[ToIndex(cell)] = value;
+		}
 
 		/// <summary>
 		/// True if the cell contains a door.
