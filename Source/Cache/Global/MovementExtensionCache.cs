@@ -47,7 +47,7 @@ namespace PathfindingFramework.Cache
 			catch (Exception exception)
 			{
 				Report.Error("Movement type initialization failed:");
-				Report.Error($"{exception.ToString()}");
+				Report.Error($"{exception}");
 			}
 		}
 

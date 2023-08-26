@@ -35,6 +35,7 @@ namespace PathfindingFramework.Cache.Local
 		/// Keeps track of pathfinding costs associated with fire presence.
 		/// In vanilla, Verse.AI.PathGrid.CalculatedCostAt calculates this cost when perceivedStatic is set to true.
 		/// In the Pathfinding Framework, a precalculated copy of this information is used to calculate all path grids.
+		/// PF ignores costs from fires attached to pawns to improve performance.
 		/// </summary>
 		private readonly int[] _fireGrid;
 
