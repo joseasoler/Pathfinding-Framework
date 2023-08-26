@@ -36,6 +36,7 @@
 		<Compile Include="Mod.cs" />
 		<Compile Include="Patches\Debug\DefGenerator_GenerateImpliedDefs_PreResolve_Patch.cs" />
 		<Compile Include="Patches\DisplayMovementInStats\Pawn_SpecialDisplayStats_Patch.cs" />
+		<Compile Include="Patches\FireGrid\Fire_RecalcPathsOnAndAroundMe_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostAdd_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostRemove_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Hediff_PostAdd_Patch.cs" />
