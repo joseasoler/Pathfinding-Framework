@@ -37,6 +37,7 @@ namespace PathfindingFramework.Cache
 
 				AddDefsFromList(DefDatabase<ThingDef>.AllDefsListForReading);
 				AddDefsFromList(DefDatabase<LifeStageDef>.AllDefsListForReading);
+				AddDefsFromList(DefDatabase<HediffDef>.AllDefsListForReading);
 				if (ModLister.BiotechInstalled)
 				{
 					AddDefsFromList(DefDatabase<GeneDef>.AllDefsListForReading);
