@@ -140,6 +140,11 @@ namespace PathfindingFramework.Cache.Local
 			}
 		}
 
+		/// <summary>
+		/// Pathfinding cost of fire at a specific cell index.
+		/// </summary>
+		/// <param name="cellIndex">Index to check.</param>
+		/// <returns>Firte path cost.</returns>
 		public int FireCost(int cellIndex)
 		{
 			return _fireGrid[cellIndex];
