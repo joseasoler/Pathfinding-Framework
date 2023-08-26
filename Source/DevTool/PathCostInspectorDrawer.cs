@@ -88,9 +88,13 @@ namespace PathfindingFramework.Debug
 
 			var map = Find.CurrentMap;
 			var mapPathCostCache = MapPathCostCache.Get(map.uniqueID);
+			var cell = UI.MouseCell();
 			var cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
+			var snowCost = SnowUtility.MovementTicksAddOn(map.snowGrid.GetCategory(cell));
 			var fireCost = mapPathCostCache.FireCost(cellIndex);
+
 			DrawHeader((string)"PF_PathCostsLabel".Translate());
+			DrawRow((string)"Snow".Translate(), snowCost.ToString());
 			DrawRow((string)"PF_FirePathCostLabel".Translate(), fireCost.ToString());
 
 			Text.WordWrap = true;
