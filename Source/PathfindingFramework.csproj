@@ -40,6 +40,7 @@
 		<Compile Include="Patches\DevTool\PathCostInspector\UIRoot_UIRootUpdate_Patch.cs" />
 		<Compile Include="Patches\DisplayMovementInStats\Pawn_SpecialDisplayStats_Patch.cs" />
 		<Compile Include="Patches\FireGrid\Fire_RecalcPathsOnAndAroundMe_Patch.cs" />
+		<Compile Include="Patches\MapChanges\MemoryUtility_ClearAllMapsAndWorld_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostAdd_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostRemove_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Hediff_PostAdd_Patch.cs" />

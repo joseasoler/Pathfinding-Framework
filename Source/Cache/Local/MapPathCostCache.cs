@@ -49,6 +49,15 @@ namespace PathfindingFramework.Cache.Local
 		}
 
 		/// <summary>
+		/// Clear all map path cost caches.
+		/// Required for cleaning up path costs after going back to the main menu.
+		/// </summary>
+		public static void Clear()
+		{
+			GlobalMapCache.Clear();
+		}
+
+		/// <summary>
 		/// Create an instance of the cache for a specific map.
 		/// </summary>
 		/// <param name="map">Parent map of this cache.</param>
