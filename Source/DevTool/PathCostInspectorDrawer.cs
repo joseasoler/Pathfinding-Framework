@@ -98,13 +98,13 @@ namespace PathfindingFramework.Debug
 			var hasIgnoreRepeater = mapPathCostCache.HasIgnoreRepeater(cellIndex) ? "Yes" : "No";
 			var hasDoor = mapPathCostCache.HasDoor(cellIndex) ? "Yes" : "No";
 
-			DrawHeader((string)"PF_PathCostsLabel".Translate());
-			DrawRow((string)"Snow".Translate(), snowCost.ToString());
-			DrawRow((string)"PF_FirePathCostLabel".Translate(), fireCost.ToString());
-			DrawRow((string)"PF_ThingsPathCostLabel".Translate(), thingsCost.ToString());
-			DrawRow((string)"PF_NonIgnoreRepeatersPathCostLabel".Translate(), nonIgnoreRepeaterThingsCost.ToString());
-			DrawRow((string)"PF_HasIgnoreRepeatersLabel".Translate(), hasIgnoreRepeater.Translate());
-			DrawRow((string)"PF_HasDoorLabel".Translate(), hasDoor.Translate());
+			DrawHeader("PF_PathCostsLabel".Translate());
+			DrawRow("Snow".Translate(), snowCost.ToString());
+			DrawRow("PF_FirePathCostLabel".Translate(), fireCost.ToString());
+			DrawRow("PF_ThingsPathCostLabel".Translate(), thingsCost.ToString());
+			DrawRow("PF_NonIgnoreRepeatersPathCostLabel".Translate(), nonIgnoreRepeaterThingsCost.ToString());
+			DrawRow("PF_HasIgnoreRepeatersLabel".Translate(), hasIgnoreRepeater.Translate());
+			DrawRow("PF_HasDoorLabel".Translate(), hasDoor.Translate());
 
 			Text.WordWrap = true;
 			Text.Anchor = TextAnchor.UpperLeft;
