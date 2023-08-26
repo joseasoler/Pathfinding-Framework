@@ -15,11 +15,6 @@ namespace PathfindingFramework.Cache.Local
 		private static readonly Dictionary<int, MapPathCostCache> GlobalMapCache = new Dictionary<int, MapPathCostCache>();
 
 		/// <summary>
-		/// Unique map ID of the parent map. Used to keep the global map cache updated.
-		/// </summary>
-		private int _mapUniqueId;
-
-		/// <summary>
 		/// X size of the parent map. Stored to convert cells to indexes and other operations without the parent map.
 		/// </summary>
 		private int _mapSizeX;
@@ -61,7 +56,6 @@ namespace PathfindingFramework.Cache.Local
 		/// <param name="map">Parent map of this cache.</param>
 		public MapPathCostCache(Map map)
 		{
-			_mapUniqueId = map.uniqueID;
 			_gridSize = map.cellIndices.NumGridCells;
 			_mapSizeX = map.Size.x;
 			_fireGrid = new int[_gridSize];
