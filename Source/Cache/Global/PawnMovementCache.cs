@@ -185,7 +185,7 @@ namespace PathfindingFramework.Cache
 
 			if (added)
 			{
-				MapPathCostCache.Get(pawn.Map.uniqueID)?.PawnSpawned(newMovementIndex);
+				MapPathCostCache.Get(pawn.Map.uniqueID).PawnSpawned(newMovementIndex);
 			}
 		}
 

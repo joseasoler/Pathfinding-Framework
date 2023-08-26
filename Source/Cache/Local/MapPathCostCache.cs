@@ -95,7 +95,7 @@ namespace PathfindingFramework.Cache.Local
 		/// <param name="map">Parent map of this cache.</param>
 		public MapPathCostCache(Map map)
 		{
-			_gridSize = map.cellIndices.NumGridCells;
+			_gridSize = map.Size.x * map.Size.z;
 			_mapSizeX = map.Size.x;
 			_map = map;
 
@@ -105,11 +105,6 @@ namespace PathfindingFramework.Cache.Local
 			_hasIgnoreRepeaterGrid = new bool[_gridSize];
 			_hasDoorGrid = new bool[_gridSize];
 			_pawnMovementCounts = new int[MovementPathCostCache.MovementCount()];
-
-			foreach (var cell in map.AllCells)
-			{
-				UpdateThings(cell, true);
-			}
 		}
 
 		/// <summary>
@@ -194,8 +189,7 @@ namespace PathfindingFramework.Cache.Local
 		/// Update pathing costs related to things present in a cell.
 		/// </summary>
 		/// <param name="cell">Cell to be updated.</param>
-		/// <param name="onCreation">Perform extra calculations only required during the cache initialization.</param>
-		public void UpdateThings(IntVec3 cell, bool onCreation = false)
+		public void UpdateThings(IntVec3 cell)
 		{
 			var cellIndex = ToIndex(cell);
 			// Get references to the relevant values of this cell.
@@ -235,12 +229,6 @@ namespace PathfindingFramework.Cache.Local
 				}
 
 				hasDoorRef = hasDoorRef || thing is Building_Door;
-
-				// Fire is already spawned before this step.
-				if (onCreation && thing is Fire)
-				{
-					UpdateFire(cell, true);
-				}
 			}
 		}
 
