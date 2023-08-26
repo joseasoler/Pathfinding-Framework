@@ -12,7 +12,7 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 			var lifeStageDef = __instance.CurLifeStage;
 			if (___pawn.Spawned && lifeStageDef != null && MovementExtensionCache.Contains(lifeStageDef))
 			{
-				PawnMovementCache.AddOrUpdate(___pawn);
+				PawnMovementCache.Update(___pawn);
 			}
 		}
 	}

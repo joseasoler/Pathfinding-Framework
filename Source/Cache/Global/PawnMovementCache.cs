@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PathfindingFramework.Cache.Local;
 using Verse;
 
 namespace PathfindingFramework.Cache
@@ -121,11 +122,32 @@ namespace PathfindingFramework.Cache
 		}
 
 		/// <summary>
+		/// Add a recently spawned pawn to the caches.
+		/// </summary>
+		/// <param name="pawn">Spawned pawn.</param>
+		public static void Add(Pawn pawn)
+		{
+			AddOrUpdate(pawn, true);
+		}
+
+		/// <summary>
+		/// Update the MovementDef to use for this pawn if necessary.
+		/// </summary>
+		/// <param name="pawn">Modified pawn.</param>
+		public static void Update(Pawn pawn)
+		{
+			AddOrUpdate(pawn, false);
+		}
+
+		/// <summary>
 		/// Set the MovementDef to use for this pawn. See MovementExtension for detail.
 		/// </summary>
 		/// <param name="pawn">Pawn to evaluate.</param>
-		public static void AddOrUpdate(Pawn pawn)
+		/// <param name="added">True if the pawn has just been added to the map..</param>
+		private static void AddOrUpdate(Pawn pawn, bool added)
 		{
+			var currentMovementIndex = added ? 0 : Get(pawn);
+
 			/*
 			 * Recalculate this. Now, MovementDef has a priority. And MovementExtension can combine.
 			 * Also do canCombine in the MovementExtensions for testing.
@@ -153,11 +175,27 @@ namespace PathfindingFramework.Cache
 				}
 			}
 
-			MovementByPawn[pawn.thingIDNumber] = movementDef?.index ?? MovementDefOf.PF_Terrestrial.index;
+
+			var newMovementIndex = movementDef?.index ?? MovementDefOf.PF_Terrestrial.index;
+			MovementByPawn[pawn.thingIDNumber] = newMovementIndex;
+			if (!added && currentMovementIndex != newMovementIndex)
+			{
+				MapPathCostCache.Get(pawn.Map.uniqueID).PawnMovementChanged(currentMovementIndex, newMovementIndex);
+			}
+
+			if (added)
+			{
+				MapPathCostCache.Get(pawn.Map.uniqueID)?.PawnSpawned(newMovementIndex);
+			}
 		}
 
+		/// <summary>
+		/// Remove a despawned pawn from the cache.
+		/// </summary>
+		/// <param name="pawn">Pawn being de-spawned.</param>
 		public static void Remove(Pawn pawn)
 		{
+			MapPathCostCache.Get(pawn.Map.uniqueID).PawnDespawned(Get(pawn));
 			MovementByPawn.Remove(pawn.thingIDNumber);
 		}
 

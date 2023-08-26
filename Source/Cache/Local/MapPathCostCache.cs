@@ -67,6 +67,11 @@ namespace PathfindingFramework.Cache.Local
 		private readonly bool[] _hasDoorGrid;
 
 		/// <summary>
+		/// Number of pawns with each movement. Used to determine which terrain grids should be kept updated.
+		/// </summary>
+		private readonly int[] _pawnMovementCounts;
+
+		/// <summary>
 		/// Obtain the map path cost cache of a specific map.
 		/// </summary>
 		/// <param name="mapUniqueId">Unique ID of the map being requested.</param>
@@ -99,6 +104,7 @@ namespace PathfindingFramework.Cache.Local
 			_nonIgnoreRepeaterThingGrid = new int[_gridSize];
 			_hasIgnoreRepeaterGrid = new bool[_gridSize];
 			_hasDoorGrid = new bool[_gridSize];
+			_pawnMovementCounts = new int[MovementPathCostCache.MovementCount()];
 
 			foreach (var cell in map.AllCells)
 			{
@@ -277,6 +283,35 @@ namespace PathfindingFramework.Cache.Local
 		public bool HasDoor(int cellIndex)
 		{
 			return _hasDoorGrid[cellIndex];
+		}
+
+		/// <summary>
+		/// A new pawn has spawned in this map.
+		/// </summary>
+		/// <param name="movementIndex">Movement index to increase.</param>
+		public void PawnSpawned(int movementIndex)
+		{
+			++_pawnMovementCounts[movementIndex];
+		}
+
+		/// <summary>
+		/// A new pawn has changed its movement type.
+		/// </summary>
+		/// <param name="previousMovementIndex">Movement index to decrease.</param>
+		/// <param name="newMovementIndex">Movement index to increase.</param>
+		public void PawnMovementChanged(int previousMovementIndex, int newMovementIndex)
+		{
+			--_pawnMovementCounts[previousMovementIndex];
+			++_pawnMovementCounts[newMovementIndex];
+		}
+
+		/// <summary>
+		/// A new pawn has been removed from the map.
+		/// </summary>
+		/// <param name="movementIndex">Movement index to decrease.</param>
+		public void PawnDespawned(int movementIndex)
+		{
+			--_pawnMovementCounts[movementIndex];
 		}
 	}
 }

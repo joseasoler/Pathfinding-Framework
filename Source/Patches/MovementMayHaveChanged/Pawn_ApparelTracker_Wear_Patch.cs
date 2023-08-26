@@ -10,10 +10,9 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 	{
 		internal static void Postfix(Pawn ___pawn, Apparel newApparel)
 		{
-			PawnMovementCache.AddOrUpdate(___pawn);
 			if (___pawn.Spawned && MovementExtensionCache.Contains(newApparel.def))
 			{
-				PawnMovementCache.AddOrUpdate(___pawn);
+				PawnMovementCache.Update(___pawn);
 			}
 		}
 	}

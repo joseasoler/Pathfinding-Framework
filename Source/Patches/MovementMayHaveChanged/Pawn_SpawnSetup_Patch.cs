@@ -12,7 +12,7 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 	{
 		internal static void Postfix(Pawn __instance)
 		{
-			PawnMovementCache.AddOrUpdate(__instance);
+			PawnMovementCache.Add(__instance);
 		}
 	}
 }

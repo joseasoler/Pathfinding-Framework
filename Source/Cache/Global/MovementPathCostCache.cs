@@ -18,6 +18,11 @@ namespace PathfindingFramework.Cache
 		private static int[] _costs;
 
 		/// <summary>
+		/// Number of MovementDefs loaded in the game.
+		/// </summary>
+		private static int _movementCount;
+
+		/// <summary>
 		/// Number of TerrainDefs loaded in the game.
 		/// </summary>
 		private static int _terrainCount;
@@ -85,11 +90,11 @@ namespace PathfindingFramework.Cache
 		{
 			var movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
 			var terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
-			var movementCount = movementDefs.Count;
+			_movementCount = movementDefs.Count;
 			_terrainCount = terrainDefs.Count;
 			_costs = new int[movementDefs.Count * terrainDefs.Count];
 
-			for (var movementIndex = 0; movementIndex < movementCount; ++movementIndex)
+			for (var movementIndex = 0; movementIndex < _movementCount; ++movementIndex)
 			{
 				var movementDef = movementDefs[movementIndex];
 				var defaultCost = movementDef.defaultCost;
@@ -130,6 +135,15 @@ namespace PathfindingFramework.Cache
 		public static int Get(int movementIndex, int terrainIndex)
 		{
 			return _costs[movementIndex * _terrainCount + terrainIndex];
+		}
+
+		/// <summary>
+		/// Total number of MovementDefs available in the game.
+		/// </summary>
+		/// <returns>Integer with the number.</returns>
+		public static int MovementCount()
+		{
+			return _movementCount;
 		}
 	}
 }
