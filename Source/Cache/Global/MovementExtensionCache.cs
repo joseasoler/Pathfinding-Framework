@@ -52,14 +52,33 @@ namespace PathfindingFramework.Cache.Global
 			}
 		}
 
+		/// <summary>
+		/// Check if a Def has a MovementExtension.
+		/// </summary>
+		/// <param name="def">Def to check.</param>
+		/// <returns>true if the Def is in the cache.</returns>
 		public static bool Contains(Def def)
 		{
 			return _defs.ContainsKey(def.shortHash);
 		}
 
+		/// <summary>
+		/// Get the extension of a Def
+		/// </summary>
+		/// <param name="def">Def to check.</param>
+		/// <returns>MovementExtension of this Def.</returns>
 		public static MovementExtension GetExtension(Def def)
 		{
 			return _defs.TryGetValue(def.shortHash, out var result) ? result : null;
+		}
+
+		public static List<MemoryUsageData> MemoryReport()
+		{
+			return new List<MemoryUsageData>
+			{
+				new MemoryUsageData(nameof(MovementExtensionCache), MemoryUsageData.Global, "Definition dictionary",
+					_defs.Count * (MemoryUsageData.DictionaryPairSize + sizeof(long)))
+			};
 		}
 	}
 }

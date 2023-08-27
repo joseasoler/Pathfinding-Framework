@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using PathfindingFramework.Parse;
 using Verse;
 
@@ -13,7 +14,7 @@ namespace PathfindingFramework.Cache.Global
 		/// <summary>
 		/// Stores a list of terrain path costs for each movement type.
 		/// </summary>
-		private static int[] _costs;
+		private static int[] _terrainPathCosts;
 
 		/// <summary>
 		/// Number of MovementDefs loaded in the game.
@@ -90,7 +91,7 @@ namespace PathfindingFramework.Cache.Global
 			var terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
 			_movementCount = movementDefs.Count;
 			_terrainCount = terrainDefs.Count;
-			_costs = new int[movementDefs.Count * terrainDefs.Count];
+			_terrainPathCosts = new int[movementDefs.Count * terrainDefs.Count];
 
 			for (var movementIndex = 0; movementIndex < _movementCount; ++movementIndex)
 			{
@@ -101,7 +102,8 @@ namespace PathfindingFramework.Cache.Global
 				{
 					var terrainDef = terrainDefs[terrainIndex];
 					var maxTagCost = CalculateMaxTagCost(terrainDef, movementDef);
-					_costs[movementIndex * _terrainCount + terrainIndex] = CalculatePathCost(maxTagCost, terrainDef.passability,
+					_terrainPathCosts[movementIndex * _terrainCount + terrainIndex] = CalculatePathCost(maxTagCost,
+						terrainDef.passability,
 						defaultCost, terrainDef.pathCost);
 				}
 			}
@@ -132,7 +134,7 @@ namespace PathfindingFramework.Cache.Global
 		/// <returns>Path cost.</returns>
 		public static int Get(int movementIndex, int terrainIndex)
 		{
-			return _costs[movementIndex * _terrainCount + terrainIndex];
+			return _terrainPathCosts[movementIndex * _terrainCount + terrainIndex];
 		}
 
 		/// <summary>
@@ -142,6 +144,15 @@ namespace PathfindingFramework.Cache.Global
 		public static int MovementCount()
 		{
 			return _movementCount;
+		}
+
+		public static List<MemoryUsageData> MemoryReport()
+		{
+			return new List<MemoryUsageData>
+			{
+				new MemoryUsageData(nameof(MovementPathCostCache), MemoryUsageData.Global, "Terrain path costs",
+					MemoryUsageData.BytesFromArray(_terrainPathCosts))
+			};
 		}
 	}
 }

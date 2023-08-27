@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PathfindingFramework.Cache.Global;
 using PathfindingFramework.Cache.Local;
 using Verse;
@@ -199,6 +200,11 @@ namespace PathfindingFramework.Cache
 			MovementByPawn.Remove(pawn.thingIDNumber);
 		}
 
+		/// <summary>
+		/// Get the movement index used by a specific pawn.
+		/// </summary>
+		/// <param name="pawn">Pawn to check.</param>
+		/// <returns>Movement index.</returns>
 		public static int Get(Pawn pawn)
 		{
 			if (MovementByPawn.TryGetValue(pawn.thingIDNumber, out var result))
@@ -208,6 +214,15 @@ namespace PathfindingFramework.Cache
 
 			Report.ErrorOnce($"Pawn {pawn.ThingID} is missing from the {nameof(PawnMovementCache)} cache.");
 			return MovementDefOf.PF_Terrestrial.index;
+		}
+
+		public static List<MemoryUsageData> MemoryReport()
+		{
+			return new List<MemoryUsageData>
+			{
+				new MemoryUsageData(nameof(PawnMovementCache), MemoryUsageData.Global, "Movement by pawn",
+					MovementByPawn.Count * MemoryUsageData.DictionaryPairSize)
+			};
 		}
 	}
 }

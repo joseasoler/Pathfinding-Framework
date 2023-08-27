@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using PathfindingFramework.Cache.Global;
 using PathfindingFramework.Parse;
 using Verse;
@@ -390,6 +391,39 @@ namespace PathfindingFramework.Cache.Local
 		public int TerrainCost(int movementType, int cellIndex)
 		{
 			return _terrainPathGrids[movementType][cellIndex];
+		}
+
+		public static List<MemoryUsageData> MemoryReport()
+		{
+			var cacheName = nameof(MapPathCostCache);
+			var report = new List<MemoryUsageData>();
+
+			foreach (var mapCache in GlobalMapCache)
+			{
+				var cache = mapCache.Value;
+				var mapName = cache._map.GetUniqueLoadID();
+
+				report.Add(new MemoryUsageData(cacheName, mapName, "Fire grid",
+					sizeof(int) * cache._fireGrid.Length));
+				report.Add(new MemoryUsageData(cacheName, mapName, "Things grid",
+					sizeof(int) * cache._thingGrid.Length));
+				report.Add(new MemoryUsageData(cacheName, mapName, "Non repeater things grid",
+					sizeof(int) * cache._nonIgnoreRepeaterThingGrid.Length));
+				report.Add(new MemoryUsageData(cacheName, mapName, "Has ignore repeater grid",
+					sizeof(byte) * cache._hasIgnoreRepeaterGrid.Length));
+				report.Add(new MemoryUsageData(cacheName, mapName, "Has door grid",
+					sizeof(byte) * cache._hasDoorGrid.Length));
+
+				var terrainPathGridSize = cache._terrainPathGrids.First().Value.Length * sizeof(int);
+
+				foreach (var terrainPathGrid in cache._terrainPathGrids)
+				{
+					var movementName = DefDatabase<MovementDef>.AllDefsListForReading[terrainPathGrid.Key].LabelCap.ToString();
+					report.Add(new MemoryUsageData(cacheName, mapName, $"{movementName} terrain grid", MemoryUsageData.DictionaryPairSizeWithoutValue + terrainPathGridSize));
+				}
+			}
+
+			return report;
 		}
 	}
 }
