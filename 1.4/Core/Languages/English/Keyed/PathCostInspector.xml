@@ -6,6 +6,7 @@
 	<PF_NonIgnoreRepeatersPathCostLabel>Non-ignore repeaters</PF_NonIgnoreRepeatersPathCostLabel>
 	<PF_HasIgnoreRepeatersLabel>Has ignore repeaters</PF_HasIgnoreRepeatersLabel>
 	<PF_HasDoorLabel>Has door</PF_HasDoorLabel>
+	<PF_HasFenceLabel>Has fence</PF_HasFenceLabel>
 	<!-- Pathfinder Framework costs -->
 	<PF_TerrainCost>{0} terrain cost</PF_TerrainCost>
 	<!-- Vanilla costs -->

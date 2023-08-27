@@ -98,6 +98,7 @@ namespace PathfindingFramework.DevTool
 			var nonIgnoreRepeaterThingsCost = mapPathCostCache.NonIgnoreRepeaterThingsCost(cellIndex);
 			var hasIgnoreRepeater = mapPathCostCache.HasIgnoreRepeater(cellIndex) ? "Yes" : "No";
 			var hasDoor = mapPathCostCache.HasDoor(cellIndex) ? "Yes" : "No";
+			var hasFence = mapPathCostCache.HasFence(cellIndex) ? "Yes" : "No";
 
 			DrawHeader("PF_PathCostsLabel".Translate());
 			DrawRow("Snow".Translate(), snowCost.ToString());
@@ -106,6 +107,7 @@ namespace PathfindingFramework.DevTool
 			DrawRow("PF_NonIgnoreRepeatersPathCostLabel".Translate(), nonIgnoreRepeaterThingsCost.ToString());
 			DrawRow("PF_HasIgnoreRepeatersLabel".Translate(), hasIgnoreRepeater.Translate());
 			DrawRow("PF_HasDoorLabel".Translate(), hasDoor.Translate());
+			DrawRow("PF_HasFenceLabel".Translate(), hasFence.Translate());
 
 			// Terrain path cost calculation.
 			var movementTypeLabels = new List<string>();

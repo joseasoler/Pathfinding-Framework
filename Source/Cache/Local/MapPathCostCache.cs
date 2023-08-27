@@ -69,6 +69,12 @@ namespace PathfindingFramework.Cache.Local
 		private readonly bool[] _hasDoorGrid;
 
 		/// <summary>
+		/// Keeps track of fence presence.
+		/// In vanilla, Verse.AI.PathGrid.CalculatedCostAt considers fences as impassable in the fenceBlocked pathing.
+		/// </summary>
+		private readonly bool[] _hasFenceGrid;
+
+		/// <summary>
 		/// Number of pawns with each movement. Used to determine which terrain path grids should be kept updated.
 		/// </summary>
 		private readonly int[] _pawnMovementCounts;
@@ -111,6 +117,7 @@ namespace PathfindingFramework.Cache.Local
 			_nonIgnoreRepeaterThingGrid = new int[_gridSize];
 			_hasIgnoreRepeaterGrid = new bool[_gridSize];
 			_hasDoorGrid = new bool[_gridSize];
+			_hasFenceGrid = new bool[_gridSize];
 			_pawnMovementCounts = new int[MovementPathCostCache.MovementCount()];
 			_terrainPathGrids = new Dictionary<int, int[]>();
 		}
@@ -125,6 +132,7 @@ namespace PathfindingFramework.Cache.Local
 				// m00nl1ght.MapPreview uses maps without uniqueID to generate previews.
 				return;
 			}
+
 			GlobalMapCache.Add(map.uniqueID, new MapPathCostCache(map));
 		}
 
@@ -169,7 +177,7 @@ namespace PathfindingFramework.Cache.Local
 				return;
 			}
 
-			const int centerCellCost = (int)PathCostValues.Impassable;
+			const int centerCellCost = 1000;
 			_fireGrid[cellIndex] += spawned ? centerCellCost : -centerCellCost;
 
 			var adjacentCells = GenAdj.AdjacentCells;
@@ -209,6 +217,7 @@ namespace PathfindingFramework.Cache.Local
 			ref int thingCostRef = ref _thingGrid[cellIndex];
 			ref int nonIgnoreRepeaterThingCostRef = ref _nonIgnoreRepeaterThingGrid[cellIndex];
 			ref bool hasIgnoreRepeaterRef = ref _hasIgnoreRepeaterGrid[cellIndex];
+			ref bool hasFenceRef = ref _hasFenceGrid[cellIndex];
 
 			// Reset the current values.
 			thingCostRef = 0;
@@ -238,6 +247,8 @@ namespace PathfindingFramework.Cache.Local
 				{
 					hasIgnoreRepeaterRef = true;
 				}
+
+				hasFenceRef = hasFenceRef || (thing.def.building != null && thing.def.building.isFence);
 			}
 		}
 
@@ -289,6 +300,16 @@ namespace PathfindingFramework.Cache.Local
 		public bool HasDoor(int cellIndex)
 		{
 			return _hasDoorGrid[cellIndex];
+		}
+
+		/// <summary>
+		/// True if the cell contains a fence.
+		/// </summary>
+		/// <param name="cellIndex">Cell to check.</param>
+		/// <returns>Boolean flag.</returns>
+		public bool HasFence(int cellIndex)
+		{
+			return _hasFenceGrid[cellIndex];
 		}
 
 		/// <summary>
@@ -418,13 +439,16 @@ namespace PathfindingFramework.Cache.Local
 					sizeof(byte) * cache._hasIgnoreRepeaterGrid.Length));
 				report.Add(new MemoryUsageData(cacheName, mapName, "Has door grid",
 					sizeof(byte) * cache._hasDoorGrid.Length));
+				report.Add(new MemoryUsageData(cacheName, mapName, "Has fence grid",
+					sizeof(byte) * cache._hasFenceGrid.Length));
 
 				var terrainPathGridSize = cache._terrainPathGrids.First().Value.Length * sizeof(int);
 
 				foreach (var terrainPathGrid in cache._terrainPathGrids)
 				{
 					var movementName = DefDatabase<MovementDef>.AllDefsListForReading[terrainPathGrid.Key].LabelCap.ToString();
-					report.Add(new MemoryUsageData(cacheName, mapName, $"{movementName} terrain grid", MemoryUsageData.DictionaryPairSizeWithoutValue + terrainPathGridSize));
+					report.Add(new MemoryUsageData(cacheName, mapName, $"{movementName} terrain grid",
+						MemoryUsageData.DictionaryPairSizeWithoutValue + terrainPathGridSize));
 				}
 			}
 
