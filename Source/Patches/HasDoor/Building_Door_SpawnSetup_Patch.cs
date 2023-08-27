@@ -9,7 +9,7 @@ namespace PathfindingFramework.Patches.HasDoor
 	{
 		internal static void Postfix(Building_Door __instance)
 		{
-			MapPathCostCache.Get(__instance.Map.uniqueID).SetHasDoor(__instance.Position, true);
+			MapPathCostCache.GetCache(__instance.Map.uniqueID).SetHasDoor(__instance.Position, true);
 		}
 	}
 }

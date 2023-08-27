@@ -18,7 +18,7 @@ namespace PathfindingFramework.Patches.TerrainCostGrid
 				return;
 			}
 
-			MapPathCostCache.Get(___map.uniqueID).UpdateTerrainCost(c);
+			MapPathCostCache.GetCache(___map.uniqueID).UpdateTerrainCost(c);
 		}
 	}
 }

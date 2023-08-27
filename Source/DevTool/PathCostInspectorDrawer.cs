@@ -89,22 +89,20 @@ namespace PathfindingFramework.DevTool
 			Text.WordWrap = false;
 
 			var map = Find.CurrentMap;
-			var mapPathCostCache = MapPathCostCache.Get(map.uniqueID);
+			var mapPathCostCache = MapPathCostCache.GetCache(map.uniqueID);
 			var cell = UI.MouseCell();
 			var cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
 			var snowCost = SnowUtility.MovementTicksAddOn(map.snowGrid.GetCategory(cell));
-			var fireCost = mapPathCostCache.FireCost(cellIndex);
-			var thingsCost = mapPathCostCache.ThingsCost(cellIndex);
-			var nonIgnoreRepeaterThingsCost = mapPathCostCache.NonIgnoreRepeaterThingsCost(cellIndex);
-			var hasIgnoreRepeater = mapPathCostCache.HasIgnoreRepeater(cellIndex) ? "Yes" : "No";
-			var hasDoor = mapPathCostCache.HasDoor(cellIndex) ? "Yes" : "No";
-			var hasFence = mapPathCostCache.HasFence(cellIndex) ? "Yes" : "No";
+			var mapPathCost = mapPathCostCache.Get(cellIndex);
+			var hasIgnoreRepeater = mapPathCost.hasIgnoreRepeater ? "Yes" : "No";
+			var hasDoor = mapPathCost.hasDoor ? "Yes" : "No";
+			var hasFence = mapPathCost.hasFence ? "Yes" : "No";
 
 			DrawHeader("PF_PathCostsLabel".Translate());
 			DrawRow("Snow".Translate(), snowCost.ToString());
-			DrawRow("PF_FirePathCostLabel".Translate(), fireCost.ToString());
-			DrawRow("PF_ThingsPathCostLabel".Translate(), thingsCost.ToString());
-			DrawRow("PF_NonIgnoreRepeatersPathCostLabel".Translate(), nonIgnoreRepeaterThingsCost.ToString());
+			DrawRow("PF_FirePathCostLabel".Translate(), mapPathCost.fire.ToString());
+			DrawRow("PF_ThingsPathCostLabel".Translate(), mapPathCost.things.ToString());
+			DrawRow("PF_NonIgnoreRepeatersPathCostLabel".Translate(), mapPathCost.nonIgnoreRepeaterThings.ToString());
 			DrawRow("PF_HasIgnoreRepeatersLabel".Translate(), hasIgnoreRepeater.Translate());
 			DrawRow("PF_HasDoorLabel".Translate(), hasDoor.Translate());
 			DrawRow("PF_HasFenceLabel".Translate(), hasFence.Translate());

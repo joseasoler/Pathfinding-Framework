@@ -11,7 +11,7 @@ namespace PathfindingFramework.Patches.ThingGrids
 		{
 			if (__instance.def.pathCost != 0 || __instance.def.passability == Traversability.Impassable)
 			{
-				MapPathCostCache.Get(__instance.Map.uniqueID).UpdateThings(__instance.Position);
+				MapPathCostCache.GetCache(__instance.Map.uniqueID).UpdateThings(__instance.Position);
 			}
 		}
 	}

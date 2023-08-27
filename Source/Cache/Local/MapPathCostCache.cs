@@ -35,44 +35,9 @@ namespace PathfindingFramework.Cache.Local
 		private readonly Map _map;
 
 		/// <summary>
-		/// Keeps track of pathfinding costs associated with fire presence.
-		/// In vanilla, Verse.AI.PathGrid.CalculatedCostAt calculates this cost when perceivedStatic is set to true.
-		/// In the Pathfinding Framework, a precalculated copy of this information is used to calculate all path grids.
-		/// PF ignores costs from fires attached to pawns to improve performance.
+		/// Collection of multiple path costs related to each cell of the map.
 		/// </summary>
-		private readonly int[] _fireGrid;
-
-		/// <summary>
-		/// Path cost of things contained in the cell.
-		/// Follows the same logic as Verse.AI.PathGrid.CalculatedCostAt for generating the pathCost in the first
-		/// ThingsListAt loop.
-		/// </summary>
-		private readonly int[] _thingGrid;
-
-		/// <summary>
-		/// Path cost of things with IsPathCostIgnoreRepeater returning false in the cell.
-		/// Follows the same logic as Verse.AI.PathGrid.CalculatedCostAt for generating the pathCost in the first
-		/// ThingsListAt loop.
-		/// </summary>
-		private readonly int[] _nonIgnoreRepeaterThingGrid;
-
-		/// <summary>
-		/// True if the cell contains one or more things with IsPathCostIgnoreRepeater returning true.
-		/// </summary>
-		private readonly bool[] _hasIgnoreRepeaterGrid;
-
-		/// <summary>
-		/// True for cells containing a door.
-		/// Used to replicate Verse.AI.PathGrid.CalculatedCostAt logic to increase path costs if both the previous and
-		/// current tiles have doors.
-		/// </summary>
-		private readonly bool[] _hasDoorGrid;
-
-		/// <summary>
-		/// Keeps track of fence presence.
-		/// In vanilla, Verse.AI.PathGrid.CalculatedCostAt considers fences as impassable in the fenceBlocked pathing.
-		/// </summary>
-		private readonly bool[] _hasFenceGrid;
+		private readonly MapPathCost[] _mapGrid;
 
 		/// <summary>
 		/// Number of pawns with each movement. Used to determine which terrain path grids should be kept updated.
@@ -89,7 +54,7 @@ namespace PathfindingFramework.Cache.Local
 		/// </summary>
 		/// <param name="mapUniqueId">Unique ID of the map being requested.</param>
 		/// <returns>Map path cost cache, or null if the map is being initialized or destroyed.</returns>
-		public static MapPathCostCache Get(int mapUniqueId)
+		public static MapPathCostCache GetCache(int mapUniqueId)
 		{
 			return GlobalMapCache.TryGetValue(mapUniqueId, out var result) ? result : null;
 		}
@@ -112,12 +77,7 @@ namespace PathfindingFramework.Cache.Local
 			_mapSizeX = map.Size.x;
 			_map = map;
 
-			_fireGrid = new int[_gridSize];
-			_thingGrid = new int[_gridSize];
-			_nonIgnoreRepeaterThingGrid = new int[_gridSize];
-			_hasIgnoreRepeaterGrid = new bool[_gridSize];
-			_hasDoorGrid = new bool[_gridSize];
-			_hasFenceGrid = new bool[_gridSize];
+			_mapGrid = new MapPathCost[_gridSize];
 			_pawnMovementCounts = new int[MovementPathCostCache.MovementCount()];
 			_terrainPathGrids = new Dictionary<int, int[]>();
 		}
@@ -177,8 +137,8 @@ namespace PathfindingFramework.Cache.Local
 				return;
 			}
 
-			const int centerCellCost = 1000;
-			_fireGrid[cellIndex] += spawned ? centerCellCost : -centerCellCost;
+			const short centerCellCost = 1000;
+			_mapGrid[cellIndex].fire += (short)(spawned ? centerCellCost : -centerCellCost);
 
 			var adjacentCells = GenAdj.AdjacentCells;
 			for (int adjacentIndex = 0; adjacentIndex < adjacentCells.Length; ++adjacentIndex)
@@ -192,18 +152,8 @@ namespace PathfindingFramework.Cache.Local
 				}
 
 				const int adjacentCellCost = 150;
-				_fireGrid[adjacentCellIndex] += spawned ? adjacentCellCost : -adjacentCellCost;
+				_mapGrid[adjacentCellIndex].fire += (short)(spawned ? adjacentCellCost : -adjacentCellCost);
 			}
-		}
-
-		/// <summary>
-		/// Pathfinding cost of fire at a specific cell index.
-		/// </summary>
-		/// <param name="cellIndex">Index to check.</param>
-		/// <returns>Fire path cost.</returns>
-		public int FireCost(int cellIndex)
-		{
-			return _fireGrid[cellIndex];
 		}
 
 		/// <summary>
@@ -213,16 +163,13 @@ namespace PathfindingFramework.Cache.Local
 		public void UpdateThings(IntVec3 cell)
 		{
 			var cellIndex = ToIndex(cell);
-			// Get references to the relevant values of this cell.
-			ref int thingCostRef = ref _thingGrid[cellIndex];
-			ref int nonIgnoreRepeaterThingCostRef = ref _nonIgnoreRepeaterThingGrid[cellIndex];
-			ref bool hasIgnoreRepeaterRef = ref _hasIgnoreRepeaterGrid[cellIndex];
-			ref bool hasFenceRef = ref _hasFenceGrid[cellIndex];
+
+			ref var mapPathCostRef = ref _mapGrid[cellIndex];
 
 			// Reset the current values.
-			thingCostRef = 0;
-			nonIgnoreRepeaterThingCostRef = 0;
-			hasIgnoreRepeaterRef = false;
+			mapPathCostRef.things = 0;
+			mapPathCostRef.nonIgnoreRepeaterThings = 0;
+			mapPathCostRef.hasIgnoreRepeater = false;
 
 			var thingList = _map.thingGrid.ThingsListAtFast(cellIndex);
 			for (int thingIndex = 0; thingIndex < thingList.Count; ++thingIndex)
@@ -231,55 +178,25 @@ namespace PathfindingFramework.Cache.Local
 
 				if (thing.def.passability == Traversability.Impassable)
 				{
-					thingCostRef = (int)PathCostValues.Impassable;
-					nonIgnoreRepeaterThingCostRef = (int)PathCostValues.Impassable;
+					mapPathCostRef.things = (int)PathCostValues.Impassable;
+					mapPathCostRef.nonIgnoreRepeaterThings = (int)PathCostValues.Impassable;
 					break;
 				}
 
-				var currentThingCost = thing.def.pathCost;
-				thingCostRef = Math.Max(thingCostRef, currentThingCost);
+				var currentThingCost = (short)thing.def.pathCost;
+				mapPathCostRef.things = Math.Max(mapPathCostRef.things, currentThingCost);
 
 				if (!PathGrid.IsPathCostIgnoreRepeater(thing.def))
 				{
-					nonIgnoreRepeaterThingCostRef = Math.Max(nonIgnoreRepeaterThingCostRef, currentThingCost);
+					mapPathCostRef.nonIgnoreRepeaterThings = Math.Max(mapPathCostRef.nonIgnoreRepeaterThings, currentThingCost);
 				}
 				else
 				{
-					hasIgnoreRepeaterRef = true;
+					mapPathCostRef.hasIgnoreRepeater = true;
 				}
 
-				hasFenceRef = hasFenceRef || (thing.def.building != null && thing.def.building.isFence);
+				mapPathCostRef.hasFence = mapPathCostRef.hasFence || (thing.def.building != null && thing.def.building.isFence);
 			}
-		}
-
-		/// <summary>
-		/// Path cost of things in the cell.
-		/// </summary>
-		/// <param name="cellIndex">Index to check.</param>
-		/// <returns>Path cost.</returns>
-		public int ThingsCost(int cellIndex)
-		{
-			return _thingGrid[cellIndex];
-		}
-
-		/// <summary>
-		/// Path cost of things with IsPathCostIgnoreRepeater returning false in the cell.
-		/// </summary>
-		/// <param name="cellIndex">Index to check.</param>
-		/// <returns>Path cost.</returns>
-		public int NonIgnoreRepeaterThingsCost(int cellIndex)
-		{
-			return _nonIgnoreRepeaterThingGrid[cellIndex];
-		}
-
-		/// <summary>
-		/// True if the cell contains one or more things with IsPathCostIgnoreRepeater returning true.
-		/// </summary>
-		/// <param name="cellIndex">Cell to check.</param>
-		/// <returns>Boolean flag.</returns>
-		public bool HasIgnoreRepeater(int cellIndex)
-		{
-			return _hasIgnoreRepeaterGrid[cellIndex];
 		}
 
 		/// <summary>
@@ -289,27 +206,17 @@ namespace PathfindingFramework.Cache.Local
 		/// <param name="value">New value.</param>
 		public void SetHasDoor(IntVec3 cell, bool value)
 		{
-			_hasDoorGrid[ToIndex(cell)] = value;
+			_mapGrid[ToIndex(cell)].hasDoor = value;
 		}
 
 		/// <summary>
-		/// True if the cell contains a door.
+		/// Get map path costs of a cell
 		/// </summary>
-		/// <param name="cellIndex">Cell to check.</param>
-		/// <returns>Boolean flag.</returns>
-		public bool HasDoor(int cellIndex)
+		/// <param name="cellIndex">Index to check.</param>
+		/// <returns>Path cost.</returns>
+		public MapPathCost Get(int cellIndex)
 		{
-			return _hasDoorGrid[cellIndex];
-		}
-
-		/// <summary>
-		/// True if the cell contains a fence.
-		/// </summary>
-		/// <param name="cellIndex">Cell to check.</param>
-		/// <returns>Boolean flag.</returns>
-		public bool HasFence(int cellIndex)
-		{
-			return _hasFenceGrid[cellIndex];
+			return _mapGrid[cellIndex];
 		}
 
 		/// <summary>
@@ -424,32 +331,22 @@ namespace PathfindingFramework.Cache.Local
 			var cacheName = nameof(MapPathCostCache);
 			var report = new List<MemoryUsageData>();
 
+			var mapPathCostSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(MapPathCost));
+
 			foreach (var mapCache in GlobalMapCache)
 			{
 				var cache = mapCache.Value;
 				var mapName = cache._map.GetUniqueLoadID();
 
-				report.Add(new MemoryUsageData(cacheName, mapName, "Fire grid",
-					sizeof(int) * cache._fireGrid.Length));
-				report.Add(new MemoryUsageData(cacheName, mapName, "Things grid",
-					sizeof(int) * cache._thingGrid.Length));
-				report.Add(new MemoryUsageData(cacheName, mapName, "Non repeater things grid",
-					sizeof(int) * cache._nonIgnoreRepeaterThingGrid.Length));
-				report.Add(new MemoryUsageData(cacheName, mapName, "Has ignore repeater grid",
-					sizeof(byte) * cache._hasIgnoreRepeaterGrid.Length));
-				report.Add(new MemoryUsageData(cacheName, mapName, "Has door grid",
-					sizeof(byte) * cache._hasDoorGrid.Length));
-				report.Add(new MemoryUsageData(cacheName, mapName, "Has fence grid",
-					sizeof(byte) * cache._hasFenceGrid.Length));
+				report.Add(new MemoryUsageData(cacheName, mapName, "Map path cost grid",
+					mapPathCostSize * cache._mapGrid.Length));
 
 				var terrainPathGridSize = cache._terrainPathGrids.First().Value.Length * sizeof(int);
-
-				foreach (var terrainPathGrid in cache._terrainPathGrids)
-				{
-					var movementName = DefDatabase<MovementDef>.AllDefsListForReading[terrainPathGrid.Key].LabelCap.ToString();
-					report.Add(new MemoryUsageData(cacheName, mapName, $"{movementName} terrain grid",
-						MemoryUsageData.DictionaryPairSizeWithoutValue + terrainPathGridSize));
-				}
+				report.AddRange(cache._terrainPathGrids
+					.Select(terrainPathGrid =>
+						DefDatabase<MovementDef>.AllDefsListForReading[terrainPathGrid.Key].LabelCap.ToString()).Select(
+						movementName => new MemoryUsageData(cacheName, mapName, $"{movementName} terrain grid",
+							MemoryUsageData.DictionaryPairSizeWithoutValue + terrainPathGridSize)));
 			}
 
 			return report;

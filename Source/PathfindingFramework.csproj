@@ -5,8 +5,9 @@
 		<RootNamespace>PathfindingFramework</RootNamespace>
 		<AssemblyName>PathfindingFramework</AssemblyName>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net472</TargetFramework>
-		<TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+		<TargetFramework>net481</TargetFramework>
+		<TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+		<LangVersion>preview</LangVersion>
 		<PlatformTarget>x64</PlatformTarget>
 		<AppDesignerFolder>Properties</AppDesignerFolder>
 		<DebugSymbols>false</DebugSymbols>
@@ -22,6 +23,7 @@
 		<Compile Include="Cache\Global\MovementExtensionCache.cs" />
 		<Compile Include="Cache\Global\MovementPathCostCache.cs" />
 		<Compile Include="Cache\Global\PawnMovementCache.cs" />
+		<Compile Include="Cache\Local\MapPathCost.cs" />
 		<Compile Include="Cache\MemoryUsageData.cs" />
 		<Compile Include="Cache\Local\MapPathCostCache.cs" />
 		<Compile Include="DevTool\HediffDefGenerator_Movement.cs" />
