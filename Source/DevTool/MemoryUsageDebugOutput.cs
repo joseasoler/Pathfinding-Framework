@@ -14,10 +14,10 @@ namespace PathfindingFramework.DevTool
 			return $"{(bytes / 1024.0F).ToString("0.##", CultureInfo.InvariantCulture)} KiB";
 		}
 
-		[DebugOutput(category: Mod.Name, onlyWhenPlaying: true)]
-		public static void MemoryUsage()
+		[DebugOutput(category: Mod.Name, onlyWhenPlaying: false)]
+		public static void MemoryUsageEstimation()
 		{
-			List<MemoryUsageData> reports = new List<MemoryUsageData>();
+			var reports = new List<MemoryUsageData>();
 			reports.AddRange(MovementExtensionCache.MemoryReport());
 			reports.AddRange(MovementPathCostCache.MemoryReport());
 			reports.AddRange(PawnMovementCache.MemoryReport());

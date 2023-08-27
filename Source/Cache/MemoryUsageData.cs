@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace PathfindingFramework.Cache
 {
 	/// <summary>
@@ -11,22 +10,22 @@ namespace PathfindingFramework.Cache
 		/// <summary>
 		/// Name of the cache
 		/// </summary>
-		public string Cache;
+		public readonly string Cache;
 
 		/// <summary>
 		/// Map of the cache, or global.
 		/// </summary>
-		public string Map;
+		public readonly string Map;
 
 		/// <summary>
 		/// One of the grids of the cache,
 		/// </summary>
-		public string Grid;
+		public readonly string Grid;
 
 		/// <summary>
 		/// Approximation of the number of bytes in this data structure.
 		/// </summary>
-		public int Bytes;
+		public readonly int Bytes;
 
 		public const string Global = "Global";
 

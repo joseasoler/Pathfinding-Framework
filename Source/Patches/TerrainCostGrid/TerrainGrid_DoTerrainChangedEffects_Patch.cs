@@ -12,6 +12,12 @@ namespace PathfindingFramework.Patches.TerrainCostGrid
 	{
 		internal static void Postfix(Map ___map, IntVec3 c)
 		{
+			if (___map.uniqueID < 0)
+			{
+				// m00nl1ght.MapPreview uses maps without uniqueID to generate previews.
+				return;
+			}
+
 			MapPathCostCache.Get(___map.uniqueID).UpdateTerrainCost(c);
 		}
 	}

@@ -120,6 +120,11 @@ namespace PathfindingFramework.Cache.Local
 		/// </summary>
 		public static void Add(Map map)
 		{
+			if (map.uniqueID < 0)
+			{
+				// m00nl1ght.MapPreview uses maps without uniqueID to generate previews.
+				return;
+			}
 			GlobalMapCache.Add(map.uniqueID, new MapPathCostCache(map));
 		}
 
