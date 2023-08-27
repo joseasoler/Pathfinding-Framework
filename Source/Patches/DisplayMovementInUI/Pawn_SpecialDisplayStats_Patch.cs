@@ -133,8 +133,9 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			var movementIndex = PawnMovementCache.Get(__instance);
 			var movementDef = DefDatabase<MovementDef>.AllDefsListForReading[movementIndex];
 
+			var hyperlinks = new List<Dialog_InfoCard.Hyperlink> { new Dialog_InfoCard.Hyperlink(movementDef) };
+
 			var extraReportText = "";
-			var hyperlinks = new List<Dialog_InfoCard.Hyperlink>();
 			var extraReportInfo = GetExtraReportInfo(__instance, movementDef);
 			if (extraReportInfo != null)
 			{
@@ -152,7 +153,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			}
 
 			yield return new StatDrawEntry(StatCategoryDefOf.BasicsPawn, "PF_Locomotion".Translate(),
-				movementDef.LabelCap, reportText, 2501, null, hyperlinks.Count == 0 ? null : hyperlinks);
+				movementDef.LabelCap, reportText, 2501, null, hyperlinks);
 		}
 	}
 }

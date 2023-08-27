@@ -5,6 +5,7 @@
 	<PathfindingFramework.MovementDef>
 		<defName>PF_Terrestrial</defName>
 		<label>terrestrial</label>
+		<description>Terrestrial creatures are adapted to move on land. They can cross shallow water, but deeper bodies of water present a challenge to them.</description>
 		<priority>0</priority>
 		<defaultCost>Default</defaultCost>
 	</PathfindingFramework.MovementDef>
@@ -20,6 +21,7 @@
 	<PathfindingFramework.MovementDef ParentName="AquaticBase">
 		<defName>PF_Aquatic</defName>
 		<label>aquatic</label>
+		<description>Aquatic creatures can swim through deep water with easy, but are almost helpless on land.</description>
 		<priority>1000</priority>
 		<defaultCost>Avoid</defaultCost>
 	</PathfindingFramework.MovementDef>
@@ -27,6 +29,7 @@
 	<PathfindingFramework.MovementDef ParentName="AquaticBase">
 		<defName>PF_Amphibious</defName>
 		<label>amphibious</label>
+		<description>Amphibious creatures can move easily on both water and land.</description>
 		<priority>2000</priority>
 		<defaultCost>Default</defaultCost>
 	</PathfindingFramework.MovementDef>
@@ -34,6 +37,7 @@
 	<PathfindingFramework.MovementDef>
 		<defName>PF_Flying</defName>
 		<label>flying</label>
+		<description>Flying creatures can hover over most obstacles.</description>
 		<priority>10000</priority>
 		<defaultCost>0</defaultCost>
 	</PathfindingFramework.MovementDef>
