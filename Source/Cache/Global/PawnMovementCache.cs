@@ -48,7 +48,7 @@ namespace PathfindingFramework.Cache
 		private static void FromGenes(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
 			var geneList = pawn.genes?.GenesListForReading;
-			if (geneList.NullOrEmpty())
+			if (geneList == null)
 			{
 				return;
 			}
@@ -77,7 +77,7 @@ namespace PathfindingFramework.Cache
 		private static void FromHediffs(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
 			var hediffList = pawn.health?.hediffSet?.hediffs;
-			if (hediffList.NullOrEmpty())
+			if (hediffList == null)
 			{
 				return;
 			}
@@ -175,7 +175,6 @@ namespace PathfindingFramework.Cache
 					movementDef = currentDef;
 				}
 			}
-
 
 			var newMovementIndex = movementDef?.index ?? MovementDefOf.PF_Terrestrial.index;
 			MovementByPawn[pawn.thingIDNumber] = newMovementIndex;
