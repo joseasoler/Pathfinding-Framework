@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PathfindingFramework.Parse;
+using RimWorld;
+using Verse;
 
 namespace PathfindingFramework
 {
@@ -48,6 +51,120 @@ namespace PathfindingFramework
 						yield return Report.ConfigError(this,
 							$"tagCost {tagCost.Key} must be a numeric value or a valid PathingCost. But it was {tagCost.Value}");
 					}
+				}
+			}
+		}
+
+		private List<Def> MovementDefsFromType<TDefType>(Func<TDefType, bool> condition = null)
+			where TDefType : Def
+		{
+			var defs = DefDatabase<TDefType>.AllDefsListForReading;
+			var resultList = new List<Def>();
+			for (int index = 0; index < defs.Count; ++index)
+			{
+				var currentDef = defs[index];
+				var extension = currentDef.GetModExtension<MovementExtension>();
+				if (!currentDef.generated && extension != null && extension.movementDef == this &&
+				    (condition == null || condition(currentDef)))
+				{
+					resultList.Add(currentDef);
+				}
+			}
+
+			return resultList;
+		}
+
+		private void AddDefHyperlinksFromType<TDefType>(ref List<DefHyperlink> hyperlinks,
+			Func<TDefType, bool> condition = null) where TDefType : Def
+		{
+			var resultList = MovementDefsFromType<TDefType>(condition);
+			foreach (var result in resultList)
+			{
+				hyperlinks.Add(new DefHyperlink(result));
+			}
+		}
+
+		private static bool IsApparel(ThingDef thingDef)
+		{
+			return thingDef.IsApparel;
+		}
+
+		private static bool IsCreature(ThingDef thingDef)
+		{
+			return thingDef.race != null;
+		}
+
+		public override void ResolveReferences()
+		{
+			if (this.descriptionHyperlinks == null)
+			{
+				this.descriptionHyperlinks = new List<DefHyperlink>();
+			}
+
+			AddDefHyperlinksFromType<ThingDef>(ref this.descriptionHyperlinks, IsCreature);
+			AddDefHyperlinksFromType<HediffDef>(ref this.descriptionHyperlinks);
+			AddDefHyperlinksFromType<ThingDef>(ref this.descriptionHyperlinks, IsApparel);
+
+			if (ModLister.BiotechInstalled)
+			{
+				AddDefHyperlinksFromType<GeneDef>(ref this.descriptionHyperlinks);
+			}
+		}
+
+		private List<Dialog_InfoCard.Hyperlink> HyperlinksFromType<TDefType>(Func<TDefType, bool> condition = null)
+			where TDefType : Def
+		{
+			var resultList = MovementDefsFromType<TDefType>(condition);
+			if (resultList.Count == 0)
+			{
+				return null;
+			}
+
+			var hyperlinks = new List<Dialog_InfoCard.Hyperlink>();
+
+			foreach (var result in resultList)
+			{
+				hyperlinks.Add(new Dialog_InfoCard.Hyperlink(result));
+			}
+
+			return hyperlinks;
+		}
+
+		public override IEnumerable<StatDrawEntry> SpecialDisplayStats(StatRequest req)
+		{
+			foreach (StatDrawEntry item in base.SpecialDisplayStats(req))
+			{
+				yield return item;
+			}
+
+			var raceHyperlinks = HyperlinksFromType<ThingDef>(IsCreature);
+			if (raceHyperlinks != null)
+			{
+				yield return new StatDrawEntry(StatCategoryDefOf.Basics, "PawnsTabShort".Translate(), "", "", 10, null,
+					raceHyperlinks);
+			}
+
+			var hediffHyperlinks = HyperlinksFromType<HediffDef>();
+			if (hediffHyperlinks != null)
+			{
+				yield return new StatDrawEntry(StatCategoryDefOf.Basics, "Health".Translate(), "", "", 20, null,
+					hediffHyperlinks);
+			}
+
+			var apparelHyperlinks = HyperlinksFromType<ThingDef>(IsApparel);
+			if (apparelHyperlinks != null)
+			{
+				yield return new StatDrawEntry(StatCategoryDefOf.Basics, "Apparel".Translate(), "", "", 30, null,
+					apparelHyperlinks);
+			}
+
+			if (ModLister.BiotechInstalled)
+			{
+				var geneHyperlinks = HyperlinksFromType<GeneDef>();
+				if (geneHyperlinks != null)
+				{
+					yield return new StatDrawEntry(StatCategoryDefOf.Basics, "Genes".Translate(), "", "", 40, null,
+						geneHyperlinks);
 				}
 			}
 		}
