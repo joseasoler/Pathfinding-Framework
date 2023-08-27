@@ -5,9 +5,8 @@ using Verse;
 namespace PathfindingFramework.Cache.Global
 {
 	/// <summary>
-	/// Parses movement types from XML and stores them in memory, allowing faster access and usage.
+	/// Parses movement types from XML and stores them in memory in a format allowing faster access.
 	/// The cache is initialized after game load, and never modified afterwards.
-	/// This class relies on Defs having an index field that starts at zero.
 	/// </summary>
 	public static class MovementPathCostCache
 	{

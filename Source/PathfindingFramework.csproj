@@ -57,6 +57,8 @@
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_ApparelTracker_Wear_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_SpawnSetup_Patch.cs" />
+		<Compile Include="Patches\TerrainCostGrid\Map_FinalizeInit_Patch.cs" />
+		<Compile Include="Patches\TerrainCostGrid\TerrainGrid_DoTerrainChangedEffects_Patch.cs" />
 		<Compile Include="Patches\ThingGrids\Thing_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\ThingGrids\Thing_SpawnSetup_Patch.cs" />
 		<Compile Include="Report.cs" />

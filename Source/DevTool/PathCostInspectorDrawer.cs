@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using PathfindingFramework.Cache.Global;
 using PathfindingFramework.Cache.Local;
 using RimWorld.Planet;
 using UnityEngine;
@@ -105,6 +107,32 @@ namespace PathfindingFramework.DevTool
 			DrawRow("PF_HasIgnoreRepeatersLabel".Translate(), hasIgnoreRepeater.Translate());
 			DrawRow("PF_HasDoorLabel".Translate(), hasDoor.Translate());
 
+			// Terrain path cost calculation.
+			var movementTypeLabels = new List<string>();
+			var terrainPathCosts = new List<int>();
+			// ToDo total costs.
+			for (int movementIndex = 0; movementIndex < MovementPathCostCache.MovementCount(); ++movementIndex)
+			{
+				if (mapPathCostCache.HasMovementType(movementIndex))
+				{
+					var label = DefDatabase<MovementDef>.AllDefsListForReading[movementIndex].LabelCap;
+					movementTypeLabels.Add(label);
+					var terrainPathCost = mapPathCostCache.TerrainCost(movementIndex, cellIndex);
+					terrainPathCosts.Add(terrainPathCost);
+				}
+			}
+
+			DrawDivider();
+			for (int dataIndex = 0; dataIndex < movementTypeLabels.Count; ++dataIndex)
+			{
+				DrawRow("PF_TerrainCost".Translate(movementTypeLabels[dataIndex]), terrainPathCosts[dataIndex].ToString());
+			}
+
+			DrawDivider();
+			var vanillaNormalCost = map.pathing.Normal.pathGrid.PerceivedPathCostAt(cell);
+			var vanillaFenceCost = map.pathing.FenceBlocked.pathGrid.PerceivedPathCostAt(cell);
+			DrawRow("PF_VanillaNormalCostLabel".Translate(), vanillaNormalCost.ToString());
+			DrawRow("PF_VanillaFencesCostLabel".Translate(), vanillaFenceCost.ToString());
 			Text.WordWrap = true;
 			Text.Anchor = TextAnchor.UpperLeft;
 		}
@@ -145,6 +173,15 @@ namespace PathfindingFramework.DevTool
 			Widgets.Label(rect, text);
 			Text.Font = GameFont.Small;
 			Text.Anchor = TextAnchor.MiddleLeft;
+			++numLines;
+		}
+
+		private static void DrawDivider()
+		{
+			var currentTextHeight = numLines * LineHeight;
+			GUI.color = Color.gray;
+			Widgets.DrawLineHorizontal(0.0F, currentTextHeight + LineHeight, WindowWidth);
+			GUI.color = Color.white;
 			++numLines;
 		}
 	}

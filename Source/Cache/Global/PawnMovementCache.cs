@@ -180,12 +180,12 @@ namespace PathfindingFramework.Cache
 			MovementByPawn[pawn.thingIDNumber] = newMovementIndex;
 			if (!added && currentMovementIndex != newMovementIndex)
 			{
-				MapPathCostCache.Get(pawn.Map.uniqueID).PawnMovementChanged(currentMovementIndex, newMovementIndex);
+				MapPathCostCache.Get(pawn.Map.uniqueID).PawnUpdated(currentMovementIndex, newMovementIndex);
 			}
 
 			if (added)
 			{
-				MapPathCostCache.Get(pawn.Map.uniqueID).PawnSpawned(newMovementIndex);
+				MapPathCostCache.Get(pawn.Map.uniqueID).PawnAdded(newMovementIndex);
 			}
 		}
 
@@ -195,7 +195,7 @@ namespace PathfindingFramework.Cache
 		/// <param name="pawn">Pawn being de-spawned.</param>
 		public static void Remove(Pawn pawn)
 		{
-			MapPathCostCache.Get(pawn.Map.uniqueID).PawnDespawned(Get(pawn));
+			MapPathCostCache.Get(pawn.Map.uniqueID).PawnRemoved(Get(pawn));
 			MovementByPawn.Remove(pawn.thingIDNumber);
 		}
 

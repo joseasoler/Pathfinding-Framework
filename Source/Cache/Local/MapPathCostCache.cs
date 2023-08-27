@@ -28,7 +28,8 @@ namespace PathfindingFramework.Cache.Local
 		private int _gridSize;
 
 		/// <summary>
-		/// Reference to the current map. Avoid using expensive methods through it and prefer local utility methods instead.
+		/// Reference to the current map. Intended for access to the thing grid and terrain cost grid.
+		/// Avoid using expensive methods through it and prefer local utility methods instead.
 		/// </summary>
 		private readonly Map _map;
 
@@ -67,9 +68,14 @@ namespace PathfindingFramework.Cache.Local
 		private readonly bool[] _hasDoorGrid;
 
 		/// <summary>
-		/// Number of pawns with each movement. Used to determine which terrain grids should be kept updated.
+		/// Number of pawns with each movement. Used to determine which terrain path grids should be kept updated.
 		/// </summary>
 		private readonly int[] _pawnMovementCounts;
+
+		/// <summary>
+		/// Terrain path grids, indexed by MovementDef.index.
+		/// </summary>
+		private readonly Dictionary<int, int[]> _terrainPathGrids;
 
 		/// <summary>
 		/// Obtain the map path cost cache of a specific map.
@@ -105,6 +111,7 @@ namespace PathfindingFramework.Cache.Local
 			_hasIgnoreRepeaterGrid = new bool[_gridSize];
 			_hasDoorGrid = new bool[_gridSize];
 			_pawnMovementCounts = new int[MovementPathCostCache.MovementCount()];
+			_terrainPathGrids = new Dictionary<int, int[]>();
 		}
 
 		/// <summary>
@@ -251,7 +258,7 @@ namespace PathfindingFramework.Cache.Local
 		/// <summary>
 		/// True if the cell contains one or more things with IsPathCostIgnoreRepeater returning true.
 		/// </summary>
-		/// <param name="cellIndex">Index to check.</param>
+		/// <param name="cellIndex">Cell to check.</param>
 		/// <returns>Boolean flag.</returns>
 		public bool HasIgnoreRepeater(int cellIndex)
 		{
@@ -271,7 +278,7 @@ namespace PathfindingFramework.Cache.Local
 		/// <summary>
 		/// True if the cell contains a door.
 		/// </summary>
-		/// <param name="cellIndex">Index to check.</param>
+		/// <param name="cellIndex">Cell to check.</param>
 		/// <returns>Boolean flag.</returns>
 		public bool HasDoor(int cellIndex)
 		{
@@ -282,9 +289,29 @@ namespace PathfindingFramework.Cache.Local
 		/// A new pawn has spawned in this map.
 		/// </summary>
 		/// <param name="movementIndex">Movement index to increase.</param>
-		public void PawnSpawned(int movementIndex)
+		public void PawnAdded(int movementIndex)
 		{
+			if (_pawnMovementCounts[movementIndex] == 0)
+			{
+				_terrainPathGrids.Add(movementIndex, new int[_gridSize]);
+				UpdateTerrainCostOfMovement(movementIndex);
+			}
+
 			++_pawnMovementCounts[movementIndex];
+		}
+
+		/// <summary>
+		/// A new pawn has been removed from the map.
+		/// </summary>
+		/// <param name="movementIndex">Movement index to decrease.</param>
+		public void PawnRemoved(int movementIndex)
+		{
+			--_pawnMovementCounts[movementIndex];
+
+			if (_pawnMovementCounts[movementIndex] == 0)
+			{
+				_terrainPathGrids.Remove(movementIndex);
+			}
 		}
 
 		/// <summary>
@@ -292,19 +319,77 @@ namespace PathfindingFramework.Cache.Local
 		/// </summary>
 		/// <param name="previousMovementIndex">Movement index to decrease.</param>
 		/// <param name="newMovementIndex">Movement index to increase.</param>
-		public void PawnMovementChanged(int previousMovementIndex, int newMovementIndex)
+		public void PawnUpdated(int previousMovementIndex, int newMovementIndex)
 		{
-			--_pawnMovementCounts[previousMovementIndex];
-			++_pawnMovementCounts[newMovementIndex];
+			PawnRemoved(previousMovementIndex);
+			PawnAdded(newMovementIndex);
 		}
 
 		/// <summary>
-		/// A new pawn has been removed from the map.
+		/// Update a specific position of every terrain path grid.
 		/// </summary>
-		/// <param name="movementIndex">Movement index to decrease.</param>
-		public void PawnDespawned(int movementIndex)
+		/// <param name="cell">Cell being updated.</param>
+		public void UpdateTerrainCost(IntVec3 cell)
 		{
-			--_pawnMovementCounts[movementIndex];
+			var cellIndex = ToIndex(cell);
+			var terrainIndex = _map.terrainGrid.TerrainAt(cellIndex).index;
+			for (int movementIndex = 0; movementIndex < _pawnMovementCounts.Length; ++movementIndex)
+			{
+				if (_pawnMovementCounts[movementIndex] == 0)
+				{
+					continue;
+				}
+
+				_terrainPathGrids[movementIndex][cellIndex] = MovementPathCostCache.Get(movementIndex, terrainIndex);
+			}
+		}
+
+		private void UpdateTerrainCostOfMovement(int movementIndex)
+		{
+			var terrainPathGrid = _terrainPathGrids[movementIndex];
+			for (int cellIndex = 0; cellIndex < _gridSize; ++cellIndex)
+			{
+				var terrainIndex = _map.terrainGrid.TerrainAt(cellIndex).index;
+				terrainPathGrid[cellIndex] = MovementPathCostCache.Get(movementIndex, terrainIndex);
+			}
+		}
+
+		/// <summary>
+		/// Update all terrain grids.
+		/// </summary>
+		public void UpdateAllTerrainCosts()
+		{
+			for (int movementIndex = 0; movementIndex < _pawnMovementCounts.Length; ++movementIndex)
+			{
+				if (_pawnMovementCounts[movementIndex] == 0)
+				{
+					continue;
+				}
+
+				UpdateTerrainCostOfMovement(movementIndex);
+			}
+		}
+
+		/// <summary>
+		/// This function is intended for DevTool features only. Pawns should never need to check if their movement type
+		/// is cached, it should always be there.
+		/// </summary>
+		/// <param name="movementIndex">Movement type to check.</param>
+		/// <returns>True if the movement type is cached.</returns>
+		public bool HasMovementType(int movementIndex)
+		{
+			return _pawnMovementCounts[movementIndex] != 0;
+		}
+
+		/// <summary>
+		/// Pathfinding cost of terrain at a specific cell index for a certain movement type.
+		/// </summary>
+		/// <param name="movementType">Current movement type.</param>
+		/// <param name="cellIndex">Index to check.</param>
+		/// <returns>Terrain path cost.</returns>
+		public int TerrainCost(int movementType, int cellIndex)
+		{
+			return _terrainPathGrids[movementType][cellIndex];
 		}
 	}
 }
