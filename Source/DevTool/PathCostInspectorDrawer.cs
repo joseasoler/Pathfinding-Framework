@@ -99,6 +99,7 @@ namespace PathfindingFramework.DevTool
 			var hasFence = mapPathCost.hasFence ? "Yes" : "No";
 
 			DrawHeader("PF_PathCostsLabel".Translate());
+			DrawRow("PF_CellLabel".Translate(), $"({cell.x}, {cell.z})");
 			DrawRow("Snow".Translate(), snowCost.ToString());
 			DrawRow("PF_FirePathCostLabel".Translate(), mapPathCost.fire.ToString());
 			DrawRow("PF_ThingsPathCostLabel".Translate(), mapPathCost.things.ToString());

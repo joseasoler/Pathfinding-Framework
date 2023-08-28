@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+	<PF_CellLabel>Cell</PF_CellLabel>
 	<PF_PathCostsLabel>Path costs</PF_PathCostsLabel>
 	<PF_FirePathCostLabel>Fire</PF_FirePathCostLabel>
 	<PF_ThingsPathCostLabel>Things</PF_ThingsPathCostLabel>

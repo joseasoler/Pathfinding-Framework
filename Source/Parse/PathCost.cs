@@ -39,7 +39,7 @@ namespace PathfindingFramework.Parse
 		}
 
 		/// <summary>
-		/// By default, PathCoths are initialized to a special value. In this case, the cost defined by the TerrainDef
+		/// By default, PathCots are initialized to a special value. In this case, the cost defined by the TerrainDef
 		/// itself will be used.
 		/// </summary>
 		public PathCost() : this(Default.cost)

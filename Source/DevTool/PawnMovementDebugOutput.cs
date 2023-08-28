@@ -14,7 +14,7 @@ namespace PathfindingFramework.DevTool
 		[DebugOutput(category: Mod.Name, onlyWhenPlaying: true)]
 		public static void PawnLocomotion()
 		{
-			var input = new List<Tuple<string, string, string, string>>();
+			var input = new List<Tuple<string, string, string, string, string>>();
 			foreach (var map in Find.Maps)
 			{
 				foreach (var pawn in map.mapPawns.AllPawnsSpawned)
@@ -22,17 +22,20 @@ namespace PathfindingFramework.DevTool
 					var name = pawn.Name != null ? pawn.Name.ToString() : pawn.def.label;
 					var thingID = pawn.ThingID;
 					var mapId = map.ToString();
-					var movementIndex = PawnMovementCache.Get(pawn);
-					var movementDefName = DefDatabase<MovementDef>.AllDefsListForReading[movementIndex].defName;
-					input.Add(new Tuple<string, string, string, string>(name, thingID, mapId, movementDefName));
+					var pawnMovement = PawnMovementCache.Get(pawn);
+					var movementDefName = DefDatabase<MovementDef>.AllDefsListForReading[pawnMovement.movementIndex].defName;
+					var shouldAvoidFences = pawnMovement.shouldAvoidFences;
+					input.Add(new Tuple<string, string, string, string, string>(name, thingID, mapId, movementDefName,
+						shouldAvoidFences.ToString()));
 				}
 			}
 
-			var dataTable = new string[4, input.Count + 1];
+			var dataTable = new string[5, input.Count + 1];
 			dataTable[0, 0] = "Name";
 			dataTable[1, 0] = "Id";
 			dataTable[2, 0] = "Map";
 			dataTable[3, 0] = "Movement";
+			dataTable[4, 0] = "Avoid fences";
 
 			for (var inputIndex = 0; inputIndex < input.Count; ++inputIndex)
 			{
@@ -41,6 +44,7 @@ namespace PathfindingFramework.DevTool
 				dataTable[1, inputIndex + 1] = tuple.Item2;
 				dataTable[2, inputIndex + 1] = tuple.Item3;
 				dataTable[3, inputIndex + 1] = tuple.Item4;
+				dataTable[4, inputIndex + 1] = tuple.Item5;
 			}
 
 			Find.WindowStack.Add(new Window_DebugTable(dataTable));

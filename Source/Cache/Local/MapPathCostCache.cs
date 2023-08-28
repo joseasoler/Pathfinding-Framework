@@ -344,12 +344,19 @@ namespace PathfindingFramework.Cache.Local
 				report.Add(new MemoryUsageData(cacheName, mapName, "Map path cost grid",
 					mapPathCostSize * cache._mapGrid.Length));
 
+				if (cache._terrainPathGrids.Count == 0)
+				{
+					continue;
+				}
+
 				int terrainPathGridSize = cache._terrainPathGrids.First().Value.Length * sizeof(int);
-				report.AddRange(cache._terrainPathGrids
-					.Select(terrainPathGrid =>
-						DefDatabase<MovementDef>.AllDefsListForReading[terrainPathGrid.Key].LabelCap.ToString()).Select(
-						movementName => new MemoryUsageData(cacheName, mapName, $"{movementName} terrain grid",
-							MemoryUsageData.DictionaryPairSizeWithoutValue + terrainPathGridSize)));
+				foreach (var pair in cache._terrainPathGrids)
+				{
+					var label = DefDatabase<MovementDef>.AllDefsListForReading[pair.Key].LabelCap.ToString();
+					var movementName = $"{label} terrain grid";
+					report.Add(new MemoryUsageData(cacheName, mapName, movementName,
+						MemoryUsageData.DictionaryPairSizeWithoutValue + terrainPathGridSize));
+				}
 			}
 
 			return report;

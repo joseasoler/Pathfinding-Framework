@@ -21,7 +21,7 @@
 	<PathfindingFramework.MovementDef ParentName="AquaticBase">
 		<defName>PF_Aquatic</defName>
 		<label>aquatic</label>
-		<description>Aquatic creatures can swim through deep water with easy, but are almost helpless on land.</description>
+		<description>Aquatic creatures can swim through deep water with ease, but are helpless on land.</description>
 		<priority>1000</priority>
 		<defaultCost>Avoid</defaultCost>
 	</PathfindingFramework.MovementDef>

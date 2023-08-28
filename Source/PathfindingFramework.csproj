@@ -12,7 +12,7 @@
 		<AppDesignerFolder>Properties</AppDesignerFolder>
 		<DebugSymbols>false</DebugSymbols>
 		<Optimize>true</Optimize>
-		<WarningLevel>4</WarningLevel>
+		<WarningLevel>5</WarningLevel>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<Deterministic>true</Deterministic>
@@ -22,6 +22,7 @@
 	<ItemGroup>
 		<Compile Include="Cache\Global\MovementExtensionCache.cs" />
 		<Compile Include="Cache\Global\MovementPathCostCache.cs" />
+		<Compile Include="Cache\Global\PawnMovement.cs" />
 		<Compile Include="Cache\Global\PawnMovementCache.cs" />
 		<Compile Include="Cache\Local\MapPathCost.cs" />
 		<Compile Include="Cache\MemoryUsageData.cs" />
