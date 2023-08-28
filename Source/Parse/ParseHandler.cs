@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Verse;
 
 namespace PathfindingFramework.Parse
@@ -15,6 +16,11 @@ namespace PathfindingFramework.Parse
 		{
 			try
 			{
+				if (!ParseHelper.parsers.ContainsKey(typeof(short)))
+				{
+					ParseHelper.Parsers<short>.Register(ParseShort);
+				}
+
 				ParseHelper.Parsers<PathCost>.Register(ParsePathCost);
 				Report.Debug("Parser initialization complete.");
 			}
@@ -26,10 +32,26 @@ namespace PathfindingFramework.Parse
 		}
 
 		/// <summary>
+		/// See ParseHelper.ParseIntPermissive.
+		/// </summary>
+		/// <param name="value">string representation of a short value.</param>
+		/// <returns>short value</returns>
+		public static short ParseShort(string str)
+		{
+			short result;
+			if (!short.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out result))
+			{
+				Report.Error($"Could not parse short value {str}");
+			}
+
+			return result;
+		}
+
+		/// <summary>
 		/// Used to parse PathCost values found in XML files.
 		/// </summary>
 		/// <param name="value">string representation of a PathCost instance.</param>
-		/// <returns></returns>
+		/// <returns>PathCost instance</returns>
 		private static PathCost ParsePathCost(string value)
 		{
 			return new PathCost(value);

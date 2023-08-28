@@ -12,28 +12,28 @@ namespace PathfindingFramework.Parse
 		/// <summary>
 		/// Final integer path cost associated with this instance.
 		/// </summary>
-		public int cost;
+		public short cost;
 
 		/// <summary>
 		/// PathCost with a value of PathCostValues.Invalid, pre-initialized for performance reasons.
 		/// </summary>
-		public static readonly PathCost Invalid = new PathCost((int)PathCostValues.Invalid);
+		public static readonly PathCost Invalid = new((short)PathCostValues.Invalid);
 
 		/// <summary>
 		/// PathCost with a value of PathCostValues.Default, pre-initialized for performance reasons.
 		/// </summary>
-		public static readonly PathCost Default = new PathCost((int)PathCostValues.Default);
+		public static readonly PathCost Default = new((short)PathCostValues.Default);
 
 		/// <summary>
 		/// PathCost with a value of PathCostValues.Impassable, pre-initialized for performance reasons.
 		/// </summary>
-		public static readonly PathCost Impassable = new PathCost((int)PathCostValues.Impassable);
+		public static readonly PathCost Impassable = new((short)PathCostValues.Impassable);
 
 		/// <summary>
 		/// Initialize directly from a numerical value. Only intended for internal use in this class.
 		/// </summary>
 		/// <param name="value">Integer value to use for the cost.</param>
-		private PathCost(int value)
+		private PathCost(short value)
 		{
 			cost = value;
 		}
@@ -54,14 +54,14 @@ namespace PathfindingFramework.Parse
 		{
 			try
 			{
-				cost = (int)Enum.Parse(typeof(PathCostValues), value);
+				cost = (short)Enum.Parse(typeof(PathCostValues), value);
 			}
 			catch (Exception)
 			{
 				// value can be one of the values defined in the PathfindingCost enum, but it can also be an integer value.
 				try
 				{
-					var parsedCost = ParseHelper.FromString<int>(value);
+					short parsedCost = ParseHelper.FromString<short>(value);
 					if (parsedCost >= 0)
 					{
 						cost = parsedCost;

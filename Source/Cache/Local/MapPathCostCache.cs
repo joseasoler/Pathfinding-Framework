@@ -42,12 +42,12 @@ namespace PathfindingFramework.Cache.Local
 		/// <summary>
 		/// Number of pawns with each movement. Used to determine which terrain path grids should be kept updated.
 		/// </summary>
-		private readonly int[] _pawnMovementCounts;
+		private readonly short[] _pawnMovementCounts;
 
 		/// <summary>
 		/// Terrain path grids, indexed by MovementDef.index.
 		/// </summary>
-		private readonly Dictionary<int, int[]> _terrainPathGrids;
+		private readonly Dictionary<int, short[]> _terrainPathGrids;
 
 		/// <summary>
 		/// Obtain the map path cost cache of a specific map.
@@ -78,8 +78,8 @@ namespace PathfindingFramework.Cache.Local
 			_map = map;
 
 			_mapGrid = new MapPathCost[_gridSize];
-			_pawnMovementCounts = new int[MovementPathCostCache.MovementCount()];
-			_terrainPathGrids = new Dictionary<int, int[]>();
+			_pawnMovementCounts = new short[MovementPathCostCache.MovementCount()];
+			_terrainPathGrids = new Dictionary<int, short[]>();
 		}
 
 		/// <summary>
@@ -151,7 +151,7 @@ namespace PathfindingFramework.Cache.Local
 					continue;
 				}
 
-				const int adjacentCellCost = 150;
+				const short adjacentCellCost = 150;
 				_mapGrid[adjacentCellIndex].fire += (short)(spawned ? adjacentCellCost : -adjacentCellCost);
 			}
 		}
@@ -178,17 +178,20 @@ namespace PathfindingFramework.Cache.Local
 
 				if (thing.def.passability == Traversability.Impassable)
 				{
-					mapPathCostRef.things = (int)PathCostValues.Impassable;
-					mapPathCostRef.nonIgnoreRepeaterThings = (int)PathCostValues.Impassable;
+					mapPathCostRef.things = (short)PathCostValues.Impassable;
+					mapPathCostRef.nonIgnoreRepeaterThings = PathCost.Impassable.cost;
 					break;
 				}
 
-				var currentThingCost = (short)thing.def.pathCost;
-				mapPathCostRef.things = Math.Max(mapPathCostRef.things, currentThingCost);
+				int currentThingCost = thing.def.pathCost;
+				short narrowedThingPathCost =
+					currentThingCost > PathCost.Impassable.cost ? PathCost.Impassable.cost : (short)currentThingCost;
+				mapPathCostRef.things = Math.Max(mapPathCostRef.things, narrowedThingPathCost);
 
 				if (!PathGrid.IsPathCostIgnoreRepeater(thing.def))
 				{
-					mapPathCostRef.nonIgnoreRepeaterThings = Math.Max(mapPathCostRef.nonIgnoreRepeaterThings, currentThingCost);
+					mapPathCostRef.nonIgnoreRepeaterThings =
+						Math.Max(mapPathCostRef.nonIgnoreRepeaterThings, narrowedThingPathCost);
 				}
 				else
 				{
@@ -227,7 +230,7 @@ namespace PathfindingFramework.Cache.Local
 		{
 			if (_pawnMovementCounts[movementIndex] == 0)
 			{
-				_terrainPathGrids.Add(movementIndex, new int[_gridSize]);
+				_terrainPathGrids.Add(movementIndex, new short[_gridSize]);
 				UpdateTerrainCostOfMovement(movementIndex);
 			}
 
@@ -331,7 +334,7 @@ namespace PathfindingFramework.Cache.Local
 			var cacheName = nameof(MapPathCostCache);
 			var report = new List<MemoryUsageData>();
 
-			var mapPathCostSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(MapPathCost));
+			int mapPathCostSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(MapPathCost));
 
 			foreach (var mapCache in GlobalMapCache)
 			{
@@ -341,7 +344,7 @@ namespace PathfindingFramework.Cache.Local
 				report.Add(new MemoryUsageData(cacheName, mapName, "Map path cost grid",
 					mapPathCostSize * cache._mapGrid.Length));
 
-				var terrainPathGridSize = cache._terrainPathGrids.First().Value.Length * sizeof(int);
+				int terrainPathGridSize = cache._terrainPathGrids.First().Value.Length * sizeof(int);
 				report.AddRange(cache._terrainPathGrids
 					.Select(terrainPathGrid =>
 						DefDatabase<MovementDef>.AllDefsListForReading[terrainPathGrid.Key].LabelCap.ToString()).Select(

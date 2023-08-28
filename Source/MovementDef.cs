@@ -14,7 +14,7 @@ namespace PathfindingFramework
 		/// <summary>
 		/// Used to choose when two or more movement types are available.
 		/// </summary>
-		public int priority;
+		public short priority;
 
 		/// <summary>
 		/// Maps terrain tags to their path costs in this movement type.

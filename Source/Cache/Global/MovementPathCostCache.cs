@@ -14,7 +14,7 @@ namespace PathfindingFramework.Cache.Global
 		/// <summary>
 		/// Stores a list of terrain path costs for each movement type.
 		/// </summary>
-		private static int[] _terrainPathCosts;
+		private static short[] _terrainPathCosts;
 
 		/// <summary>
 		/// Number of MovementDefs loaded in the game.
@@ -32,7 +32,7 @@ namespace PathfindingFramework.Cache.Global
 		/// <param name="terrainDef">Terrain being evaluated.</param>
 		/// <param name="movementDef">Movement type being checked.</param>
 		/// <returns>Default if no tag was found, the maximum pathing cost otherwise.</returns>
-		private static int CalculateMaxTagCost(TerrainDef terrainDef, MovementDef movementDef)
+		private static short CalculateMaxTagCost(TerrainDef terrainDef, MovementDef movementDef)
 		{
 			var maxTagCost = PathCost.Default.cost;
 
@@ -61,7 +61,7 @@ namespace PathfindingFramework.Cache.Global
 		/// <param name="defaultCost">Default cost defined in the movement type.</param>
 		/// <param name="terrainPathCost">Vanilla path cost.</param>
 		/// <returns>Cost to use for pathing.</returns>
-		private static int CalculatePathCost(int maxTagCost, Traversability passability, PathCost defaultCost,
+		private static short CalculatePathCost(short maxTagCost, Traversability passability, PathCost defaultCost,
 			int terrainPathCost)
 		{
 			if (maxTagCost > PathCost.Default.cost)
@@ -74,7 +74,10 @@ namespace PathfindingFramework.Cache.Global
 				return PathCost.Impassable.cost;
 			}
 
-			return defaultCost == PathCost.Default ? terrainPathCost : defaultCost.cost;
+			short narrowedTerrainPathCost =
+				terrainPathCost > PathCost.Impassable.cost ? PathCost.Impassable.cost : (short)terrainPathCost;
+
+			return defaultCost == PathCost.Default ? narrowedTerrainPathCost : defaultCost.cost;
 		}
 
 		/// <summary>
@@ -86,7 +89,7 @@ namespace PathfindingFramework.Cache.Global
 			var terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
 			_movementCount = movementDefs.Count;
 			_terrainCount = terrainDefs.Count;
-			_terrainPathCosts = new int[movementDefs.Count * terrainDefs.Count];
+			_terrainPathCosts = new short[movementDefs.Count * terrainDefs.Count];
 
 			for (var movementIndex = 0; movementIndex < _movementCount; ++movementIndex)
 			{
@@ -127,7 +130,7 @@ namespace PathfindingFramework.Cache.Global
 		/// <param name="movementIndex">Index value of the MovementDef.</param>
 		/// <param name="terrainIndex">Index value of the TerrainDef.</param>
 		/// <returns>Path cost.</returns>
-		public static int Get(int movementIndex, int terrainIndex)
+		public static short Get(int movementIndex, int terrainIndex)
 		{
 			return _terrainPathCosts[movementIndex * _terrainCount + terrainIndex];
 		}
@@ -146,7 +149,7 @@ namespace PathfindingFramework.Cache.Global
 			return new List<MemoryUsageData>
 			{
 				new(nameof(MovementPathCostCache), MemoryUsageData.Global, "Terrain path costs",
-					MemoryUsageData.BytesFromArray(_terrainPathCosts))
+					sizeof(short) * _terrainPathCosts.Length)
 			};
 		}
 	}

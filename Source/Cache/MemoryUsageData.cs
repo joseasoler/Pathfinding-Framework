@@ -47,10 +47,5 @@ namespace PathfindingFramework.Cache
 			Grid = grid;
 			Bytes = bytes;
 		}
-
-		public static int BytesFromArray(int[] array)
-		{
-			return sizeof(int) * array.Length;
-		}
 	}
 }

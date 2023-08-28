@@ -5,7 +5,7 @@ namespace PathfindingFramework.Parse
 	/// <summary>
 	/// Defines specific pathfinding cost values which can be referenced by name.
 	/// </summary>
-	public enum PathCostValues
+	public enum PathCostValues : short
 	{
 		/// <summary>
 		/// Use the cost defined by the TerrainDef itself.
