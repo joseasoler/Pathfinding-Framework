@@ -3,8 +3,11 @@ using Verse;
 
 namespace PathfindingFramework.Patches.DisplayMovementInUI
 {
+	/// <summary>
+	/// Add granted locomotion to the description of genes.
+	/// </summary>
 	[HarmonyPatch(typeof(GeneDef), "GetDescriptionFull")]
-	public class GeneDef_GetDescriptionFull_Patch
+	internal static class GeneDef_GetDescriptionFull_Patch
 	{
 		internal static void Postfix(GeneDef __instance, ref string __result)
 		{

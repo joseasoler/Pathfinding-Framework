@@ -3,7 +3,7 @@ using PathfindingFramework.Cache.Local;
 using RimWorld;
 using Verse;
 
-namespace PathfindingFramework.Patches.FireGrid
+namespace PathfindingFramework.Patches.FirePathCost
 {
 	/// <summary>
 	/// Keeps the fire grid updated after a new fire spawns.

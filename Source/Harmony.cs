@@ -21,7 +21,7 @@ namespace PathfindingFramework
 			catch (Exception exception)
 			{
 				Report.Error("Harmony patching failed:");
-				Report.Error($"{exception.ToString()}");
+				Report.Error($"{exception}");
 			}
 		}
 	}

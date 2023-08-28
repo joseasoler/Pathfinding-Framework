@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using HarmonyLib;
-using PathfindingFramework.Cache;
 using PathfindingFramework.Cache.Global;
 using RimWorld;
 using Verse;
@@ -88,7 +87,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 				return null;
 			}
 
-			for (int index = 0; index < hediffList.Count; ++index)
+			for (var index = 0; index < hediffList.Count; ++index)
 			{
 				var hediffDef = hediffList[index].def;
 

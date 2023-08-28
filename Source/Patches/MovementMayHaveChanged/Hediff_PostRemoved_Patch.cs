@@ -1,10 +1,12 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Cache;
 using PathfindingFramework.Cache.Global;
 using Verse;
 
 namespace PathfindingFramework.Patches.MovementMayHaveChanged
 {
+	/// <summary>
+	/// Update the pawn movement cache when a hediff with a movement extension is removed.
+	/// </summary>
 	[HarmonyPatch(typeof(Hediff), nameof(Hediff.PostRemoved))]
 	internal static class Hediff_PostRemoved_Patch
 	{

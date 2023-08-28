@@ -15,7 +15,7 @@ namespace PathfindingFramework.Cache.Global
 
 		private static void AddDefsFromList<TDefType>(List<TDefType> source) where TDefType : Def
 		{
-			for (int index = 0; index < source.Count; ++index)
+			for (var index = 0; index < source.Count; ++index)
 			{
 				Def currentDef = source[index];
 				var extension = currentDef.GetModExtension<MovementExtension>();
@@ -76,7 +76,7 @@ namespace PathfindingFramework.Cache.Global
 		{
 			return new List<MemoryUsageData>
 			{
-				new MemoryUsageData(nameof(MovementExtensionCache), MemoryUsageData.Global, "Definition dictionary",
+				new(nameof(MovementExtensionCache), MemoryUsageData.Global, "Movement extension Defs",
 					_defs.Count * (MemoryUsageData.DictionaryPairSize + sizeof(long)))
 			};
 		}

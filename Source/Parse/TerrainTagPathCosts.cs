@@ -22,7 +22,7 @@ namespace PathfindingFramework.Parse
 		{
 			data = new Dictionary<string, PathCost>();
 			var tagCosts = DirectXmlToObject.ListFromXml<TerrainTagPathCost>(xmlRoot);
-			foreach (TerrainTagPathCost tagCost in tagCosts)
+			foreach (var tagCost in tagCosts)
 			{
 				data.Add(tagCost.tag, tagCost.cost);
 			}

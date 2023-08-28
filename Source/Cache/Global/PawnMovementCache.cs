@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using PathfindingFramework.Cache.Global;
 using PathfindingFramework.Cache.Local;
 using Verse;
 
-namespace PathfindingFramework.Cache
+namespace PathfindingFramework.Cache.Global
 {
 	/// <summary>
 	/// Keeps track of the MovementDef associated with each spawned pawn. See MovementExtension for details.
@@ -14,7 +12,7 @@ namespace PathfindingFramework.Cache
 		/// <summary>
 		/// Indexed by [pawn.thingIDNumber, movementDef.index].
 		/// </summary>
-		private static readonly Dictionary<int, int> MovementByPawn = new Dictionary<int, int>();
+		private static readonly Dictionary<int, int> MovementByPawn = new();
 
 		/// <summary>
 		/// Add all movement definitions obtained from apparel to the set.
@@ -220,7 +218,7 @@ namespace PathfindingFramework.Cache
 		{
 			return new List<MemoryUsageData>
 			{
-				new MemoryUsageData(nameof(PawnMovementCache), MemoryUsageData.Global, "Movement by pawn",
+				new(nameof(PawnMovementCache), MemoryUsageData.Global, "Movement by pawn",
 					MovementByPawn.Count * MemoryUsageData.DictionaryPairSize)
 			};
 		}

@@ -7,7 +7,7 @@ namespace PathfindingFramework.Parse
 	/// Wraps an integer path cost value with some utility functions to convert to and from specific values defined in
 	/// PathCostValues.
 	/// </summary>
-	public class PathCost
+	public record struct PathCost
 	{
 		/// <summary>
 		/// Final integer path cost associated with this instance.
@@ -77,51 +77,6 @@ namespace PathfindingFramework.Parse
 		public override string ToString()
 		{
 			return Enum.GetName(typeof(PathCostValues), cost) ?? cost.ToString();
-		}
-
-		public static bool operator ==(PathCost lhs, PathCostValues rhs)
-		{
-			return lhs.cost == (int)rhs;
-		}
-
-		public static bool operator !=(PathCost lhs, PathCostValues rhs)
-		{
-			return !(lhs == rhs);
-		}
-
-		public static bool operator ==(PathCost lhs, PathCost rhs)
-		{
-			return lhs.cost == rhs.cost;
-		}
-
-		public static bool operator !=(PathCost lhs, PathCost rhs)
-		{
-			return !(lhs == rhs);
-		}
-
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj))
-			{
-				return false;
-			}
-
-			if (ReferenceEquals(this, obj))
-			{
-				return true;
-			}
-
-			if (obj.GetType() != this.GetType())
-			{
-				return false;
-			}
-
-			return this == (PathCost)obj;
-		}
-
-		public override int GetHashCode()
-		{
-			return cost;
 		}
 	}
 }

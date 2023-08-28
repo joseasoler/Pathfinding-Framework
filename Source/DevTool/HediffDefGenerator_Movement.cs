@@ -30,7 +30,7 @@ namespace PathfindingFramework.DevTool
 				{
 					movementDef = movementDef
 				});
-				DefGenerator.AddImpliedDef<HediffDef>(hediffDef);
+				DefGenerator.AddImpliedDef(hediffDef);
 			}
 		}
 	}

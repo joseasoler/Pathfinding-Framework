@@ -3,10 +3,10 @@ using PathfindingFramework.Cache.Local;
 using RimWorld;
 using Verse;
 
-namespace PathfindingFramework.Patches.FireGrid
+namespace PathfindingFramework.Patches.FirePathCost
 {
 	/// <summary>
-	/// Keeps the fire grid updated after a fire is destroyed.
+	/// Keeps fire pathfinding information updated after a fire is destroyed.
 	/// </summary>
 	[HarmonyPatch(typeof(Fire), nameof(Fire.DeSpawn))]
 	internal static class Fire_DeSpawn_Patch

@@ -13,7 +13,7 @@ namespace PathfindingFramework.DevTool
 			var movementCount = movementDefs.Count;
 			var terrainCount = terrainDefs.Count;
 
-			string[,] dataTable = new string[movementCount + 1, terrainCount + 1];
+			var dataTable = new string[movementCount + 1, terrainCount + 1];
 			dataTable[0, 0] = "Movement type";
 
 			for (var movementIndex = 0; movementIndex < movementCount; ++movementIndex)

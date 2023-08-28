@@ -26,26 +26,26 @@ namespace PathfindingFramework.DevTool
 		/// <summary>
 		/// True while Control+Shift+Q is held and the relevant mod setting is enabled.
 		/// </summary>
-		public static bool active;
+		private static bool _active;
 
 		/// <summary>
 		/// Current number of lines of the inspector.
 		/// </summary>
-		private static int numLines;
+		private static int _numLines;
 
 		public static void Update()
 		{
 			if (!Settings.Values.PathCostInspector || Current.ProgramState != ProgramState.Playing ||
 			    WorldRendererUtility.WorldRenderedNow || Find.CurrentMap == null || !UI.MouseCell().InBounds(Find.CurrentMap))
 			{
-				active = false;
+				_active = false;
 				return;
 			}
 
-			active = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
+			_active = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
 				(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKey(KeyCode.Q);
 
-			if (active)
+			if (_active)
 			{
 				GenUI.RenderMouseoverBracket();
 			}
@@ -53,15 +53,15 @@ namespace PathfindingFramework.DevTool
 
 		public static void OnGui()
 		{
-			if (!active || Mouse.IsInputBlockedNow)
+			if (!_active || Mouse.IsInputBlockedNow)
 			{
 				return;
 			}
 
 			var rect = new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, WindowWidth,
-				numLines * LineHeight + LineHeight);
+				_numLines * LineHeight + LineHeight);
 
-			numLines = 0;
+			_numLines = 0;
 			rect.x += DistFromMouse;
 			rect.y += DistFromMouse;
 			if (rect.xMax > UI.screenWidth)
@@ -74,12 +74,12 @@ namespace PathfindingFramework.DevTool
 				rect.y -= rect.height + OutsideScreenOffset;
 			}
 
-			Find.WindowStack.ImmediateWindow(62348, rect, WindowLayer.Super, new Action(FillWindow));
+			Find.WindowStack.ImmediateWindow(1362348, rect, WindowLayer.Super, FillWindow);
 		}
 
 		private static void FillWindow()
 		{
-			if (!active)
+			if (!_active)
 			{
 				return;
 			}
@@ -137,15 +137,10 @@ namespace PathfindingFramework.DevTool
 			Text.Anchor = TextAnchor.UpperLeft;
 		}
 
-		/// <summary>
-		/// ToDo
-		/// </summary>
-		/// <param name="label"></param>
-		/// <param name="info"></param>
 		private static void DrawRow(string label, string info)
 		{
-			var currentTextHeight = numLines * LineHeight + LineHeight / 2.0F;
-			if (numLines % 2 == 1)
+			var currentTextHeight = _numLines * LineHeight + LineHeight / 2.0F;
+			if (_numLines % 2 == 1)
 			{
 				var rect = new Rect(WindowPadding, currentTextHeight, LabelColumnWidth + ColumnPadding + InfoColumnWidth,
 					LineHeight);
@@ -159,7 +154,7 @@ namespace PathfindingFramework.DevTool
 			var infoRect = new Rect(WindowPadding + ColumnPadding + LabelColumnWidth, currentTextHeight, InfoColumnWidth,
 				LineHeight);
 			Widgets.Label(infoRect, info);
-			++numLines;
+			++_numLines;
 		}
 
 		private static void DrawHeader(string text)
@@ -167,22 +162,22 @@ namespace PathfindingFramework.DevTool
 			const int extraTextHeight = 4;
 			Text.Anchor = TextAnchor.UpperCenter;
 			Text.Font = GameFont.Medium;
-			var currentTextHeight = numLines * LineHeight + LineHeight / 2.0F - extraTextHeight * 2;
+			var currentTextHeight = _numLines * LineHeight + LineHeight / 2.0F - extraTextHeight * 2;
 			var rect = new Rect(WindowPadding, currentTextHeight, LabelColumnWidth + ColumnPadding + InfoColumnWidth,
 				LineHeight + extraTextHeight);
 			Widgets.Label(rect, text);
 			Text.Font = GameFont.Small;
 			Text.Anchor = TextAnchor.MiddleLeft;
-			++numLines;
+			++_numLines;
 		}
 
 		private static void DrawDivider()
 		{
-			var currentTextHeight = numLines * LineHeight;
+			var currentTextHeight = _numLines * LineHeight;
 			GUI.color = Color.gray;
 			Widgets.DrawLineHorizontal(0.0F, currentTextHeight + LineHeight, WindowWidth);
 			GUI.color = Color.white;
-			++numLines;
+			++_numLines;
 		}
 	}
 }

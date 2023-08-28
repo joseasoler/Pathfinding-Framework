@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using PathfindingFramework.Cache;
+using PathfindingFramework.Cache.Global;
 using Verse;
 
 namespace PathfindingFramework.DevTool
 {
+	/// <summary>
+	/// Generate a report with the movement type used by each pawn on the current map.
+	/// </summary>
 	public static class PawnMovementDebugOutput
 	{
 		[DebugOutput(category: Mod.Name, onlyWhenPlaying: true)]

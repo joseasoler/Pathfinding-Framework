@@ -3,6 +3,9 @@ using Verse;
 
 namespace PathfindingFramework.Patches.DisplayMovementInUI
 {
+	/// <summary>
+	/// Add granted locomotion to the hediff tooltip.
+	/// </summary>
 	[HarmonyPatch(typeof(Hediff), nameof(Hediff.GetTooltip))]
 	internal static class Hediff_GetTooltip_Patch
 	{

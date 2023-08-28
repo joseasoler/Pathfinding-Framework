@@ -25,7 +25,7 @@ namespace PathfindingFramework
 		/// </summary>
 		private static readonly string Prefix = $"[{Mod.Name} v{Version}] ";
 
-		private static readonly HashSet<int> _usedHashes = new HashSet<int>();
+		private static readonly HashSet<int> UsedHashes = new HashSet<int>();
 
 		/// <summary>
 		/// Prepends the identification prefix to some text to be used in a report.
@@ -74,12 +74,12 @@ namespace PathfindingFramework
 		public static void ErrorOnce(string message)
 		{
 			var hash = message.GetHashCode();
-			if (_usedHashes.Contains(hash))
+			if (UsedHashes.Contains(hash))
 			{
 				return;
 			}
 
-			_usedHashes.Add(hash);
+			UsedHashes.Add(hash);
 			Report.Error(message);
 		}
 
@@ -89,7 +89,7 @@ namespace PathfindingFramework
 		/// <param name="def">Def with a configuration error.</param>
 		/// <param name="error">Error to show.</param>
 		/// <returns>Configuration error string.</returns>
-		public static string ConfigError(Verse.Def def, string error)
+		public static string ConfigError(Def def, string error)
 		{
 			return $"{Prefix} [{def.defName}]: {error}";
 		}

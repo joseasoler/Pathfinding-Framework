@@ -8,7 +8,7 @@ namespace PathfindingFramework.Patches.DevTool.PathCostInspector
 	/// Show the path cost inspector window if it is enabled.
 	/// </summary>
 	[HarmonyPatch(typeof(UIRoot), nameof(UIRoot.UIRootOnGUI))]
-	public class UIRoot_UIRootOnGUI_Patch
+	internal static class UIRoot_UIRootOnGUI_Patch
 	{
 		internal static void Postfix()
 		{

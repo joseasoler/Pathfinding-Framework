@@ -8,7 +8,7 @@ namespace PathfindingFramework.Patches.ThingGrids
 	/// Update MapPathCostCache when needed.
 	/// </summary>
 	[HarmonyPatch(typeof(Thing), nameof(Thing.DeSpawn))]
-	public class Thing_DeSpawn_Patch
+	internal static class Thing_DeSpawn_Patch
 	{
 		internal static void Prefix(Thing __instance)
 		{

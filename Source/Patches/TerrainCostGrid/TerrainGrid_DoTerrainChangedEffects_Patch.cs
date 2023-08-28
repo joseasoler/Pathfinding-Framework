@@ -8,7 +8,7 @@ namespace PathfindingFramework.Patches.TerrainCostGrid
 	/// Handle updates to the terrain cost grids.
 	/// </summary>
 	[HarmonyPatch(typeof(TerrainGrid), "DoTerrainChangedEffects")]
-	public class TerrainGrid_DoTerrainChangedEffects_Patch
+	internal static class TerrainGrid_DoTerrainChangedEffects_Patch
 	{
 		internal static void Postfix(Map ___map, IntVec3 c)
 		{

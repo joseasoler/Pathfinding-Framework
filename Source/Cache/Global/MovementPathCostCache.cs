@@ -74,12 +74,7 @@ namespace PathfindingFramework.Cache.Global
 				return PathCost.Impassable.cost;
 			}
 
-			if (defaultCost == PathCost.Default)
-			{
-				return terrainPathCost;
-			}
-
-			return defaultCost.cost;
+			return defaultCost == PathCost.Default ? terrainPathCost : defaultCost.cost;
 		}
 
 		/// <summary>
@@ -110,7 +105,7 @@ namespace PathfindingFramework.Cache.Global
 		}
 
 		/// <summary>
-		/// Movement path cost initialization.
+		/// Movement path cost cache initialization.
 		/// </summary>
 		public static void Initialize()
 		{
@@ -150,7 +145,7 @@ namespace PathfindingFramework.Cache.Global
 		{
 			return new List<MemoryUsageData>
 			{
-				new MemoryUsageData(nameof(MovementPathCostCache), MemoryUsageData.Global, "Terrain path costs",
+				new(nameof(MovementPathCostCache), MemoryUsageData.Global, "Terrain path costs",
 					MemoryUsageData.BytesFromArray(_terrainPathCosts))
 			};
 		}

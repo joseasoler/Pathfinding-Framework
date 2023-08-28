@@ -10,12 +10,12 @@ namespace PathfindingFramework
 		/// <summary>
 		/// Enable the path cost inspector.
 		/// </summary>
-		public bool PathCostInspector = false;
+		public bool PathCostInspector/* = false*/;
 
 		/// <summary>
 		/// Write additional debug information to the game log.
 		/// </summary>
-		public bool DebugLog = false;
+		public bool DebugLog/* = false*/;
 	}
 
 	/// <summary>
@@ -26,7 +26,7 @@ namespace PathfindingFramework
 		/// <summary>
 		/// Single instance of the setting values of this mod. Uses static for performance reasons.
 		/// </summary>
-		public static SettingValues Values = new SettingValues();
+		public static SettingValues Values = new();
 
 		/// <summary>
 		/// Set all settings to their default values.

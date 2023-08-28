@@ -16,7 +16,7 @@ namespace PathfindingFramework.Cache.Local
 		/// <summary>
 		/// Associates a map path cost cache to each map.uniqueID value.
 		/// </summary>
-		private static readonly Dictionary<int, MapPathCostCache> GlobalMapCache = new Dictionary<int, MapPathCostCache>();
+		private static readonly Dictionary<int, MapPathCostCache> GlobalMapCache = new();
 
 		/// <summary>
 		/// X size of the parent map. Stored to convert cells to indexes and other operations without the parent map.

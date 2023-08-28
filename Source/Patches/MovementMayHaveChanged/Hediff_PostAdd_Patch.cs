@@ -1,10 +1,12 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Cache;
 using PathfindingFramework.Cache.Global;
 using Verse;
 
 namespace PathfindingFramework.Patches.MovementMayHaveChanged
 {
+	/// <summary>
+	/// Update the pawn movement cache when a hediff with a movement extension is added.
+	/// </summary>
 	[HarmonyPatch(typeof(Hediff), nameof(Hediff.PostAdd))]
 	internal static class Hediff_PostAdd_Patch
 	{

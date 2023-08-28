@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Cache;
+using PathfindingFramework.Cache.Global;
 using Verse;
 
 namespace PathfindingFramework.Patches.MovementMayHaveChanged
