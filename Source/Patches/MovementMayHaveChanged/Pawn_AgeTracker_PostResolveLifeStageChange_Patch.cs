@@ -10,9 +10,13 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 	[HarmonyPatch(typeof(Pawn_AgeTracker), nameof(Pawn_AgeTracker.PostResolveLifeStageChange))]
 	internal static class Pawn_AgeTracker_PostResolveLifeStageChange_Patch
 	{
-		internal static void Postfix(Pawn_AgeTracker __instance, Pawn ___pawn)
+		internal static void Postfix(Pawn ___pawn)
 		{
-			PawnMovementCache.Update(___pawn);
+			// PostResolveLifeStageChange might get called during the pawn spawning process.
+			if (___pawn.Spawned)
+			{
+				PawnMovementCache.Update(___pawn);
+			}
 		}
 	}
 }
