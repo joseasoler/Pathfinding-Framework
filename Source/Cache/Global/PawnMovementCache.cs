@@ -191,10 +191,11 @@ namespace PathfindingFramework.Cache.Global
 		/// <summary>
 		/// Remove a despawned pawn from the cache.
 		/// </summary>
+		/// <param name="mapUniqueId">Map of the pawn being de-spawned.</param>
 		/// <param name="pawn">Pawn being de-spawned.</param>
-		public static void Remove(Pawn pawn)
+		public static void Remove(int mapUniqueId, Pawn pawn)
 		{
-			MapPathCostCache.GetCache(pawn.Map.uniqueID).PawnRemoved(Get(pawn).movementIndex);
+			MapPathCostCache.GetCache(mapUniqueId).PawnRemoved(Get(pawn).movementIndex);
 			MovementByPawn.Remove(pawn.thingIDNumber);
 		}
 
