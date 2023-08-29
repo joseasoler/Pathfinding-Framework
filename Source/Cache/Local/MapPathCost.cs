@@ -2,8 +2,8 @@
 
 namespace PathfindingFramework.Cache.Local
 {
-	[StructLayout(LayoutKind.Sequential, Pack=1)]
-	public record struct MapPathCost
+	[StructLayout(LayoutKind.Sequential, Pack = 1)]
+	public struct MapPathCost
 	{
 		/// <summary>
 		/// Keeps track of pathfinding costs associated with fire presence.

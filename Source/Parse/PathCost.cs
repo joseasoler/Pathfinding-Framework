@@ -7,8 +7,9 @@ namespace PathfindingFramework.Parse
 	/// Wraps an integer path cost value with some utility functions to convert to and from specific values defined in
 	/// PathCostValues.
 	/// </summary>
-	public record struct PathCost
+	public struct PathCost
 	{
+
 		/// <summary>
 		/// Final integer path cost associated with this instance.
 		/// </summary>
@@ -36,14 +37,6 @@ namespace PathfindingFramework.Parse
 		private PathCost(short value)
 		{
 			cost = value;
-		}
-
-		/// <summary>
-		/// By default, PathCots are initialized to a special value. In this case, the cost defined by the TerrainDef
-		/// itself will be used.
-		/// </summary>
-		public PathCost() : this(Default.cost)
-		{
 		}
 
 		/// <summary>
@@ -77,6 +70,31 @@ namespace PathfindingFramework.Parse
 		public override string ToString()
 		{
 			return Enum.GetName(typeof(PathCostValues), cost) ?? cost.ToString();
+		}
+		
+		public static bool operator ==(PathCost lhs, PathCost rhs)
+		{
+			return lhs.cost == rhs.cost;
+		}
+
+		public static bool operator !=(PathCost lhs, PathCost rhs)
+		{
+			return lhs.cost != rhs.cost;
+		}
+
+		private bool Equals(PathCost other)
+		{
+			return cost == other.cost;
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is PathCost other && Equals(other);
+		}
+
+		public override int GetHashCode()
+		{
+			return cost.GetHashCode();
 		}
 	}
 }

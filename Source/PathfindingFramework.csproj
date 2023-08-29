@@ -5,9 +5,9 @@
 		<RootNamespace>PathfindingFramework</RootNamespace>
 		<AssemblyName>PathfindingFramework</AssemblyName>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net481</TargetFramework>
-		<TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
-		<LangVersion>preview</LangVersion>
+		<TargetFramework>net48</TargetFramework>
+		<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+		<LangVersion>9</LangVersion>
 		<PlatformTarget>x64</PlatformTarget>
 		<AppDesignerFolder>Properties</AppDesignerFolder>
 		<DebugSymbols>false</DebugSymbols>
