@@ -1,24 +1,40 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Runtime.CompilerServices;
 
 namespace PathfindingFramework.Cache.Global
 {
-	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	public struct PawnMovement
+	/// <summary>
+	/// Utility class to pack different pawn movement parameters into a single integer. This integer has the following
+	/// memory layout: 0x0000AFMI
+	/// Where AF is an avoid fences boolean values, and MI is a MovementDef.index.
+	/// </summary>
+	public static class PawnMovement
 	{
 		/// <summary>
-		/// movementDef.index associated with this pawn.
+		/// Movement index is packed into the lowest 2 byte of the integer.
 		/// </summary>
-		public ushort movementIndex;
+		private const int MovementIndexMask = 0xFF;
 
 		/// <summary>
-		/// True if the pawn cannot pass over fences.
+		/// Mask over the position used by the avoid fences mask.
 		/// </summary>
-		public bool shouldAvoidFences;
+		private const int AvoidFencesMask = 0b100000000;
 
-		public PawnMovement(ushort index, bool avoidFences)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int FromParameters(int movementIndex, bool avoidFences)
 		{
-			movementIndex = index;
-			shouldAvoidFences = avoidFences;
+			return movementIndex + (avoidFences ? AvoidFencesMask : 0);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int MovementIndex(int pawnMovement)
+		{
+			return pawnMovement & MovementIndexMask;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool AvoidFences(int pawnMovement)
+		{
+			return (pawnMovement & AvoidFencesMask) != 0;
 		}
 	}
 }

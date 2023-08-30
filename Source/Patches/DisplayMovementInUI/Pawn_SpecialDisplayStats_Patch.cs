@@ -130,9 +130,9 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			}
 
 			var pawnMovement = PawnMovementCache.Get(__instance);
-			var movementDef = DefDatabase<MovementDef>.AllDefsListForReading[pawnMovement.movementIndex];
+			var movementDef = DefDatabase<MovementDef>.AllDefsListForReading[PawnMovement.MovementIndex(pawnMovement)];
 
-			var hyperlinks = new List<Dialog_InfoCard.Hyperlink> { new(movementDef) };
+			var hyperlinks = new List<Dialog_InfoCard.Hyperlink> {new(movementDef)};
 
 			var extraReportText = "";
 			var extraReportInfo = GetExtraReportInfo(__instance, movementDef);

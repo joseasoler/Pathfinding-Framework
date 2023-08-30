@@ -10,9 +10,9 @@ namespace PathfindingFramework.Cache.Global
 	public static class PawnMovementCache
 	{
 		/// <summary>
-		/// Indexed by pawn.thingIDNumber.
+		/// Indexed by pawn.thingIDNumber. The value is a PawnMovement integer.
 		/// </summary>
-		private static readonly Dictionary<int, PawnMovement> MovementByPawn = new();
+		private static readonly Dictionary<int, int> MovementByPawn = new();
 
 		/// <summary>
 		/// Add all movement definitions obtained from apparel to the set.
@@ -146,7 +146,7 @@ namespace PathfindingFramework.Cache.Global
 		/// <param name="added">True if the pawn has just been added to the map..</param>
 		private static void AddOrUpdate(Pawn pawn, bool added)
 		{
-			var currentMovementIndex = added ? 0 : Get(pawn).movementIndex;
+			var currentMovementIndex = added ? 0 : PawnMovement.MovementIndex(Get(pawn));
 
 			/*
 			 * Recalculate this. Now, MovementDef has a priority. And MovementExtension can combine.
@@ -176,7 +176,7 @@ namespace PathfindingFramework.Cache.Global
 			}
 
 			var newMovementIndex = movementDef?.index ?? MovementDefOf.PF_Terrestrial.index;
-			MovementByPawn[pawn.thingIDNumber] = new PawnMovement(newMovementIndex, pawn.ShouldAvoidFences);
+			MovementByPawn[pawn.thingIDNumber] = PawnMovement.FromParameters(newMovementIndex, pawn.ShouldAvoidFences);
 			if (!added && currentMovementIndex != newMovementIndex)
 			{
 				MapPathCostCache.GetCache(pawn.Map.uniqueID).PawnUpdated(currentMovementIndex, newMovementIndex);
@@ -195,7 +195,7 @@ namespace PathfindingFramework.Cache.Global
 		/// <param name="pawn">Pawn being de-spawned.</param>
 		public static void Remove(int mapUniqueId, Pawn pawn)
 		{
-			MapPathCostCache.GetCache(mapUniqueId).PawnRemoved(Get(pawn).movementIndex);
+			MapPathCostCache.GetCache(mapUniqueId).PawnRemoved(PawnMovement.MovementIndex(Get(pawn)));
 			MovementByPawn.Remove(pawn.thingIDNumber);
 		}
 
@@ -204,7 +204,7 @@ namespace PathfindingFramework.Cache.Global
 		/// </summary>
 		/// <param name="pawn">Pawn to check.</param>
 		/// <returns>Movement index.</returns>
-		public static PawnMovement Get(Pawn pawn)
+		public static int Get(Pawn pawn)
 		{
 			if (MovementByPawn.TryGetValue(pawn.thingIDNumber, out var result))
 			{
@@ -212,17 +212,15 @@ namespace PathfindingFramework.Cache.Global
 			}
 
 			Report.ErrorOnce($"Pawn {pawn.ThingID} is missing from the {nameof(PawnMovementCache)} cache.");
-			return new PawnMovement(MovementDefOf.PF_Terrestrial.index, false);
+			return PawnMovement.FromParameters(MovementDefOf.PF_Terrestrial.index, false);
 		}
 
 		public static List<MemoryUsageData> MemoryReport()
 		{
-			int pawnMovementSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(PawnMovement));
-
 			return new List<MemoryUsageData>
 			{
 				new(nameof(PawnMovementCache), MemoryUsageData.Global, "Movement by pawn",
-					MovementByPawn.Count * (MemoryUsageData.DictionaryPairSizeWithoutValue + pawnMovementSize))
+					MovementByPawn.Count * MemoryUsageData.DictionaryPairSize)
 			};
 		}
 	}

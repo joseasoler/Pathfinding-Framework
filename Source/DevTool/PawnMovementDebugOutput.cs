@@ -19,12 +19,13 @@ namespace PathfindingFramework.DevTool
 			{
 				foreach (var pawn in map.mapPawns.AllPawnsSpawned)
 				{
-					var name = pawn.Name != null ? pawn.Name.ToString() : pawn.def.label;
-					var thingID = pawn.ThingID;
-					var mapId = map.ToString();
-					var pawnMovement = PawnMovementCache.Get(pawn);
-					var movementDefName = DefDatabase<MovementDef>.AllDefsListForReading[pawnMovement.movementIndex].defName;
-					var shouldAvoidFences = pawnMovement.shouldAvoidFences;
+					string name = pawn.Name != null ? pawn.Name.ToString() : pawn.def.label;
+					string thingID = pawn.ThingID;
+					string mapId = map.ToString();
+					int pawnMovement = PawnMovementCache.Get(pawn);
+					string movementDefName = DefDatabase<MovementDef>
+						.AllDefsListForReading[PawnMovement.MovementIndex(pawnMovement)].defName;
+					bool shouldAvoidFences = PawnMovement.AvoidFences(pawnMovement);
 					input.Add(new Tuple<string, string, string, string, string>(name, thingID, mapId, movementDefName,
 						shouldAvoidFences.ToString()));
 				}

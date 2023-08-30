@@ -75,7 +75,7 @@ namespace PathfindingFramework.Cache.Global
 			}
 
 			short narrowedTerrainPathCost =
-				terrainPathCost > PathCost.Impassable.cost ? PathCost.Impassable.cost : (short)terrainPathCost;
+				terrainPathCost > PathCost.Impassable.cost ? PathCost.Impassable.cost : (short) terrainPathCost;
 
 			return defaultCost == PathCost.Default ? narrowedTerrainPathCost : defaultCost.cost;
 		}
@@ -88,6 +88,13 @@ namespace PathfindingFramework.Cache.Global
 			var movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
 			var terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
 			_movementCount = movementDefs.Count;
+
+			if (_movementCount > sbyte.MaxValue)
+			{
+				Report.Error(
+					$"Total number of movementDefs is {_movementCount}. This is far larger than the maximum allowed value and WILL cause problems.");
+			}
+
 			_terrainCount = terrainDefs.Count;
 			_terrainPathCosts = new short[movementDefs.Count * terrainDefs.Count];
 
