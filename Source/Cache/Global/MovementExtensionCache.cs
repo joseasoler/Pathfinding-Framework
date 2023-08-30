@@ -11,17 +11,17 @@ namespace PathfindingFramework.Cache.Global
 	/// </summary>
 	public static class MovementExtensionCache
 	{
-		private static Dictionary<ushort, MovementExtension> _defs;
+		private static Dictionary<int, MovementDef> _defs;
 
 		private static void AddDefsFromList<TDefType>(List<TDefType> source) where TDefType : Def
 		{
-			for (var index = 0; index < source.Count; ++index)
+			for (int index = 0; index < source.Count; ++index)
 			{
 				Def currentDef = source[index];
-				var extension = currentDef.GetModExtension<MovementExtension>();
-				if (extension != null)
+				MovementDef movementDef = currentDef.GetModExtension<MovementExtension>()?.movementDef;
+				if (movementDef != null)
 				{
-					_defs[currentDef.shortHash] = extension;
+					_defs[currentDef.shortHash] = movementDef;
 				}
 			}
 		}
@@ -33,7 +33,7 @@ namespace PathfindingFramework.Cache.Global
 		{
 			try
 			{
-				_defs = new Dictionary<ushort, MovementExtension>();
+				_defs = new Dictionary<int, MovementDef>();
 
 				AddDefsFromList(DefDatabase<ThingDef>.AllDefsListForReading);
 				AddDefsFromList(DefDatabase<LifeStageDef>.AllDefsListForReading);
@@ -66,8 +66,8 @@ namespace PathfindingFramework.Cache.Global
 		/// Get the extension of a Def
 		/// </summary>
 		/// <param name="def">Def to check.</param>
-		/// <returns>MovementExtension of this Def.</returns>
-		public static MovementExtension GetExtension(Def def)
+		/// <returns>MovementDef associated to this Def.</returns>
+		public static MovementDef GetMovementDef(Def def)
 		{
 			return _defs.TryGetValue(def.shortHash, out var result) ? result : null;
 		}

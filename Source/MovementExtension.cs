@@ -5,9 +5,9 @@ namespace PathfindingFramework
 {
 	/// <summary>
 	/// Define an alternative movement type to use for pawns. This extension is compatible with the following Def types.
-	/// These types are listed in order of priority.
 	/// * ThingDef: pawns wearing this item as apparel.
 	/// * GeneDef: pawns with this gene.
+	/// * HediffDef: pawns with this hediff.
 	/// * LifeStageDef: pawns currently in this life stage.
 	/// * ThingDef: pawns with this ThingDef as their race.
 	/// 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PathfindingFramework.Cache.Local;
+using RimWorld;
 using Verse;
 
 namespace PathfindingFramework.Cache.Global
@@ -31,10 +32,10 @@ namespace PathfindingFramework.Cache.Global
 			for (int index = 0; index < apparelList.Count; ++index)
 			{
 				var apparelDef = apparelList[index].def;
-				var extension = MovementExtensionCache.GetExtension(apparelDef);
-				if (extension != null)
+				var movementDef = MovementExtensionCache.GetMovementDef(apparelDef);
+				if (movementDef != null)
 				{
-					movementDefs.Add(extension.movementDef);
+					movementDefs.Add(movementDef);
 				}
 			}
 		}
@@ -60,10 +61,10 @@ namespace PathfindingFramework.Cache.Global
 					continue;
 				}
 
-				var extension = MovementExtensionCache.GetExtension(gene.def);
-				if (extension != null)
+				MovementDef movementDef = MovementExtensionCache.GetMovementDef(gene.def);
+				if (movementDef != null)
 				{
-					movementDefs.Add(extension.movementDef);
+					movementDefs.Add(movementDef);
 				}
 			}
 		}
@@ -85,10 +86,10 @@ namespace PathfindingFramework.Cache.Global
 			{
 				var hediff = hediffList[index];
 
-				var extension = MovementExtensionCache.GetExtension(hediff.def);
-				if (extension != null)
+				MovementDef movementDef = MovementExtensionCache.GetMovementDef(hediff.def);
+				if (movementDef != null)
 				{
-					movementDefs.Add(extension.movementDef);
+					movementDefs.Add(movementDef);
 				}
 			}
 		}
@@ -100,7 +101,8 @@ namespace PathfindingFramework.Cache.Global
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
 		private static void FromLifeStage(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
-			var movementDef = MovementExtensionCache.GetExtension(pawn.ageTracker?.CurLifeStage)?.movementDef;
+			LifeStageDef lifeStageDef = pawn.ageTracker?.CurLifeStage;
+			MovementDef movementDef = MovementExtensionCache.GetMovementDef(lifeStageDef);
 			if (movementDef != null)
 			{
 				movementDefs.Add(movementDef);
@@ -114,7 +116,7 @@ namespace PathfindingFramework.Cache.Global
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
 		private static void FromRace(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
-			var movementDef = MovementExtensionCache.GetExtension(pawn.def)?.movementDef;
+			var movementDef = MovementExtensionCache.GetMovementDef(pawn.def);
 			if (movementDef != null)
 			{
 				movementDefs.Add(movementDef);

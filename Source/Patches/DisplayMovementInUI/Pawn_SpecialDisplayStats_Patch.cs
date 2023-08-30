@@ -23,8 +23,8 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			for (int index = 0; index < apparelList.Count; ++index)
 			{
 				var apparelDef = apparelList[index].def;
-				var extension = MovementExtensionCache.GetExtension(apparelDef);
-				if (extension != null && extension.movementDef == movementDef)
+				var extensionMovementDef = MovementExtensionCache.GetMovementDef(apparelDef);
+				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return new Pair<string, Dialog_InfoCard.Hyperlink?>(apparelDef.label,
 						new Dialog_InfoCard.Hyperlink(apparelDef));
@@ -45,8 +45,8 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 					continue;
 				}
 
-				var extension = MovementExtensionCache.GetExtension(gene.def);
-				if (extension != null && extension.movementDef == movementDef)
+				var extensionMovementDef = MovementExtensionCache.GetMovementDef(gene.def);
+				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return gene.def;
 				}
@@ -91,8 +91,8 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			{
 				var hediffDef = hediffList[index].def;
 
-				var extension = MovementExtensionCache.GetExtension(hediffDef);
-				if (extension != null && extension.movementDef == movementDef)
+				var extensionMovementDef = MovementExtensionCache.GetMovementDef(hediffDef);
+				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return new Pair<string, Dialog_InfoCard.Hyperlink?>(hediffDef.label,
 						new Dialog_InfoCard.Hyperlink(hediffDef));
