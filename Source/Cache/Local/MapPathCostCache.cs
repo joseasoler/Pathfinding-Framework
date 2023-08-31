@@ -11,28 +11,12 @@ namespace PathfindingFramework.Cache.Local
 	/// <summary>
 	/// Stores and keeps updated different pathfinding grids for a specific map.
 	/// </summary>
-	public class MapPathCostCache
+	public class MapPathCostCache : MapCache
 	{
 		/// <summary>
 		/// Associates a map path cost cache to each map.uniqueID value.
 		/// </summary>
 		private static readonly Dictionary<int, MapPathCostCache> GlobalMapCache = new();
-
-		/// <summary>
-		/// X size of the parent map. Stored to convert cells to indexes and other operations without the parent map.
-		/// </summary>
-		private int _mapSizeX;
-
-		/// <summary>
-		/// Total number of positions in the current map. Cached for performing InBounds checks without the parent map.
-		/// </summary>
-		private int _gridSize;
-
-		/// <summary>
-		/// Reference to the current map. Intended for access to the thing grid and terrain cost grid.
-		/// Avoid using expensive methods through it and prefer local utility methods instead.
-		/// </summary>
-		private readonly Map _map;
 
 		/// <summary>
 		/// Collection of multiple path costs related to each cell of the map.
@@ -71,13 +55,9 @@ namespace PathfindingFramework.Cache.Local
 		/// Create an instance of the cache for a specific map.
 		/// </summary>
 		/// <param name="map">Parent map of this cache.</param>
-		public MapPathCostCache(Map map)
+		public MapPathCostCache(Map map) : base(map)
 		{
-			_gridSize = map.Size.x * map.Size.z;
-			_mapSizeX = map.Size.x;
-			_map = map;
-
-			_mapGrid = new MapPathCost[_gridSize];
+			_mapGrid = new MapPathCost[GridSize];
 			_pawnMovementCounts = new short[MovementPathCostCache.MovementCount()];
 			_terrainPathGrids = new Dictionary<int, short[]>();
 		}
@@ -105,23 +85,13 @@ namespace PathfindingFramework.Cache.Local
 		}
 
 		/// <summary>
-		/// In-class replacement for Verse.CellIndices.CellToIndex.
-		/// </summary>
-		/// <param name="cell">Cell to convert.</param>
-		/// <returns>Index of the cell in this map.</returns>
-		private int ToIndex(IntVec3 cell)
-		{
-			return cell.z * _mapSizeX + cell.x;
-		}
-
-		/// <summary>
 		/// In-class replacement for GenGrid.InBounds, using cell indexes.
 		/// </summary>
 		/// <param name="cellIndex">Cell index to be checked</param>
 		/// <returns>True if the index refers to a cell inside of the map.</returns>
 		private bool InBounds(int cellIndex)
 		{
-			return cellIndex >= 0 && cellIndex < _gridSize;
+			return cellIndex >= 0 && cellIndex < GridSize;
 		}
 
 		/// <summary>
@@ -138,7 +108,7 @@ namespace PathfindingFramework.Cache.Local
 			}
 
 			const short centerCellCost = 1000;
-			_mapGrid[cellIndex].fire += (short)(spawned ? centerCellCost : -centerCellCost);
+			_mapGrid[cellIndex].fire += (short) (spawned ? centerCellCost : -centerCellCost);
 
 			var adjacentCells = GenAdj.AdjacentCells;
 			for (int adjacentIndex = 0; adjacentIndex < adjacentCells.Length; ++adjacentIndex)
@@ -152,7 +122,7 @@ namespace PathfindingFramework.Cache.Local
 				}
 
 				const short adjacentCellCost = 150;
-				_mapGrid[adjacentCellIndex].fire += (short)(spawned ? adjacentCellCost : -adjacentCellCost);
+				_mapGrid[adjacentCellIndex].fire += (short) (spawned ? adjacentCellCost : -adjacentCellCost);
 			}
 		}
 
@@ -171,21 +141,21 @@ namespace PathfindingFramework.Cache.Local
 			mapPathCostRef.nonIgnoreRepeaterThings = 0;
 			mapPathCostRef.hasIgnoreRepeater = false;
 
-			var thingList = _map.thingGrid.ThingsListAtFast(cellIndex);
+			var thingList = Map.thingGrid.ThingsListAtFast(cellIndex);
 			for (int thingIndex = 0; thingIndex < thingList.Count; ++thingIndex)
 			{
 				var thing = thingList[thingIndex];
 
 				if (thing.def.passability == Traversability.Impassable)
 				{
-					mapPathCostRef.things = (short)PathCostValues.Impassable;
+					mapPathCostRef.things = (short) PathCostValues.Impassable;
 					mapPathCostRef.nonIgnoreRepeaterThings = PathCost.Impassable.cost;
 					break;
 				}
 
 				int currentThingCost = thing.def.pathCost;
 				short narrowedThingPathCost =
-					currentThingCost > PathCost.Impassable.cost ? PathCost.Impassable.cost : (short)currentThingCost;
+					currentThingCost > PathCost.Impassable.cost ? PathCost.Impassable.cost : (short) currentThingCost;
 				mapPathCostRef.things = Math.Max(mapPathCostRef.things, narrowedThingPathCost);
 
 				if (!PathGrid.IsPathCostIgnoreRepeater(thing.def))
@@ -230,7 +200,7 @@ namespace PathfindingFramework.Cache.Local
 		{
 			if (_pawnMovementCounts[movementIndex] == 0)
 			{
-				_terrainPathGrids.Add(movementIndex, new short[_gridSize]);
+				_terrainPathGrids.Add(movementIndex, new short[GridSize]);
 				UpdateTerrainCostOfMovement(movementIndex);
 			}
 
@@ -269,7 +239,7 @@ namespace PathfindingFramework.Cache.Local
 		public void UpdateTerrainCost(IntVec3 cell)
 		{
 			var cellIndex = ToIndex(cell);
-			var terrainIndex = _map.terrainGrid.TerrainAt(cellIndex).index;
+			var terrainIndex = Map.terrainGrid.TerrainAt(cellIndex).index;
 			for (int movementIndex = 0; movementIndex < _pawnMovementCounts.Length; ++movementIndex)
 			{
 				if (_pawnMovementCounts[movementIndex] == 0)
@@ -284,9 +254,9 @@ namespace PathfindingFramework.Cache.Local
 		private void UpdateTerrainCostOfMovement(int movementIndex)
 		{
 			var terrainPathGrid = _terrainPathGrids[movementIndex];
-			for (int cellIndex = 0; cellIndex < _gridSize; ++cellIndex)
+			for (int cellIndex = 0; cellIndex < GridSize; ++cellIndex)
 			{
-				var terrainIndex = _map.terrainGrid.TerrainAt(cellIndex).index;
+				var terrainIndex = Map.terrainGrid.TerrainAt(cellIndex).index;
 				terrainPathGrid[cellIndex] = MovementPathCostCache.Get(movementIndex, terrainIndex);
 			}
 		}
@@ -339,7 +309,7 @@ namespace PathfindingFramework.Cache.Local
 			foreach (var mapCache in GlobalMapCache)
 			{
 				var cache = mapCache.Value;
-				var mapName = cache._map.GetUniqueLoadID();
+				var mapName = cache.Map.GetUniqueLoadID();
 
 				report.Add(new MemoryUsageData(cacheName, mapName, "Map path cost grid",
 					mapPathCostSize * cache._mapGrid.Length));

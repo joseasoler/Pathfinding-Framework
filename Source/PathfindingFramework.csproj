@@ -24,6 +24,7 @@
 		<Compile Include="Cache\Global\MovementPathCostCache.cs" />
 		<Compile Include="Cache\Global\PawnMovement.cs" />
 		<Compile Include="Cache\Global\PawnMovementCache.cs" />
+		<Compile Include="Cache\Local\MapCache.cs" />
 		<Compile Include="Cache\Local\MapPathCost.cs" />
 		<Compile Include="Cache\MemoryUsageData.cs" />
 		<Compile Include="Cache\Local\MapPathCostCache.cs" />
