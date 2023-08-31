@@ -12,7 +12,7 @@ namespace PathfindingFramework.Patches.TerrainCostGrid
 	{
 		internal static void Prefix(Map __instance)
 		{
-			MapPathCostCache.GetCache(__instance.uniqueID).UpdateAllTerrainCosts();
+			__instance.MapPathCosts().UpdateAllTerrainCosts();
 		}
 	}
 }

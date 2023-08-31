@@ -12,7 +12,7 @@ namespace PathfindingFramework.Patches.HasDoor
 	{
 		internal static void Prefix(Building_Door __instance)
 		{
-			MapPathCostCache.GetCache(__instance.Map.uniqueID).SetHasDoor(__instance.Position, false);
+			__instance.Map.MapPathCosts().SetHasDoor(__instance.Position, false);
 		}
 	}
 }

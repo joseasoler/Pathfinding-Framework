@@ -31,7 +31,6 @@ namespace PathfindingFramework
 		{
 			GetSettings<Settings>();
 			// Caches which require DefDatabase being fully initialized.
-			MovementPathCostCache.Initialize();
 			MovementExtensionCache.Initialize();
 		}
 

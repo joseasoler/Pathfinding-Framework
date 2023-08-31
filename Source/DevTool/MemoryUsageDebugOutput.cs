@@ -29,7 +29,7 @@ namespace PathfindingFramework.DevTool
 		{
 			var reports = new List<MemoryUsageData>();
 			reports.AddRange(MovementExtensionCache.MemoryReport());
-			reports.AddRange(MovementPathCostCache.MemoryReport());
+			reports.AddRange(MovementDefUtils.MemoryReport.Get());
 			reports.AddRange(PawnMovementCache.MemoryReport());
 			reports.AddRange(MapPathCostCache.MemoryReport());
 			var dataTable = new string[4, reports.Count + 2];

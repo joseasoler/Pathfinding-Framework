@@ -22,10 +22,8 @@ namespace PathfindingFramework.DevTool
 					string name = pawn.Name != null ? pawn.Name.ToString() : pawn.def.label;
 					string thingID = pawn.ThingID;
 					string mapId = map.ToString();
-					int pawnMovement = PawnMovementCache.Get(pawn);
-					string movementDefName = DefDatabase<MovementDef>
-						.AllDefsListForReading[PawnMovement.MovementIndex(pawnMovement)].defName;
-					bool shouldAvoidFences = PawnMovement.AvoidFences(pawnMovement);
+					string movementDefName = pawn.MovementDef().ToString();
+					bool shouldAvoidFences = pawn.ShouldAvoidFences;
 					input.Add(new Tuple<string, string, string, string, string>(name, thingID, mapId, movementDefName,
 						shouldAvoidFences.ToString()));
 				}

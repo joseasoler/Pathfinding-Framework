@@ -19,11 +19,7 @@ namespace PathfindingFramework.Patches.FirePathCost
 				return;
 			}
 
-			var map = __instance.Map;
-			if (map != null)
-			{
-				MapPathCostCache.GetCache(map.uniqueID).UpdateFire(__instance.Position, false);
-			}
+			__instance.Map?.MapPathCosts().UpdateFire(__instance.Position, false);
 		}
 	}
 }

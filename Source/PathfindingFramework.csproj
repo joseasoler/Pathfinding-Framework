@@ -21,11 +21,10 @@
 
 	<ItemGroup>
 		<Compile Include="Cache\Global\MovementExtensionCache.cs" />
-		<Compile Include="Cache\Global\MovementPathCostCache.cs" />
-		<Compile Include="Cache\Global\PawnMovement.cs" />
 		<Compile Include="Cache\Global\PawnMovementCache.cs" />
-		<Compile Include="Cache\Local\MapCache.cs" />
+		<Compile Include="Cache\Local\MapPathingData.cs" />
 		<Compile Include="Cache\Local\MapPathCost.cs" />
+		<Compile Include="Cache\Local\MapPathCosts.cs" />
 		<Compile Include="Cache\MemoryUsageData.cs" />
 		<Compile Include="Cache\Local\MapPathCostCache.cs" />
 		<Compile Include="DevTool\HediffDefGenerator_Movement.cs" />
@@ -35,6 +34,8 @@
 		<Compile Include="DevTool\PawnMovementDebugOutput.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="MovementDefOf.cs" />
+		<Compile Include="MovementDefUtils\MemoryReport.cs" />
+		<Compile Include="MovementDefUtils\PathCosts.cs" />
 		<Compile Include="MovementExtension.cs" />
 		<Compile Include="Parse\ParseHandler.cs" />
 		<Compile Include="Parse\PathCost.cs" />
@@ -73,6 +74,9 @@
 		<Compile Include="Properties\AssemblyInfo.cs" />
 		<Compile Include="Settings.cs" />
 		<Compile Include="SettingsWindow.cs" />
+		<Compile Include="MovementDefUtils\Hyperlinks.cs" />
+		<Compile Include="MovementDefUtils\StatDrawEntries.cs" />
+		<Compile Include="MovementDefUtils\DefsWithMovementType.cs" />
 		<Reference Include="System" />
 		<Reference Include="System.Xml" />
 		<PackageReference Include="Krafs.Publicizer" Version="2.2.1">

@@ -129,8 +129,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 				yield return value;
 			}
 
-			var pawnMovement = PawnMovementCache.Get(__instance);
-			var movementDef = DefDatabase<MovementDef>.AllDefsListForReading[PawnMovement.MovementIndex(pawnMovement)];
+			var movementDef = __instance.MovementDef();
 
 			var hyperlinks = new List<Dialog_InfoCard.Hyperlink> {new(movementDef)};
 

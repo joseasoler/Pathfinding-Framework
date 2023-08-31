@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
 using RimWorld;
 using Verse;
@@ -30,6 +31,12 @@ namespace PathfindingFramework
 		/// </summary>
 		public PathCost defaultCost;
 
+		/// <summary>
+		/// Stores a precalculated list of all terrain path costs for this movement type.
+		/// This is initialized after XML references are resolved, and never modified afterwards.
+		/// </summary>
+		public short[] PathCosts = null;
+
 		public override IEnumerable<string> ConfigErrors()
 		{
 			foreach (var error in base.ConfigErrors())
@@ -39,7 +46,7 @@ namespace PathfindingFramework
 
 			if (defaultCost == PathCost.Invalid)
 			{
-				yield return Report.ConfigError(this, $"defaultCost must be a numeric value or a valid PathingCost.");
+				yield return Report.ConfigError(this, "defaultCost must be a numeric value or a valid PathingCost.");
 			}
 
 			if (tagCosts != null)
@@ -55,79 +62,15 @@ namespace PathfindingFramework
 			}
 		}
 
-		private List<Def> MovementDefsFromType<TDefType>(Func<TDefType, bool> condition = null)
-			where TDefType : Def
-		{
-			var defs = DefDatabase<TDefType>.AllDefsListForReading;
-			var resultList = new List<Def>();
-			for (int index = 0; index < defs.Count; ++index)
-			{
-				var currentDef = defs[index];
-				var extension = currentDef.GetModExtension<MovementExtension>();
-				if (!currentDef.generated && extension != null && extension.movementDef == this &&
-				    (condition == null || condition(currentDef)))
-				{
-					resultList.Add(currentDef);
-				}
-			}
-
-			return resultList;
-		}
-
-		private void AddDefHyperlinksFromType<TDefType>(ref List<DefHyperlink> hyperlinks,
-			Func<TDefType, bool> condition = null) where TDefType : Def
-		{
-			var resultList = MovementDefsFromType<TDefType>(condition);
-			foreach (var result in resultList)
-			{
-				hyperlinks.Add(new DefHyperlink(result));
-			}
-		}
-
-		private static bool IsApparel(ThingDef thingDef)
-		{
-			return thingDef.IsApparel;
-		}
-
-		private static bool IsCreature(ThingDef thingDef)
-		{
-			return thingDef.race != null;
-		}
-
 		public override void ResolveReferences()
 		{
-			if (this.descriptionHyperlinks == null)
+			if (PathCosts != null)
 			{
-				this.descriptionHyperlinks = new List<DefHyperlink>();
+				return;
 			}
 
-			AddDefHyperlinksFromType<ThingDef>(ref this.descriptionHyperlinks, IsCreature);
-			AddDefHyperlinksFromType<HediffDef>(ref this.descriptionHyperlinks);
-			AddDefHyperlinksFromType<ThingDef>(ref this.descriptionHyperlinks, IsApparel);
-
-			if (ModLister.BiotechInstalled)
-			{
-				AddDefHyperlinksFromType<GeneDef>(ref this.descriptionHyperlinks);
-			}
-		}
-
-		private List<Dialog_InfoCard.Hyperlink> HyperlinksFromType<TDefType>(Func<TDefType, bool> condition = null)
-			where TDefType : Def
-		{
-			var resultList = MovementDefsFromType<TDefType>(condition);
-			if (resultList.Count == 0)
-			{
-				return null;
-			}
-
-			var hyperlinks = new List<Dialog_InfoCard.Hyperlink>();
-
-			foreach (var result in resultList)
-			{
-				hyperlinks.Add(new Dialog_InfoCard.Hyperlink(result));
-			}
-
-			return hyperlinks;
+			PathCosts = MovementDefUtils.PathCosts.Get(this);
+			descriptionHyperlinks = Hyperlinks.Get(this);
 		}
 
 		public override IEnumerable<StatDrawEntry> SpecialDisplayStats(StatRequest req)
@@ -137,35 +80,9 @@ namespace PathfindingFramework
 				yield return item;
 			}
 
-			var raceHyperlinks = HyperlinksFromType<ThingDef>(IsCreature);
-			if (raceHyperlinks != null)
+			foreach (StatDrawEntry item in StatDrawEntries.Get(this))
 			{
-				yield return new StatDrawEntry(StatCategoryDefOf.Basics, "PawnsTabShort".Translate(), "", "", 10, null,
-					raceHyperlinks);
-			}
-
-			var hediffHyperlinks = HyperlinksFromType<HediffDef>();
-			if (hediffHyperlinks != null)
-			{
-				yield return new StatDrawEntry(StatCategoryDefOf.Basics, "Health".Translate(), "", "", 20, null,
-					hediffHyperlinks);
-			}
-
-			var apparelHyperlinks = HyperlinksFromType<ThingDef>(IsApparel);
-			if (apparelHyperlinks != null)
-			{
-				yield return new StatDrawEntry(StatCategoryDefOf.Basics, "Apparel".Translate(), "", "", 30, null,
-					apparelHyperlinks);
-			}
-
-			if (ModLister.BiotechInstalled)
-			{
-				var geneHyperlinks = HyperlinksFromType<GeneDef>();
-				if (geneHyperlinks != null)
-				{
-					yield return new StatDrawEntry(StatCategoryDefOf.Basics, "Genes".Translate(), "", "", 40, null,
-						geneHyperlinks);
-				}
+				yield return item;
 			}
 		}
 	}

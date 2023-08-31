@@ -1,4 +1,5 @@
-﻿using PathfindingFramework.Cache.Global;
+﻿using System.Collections.Generic;
+using PathfindingFramework.Cache.Global;
 using Verse;
 
 namespace PathfindingFramework.DevTool
@@ -8,25 +9,24 @@ namespace PathfindingFramework.DevTool
 		[DebugOutput(category: PathfindingFramework.Name, onlyWhenPlaying: false)]
 		public static void MovementCosts()
 		{
-			var movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
-			var terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
-			var movementCount = movementDefs.Count;
-			var terrainCount = terrainDefs.Count;
+			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
+			List<TerrainDef> terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
+			int movementCount = movementDefs.Count;
+			int terrainCount = terrainDefs.Count;
 
 			var dataTable = new string[movementCount + 1, terrainCount + 1];
 			dataTable[0, 0] = "Movement type";
 
 			for (var movementIndex = 0; movementIndex < movementCount; ++movementIndex)
 			{
-				var movementDef = movementDefs[movementIndex];
+				MovementDef movementDef = movementDefs[movementIndex];
 				dataTable[movementIndex + 1, 0] = movementDef.label;
 
 				for (var terrainIndex = 0; terrainIndex < terrainCount; ++terrainIndex)
 				{
-					var terrainDef = terrainDefs[terrainIndex];
+					TerrainDef terrainDef = terrainDefs[terrainIndex];
 					dataTable[0, terrainIndex + 1] = terrainDef.label;
-					dataTable[movementIndex + 1, terrainIndex + 1] =
-						MovementPathCostCache.Get(movementIndex, terrainIndex).ToString();
+					dataTable[movementIndex + 1, terrainIndex + 1] = movementDef.PathCosts[terrainIndex].ToString();
 				}
 			}
 

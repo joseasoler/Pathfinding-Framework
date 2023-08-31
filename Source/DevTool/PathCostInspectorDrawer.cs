@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using PathfindingFramework.Cache.Global;
+﻿using System.Collections.Generic;
 using PathfindingFramework.Cache.Local;
 using RimWorld.Planet;
 using UnityEngine;
@@ -43,7 +41,7 @@ namespace PathfindingFramework.DevTool
 			}
 
 			_active = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
-				(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKey(KeyCode.Q);
+			          (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKey(KeyCode.Q);
 
 			if (_active)
 			{
@@ -88,12 +86,12 @@ namespace PathfindingFramework.DevTool
 			Text.Anchor = TextAnchor.MiddleLeft;
 			Text.WordWrap = false;
 
-			var map = Find.CurrentMap;
-			var mapPathCostCache = MapPathCostCache.GetCache(map.uniqueID);
-			var cell = UI.MouseCell();
-			var cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
-			var snowCost = SnowUtility.MovementTicksAddOn(map.snowGrid.GetCategory(cell));
-			var mapPathCost = mapPathCostCache.Get(cellIndex);
+			Map map = Find.CurrentMap;
+			IntVec3 cell = UI.MouseCell();
+			int cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
+			int snowCost = SnowUtility.MovementTicksAddOn(map.snowGrid.GetCategory(cell));
+			MapPathCosts mapPathCosts = map.MapPathCosts();
+			MapPathCost mapPathCost = mapPathCosts.Get(cellIndex);
 			var hasIgnoreRepeater = mapPathCost.hasIgnoreRepeater ? "Yes" : "No";
 			var hasDoor = mapPathCost.hasDoor ? "Yes" : "No";
 			var hasFence = mapPathCost.hasFence ? "Yes" : "No";
@@ -109,16 +107,16 @@ namespace PathfindingFramework.DevTool
 			DrawRow("PF_HasFenceLabel".Translate(), hasFence.Translate());
 
 			// Terrain path cost calculation.
-			var movementTypeLabels = new List<string>();
-			var terrainPathCosts = new List<int>();
-			// ToDo total costs.
-			for (int movementIndex = 0; movementIndex < MovementPathCostCache.MovementCount(); ++movementIndex)
+			List<string> movementTypeLabels = new List<string>();
+			List<int> terrainPathCosts = new List<int>();
+			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
+			for (int movementIndex = 0; movementIndex < movementDefs.Count; ++movementIndex)
 			{
-				if (mapPathCostCache.HasMovementType(movementIndex))
+				if (mapPathCosts.HasMovementType(movementIndex))
 				{
-					var label = DefDatabase<MovementDef>.AllDefsListForReading[movementIndex].LabelCap;
+					string label = movementDefs[movementIndex].LabelCap;
 					movementTypeLabels.Add(label);
-					var terrainPathCost = mapPathCostCache.TerrainCost(movementIndex, cellIndex);
+					var terrainPathCost = mapPathCosts.TerrainCost(movementIndex, cellIndex);
 					terrainPathCosts.Add(terrainPathCost);
 				}
 			}
