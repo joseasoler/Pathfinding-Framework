@@ -13,6 +13,7 @@
 		<DebugSymbols>false</DebugSymbols>
 		<Optimize>true</Optimize>
 		<WarningLevel>5</WarningLevel>
+		<NoWarn>CS2002</NoWarn> <!-- Disable warning coming from krafs publicizer. -->
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<Deterministic>true</Deterministic>
