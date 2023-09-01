@@ -28,6 +28,11 @@ namespace PathfindingFramework.MapPathCosts
 		public short nonIgnoreRepeaterThings;
 
 		/// <summary>
+		/// Keeps track of the path cost associated with snow.
+		/// </summary>
+		public sbyte snow;
+
+		/// <summary>
 		/// True if the cell contains one or more things with IsPathCostIgnoreRepeater returning true.
 		/// </summary>
 		public bool hasIgnoreRepeater;

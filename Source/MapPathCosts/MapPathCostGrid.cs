@@ -122,12 +122,17 @@ namespace PathfindingFramework.MapPathCosts
 			_mapGrid[ToIndex(cell)].hasDoor = value;
 		}
 
+		public void UpdateSnow(IntVec3 cell, int cost)
+		{
+			_mapGrid[ToIndex(cell)].snow = (sbyte) cost;
+		}
+
 		/// <summary>
 		/// Get map path costs of a cell
 		/// </summary>
 		/// <param name="cellIndex">Index to check.</param>
 		/// <returns>Path cost.</returns>
-		public MapPathCosts.MapPathCost Get(int cellIndex)
+		public MapPathCost Get(int cellIndex)
 		{
 			return _mapGrid[cellIndex];
 		}

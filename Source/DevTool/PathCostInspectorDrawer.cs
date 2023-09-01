@@ -90,7 +90,6 @@ namespace PathfindingFramework.DevTool
 			Map map = Find.CurrentMap;
 			IntVec3 cell = UI.MouseCell();
 			int cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
-			int snowCost = SnowUtility.MovementTicksAddOn(map.snowGrid.GetCategory(cell));
 			MapPathCostGrid mapPathCostGrid = map.MapPathCostGrid();
 			MapPathCost mapPathCost = mapPathCostGrid.Get(cellIndex);
 			var hasIgnoreRepeater = mapPathCost.hasIgnoreRepeater ? "Yes" : "No";
@@ -99,7 +98,7 @@ namespace PathfindingFramework.DevTool
 
 			DrawHeader("PF_PathCostsLabel".Translate());
 			DrawRow("PF_CellLabel".Translate(), $"({cell.x}, {cell.z})");
-			DrawRow("Snow".Translate(), snowCost.ToString());
+			DrawRow("Snow".Translate(), mapPathCost.snow.ToString());
 			DrawRow("PF_FirePathCostLabel".Translate(), mapPathCost.fire.ToString());
 			DrawRow("PF_ThingsPathCostLabel".Translate(), mapPathCost.things.ToString());
 			DrawRow("PF_NonIgnoreRepeatersPathCostLabel".Translate(), mapPathCost.nonIgnoreRepeaterThings.ToString());

@@ -41,6 +41,7 @@
 		<Compile Include="Parse\PathCostValues.cs" />
 		<Compile Include="Parse\TerrainTagPathCost.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
+		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
 		<Compile Include="PathfindingFramework.cs" />
 		<Compile Include="Patches\DevTool\DevToolDefGeneration\DefGenerator_GenerateImpliedDefs_PreResolve_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathCostInspector\UIRoot_UIRootOnGUI_Patch.cs" />
@@ -114,6 +115,7 @@
 	<ItemGroup>
 		<Publicize Include="Assembly-CSharp:Verse.DirectXmlToObject.ListFromXml" />
 		<Publicize Include="Assembly-CSharp:Verse.ParseHelper.parsers" />
+		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.map" />
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathGrid.IsPathCostIgnoreRepeater" />
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
