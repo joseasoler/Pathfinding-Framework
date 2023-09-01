@@ -1,20 +1,16 @@
 ﻿using System.Collections.Generic;
-using PathfindingFramework.Cache.Local;
+using PathfindingFramework.Cache.Global;
+using PathfindingFramework.Patches;
 using RimWorld;
 using Verse;
 
-namespace PathfindingFramework.Cache.Global
+namespace PathfindingFramework.PawnMovement
 {
 	/// <summary>
-	/// Keeps track of the MovementDef associated with each spawned pawn. See MovementExtension for details.
+	/// Updates the MovementDef associated with each spawned pawn as needed. See MovementExtension for details.
 	/// </summary>
-	public static class PawnMovementCache
+	public static class PawnMovementUpdater
 	{
-		/// <summary>
-		/// Indexed by pawn.thingIDNumber.
-		/// </summary>
-		private static readonly Dictionary<int, MovementDef> MovementByPawn = new();
-
 		/// <summary>
 		/// Add all movement definitions obtained from apparel to the set.
 		/// </summary>
@@ -41,7 +37,7 @@ namespace PathfindingFramework.Cache.Global
 		}
 
 		/// <summary>
-		/// Add the MovementExtensions of the pawn's genes to the set.
+		/// Add MovementExtensions from the pawn genes to the set.
 		/// </summary>
 		/// <param name="pawn">Pawn being evaluated</param>
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
@@ -124,7 +120,7 @@ namespace PathfindingFramework.Cache.Global
 		}
 
 		/// <summary>
-		/// Add a recently spawned pawn to the caches.
+		/// Add a recently spawned pawn.
 		/// </summary>
 		/// <param name="pawn">Spawned pawn.</param>
 		public static void Add(Pawn pawn)
@@ -178,15 +174,15 @@ namespace PathfindingFramework.Cache.Global
 			}
 
 			movementDef ??= MovementDefOf.PF_Terrestrial;
-			MovementByPawn[pawn.thingIDNumber] = movementDef;
+			pawn.MovementDef() = movementDef;
 			if (!added && currentMovementDef != movementDef)
 			{
-				pawn.Map.MapPathCosts().PawnUpdated(currentMovementDef, movementDef);
+				pawn.Map.MapPathCostGrid().PawnUpdated(currentMovementDef, movementDef);
 			}
 
 			if (added)
 			{
-				pawn.Map.MapPathCosts().PawnAdded(movementDef);
+				pawn.Map.MapPathCostGrid().PawnAdded(movementDef);
 			}
 		}
 
@@ -197,33 +193,7 @@ namespace PathfindingFramework.Cache.Global
 		/// <param name="pawn">Pawn being de-spawned.</param>
 		public static void Remove(int mapUniqueId, Pawn pawn)
 		{
-			pawn.Map.MapPathCosts().PawnRemoved(pawn.MovementDef());
-			MovementByPawn.Remove(pawn.thingIDNumber);
-		}
-
-		/// <summary>
-		/// Get the movement definition used by a specific pawn.
-		/// </summary>
-		/// <param name="pawn">Pawn to check.</param>
-		/// <returns>Movement definition to use.</returns>
-		public static MovementDef MovementDef(this Pawn pawn)
-		{
-			if (MovementByPawn.TryGetValue(pawn.thingIDNumber, out var result))
-			{
-				return result;
-			}
-
-			Report.ErrorOnce($"Pawn {pawn.ThingID} is missing from the {nameof(PawnMovementCache)} cache.");
-			return MovementDefOf.PF_Terrestrial;
-		}
-
-		public static List<MemoryUsageData> MemoryReport()
-		{
-			return new List<MemoryUsageData>
-			{
-				new(nameof(PawnMovementCache), MemoryUsageData.Global, "Movement by pawn",
-					MovementByPawn.Count * MemoryUsageData.DictionaryPairSize)
-			};
+			pawn.Map.MapPathCostGrid().PawnRemoved(pawn.MovementDef());
 		}
 	}
 }

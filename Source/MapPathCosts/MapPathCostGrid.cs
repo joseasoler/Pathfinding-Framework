@@ -4,14 +4,14 @@ using PathfindingFramework.Parse;
 using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.Cache.Local
+namespace PathfindingFramework.MapPathCosts
 {
-	public class MapPathCosts : MapPathingData
+	public class MapPathCostGrid : MapGrid
 	{
 		/// <summary>
 		/// Collection of multiple path costs related to each cell of the map.
 		/// </summary>
-		private readonly MapPathCost[] _mapGrid;
+		private readonly MapPathCosts.MapPathCost[] _mapGrid;
 
 		/// <summary>
 		/// Number of pawns with each movement. Used to determine which terrain path grids should be kept updated.
@@ -27,9 +27,9 @@ namespace PathfindingFramework.Cache.Local
 		/// Create an instance of the cache for a specific map.
 		/// </summary>
 		/// <param name="map">Parent map of this cache.</param>
-		public MapPathCosts(Map map) : base(map)
+		public MapPathCostGrid(Map map) : base(map)
 		{
-			_mapGrid = new MapPathCost[GridSize];
+			_mapGrid = new MapPathCosts.MapPathCost[GridSize];
 			_pawnMovementCounts = new short[DefDatabase<MovementDef>.AllDefsListForReading.Count];
 			_terrainPathGrids = new Dictionary<int, short[]>();
 		}
@@ -127,7 +127,7 @@ namespace PathfindingFramework.Cache.Local
 		/// </summary>
 		/// <param name="cellIndex">Index to check.</param>
 		/// <returns>Path cost.</returns>
-		public MapPathCost Get(int cellIndex)
+		public MapPathCosts.MapPathCost Get(int cellIndex)
 		{
 			return _mapGrid[cellIndex];
 		}

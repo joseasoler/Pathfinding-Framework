@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Cache.Local;
 using Verse;
 
 namespace PathfindingFramework.Patches.MapChanges
@@ -12,7 +11,8 @@ namespace PathfindingFramework.Patches.MapChanges
 	{
 		internal static void Prefix(Map map)
 		{
-			MapPathCostCache.Remove(map);
+			// Stop accepting pathfinding update calls.
+			map.MapPathCostGrid() = null;
 		}
 	}
 }

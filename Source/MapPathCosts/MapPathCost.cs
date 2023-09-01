@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace PathfindingFramework.Cache.Local
+namespace PathfindingFramework.MapPathCosts
 {
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
 	public struct MapPathCost

@@ -1,5 +1,4 @@
 using HarmonyLib;
-using PathfindingFramework.Cache.Local;
 using RimWorld;
 using Verse;
 
@@ -19,7 +18,7 @@ namespace PathfindingFramework.Patches.FirePathCost
 				return;
 			}
 
-			__instance.Map?.MapPathCosts().UpdateFire(__instance.Position, false);
+			__instance.Map?.MapPathCostGrid().UpdateFire(__instance.Position, false);
 		}
 	}
 }

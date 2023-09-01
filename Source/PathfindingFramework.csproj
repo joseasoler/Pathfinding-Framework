@@ -21,18 +21,17 @@
 
 	<ItemGroup>
 		<Compile Include="Cache\Global\MovementExtensionCache.cs" />
-		<Compile Include="Cache\Global\PawnMovementCache.cs" />
-		<Compile Include="Cache\Local\MapPathingData.cs" />
-		<Compile Include="Cache\Local\MapPathCost.cs" />
-		<Compile Include="Cache\Local\MapPathCosts.cs" />
-		<Compile Include="Cache\MemoryUsageData.cs" />
-		<Compile Include="Cache\Local\MapPathCostCache.cs" />
 		<Compile Include="DevTool\HediffDefGenerator_Movement.cs" />
+		<Compile Include="DevTool\MemoryUsageData.cs" />
 		<Compile Include="DevTool\MemoryUsageDebugOutput.cs" />
 		<Compile Include="DevTool\MovementCostDebugOutput.cs" />
 		<Compile Include="DevTool\PathCostInspectorDrawer.cs" />
 		<Compile Include="DevTool\PawnMovementDebugOutput.cs" />
 		<Compile Include="Harmony.cs" />
+		<Compile Include="MapPathCosts\MapPathCost.cs" />
+		<Compile Include="MapPathCosts\MapPathCostMemoryReport.cs" />
+		<Compile Include="MapPathCosts\MapPathCostGrid.cs" />
+		<Compile Include="MapGrid.cs" />
 		<Compile Include="MovementDefOf.cs" />
 		<Compile Include="MovementDefUtils\MemoryReport.cs" />
 		<Compile Include="MovementDefUtils\PathCosts.cs" />
@@ -41,6 +40,7 @@
 		<Compile Include="Parse\PathCost.cs" />
 		<Compile Include="Parse\PathCostValues.cs" />
 		<Compile Include="Parse\TerrainTagPathCost.cs" />
+		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="PathfindingFramework.cs" />
 		<Compile Include="Patches\DevTool\DevToolDefGeneration\DefGenerator_GenerateImpliedDefs_PreResolve_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathCostInspector\UIRoot_UIRootOnGUI_Patch.cs" />
@@ -54,7 +54,6 @@
 		<Compile Include="Patches\HasDoor\Building_Door_SpawnSetup_Patch.cs" />
 		<Compile Include="Patches\MapChanges\Game_DeinitAndRemoveMap_NewTemp_Patch.cs" />
 		<Compile Include="Patches\MapChanges\Map_ConstructComponents_Patch.cs" />
-		<Compile Include="Patches\MapChanges\MemoryUtility_ClearAllMapsAndWorld_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostAdd_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostRemove_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Hediff_PostAdd_Patch.cs" />
@@ -68,6 +67,7 @@
 		<Compile Include="Patches\TerrainCostGrid\TerrainGrid_DoTerrainChangedEffects_Patch.cs" />
 		<Compile Include="Patches\ThingGrids\Thing_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\ThingGrids\Thing_SpawnSetup_Patch.cs" />
+		<Compile Include="PawnMovement\PawnMovementUpdater.cs" />
 		<Compile Include="Report.cs" />
 		<Compile Include="MovementDef.cs" />
 		<Compile Include="Parse\TerrainTagPathCosts.cs" />
@@ -83,7 +83,8 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Lib.Harmony" Version="2.2.2" ExcludeAssets="runtime" />
+		<PackageReference Include="Lib.Harmony" Version="2.*" ExcludeAssets="runtime" />
+		<PackageReference Include="Zetrith.Prepatcher" Version="1.*" />
 		<Reference Include="Assembly-CSharp">
 			<HintPath Condition="$([MSBuild]::IsOSPlatform('Windows'))">..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
 			<HintPath Condition="$([MSBuild]::IsOSPlatform('Linux'))">..\..\..\RimWorldLinux_Data\Managed\Assembly-CSharp.dll</HintPath>

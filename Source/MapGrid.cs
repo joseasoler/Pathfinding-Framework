@@ -1,8 +1,8 @@
 using Verse;
 
-namespace PathfindingFramework.Cache.Local
+namespace PathfindingFramework
 {
-	public class MapPathingData
+	public class MapGrid
 	{
 		/// <summary>
 		/// X size of the parent map. Stored to convert cells to indexes and other operations without the parent map.
@@ -24,7 +24,7 @@ namespace PathfindingFramework.Cache.Local
 		/// Create an instance of the cache for a specific map.
 		/// </summary>
 		/// <param name="map">Parent map of this cache.</param>
-		protected MapPathingData(Map map)
+		protected MapGrid(Map map)
 		{
 			GridSize = map.Size.x * map.Size.z;
 			_mapSizeX = map.Size.x;

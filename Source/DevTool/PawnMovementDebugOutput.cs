@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using PathfindingFramework.Cache;
 using PathfindingFramework.Cache.Global;
+using PathfindingFramework.Patches;
 using Verse;
 
 namespace PathfindingFramework.DevTool

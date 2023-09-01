@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using PathfindingFramework.Cache.Global;
+using PathfindingFramework.PawnMovement;
 using Verse;
 
 namespace PathfindingFramework.Patches.MovementMayHaveChanged
@@ -14,7 +15,7 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 		{
 			if (__instance.pawn.Spawned && MovementExtensionCache.Contains(__instance.def))
 			{
-				PawnMovementCache.Update(__instance.pawn);
+				PawnMovementUpdater.Update(__instance.pawn);
 			}
 		}
 	}

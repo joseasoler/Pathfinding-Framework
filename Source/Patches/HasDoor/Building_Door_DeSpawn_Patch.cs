@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Cache.Local;
 using RimWorld;
 
 namespace PathfindingFramework.Patches.HasDoor
@@ -12,7 +11,7 @@ namespace PathfindingFramework.Patches.HasDoor
 	{
 		internal static void Prefix(Building_Door __instance)
 		{
-			__instance.Map.MapPathCosts().SetHasDoor(__instance.Position, false);
+			__instance.Map.MapPathCostGrid().SetHasDoor(__instance.Position, false);
 		}
 	}
 }

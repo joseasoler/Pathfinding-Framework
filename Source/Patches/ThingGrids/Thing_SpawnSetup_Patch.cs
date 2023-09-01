@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Cache.Local;
 using Verse;
 
 namespace PathfindingFramework.Patches.ThingGrids
@@ -11,7 +10,7 @@ namespace PathfindingFramework.Patches.ThingGrids
 		{
 			if (__instance.def.pathCost != 0 || __instance.def.passability == Traversability.Impassable)
 			{
-				__instance.Map.MapPathCosts().UpdateThings(__instance.Position);
+				__instance.Map.MapPathCostGrid().UpdateThings(__instance.Position);
 			}
 		}
 	}

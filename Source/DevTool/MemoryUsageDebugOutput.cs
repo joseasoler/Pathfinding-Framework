@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using PathfindingFramework.Cache;
 using PathfindingFramework.Cache.Global;
-using PathfindingFramework.Cache.Local;
+using PathfindingFramework.MapPathCosts;
 using Verse;
 
 namespace PathfindingFramework.DevTool
@@ -30,8 +29,7 @@ namespace PathfindingFramework.DevTool
 			var reports = new List<MemoryUsageData>();
 			reports.AddRange(MovementExtensionCache.MemoryReport());
 			reports.AddRange(MovementDefUtils.MemoryReport.Get());
-			reports.AddRange(PawnMovementCache.MemoryReport());
-			reports.AddRange(MapPathCostCache.MemoryReport());
+			reports.AddRange(MapPathCostMemoryReport.MemoryReport());
 			var dataTable = new string[4, reports.Count + 2];
 			dataTable[0, 0] = "Cache";
 			dataTable[1, 0] = "Map";

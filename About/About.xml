@@ -7,7 +7,6 @@
 	</supportedVersions>
 	<url>github.com/joseasoler/pathfinding-framework</url>
 	<packageId>pathfinding.framework</packageId>
-	<!-- &lt;size=18&gt;&lt;b&gt;&lt;color=teal&gt;Pathfinding Framework&lt;/color&gt;&lt;/b&gt;&lt;/size&gt; -->
 	<description><![CDATA[<size=18><b><color=teal>Pathfinding Framework</color></b></size>
 
 Enables the creation of custom movement rules for pawns.
@@ -21,12 +20,22 @@ This mod is an overhaul of TerrainMovementKit and SwimmingKit, with a focus on p
 			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
 			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
 		</li>
+		<li>
+			<packageId>zetrith.prepatcher</packageId>
+			<displayName>Prepatcher</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2934420800</steamWorkshopUrl>
+			<downloadUrl>https://github.com/Zetrith/Prepatcher/releases</downloadUrl>
+		</li>
 	</modDependencies>
 	<loadAfter>
+		<li>zetrith.prepatcher</li>
 		<li>brrainz.harmony</li>
 		<li>Ludeon.RimWorld</li>
 		<li>Ludeon.RimWorld.Royalty</li>
 		<li>Ludeon.RimWorld.Ideology</li>
 		<li>Ludeon.RimWorld.Biotech</li>
 	</loadAfter>
+	<incompatibleWith>
+		<li>pyrce.terrain.movement.modkit</li> <!-- TerrainMovementKit -->
+	</incompatibleWith>
 </ModMetaData>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using PathfindingFramework.Cache.Local;
+using PathfindingFramework.MapPathCosts;
+using PathfindingFramework.Patches;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;
@@ -90,8 +91,8 @@ namespace PathfindingFramework.DevTool
 			IntVec3 cell = UI.MouseCell();
 			int cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
 			int snowCost = SnowUtility.MovementTicksAddOn(map.snowGrid.GetCategory(cell));
-			MapPathCosts mapPathCosts = map.MapPathCosts();
-			MapPathCost mapPathCost = mapPathCosts.Get(cellIndex);
+			MapPathCostGrid mapPathCostGrid = map.MapPathCostGrid();
+			MapPathCost mapPathCost = mapPathCostGrid.Get(cellIndex);
 			var hasIgnoreRepeater = mapPathCost.hasIgnoreRepeater ? "Yes" : "No";
 			var hasDoor = mapPathCost.hasDoor ? "Yes" : "No";
 			var hasFence = mapPathCost.hasFence ? "Yes" : "No";
@@ -112,11 +113,11 @@ namespace PathfindingFramework.DevTool
 			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
 			for (int movementIndex = 0; movementIndex < movementDefs.Count; ++movementIndex)
 			{
-				if (mapPathCosts.HasMovementType(movementIndex))
+				if (mapPathCostGrid.HasMovementType(movementIndex))
 				{
 					string label = movementDefs[movementIndex].LabelCap;
 					movementTypeLabels.Add(label);
-					var terrainPathCost = mapPathCosts.TerrainCost(movementIndex, cellIndex);
+					var terrainPathCost = mapPathCostGrid.TerrainCost(movementIndex, cellIndex);
 					terrainPathCosts.Add(terrainPathCost);
 				}
 			}

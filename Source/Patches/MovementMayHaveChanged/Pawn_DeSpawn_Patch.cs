@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using PathfindingFramework.Cache.Global;
+using PathfindingFramework.PawnMovement;
 using Verse;
 
 namespace PathfindingFramework.Patches.MovementMayHaveChanged
@@ -18,7 +19,7 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 
 		internal static void Postfix(Pawn __instance, int __state)
 		{
-			PawnMovementCache.Remove(__state, __instance);
+			PawnMovementUpdater.Remove(__state, __instance);
 		}
 	}
 }

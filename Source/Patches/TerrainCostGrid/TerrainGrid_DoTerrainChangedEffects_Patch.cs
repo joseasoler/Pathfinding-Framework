@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Cache.Local;
 using Verse;
 
 namespace PathfindingFramework.Patches.TerrainCostGrid
@@ -18,7 +17,7 @@ namespace PathfindingFramework.Patches.TerrainCostGrid
 				return;
 			}
 
-			___map.MapPathCosts().UpdateTerrainCost(c);
+			___map.MapPathCostGrid().UpdateTerrainCost(c);
 		}
 	}
 }

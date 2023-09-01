@@ -1,14 +1,14 @@
 ﻿
-namespace PathfindingFramework.Cache
+namespace PathfindingFramework.DevTool
 {
 	/// <summary>
-	/// Used to provide estimations of memory usage. Used to get a general idea of memory usage and detect regressions
+	/// Contains estimations of memory usage. Used to get a general idea of memory usage and detect regressions
 	/// and bugs. If you want to properly and exactly profile memory usage, use a better tool.
 	/// </summary>
 	public struct MemoryUsageData
 	{
 		/// <summary>
-		/// Name of the cache
+		/// Name of the cache.
 		/// </summary>
 		public readonly string Cache;
 
@@ -18,7 +18,7 @@ namespace PathfindingFramework.Cache
 		public readonly string Map;
 
 		/// <summary>
-		/// One of the grids of the cache,
+		/// One of the grids of the cache.
 		/// </summary>
 		public readonly string Grid;
 

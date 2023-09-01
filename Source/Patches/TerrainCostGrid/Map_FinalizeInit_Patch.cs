@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Cache.Local;
 using Verse;
 
 namespace PathfindingFramework.Patches.TerrainCostGrid
@@ -12,7 +11,7 @@ namespace PathfindingFramework.Patches.TerrainCostGrid
 	{
 		internal static void Prefix(Map __instance)
 		{
-			__instance.MapPathCosts().UpdateAllTerrainCosts();
+			__instance.MapPathCostGrid().UpdateAllTerrainCosts();
 		}
 	}
 }

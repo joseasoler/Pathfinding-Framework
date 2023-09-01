@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using PathfindingFramework.Cache.Global;
+using PathfindingFramework.PawnMovement;
 using Verse;
 
 namespace PathfindingFramework.Patches.MovementMayHaveChanged
@@ -15,7 +16,7 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 			// PostResolveLifeStageChange might get called during the pawn spawning process.
 			if (___pawn.Spawned)
 			{
-				PawnMovementCache.Update(___pawn);
+				PawnMovementUpdater.Update(___pawn);
 			}
 		}
 	}
