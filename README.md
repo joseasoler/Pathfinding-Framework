@@ -7,6 +7,8 @@ Pathfinding Framework
 
 This mod is an overhaul of [TerrainMovementKit](https://steamcommunity.com/sharedfiles/filedetails/?id=2048567351) and [SwimmingKit](https://steamcommunity.com/sharedfiles/filedetails/?id=1542399915), with a focus on performance and mod compatibility.
 
+**Discord server:** https://discord.gg/HB3KyzStgp
+
 Development
 ---
 
