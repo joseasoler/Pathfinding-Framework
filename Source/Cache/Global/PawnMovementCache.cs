@@ -177,7 +177,7 @@ namespace PathfindingFramework.Cache.Global
 				}
 			}
 
-			movementDef = movementDef ?? MovementDefOf.PF_Terrestrial;
+			movementDef ??= MovementDefOf.PF_Terrestrial;
 			MovementByPawn[pawn.thingIDNumber] = movementDef;
 			if (!added && currentMovementDef != movementDef)
 			{

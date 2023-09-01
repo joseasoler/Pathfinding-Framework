@@ -55,10 +55,7 @@ namespace PathfindingFramework.MovementDefUtils
 				return PathCost.Impassable.cost;
 			}
 
-			short narrowedTerrainPathCost =
-				terrainPathCost > PathCost.Impassable.cost ? PathCost.Impassable.cost : (short) terrainPathCost;
-
-			return defaultCost == PathCost.Default ? narrowedTerrainPathCost : defaultCost.cost;
+			return defaultCost != PathCost.Default ? defaultCost.cost : Math.Min(terrainPathCost, PathCost.Impassable.cost);
 		}
 
 		public static short[] Get(MovementDef movementDef)

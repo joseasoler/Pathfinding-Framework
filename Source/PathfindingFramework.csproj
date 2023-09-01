@@ -111,8 +111,8 @@
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
-		<Publicize Include="Assembly-CSharp:Verse.ParseHelper.parsers" />
 		<Publicize Include="Assembly-CSharp:Verse.DirectXmlToObject.ListFromXml" />
+		<Publicize Include="Assembly-CSharp:Verse.ParseHelper.parsers" />
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathGrid.IsPathCostIgnoreRepeater" />
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
