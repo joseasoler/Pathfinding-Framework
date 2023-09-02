@@ -107,18 +107,17 @@ namespace PathfindingFramework.DevTool
 			DrawRow("PF_HasFenceLabel".Translate(), hasFence.Translate());
 
 			// Terrain path cost calculation.
+			TerrainDef terrainDef = map.terrainGrid.TerrainAt(cellIndex);
 			List<string> movementTypeLabels = new List<string>();
 			List<int> terrainPathCosts = new List<int>();
 			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
 			for (int movementIndex = 0; movementIndex < movementDefs.Count; ++movementIndex)
 			{
-				if (mapPathCostGrid.HasMovementType(movementIndex))
-				{
-					string label = movementDefs[movementIndex].LabelCap;
-					movementTypeLabels.Add(label);
-					var terrainPathCost = mapPathCostGrid.TerrainCost(movementIndex, cellIndex);
-					terrainPathCosts.Add(terrainPathCost);
-				}
+				MovementDef movementDef = movementDefs[movementIndex];
+				string label = movementDef.LabelCap;
+				movementTypeLabels.Add(label);
+				var terrainPathCost = movementDef.PathCosts[terrainDef.index];
+				terrainPathCosts.Add(terrainPathCost);
 			}
 
 			DrawDivider();
@@ -127,6 +126,7 @@ namespace PathfindingFramework.DevTool
 				DrawRow("PF_TerrainCost".Translate(movementTypeLabels[dataIndex]), terrainPathCosts[dataIndex].ToString());
 			}
 
+			/* ToDo move to a path grid inspector.
 			DrawDivider();
 			var vanillaNormalCost = map.pathing.Normal.pathGrid.PerceivedPathCostAt(cell);
 			var vanillaFenceCost = map.pathing.FenceBlocked.pathGrid.PerceivedPathCostAt(cell);
@@ -134,6 +134,7 @@ namespace PathfindingFramework.DevTool
 			DrawRow("PF_VanillaFencesCostLabel".Translate(), vanillaFenceCost.ToString());
 			Text.WordWrap = true;
 			Text.Anchor = TextAnchor.UpperLeft;
+			*/
 		}
 
 		private static void DrawRow(string label, string info)

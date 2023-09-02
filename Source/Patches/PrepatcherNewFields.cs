@@ -1,4 +1,5 @@
 using PathfindingFramework.MapPathCosts;
+using PathfindingFramework.MovementContexts;
 using Prepatcher;
 using Verse;
 
@@ -11,15 +12,10 @@ namespace PathfindingFramework.Patches
 	{
 		private const string NoPrepatcher = "Fatal error: Prepatcher is required!";
 
-		/// <summary>
-		/// Returned when Prepatcher is not found.
-		/// </summary>
 		private static MovementDef _noPrepatcherMovementDef = null;
-
-		/// <summary>
-		/// Returned when Prepatcher is not found.
-		/// </summary>
 		private static MapPathCostGrid _noPrepatcherMapPathCostGrid = null;
+		private static MovementContext _noPrepatcherMovementContext = null;
+		private static MovementContextData _noPrepatcherMovementContextData = null;
 
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this Pawn pawn)
@@ -29,10 +25,25 @@ namespace PathfindingFramework.Patches
 		}
 
 		[PrepatcherField]
+		public static ref MovementContext MovementContext(this Pawn pawn)
+		{
+			Report.ErrorOnce(NoPrepatcher);
+			return ref _noPrepatcherMovementContext;
+		}
+
+		[PrepatcherField]
 		public static ref MapPathCostGrid MapPathCostGrid(this Map map)
 		{
 			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherMapPathCostGrid;
+		}
+
+
+		[PrepatcherField]
+		public static ref MovementContextData MovementContextData(this Map map)
+		{
+			Report.ErrorOnce(NoPrepatcher);
+			return ref _noPrepatcherMovementContextData;
 		}
 	}
 }

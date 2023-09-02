@@ -3,5 +3,6 @@
 	<v1.4>
 		<li>1.4/Core</li>
 		<li IfModActive="Ludeon.RimWorld.Biotech">1.4/Biotech</li>
+		<li IfModActive="Dubwise.DubsBadHygiene,">1.4/Mods/DubsBadHygiene</li>
 	</v1.4>
 </loadFolders>

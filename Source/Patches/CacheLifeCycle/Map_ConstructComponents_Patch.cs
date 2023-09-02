@@ -1,8 +1,9 @@
 ﻿using HarmonyLib;
 using PathfindingFramework.MapPathCosts;
+using PathfindingFramework.MovementContexts;
 using Verse;
 
-namespace PathfindingFramework.Patches.MapChanges
+namespace PathfindingFramework.Patches.CacheLifeCycle
 {
 	/// <summary>
 	/// Initialize a new MapPathCostGrid when a map is created.
@@ -19,8 +20,9 @@ namespace PathfindingFramework.Patches.MapChanges
 				return;
 			}
 
-			// Start accepting pathfinding update calls after the map is fully initialized.
+			// Start accepting pathfinding update calls.
 			__instance.MapPathCostGrid() = new MapPathCostGrid(__instance);
+			__instance.MovementContextData() = new MovementContextData(__instance);
 		}
 	}
 }

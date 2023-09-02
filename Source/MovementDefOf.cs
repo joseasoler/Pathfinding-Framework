@@ -9,7 +9,7 @@ namespace PathfindingFramework
 		/// Movement type used by default. Should correspond to vanilla path costs.
 		/// </summary>
 		public static MovementDef PF_Terrestrial;
-		
+
 		/// <summary>
 		/// Aquatic creatures can swim through deep water with ease, but are helpless on land.
 		/// </summary>

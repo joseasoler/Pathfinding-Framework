@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using Verse;
 
-namespace PathfindingFramework.Patches.MapChanges
+namespace PathfindingFramework.Patches.CacheLifeCycle
 {
 	/// <summary>
 	/// Remove all map path cost information when a map is removed from the game.
@@ -13,6 +13,7 @@ namespace PathfindingFramework.Patches.MapChanges
 		{
 			// Stop accepting pathfinding update calls.
 			map.MapPathCostGrid() = null;
+			map.MovementContextData() = null;
 		}
 	}
 }

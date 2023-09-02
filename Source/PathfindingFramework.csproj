@@ -33,6 +33,9 @@
 		<Compile Include="MapPathCosts\MapPathCostMemoryReport.cs" />
 		<Compile Include="MapPathCosts\MapPathCostGrid.cs" />
 		<Compile Include="MapGrid.cs" />
+		<Compile Include="MovementContexts\MovementContext.cs" />
+		<Compile Include="MovementContexts\MovementContextData.cs" />
+		<Compile Include="MovementContexts\MovementContextId.cs" />
 		<Compile Include="MovementDefOf.cs" />
 		<Compile Include="MovementDefUtils\MemoryReport.cs" />
 		<Compile Include="MovementDefUtils\PathCosts.cs" />
@@ -41,8 +44,14 @@
 		<Compile Include="Parse\PathCost.cs" />
 		<Compile Include="Parse\PathCostValues.cs" />
 		<Compile Include="Parse\TerrainTagPathCost.cs" />
+		<Compile Include="Patches\Pathfinding\Pathing_For_Pawn_Patch.cs" />
+		<Compile Include="Patches\Pathfinding\Pathing_For_TraverseParms_Patch.cs" />
+		<Compile Include="Patches\Pathfinding\PawnDestinationReservationManager_CanReserve_Patch.cs" />
+		<Compile Include="Patches\Pathfinding\Pawn_PathFollower_CostToMoveIntoCell_Patch.cs" />
+		<Compile Include="Patches\Pathfinding\Reachability_CanReach_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
+		<Compile Include="Patches\Spawning\RCellFinder_RandomAnimalSpawnCell_MapGen_Patch.cs" />
 		<Compile Include="PathfindingFramework.cs" />
 		<Compile Include="Patches\DevTool\DevToolDefGeneration\DefGenerator_GenerateImpliedDefs_PreResolve_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathCostInspector\UIRoot_UIRootOnGUI_Patch.cs" />
@@ -54,8 +63,8 @@
 		<Compile Include="Patches\FirePathCost\Fire_SpawnSetup_Patch.cs" />
 		<Compile Include="Patches\HasDoor\Building_Door_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\HasDoor\Building_Door_SpawnSetup_Patch.cs" />
-		<Compile Include="Patches\MapChanges\Game_DeinitAndRemoveMap_NewTemp_Patch.cs" />
-		<Compile Include="Patches\MapChanges\Map_ConstructComponents_Patch.cs" />
+		<Compile Include="Patches\CacheLifeCycle\Game_DeinitAndRemoveMap_NewTemp_Patch.cs" />
+		<Compile Include="Patches\CacheLifeCycle\Map_ConstructComponents_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostAdd_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostRemove_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Hediff_PostAdd_Patch.cs" />
@@ -65,8 +74,8 @@
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_ApparelTracker_Wear_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_SpawnSetup_Patch.cs" />
-		<Compile Include="Patches\TerrainCostGrid\Map_FinalizeInit_Patch.cs" />
-		<Compile Include="Patches\TerrainCostGrid\TerrainGrid_DoTerrainChangedEffects_Patch.cs" />
+		<Compile Include="Patches\TerrainChanges\Map_FinalizeInit_Patch.cs" />
+		<Compile Include="Patches\TerrainChanges\TerrainGrid_DoTerrainChangedEffects_Patch.cs" />
 		<Compile Include="Patches\ThingGrids\Thing_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\ThingGrids\Thing_SpawnSetup_Patch.cs" />
 		<Compile Include="PawnMovement\PawnMovementUpdater.cs" />

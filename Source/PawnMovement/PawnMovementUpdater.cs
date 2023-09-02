@@ -120,32 +120,11 @@ namespace PathfindingFramework.PawnMovement
 		}
 
 		/// <summary>
-		/// Add a recently spawned pawn.
-		/// </summary>
-		/// <param name="pawn">Spawned pawn.</param>
-		public static void Add(Pawn pawn)
-		{
-			AddOrUpdate(pawn, true);
-		}
-
-		/// <summary>
-		/// Update the MovementDef to use for this pawn if necessary.
-		/// </summary>
-		/// <param name="pawn">Modified pawn.</param>
-		public static void Update(Pawn pawn)
-		{
-			AddOrUpdate(pawn, false);
-		}
-
-		/// <summary>
-		/// Set the MovementDef to use for this pawn. See MovementExtension for detail.
+		/// Updates the MovementDef to use for this pawn. See MovementExtension for details.
 		/// </summary>
 		/// <param name="pawn">Pawn to evaluate.</param>
-		/// <param name="added">True if the pawn has just been added to the map..</param>
-		private static void AddOrUpdate(Pawn pawn, bool added)
+		public static void Update(Pawn pawn)
 		{
-			MovementDef currentMovementDef = added ? null : pawn.MovementDef();
-
 			/*
 			 * Recalculate this. Now, MovementDef has a priority. And MovementExtension can combine.
 			 * Also do canCombine in the MovementExtensions for testing.
@@ -164,6 +143,7 @@ namespace PathfindingFramework.PawnMovement
 
 			int priority = int.MinValue;
 			MovementDef movementDef = null;
+
 			foreach (var currentDef in movementDefs)
 			{
 				if (priority < currentDef.priority)
@@ -175,15 +155,7 @@ namespace PathfindingFramework.PawnMovement
 
 			movementDef ??= MovementDefOf.PF_Terrestrial;
 			pawn.MovementDef() = movementDef;
-			if (!added && currentMovementDef != movementDef)
-			{
-				pawn.Map.MapPathCostGrid().PawnUpdated(currentMovementDef, movementDef);
-			}
-
-			if (added)
-			{
-				pawn.Map.MapPathCostGrid().PawnAdded(movementDef);
-			}
+			pawn.Map.MovementContextData().UpdatePawn(pawn);
 		}
 
 		/// <summary>
@@ -193,7 +165,7 @@ namespace PathfindingFramework.PawnMovement
 		/// <param name="pawn">Pawn being de-spawned.</param>
 		public static void Remove(int mapUniqueId, Pawn pawn)
 		{
-			pawn.Map.MapPathCostGrid().PawnRemoved(pawn.MovementDef());
+			pawn.Map.MovementContextData() = null;
 		}
 	}
 }

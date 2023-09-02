@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/TerrainDef[defName="PoolWater"]</xpath>
+		<value>
+			<tags>
+				<li>PF_ShallowWater</li>
+			</tags>
+		</value>
+	</Operation>
+
+</Patch>
