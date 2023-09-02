@@ -45,7 +45,7 @@
 		<Compile Include="Parse\PathCost.cs" />
 		<Compile Include="Parse\PathCostValues.cs" />
 		<Compile Include="Parse\TerrainTagPathCost.cs" />
-		<Compile Include="Patches\DevTool\FindPathDebugging\Pawn_PathFollower_GenerateNewPath.cs" />
+		<Compile Include="Patches\DevTool\PathDebugging\Pawn_PathFollower_GenerateNewPath.cs" />
 		<Compile Include="Patches\Pathfinding\Pathing_For_Pawn_Patch.cs" />
 		<Compile Include="Patches\Pathfinding\Pathing_For_TraverseParms_Patch.cs" />
 		<Compile Include="Patches\Pathfinding\PawnDestinationReservationManager_CanReserve_Patch.cs" />

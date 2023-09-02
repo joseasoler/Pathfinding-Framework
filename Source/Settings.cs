@@ -10,12 +10,18 @@ namespace PathfindingFramework
 		/// <summary>
 		/// Enable the inspectors.
 		/// </summary>
-		public bool Inspectors/* = false*/;
+		public bool Inspectors /* = false*/;
+
+		/// <summary>
+		/// Display a log with additional information when the pathfinder is unable to find a path.
+		/// Keep in mind that this log triggers in many valid cases; enabling it is only recommended for debugging.
+		/// </summary>
+		public bool LogPathNotFound /* = false*/;
 
 		/// <summary>
 		/// Write additional debug information to the game log.
 		/// </summary>
-		public bool DebugLog/* = false*/;
+		public bool DebugLog /* = false*/;
 	}
 
 	/// <summary>
@@ -43,6 +49,7 @@ namespace PathfindingFramework
 		{
 			base.ExposeData();
 			Scribe_Values.Look(ref Values.Inspectors, "Inspectors");
+			Scribe_Values.Look(ref Values.LogPathNotFound, "LogPathNotFound");
 			Scribe_Values.Look(ref Values.DebugLog, "DebugLog");
 		}
 	}
