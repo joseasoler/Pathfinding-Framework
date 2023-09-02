@@ -8,9 +8,6 @@
 	<PF_HasIgnoreRepeatersLabel>Has ignore repeaters</PF_HasIgnoreRepeatersLabel>
 	<PF_HasDoorLabel>Has door</PF_HasDoorLabel>
 	<PF_HasFenceLabel>Has fence</PF_HasFenceLabel>
-	<!-- Pathfinder Framework costs -->
+	<PF_BasePathCost>Base cost</PF_BasePathCost>
 	<PF_TerrainCost>{0} terrain cost</PF_TerrainCost>
-	<!-- Vanilla costs -->
-	<PF_VanillaNormalCostLabel>Total vanilla normal cost</PF_VanillaNormalCostLabel>
-	<PF_VanillaFencesCostLabel>Total vanilla fences cost</PF_VanillaFencesCostLabel>
 </LanguageData>

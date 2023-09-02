@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PathfindingFramework.MapPathCosts;
+using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using RimWorld.Planet;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace PathfindingFramework.DevTool
 	{
 		private const float DistFromMouse = 26.0F;
 		private const float LabelColumnWidth = 160.0F;
-		private const float InfoColumnWidth = 100.0F;
+		private const float InfoColumnWidth = 140.0F;
 		private const float WindowPadding = 12.0F;
 		private const float ColumnPadding = 12.0F;
 		private const float LineHeight = 24.0F;
@@ -76,6 +77,25 @@ namespace PathfindingFramework.DevTool
 			Find.WindowStack.ImmediateWindow(1362348, rect, WindowLayer.Super, FillWindow);
 		}
 
+		private static string PathCostLabel(short pathCost)
+		{
+			string movementPathCostLabel;
+			switch ((PathCostValues) pathCost)
+			{
+				case PathCostValues.Avoid:
+					movementPathCostLabel = "Avoid";
+					break;
+				case PathCostValues.Impassable:
+					movementPathCostLabel = "Impassable";
+					break;
+				default:
+					movementPathCostLabel = pathCost.ToString();
+					break;
+			}
+
+			return movementPathCostLabel;
+		}
+
 		private static void FillWindow()
 		{
 			if (!_active)
@@ -92,39 +112,46 @@ namespace PathfindingFramework.DevTool
 			int cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
 			MapPathCostGrid mapPathCostGrid = map.MapPathCostGrid();
 			MapPathCost mapPathCost = mapPathCostGrid.Get(cellIndex);
-			var hasIgnoreRepeater = mapPathCost.hasIgnoreRepeater ? "Yes" : "No";
-			var hasDoor = mapPathCost.hasDoor ? "Yes" : "No";
-			var hasFence = mapPathCost.hasFence ? "Yes" : "No";
-
-			DrawHeader("PF_PathCostsLabel".Translate());
-			DrawRow("PF_CellLabel".Translate(), $"{cell.x}, {cell.z}");
-			DrawRow("Snow".Translate(), mapPathCost.snow.ToString());
-			DrawRow("PF_FirePathCostLabel".Translate(), mapPathCost.fire.ToString());
-			DrawRow("PF_ThingsPathCostLabel".Translate(), mapPathCost.things.ToString());
-			DrawRow("PF_NonIgnoreRepeatersPathCostLabel".Translate(), mapPathCost.nonIgnoreRepeaterThings.ToString());
-			DrawRow("PF_HasIgnoreRepeatersLabel".Translate(), hasIgnoreRepeater.Translate());
-			DrawRow("PF_HasDoorLabel".Translate(), hasDoor.Translate());
-			DrawRow("PF_HasFenceLabel".Translate(), hasFence.Translate());
 
 			// Terrain path cost calculation.
 			TerrainDef terrainDef = map.terrainGrid.TerrainAt(cellIndex);
 			List<string> movementTypeLabels = new List<string>();
-			List<int> terrainPathCosts = new List<int>();
+			List<short> terrainPathCosts = new List<short>();
 			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
 			for (int movementIndex = 0; movementIndex < movementDefs.Count; ++movementIndex)
 			{
 				MovementDef movementDef = movementDefs[movementIndex];
 				string label = movementDef.LabelCap;
 				movementTypeLabels.Add(label);
-				var terrainPathCost = movementDef.PathCosts[terrainDef.index];
+				short terrainPathCost = movementDef.PathCosts[terrainDef.index];
 				terrainPathCosts.Add(terrainPathCost);
 			}
 
+			DrawHeader("PF_PathCostsLabel".Translate());
+			DrawRow("PF_CellLabel".Translate(), $"{cell.x}, {cell.z} ({cellIndex})");
+
 			DrawDivider();
+			DrawRow("Terrain_Label".Translate(), terrainDef.LabelCap);
+			string basePathCostLabel = (terrainDef.passability != Traversability.Impassable)
+				? terrainDef.pathCost.ToString()
+				: "Impassable".Translate();
+			DrawRow("PF_BasePathCost".Translate(), basePathCostLabel);
 			for (int dataIndex = 0; dataIndex < movementTypeLabels.Count; ++dataIndex)
 			{
-				DrawRow("PF_TerrainCost".Translate(movementTypeLabels[dataIndex]), terrainPathCosts[dataIndex].ToString());
+				DrawRow("PF_TerrainCost".Translate(movementTypeLabels[dataIndex]), PathCostLabel(terrainPathCosts[dataIndex]));
 			}
+
+			DrawDivider();
+			DrawRow("Snow_Label".Translate(), mapPathCost.snow.ToString());
+			DrawRow("PF_FirePathCostLabel".Translate(), mapPathCost.fire.ToString());
+			DrawRow("PF_ThingsPathCostLabel".Translate(), PathCostLabel(mapPathCost.things));
+			DrawRow("PF_NonIgnoreRepeatersPathCostLabel".Translate(), PathCostLabel(mapPathCost.nonIgnoreRepeaterThings));
+			var hasIgnoreRepeater = mapPathCost.hasIgnoreRepeater ? "Yes" : "No";
+			DrawRow("PF_HasIgnoreRepeatersLabel".Translate(), hasIgnoreRepeater.Translate());
+			var hasDoor = mapPathCost.hasDoor ? "Yes" : "No";
+			DrawRow("PF_HasDoorLabel".Translate(), hasDoor.Translate());
+			var hasFence = mapPathCost.hasFence ? "Yes" : "No";
+			DrawRow("PF_HasFenceLabel".Translate(), hasFence.Translate());
 
 			/* ToDo move to a path grid inspector.
 			DrawDivider();
@@ -132,9 +159,10 @@ namespace PathfindingFramework.DevTool
 			var vanillaFenceCost = map.pathing.FenceBlocked.pathGrid.PerceivedPathCostAt(cell);
 			DrawRow("PF_VanillaNormalCostLabel".Translate(), vanillaNormalCost.ToString());
 			DrawRow("PF_VanillaFencesCostLabel".Translate(), vanillaFenceCost.ToString());
+			*/
+
 			Text.WordWrap = true;
 			Text.Anchor = TextAnchor.UpperLeft;
-			*/
 		}
 
 		private static void DrawRow(string label, string info)
