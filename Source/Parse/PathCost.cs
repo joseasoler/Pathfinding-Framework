@@ -26,6 +26,11 @@ namespace PathfindingFramework.Parse
 		public static readonly PathCost Default = new((short)PathCostValues.Default);
 
 		/// <summary>
+		/// PathCost with a value of PathCostValues.Avoid, pre-initialized for performance reasons.
+		/// </summary>
+		public static readonly PathCost Avoid = new((short)PathCostValues.Avoid);
+
+		/// <summary>
 		/// PathCost with a value of PathCostValues.Impassable, pre-initialized for performance reasons.
 		/// </summary>
 		public static readonly PathCost Impassable = new((short)PathCostValues.Impassable);

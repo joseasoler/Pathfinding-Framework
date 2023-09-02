@@ -112,7 +112,7 @@ namespace PathfindingFramework.MovementContexts
 		/// <returns>True if the cell is passable.</returns>
 		public bool CanEnter(IntVec3 cell)
 		{
-			return PathingContext.pathGrid.pathGrid[ToIndex(cell)] <= PathCost.Impassable.cost;
+			return PathingContext.pathGrid.pathGrid[ToIndex(cell)] < PathCost.Avoid.cost;
 		}
 	}
 }
