@@ -42,7 +42,7 @@ namespace PathfindingFramework.Cache.Global
 
 		private static string ValidateThingDef(ThingDef thingDef, MovementDef movementDef)
 		{
-			if (!movementDef.noPennedAnimals || thingDef.race == null || !thingDef.race.FenceBlocked)
+			if (!movementDef.penAnimalsDisallowed || thingDef.race == null || !thingDef.race.FenceBlocked)
 			{
 				return null;
 			}
@@ -51,7 +51,7 @@ namespace PathfindingFramework.Cache.Global
 				? thingDef.modContentPack.PackageIdPlayerFacing
 				: "Unknown".Translate();
 
-			return movementDef.noPennedAnimals && thingDef.race != null && thingDef.race.FenceBlocked
+			return movementDef.penAnimalsDisallowed && thingDef.race != null && thingDef.race.FenceBlocked
 				? $"{thingDef.defName}[{packageId}] is a roamer, but has been assigned movement type {movementDef.defName} which disables pen animal pathfinding."
 				: null;
 		}

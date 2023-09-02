@@ -46,7 +46,7 @@ namespace PathfindingFramework
 		/// normally even if they are set to avoid them. A warning will be displayed when penned animals use this movement
 		/// type.
 		/// </summary>
-		public bool noPennedAnimals;
+		public bool penAnimalsDisallowed;
 
 		/// <summary>
 		/// Stores a precalculated list of all terrain path costs for this movement type.

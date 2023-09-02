@@ -14,7 +14,7 @@ namespace PathfindingFramework.MovementContexts
 			}
 
 			long id = movementDef.index;
-			if (!movementDef.noPennedAnimals && pawn.ShouldAvoidFences)
+			if (!movementDef.penAnimalsDisallowed && pawn.ShouldAvoidFences)
 			{
 				id += 0x100000000;
 			}

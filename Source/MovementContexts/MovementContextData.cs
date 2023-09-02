@@ -40,7 +40,7 @@ namespace PathfindingFramework.MovementContexts
 			{
 				// Create a new context and update its path grid.
 				MovementDef movementDef = pawn.MovementDef();
-				context = new MovementContext(movementDef, pawn.Map, !movementDef.noPennedAnimals && pawn.ShouldAvoidFences);
+				context = new MovementContext(movementDef, pawn.Map, !movementDef.penAnimalsDisallowed && pawn.ShouldAvoidFences);
 				_contexts[movementContextId] = new WeakReference<MovementContext>(context);
 				for (int cellIndex = 0; cellIndex < GridSize; ++cellIndex)
 				{

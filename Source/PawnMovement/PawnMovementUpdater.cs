@@ -157,15 +157,5 @@ namespace PathfindingFramework.PawnMovement
 			pawn.MovementDef() = movementDef;
 			pawn.Map.MovementContextData().UpdatePawn(pawn);
 		}
-
-		/// <summary>
-		/// Remove a de-spawned pawn from the cache.
-		/// </summary>
-		/// <param name="mapUniqueId">Map of the pawn being de-spawned.</param>
-		/// <param name="pawn">Pawn being de-spawned.</param>
-		public static void Remove(int mapUniqueId, Pawn pawn)
-		{
-			pawn.Map.MovementContextData() = null;
-		}
 	}
 }

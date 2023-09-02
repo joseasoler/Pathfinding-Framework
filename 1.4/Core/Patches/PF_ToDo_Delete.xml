@@ -29,11 +29,22 @@
 		</value>
 	</Operation>
 
+	<!-- Flying pigskins. -->
 	<Operation Class="PatchOperationAddModExtension">
-		<xpath>Defs/GeneDef[defName="AnimalWarcall"]</xpath>
+		<xpath>Defs/GeneDef[defName="VoicePig"]</xpath>
 		<value>
 			<li Class="PathfindingFramework.MovementExtension">
 				<movementDef>PF_Flying</movementDef>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- Amphibious impids. -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/GeneDef[defName="FireSpew"]</xpath>
+		<value>
+			<li Class="PathfindingFramework.MovementExtension">
+				<movementDef>PF_Amphibious</movementDef>
 			</li>
 		</value>
 	</Operation>
