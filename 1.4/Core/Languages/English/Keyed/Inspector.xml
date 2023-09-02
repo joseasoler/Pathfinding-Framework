@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 	<PF_CellLabel>Cell</PF_CellLabel>
+	<!-- Path cost inspector -->
 	<PF_PathCostsLabel>Path costs</PF_PathCostsLabel>
 	<PF_FirePathCostLabel>Fire</PF_FirePathCostLabel>
 	<PF_ThingsPathCostLabel>Things</PF_ThingsPathCostLabel>
@@ -10,4 +11,9 @@
 	<PF_HasFenceLabel>Has fence</PF_HasFenceLabel>
 	<PF_BasePathCost>Base cost</PF_BasePathCost>
 	<PF_TerrainCost>{0} terrain cost</PF_TerrainCost>
+	<!-- Movement cost inspector -->
+	<PF_MovementCostsLabel>Total movement costs</PF_MovementCostsLabel>
+	<PF_VanillaLabel>Vanilla</PF_VanillaLabel>
+	<PF_NoFencesMovementLabel>{0} (avoid fences)</PF_NoFencesMovementLabel>
+
 </LanguageData>

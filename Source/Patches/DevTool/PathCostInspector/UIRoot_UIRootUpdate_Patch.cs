@@ -12,7 +12,7 @@ namespace PathfindingFramework.Patches.DevTool.PathCostInspector
 	{
 		internal static void Postfix()
 		{
-			PathCostInspectorDrawer.Update();
+			InspectorDrawer.Update();
 		}
 	}
 }

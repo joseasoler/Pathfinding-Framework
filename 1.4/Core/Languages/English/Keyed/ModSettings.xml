@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-	<PF_PathCostInspectorLabel>Path cost inspector</PF_PathCostInspectorLabel>
-	<PF_PathCostInspectorHover>If enabled, the path cost inspector window will appear while Control+Shift+Q is held.</PF_PathCostInspectorHover>
+	<PF_InspectorLabel>Inspector</PF_InspectorLabel>
+	<PF_InspectorHover>If enabled, the path cost inspector window will appear while Control+Shift+Q is held. The movement costs inspector will appear while Control+Shift+E is held.</PF_InspectorHover>
 	<PF_DebugLogLabel>Debug log</PF_DebugLogLabel>
 	<PF_DebugLogHover>Display additional messages in the log. Useful for debugging bugs.</PF_DebugLogHover>
 	<PF_ResetSettingsLabel>Reset</PF_ResetSettingsLabel>

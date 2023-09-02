@@ -26,7 +26,7 @@
 		<Compile Include="DevTool\MemoryUsageData.cs" />
 		<Compile Include="DevTool\MemoryUsageDebugOutput.cs" />
 		<Compile Include="DevTool\MovementCostDebugOutput.cs" />
-		<Compile Include="DevTool\PathCostInspectorDrawer.cs" />
+		<Compile Include="DevTool\InspectorDrawer.cs" />
 		<Compile Include="DevTool\PawnMovementDebugOutput.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="MapPathCosts\MapPathCost.cs" />

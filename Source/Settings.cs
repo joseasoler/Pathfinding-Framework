@@ -8,9 +8,9 @@ namespace PathfindingFramework
 	public class SettingValues
 	{
 		/// <summary>
-		/// Enable the path cost inspector.
+		/// Enable the inspectors.
 		/// </summary>
-		public bool PathCostInspector/* = false*/;
+		public bool Inspectors/* = false*/;
 
 		/// <summary>
 		/// Write additional debug information to the game log.
@@ -42,7 +42,7 @@ namespace PathfindingFramework
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_Values.Look(ref Values.PathCostInspector, "PathCostInspector");
+			Scribe_Values.Look(ref Values.Inspectors, "Inspectors");
 			Scribe_Values.Look(ref Values.DebugLog, "DebugLog");
 		}
 	}

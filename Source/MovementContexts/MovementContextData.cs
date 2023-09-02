@@ -51,7 +51,12 @@ namespace PathfindingFramework.MovementContexts
 			pawn.MovementContext() = context;
 		}
 
-		private List<MovementContext> ValidContexts()
+		/// <summary>
+		/// Movement contexts that are currently active in this map.
+		/// Exposed to be used in the inspector drawer.
+		/// </summary>
+		/// <returns>List of active contexts.</returns>
+		public List<MovementContext> ActiveContexts()
 		{
 			List<MovementContext> validContexts = new List<MovementContext>();
 			foreach (var entry in _contexts)
@@ -75,7 +80,7 @@ namespace PathfindingFramework.MovementContexts
 		{
 			int cellIndex = ToIndex(cell);
 			MapPathCost mapPathCost = Map.MapPathCostGrid().Get(cellIndex);
-			List<MovementContext> validContexts = ValidContexts();
+			List<MovementContext> validContexts = ActiveContexts();
 
 			foreach (MovementContext context in validContexts)
 			{
@@ -85,7 +90,7 @@ namespace PathfindingFramework.MovementContexts
 
 		public void UpdateAll()
 		{
-			List<MovementContext> validContexts = ValidContexts();
+			List<MovementContext> validContexts = ActiveContexts();
 			for (int cellIndex = 0; cellIndex < GridSize; ++cellIndex)
 			{
 				MapPathCost mapPathCost = Map.MapPathCostGrid().Get(cellIndex);
@@ -101,7 +106,7 @@ namespace PathfindingFramework.MovementContexts
 			List<MemoryUsageData> report = new List<MemoryUsageData>();
 
 			int pathGridCount = GridSize * sizeof(int);
-			List<MovementContext> validContexts = ValidContexts();
+			List<MovementContext> validContexts = ActiveContexts();
 
 			foreach (MovementContext context in validContexts)
 			{

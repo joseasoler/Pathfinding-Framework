@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PathfindingFramework.MapPathCosts;
+using PathfindingFramework.MovementContexts;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using RimWorld.Planet;
@@ -12,10 +13,10 @@ namespace PathfindingFramework.DevTool
 	/// Shows a path cost inspector drawer when a mod setting is enabled and a hotkey is kept pressed.
 	/// See Verse.CellInspectorDrawer for the vanilla implementation of the map inspector.
 	/// </summary>
-	public class PathCostInspectorDrawer
+	public static class InspectorDrawer
 	{
 		private const float DistFromMouse = 26.0F;
-		private const float LabelColumnWidth = 160.0F;
+		private const float LabelColumnWidth = 180.0F;
 		private const float InfoColumnWidth = 140.0F;
 		private const float WindowPadding = 12.0F;
 		private const float ColumnPadding = 12.0F;
@@ -26,7 +27,12 @@ namespace PathfindingFramework.DevTool
 		/// <summary>
 		/// True while Control+Shift+Q is held and the relevant mod setting is enabled.
 		/// </summary>
-		private static bool _active;
+		private static bool _pathCostInspectorActive;
+
+		/// <summary>
+		/// True while Control+Shift+A is held and the relevant mod setting is enabled.
+		/// </summary>
+		private static bool _movementContextInspectorActive;
 
 		/// <summary>
 		/// Current number of lines of the inspector.
@@ -35,17 +41,23 @@ namespace PathfindingFramework.DevTool
 
 		public static void Update()
 		{
-			if (!Settings.Values.PathCostInspector || Current.ProgramState != ProgramState.Playing ||
+			if (!Settings.Values.Inspectors || Current.ProgramState != ProgramState.Playing ||
 			    WorldRendererUtility.WorldRenderedNow || Find.CurrentMap == null || !UI.MouseCell().InBounds(Find.CurrentMap))
 			{
-				_active = false;
+				_pathCostInspectorActive = false;
+				_movementContextInspectorActive = false;
 				return;
 			}
 
-			_active = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
-			          (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKey(KeyCode.Q);
+			_pathCostInspectorActive = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
+			                           (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) &&
+			                           Input.GetKey(KeyCode.Q);
 
-			if (_active)
+			_movementContextInspectorActive = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
+			                                  (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) &&
+			                                  Input.GetKey(KeyCode.E);
+
+			if (_pathCostInspectorActive || _movementContextInspectorActive)
 			{
 				GenUI.RenderMouseoverBracket();
 			}
@@ -53,7 +65,7 @@ namespace PathfindingFramework.DevTool
 
 		public static void OnGui()
 		{
-			if (!_active || Mouse.IsInputBlockedNow)
+			if ((!_pathCostInspectorActive && !_movementContextInspectorActive) || Mouse.IsInputBlockedNow)
 			{
 				return;
 			}
@@ -98,7 +110,7 @@ namespace PathfindingFramework.DevTool
 
 		private static void FillWindow()
 		{
-			if (!_active)
+			if (!_pathCostInspectorActive && !_movementContextInspectorActive)
 			{
 				return;
 			}
@@ -107,14 +119,37 @@ namespace PathfindingFramework.DevTool
 			Text.Anchor = TextAnchor.MiddleLeft;
 			Text.WordWrap = false;
 
-			Map map = Find.CurrentMap;
 			IntVec3 cell = UI.MouseCell();
+			Map map = Find.CurrentMap;
 			int cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
+			TerrainDef terrainDef = map.terrainGrid.TerrainAt(cellIndex);
+
+			DrawHeader(_pathCostInspectorActive ? "PF_PathCostsLabel".Translate() : "PF_MovementCostsLabel".Translate());
+			// Draw shared initial properties.
+			DrawRow("PF_CellLabel".Translate(), $"{cell.x}, {cell.z} ({cellIndex})");
+
+			DrawDivider();
+			DrawRow("Terrain_Label".Translate(), terrainDef.LabelCap);
+
+			if (_pathCostInspectorActive)
+			{
+				FillPathCostInspectorWindow(map, cellIndex, terrainDef);
+			}
+			else if (_movementContextInspectorActive)
+			{
+				FillMovementContextInspectorWindow(map, cell);
+			}
+
+			Text.WordWrap = true;
+			Text.Anchor = TextAnchor.UpperLeft;
+		}
+
+		private static void FillPathCostInspectorWindow(Map map, int cellIndex, TerrainDef terrainDef)
+		{
 			MapPathCostGrid mapPathCostGrid = map.MapPathCostGrid();
 			MapPathCost mapPathCost = mapPathCostGrid.Get(cellIndex);
 
 			// Terrain path cost calculation.
-			TerrainDef terrainDef = map.terrainGrid.TerrainAt(cellIndex);
 			List<string> movementTypeLabels = new List<string>();
 			List<short> terrainPathCosts = new List<short>();
 			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
@@ -127,11 +162,6 @@ namespace PathfindingFramework.DevTool
 				terrainPathCosts.Add(terrainPathCost);
 			}
 
-			DrawHeader("PF_PathCostsLabel".Translate());
-			DrawRow("PF_CellLabel".Translate(), $"{cell.x}, {cell.z} ({cellIndex})");
-
-			DrawDivider();
-			DrawRow("Terrain_Label".Translate(), terrainDef.LabelCap);
 			string basePathCostLabel = (terrainDef.passability != Traversability.Impassable)
 				? terrainDef.pathCost.ToString()
 				: "Impassable".Translate();
@@ -152,17 +182,32 @@ namespace PathfindingFramework.DevTool
 			DrawRow("PF_HasDoorLabel".Translate(), hasDoor.Translate());
 			var hasFence = mapPathCost.hasFence ? "Yes" : "No";
 			DrawRow("PF_HasFenceLabel".Translate(), hasFence.Translate());
+		}
 
-			/* ToDo move to a path grid inspector.
+		private static void FillMovementContextInspectorWindow(Map map, IntVec3 cell)
+		{
 			DrawDivider();
-			var vanillaNormalCost = map.pathing.Normal.pathGrid.PerceivedPathCostAt(cell);
-			var vanillaFenceCost = map.pathing.FenceBlocked.pathGrid.PerceivedPathCostAt(cell);
-			DrawRow("PF_VanillaNormalCostLabel".Translate(), vanillaNormalCost.ToString());
-			DrawRow("PF_VanillaFencesCostLabel".Translate(), vanillaFenceCost.ToString());
-			*/
+			short vanillaNormalCost = (short) map.pathing.Normal.pathGrid.PerceivedPathCostAt(cell);
+			short vanillaFenceCost = (short) map.pathing.FenceBlocked.pathGrid.PerceivedPathCostAt(cell);
+			string vanillaLabel = "PF_VanillaLabel".Translate();
+			DrawRow(vanillaLabel, PathCostLabel(vanillaNormalCost));
+			DrawRow("PF_NoFencesMovementLabel".Translate(vanillaLabel), PathCostLabel(vanillaFenceCost));
 
-			Text.WordWrap = true;
-			Text.Anchor = TextAnchor.UpperLeft;
+			DrawDivider();
+			List<MovementContext> activeContexts = map.MovementContextData().ActiveContexts();
+			activeContexts.Sort((contextLhs, contextRhs) =>
+				contextLhs.MovementDef.priority.CompareTo(contextRhs.MovementDef.priority));
+
+			foreach (MovementContext context in activeContexts)
+			{
+				short cost = (short) context.PathingContext.pathGrid.PerceivedPathCostAt(cell);
+				string movementLabelCap = context.MovementDef.LabelCap;
+				string label = context.ShouldAvoidFences
+					? "PF_NoFencesMovementLabel".Translate(movementLabelCap)
+					: movementLabelCap;
+
+				DrawRow(label, PathCostLabel(cost));
+			}
 		}
 
 		private static void DrawRow(string label, string info)
