@@ -12,7 +12,7 @@
 	</Operation>
 
 	<Operation Class="PatchOperationAddModExtension">
-		<xpath>Defs/ThingDef[defName="Apparel_CowboyHat" or defName="Alpaca"]</xpath>
+		<xpath>Defs/ThingDef[defName="Apparel_CowboyHat" or defName="Warg"]</xpath>
 		<value>
 			<li Class="PathfindingFramework.MovementExtension">
 				<movementDef>PF_Aquatic</movementDef>
@@ -21,7 +21,7 @@
 	</Operation>
 
 	<Operation Class="PatchOperationAddModExtension">
-		<xpath>Defs/ThingDef[defName="Pig"]</xpath>
+		<xpath>Defs/ThingDef[defName="Megasloth"]</xpath>
 		<value>
 			<li Class="PathfindingFramework.MovementExtension">
 				<movementDef>PF_Flying</movementDef>

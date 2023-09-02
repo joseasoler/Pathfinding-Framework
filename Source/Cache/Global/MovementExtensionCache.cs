@@ -14,17 +14,46 @@ namespace PathfindingFramework.Cache.Global
 	{
 		private static Dictionary<int, MovementDef> _defs;
 
-		private static void AddDefsFromList<TDefType>(List<TDefType> source) where TDefType : Def
+		private static void AddDefsFromList<TDefType>(List<TDefType> source,
+			Func<TDefType, MovementDef, string> validator = null)
+			where TDefType : Def
 		{
 			for (int index = 0; index < source.Count; ++index)
 			{
-				Def currentDef = source[index];
+				TDefType currentDef = source[index];
 				MovementDef movementDef = currentDef.GetModExtension<MovementExtension>()?.movementDef;
-				if (movementDef != null)
+				if (movementDef == null)
 				{
-					_defs[currentDef.shortHash] = movementDef;
+					continue;
+				}
+
+				_defs[currentDef.shortHash] = movementDef;
+
+				if (validator != null)
+				{
+					string result = validator(currentDef, movementDef);
+					if (!result.NullOrEmpty())
+					{
+						Report.Error(result);
+					}
 				}
 			}
+		}
+
+		private static string ValidateThingDef(ThingDef thingDef, MovementDef movementDef)
+		{
+			if (!movementDef.noPennedAnimals || thingDef.race == null || !thingDef.race.FenceBlocked)
+			{
+				return null;
+			}
+
+			string packageId = thingDef.modContentPack != null
+				? thingDef.modContentPack.PackageIdPlayerFacing
+				: "Unknown".Translate();
+
+			return movementDef.noPennedAnimals && thingDef.race != null && thingDef.race.FenceBlocked
+				? $"{thingDef.defName}[{packageId}] is a roamer, but has been assigned movement type {movementDef.defName} which disables pen animal pathfinding."
+				: null;
 		}
 
 		/// <summary>
@@ -36,7 +65,7 @@ namespace PathfindingFramework.Cache.Global
 			{
 				_defs = new Dictionary<int, MovementDef>();
 
-				AddDefsFromList(DefDatabase<ThingDef>.AllDefsListForReading);
+				AddDefsFromList(DefDatabase<ThingDef>.AllDefsListForReading, ValidateThingDef);
 				AddDefsFromList(DefDatabase<LifeStageDef>.AllDefsListForReading);
 				AddDefsFromList(DefDatabase<HediffDef>.AllDefsListForReading);
 				if (ModLister.BiotechInstalled)

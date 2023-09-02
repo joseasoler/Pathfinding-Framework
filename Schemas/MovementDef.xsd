@@ -40,6 +40,11 @@
 					<xs:documentation>When this flag is set, this movement type will ignore snow path costs.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="noPennedAnimals" type="xs:boolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Marks this movement type as not intended for penned animals. When this flag is set, all pawns will treat fences normally even if they are set to avoid them. A warning will be displayed when penned animals use this movement type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:all>
 		<xs:attribute name="Name" type="xs:string"/>
 		<xs:attribute name="ParentName" type="xs:string"/>

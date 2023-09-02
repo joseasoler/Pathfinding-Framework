@@ -37,6 +37,13 @@ namespace PathfindingFramework
 		public bool ignoreSnow;
 
 		/// <summary>
+		/// Marks this movement type as not intended for penned animals. When this flag is set, all pawns will treat fences
+		/// normally even if they are set to avoid them. A warning will be displayed when penned animals use this movement
+		/// type.
+		/// </summary>
+		public bool noPennedAnimals;
+
+		/// <summary>
 		/// Stores a precalculated list of all terrain path costs for this movement type.
 		/// This is initialized after XML references are resolved, and never modified afterwards.
 		/// </summary>

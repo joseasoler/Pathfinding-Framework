@@ -24,6 +24,7 @@
 		<description>Aquatic creatures can swim through deep water with ease, but are helpless on land.</description>
 		<priority>1000</priority>
 		<defaultCost>Avoid</defaultCost>
+		<noPennedAnimals>true</noPennedAnimals>
 	</PathfindingFramework.MovementDef>
 
 	<PathfindingFramework.MovementDef ParentName="AquaticBase">
@@ -41,6 +42,7 @@
 		<priority>10000</priority>
 		<defaultCost>0</defaultCost>
 		<ignoreSnow>true</ignoreSnow>
+		<noPennedAnimals>true</noPennedAnimals>
 	</PathfindingFramework.MovementDef>
 
 </Defs>
