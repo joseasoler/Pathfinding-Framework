@@ -12,6 +12,7 @@ namespace PathfindingFramework.Patches.TerrainChanges
 	{
 		internal static void Prefix(Map __instance)
 		{
+			__instance.MapPathCostGrid().UpdateAllSnow();
 			__instance.MovementContextData().UpdateAll();
 		}
 	}

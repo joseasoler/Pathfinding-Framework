@@ -19,7 +19,7 @@ namespace PathfindingFramework.Patches.SnowPathCost
 			}
 
 			Map map = __instance.map;
-			map.MapPathCostGrid().UpdateSnow(c, SnowUtility.MovementTicksAddOn(map.snowGrid.GetCategory(c)));
+			map.MapPathCostGrid().UpdateSnow(c, SnowUtility.MovementTicksAddOn(newCategory));
 		}
 	}
 }

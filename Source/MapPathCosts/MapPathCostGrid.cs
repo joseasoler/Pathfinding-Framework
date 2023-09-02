@@ -115,6 +115,16 @@ namespace PathfindingFramework.MapPathCosts
 			_mapGrid[ToIndex(cell)].snow = (sbyte) cost;
 		}
 
+		public void UpdateAllSnow()
+		{
+			for (int cellIndex = 0; cellIndex < GridSize; ++cellIndex)
+			{
+				float depth = Map.snowGrid.depthGrid[cellIndex];
+				SnowCategory newCategory = SnowUtility.GetSnowCategory(depth);
+				_mapGrid[cellIndex].snow = (sbyte) SnowUtility.MovementTicksAddOn(newCategory);
+			}
+		}
+
 		/// <summary>
 		/// Get map path costs of a cell
 		/// </summary>
