@@ -12,7 +12,7 @@ namespace PathfindingFramework.MapPathCosts
 		/// <summary>
 		/// Collection of multiple path costs related to each cell of the map.
 		/// </summary>
-		private readonly MapPathCosts.MapPathCost[] _mapGrid;
+		private readonly MapPathCost[] _mapGrid;
 
 		/// <summary>
 		/// Create an instance of the cache for a specific map.
@@ -20,7 +20,7 @@ namespace PathfindingFramework.MapPathCosts
 		/// <param name="map">Parent map of this cache.</param>
 		public MapPathCostGrid(Map map) : base(map)
 		{
-			_mapGrid = new MapPathCosts.MapPathCost[GridSize];
+			_mapGrid = new MapPathCost[GridSize];
 		}
 
 		/// <summary>
@@ -38,6 +38,7 @@ namespace PathfindingFramework.MapPathCosts
 
 			const short centerCellCost = 1000;
 			_mapGrid[cellIndex].fire += (short) (spawned ? centerCellCost : -centerCellCost);
+			Map.MovementContextData().UpdateCell(cellIndex);
 
 			var adjacentCells = GenAdj.AdjacentCells;
 			for (int adjacentIndex = 0; adjacentIndex < adjacentCells.Length; ++adjacentIndex)
@@ -52,6 +53,7 @@ namespace PathfindingFramework.MapPathCosts
 
 				const short adjacentCellCost = 150;
 				_mapGrid[adjacentCellIndex].fire += (short) (spawned ? adjacentCellCost : -adjacentCellCost);
+				Map.MovementContextData().UpdateCell(adjacentIndex);
 			}
 		}
 
@@ -99,6 +101,8 @@ namespace PathfindingFramework.MapPathCosts
 
 				mapPathCostRef.hasFence = mapPathCostRef.hasFence || (thing.def.building != null && thing.def.building.isFence);
 			}
+
+			Map.MovementContextData().UpdateCell(cellIndex);
 		}
 
 		/// <summary>

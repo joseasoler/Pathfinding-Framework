@@ -4,6 +4,7 @@ using Verse.AI;
 
 namespace PathfindingFramework.Patches.Pathfinding
 {
+	/*
 	[HarmonyPatch(typeof(Pathing), nameof(Pathing.For), typeof(TraverseParms))]
 	internal static class Pathing_For_TraverseParms_Patch
 	{
@@ -19,4 +20,5 @@ namespace PathfindingFramework.Patches.Pathfinding
 			return pathingContext == null;
 		}
 	}
+	*/
 }
