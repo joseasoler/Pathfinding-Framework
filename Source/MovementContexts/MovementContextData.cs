@@ -79,7 +79,15 @@ namespace PathfindingFramework.MovementContexts
 		/// <param name="cell">Cell being updated.</param>
 		public void UpdateCell(IntVec3 cell)
 		{
-			int cellIndex = ToIndex(cell);
+			UpdateCell(ToIndex(cell));
+		}
+
+		/// <summary>
+		/// Update cell path costs in every movement context.
+		/// </summary>
+		/// <param name="cellIndex">Index of the cell being updated.</param>
+		public void UpdateCell(int cellIndex)
+		{
 			MapPathCost mapPathCost = Map.MapPathCostGrid().Get(cellIndex);
 			List<MovementContext> validContexts = ActiveContexts();
 

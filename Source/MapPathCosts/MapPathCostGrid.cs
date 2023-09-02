@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using PathfindingFramework.Parse;
+using PathfindingFramework.Patches;
 using Verse;
 using Verse.AI;
 
@@ -107,12 +108,16 @@ namespace PathfindingFramework.MapPathCosts
 		/// <param name="value">New value.</param>
 		public void SetHasDoor(IntVec3 cell, bool value)
 		{
-			_mapGrid[ToIndex(cell)].hasDoor = value;
+			int cellIndex = ToIndex(cell);
+			_mapGrid[cellIndex].hasDoor = value;
+			Map.MovementContextData().UpdateCell(cellIndex);
 		}
 
 		public void UpdateSnow(IntVec3 cell, int cost)
 		{
-			_mapGrid[ToIndex(cell)].snow = (sbyte) cost;
+			int cellIndex = ToIndex(cell);
+			_mapGrid[cellIndex].snow = (sbyte) cost;
+			Map.MovementContextData().UpdateCell(cellIndex);
 		}
 
 		public void UpdateAllSnow()
@@ -122,11 +127,12 @@ namespace PathfindingFramework.MapPathCosts
 				float depth = Map.snowGrid.depthGrid[cellIndex];
 				SnowCategory newCategory = SnowUtility.GetSnowCategory(depth);
 				_mapGrid[cellIndex].snow = (sbyte) SnowUtility.MovementTicksAddOn(newCategory);
+				// This function does not need to update the MovementContextData. This is done separately by the caller.
 			}
 		}
 
 		/// <summary>
-		/// Get map path costs of a cell
+		/// Get map path costs of a cell.
 		/// </summary>
 		/// <param name="cellIndex">Index to check.</param>
 		/// <returns>Path cost.</returns>
