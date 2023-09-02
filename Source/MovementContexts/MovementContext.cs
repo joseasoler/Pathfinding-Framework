@@ -1,3 +1,4 @@
+using System;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
@@ -40,26 +41,28 @@ namespace PathfindingFramework.MovementContexts
 		public void UpdateCell(int cellIndex, MapPathCost pathCosts)
 		{
 			TerrainDef terrainDef = Map.terrainGrid.TerrainAt(cellIndex);
+
 			int cost = PathCost.Impassable.cost;
 			if (terrainDef != null && (!ShouldAvoidFences || !pathCosts.hasFence))
 			{
 				cost = MovementDef.PathCosts[terrainDef.index];
-				if (cost < PathCost.Impassable.cost)
+				if (pathCosts.things > cost)
 				{
-					if (pathCosts.things > cost)
+					if (!MovementDef.ignoreThings || pathCosts.things >= PathCost.Avoid.cost)
 					{
 						cost = pathCosts.things;
 					}
-
-					if (!MovementDef.ignoreSnow && pathCosts.snow > cost)
-					{
-						cost = pathCosts.snow;
-					}
-
-					cost += pathCosts.fire;
 				}
+
+				if (!MovementDef.ignoreSnow && pathCosts.snow > cost)
+				{
+					cost = pathCosts.snow;
+				}
+
+				cost += pathCosts.fire;
 			}
 
+			cost = Math.Min(cost, PathCost.Impassable.cost);
 			PathingContext.pathGrid.pathGrid[cellIndex] = cost;
 		}
 
@@ -81,27 +84,28 @@ namespace PathfindingFramework.MovementContexts
 
 			int cost = MovementDef.PathCosts[terrainDef.index];
 			MapPathCost prevMapPathCost = Map.MapPathCostGrid().Get(ToIndex(prevCell));
-			if (cost < PathCost.Impassable.cost)
+			short thingsCost = prevMapPathCost.hasIgnoreRepeater
+				? nextMapPathCost.nonIgnoreRepeaterThings
+				: nextMapPathCost.things;
+			if (thingsCost > cost)
 			{
-				short thingsCost = prevMapPathCost.hasIgnoreRepeater
-					? nextMapPathCost.nonIgnoreRepeaterThings
-					: nextMapPathCost.things;
-				if (thingsCost > cost)
+				if (!MovementDef.ignoreThings || thingsCost >= PathCost.Avoid.cost)
 				{
 					cost = thingsCost;
 				}
-
-				if (!MovementDef.ignoreSnow && nextMapPathCost.snow > cost)
-				{
-					cost = nextMapPathCost.snow;
-				}
-
-				if (prevMapPathCost.hasDoor)
-				{
-					cost += 45;
-				}
 			}
 
+			if (!MovementDef.ignoreSnow && nextMapPathCost.snow > cost)
+			{
+				cost = nextMapPathCost.snow;
+			}
+
+			if (prevMapPathCost.hasDoor)
+			{
+				cost += 45;
+			}
+
+			cost = Math.Min(cost, PathCost.Impassable.cost);
 			return cost;
 		}
 

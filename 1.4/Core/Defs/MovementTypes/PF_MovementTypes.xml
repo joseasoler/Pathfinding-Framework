@@ -42,6 +42,7 @@
 		<priority>10000</priority>
 		<defaultCost>0</defaultCost>
 		<ignoreSnow>true</ignoreSnow>
+		<ignoreThings>true</ignoreThings>
 		<noPennedAnimals>true</noPennedAnimals>
 	</PathfindingFramework.MovementDef>
 

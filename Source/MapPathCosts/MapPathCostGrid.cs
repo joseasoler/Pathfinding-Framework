@@ -76,7 +76,7 @@ namespace PathfindingFramework.MapPathCosts
 
 				if (thing.def.passability == Traversability.Impassable)
 				{
-					mapPathCostRef.things = (short) PathCostValues.Impassable;
+					mapPathCostRef.things = PathCost.Impassable.cost;
 					mapPathCostRef.nonIgnoreRepeaterThings = PathCost.Impassable.cost;
 					break;
 				}
