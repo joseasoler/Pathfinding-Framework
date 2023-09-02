@@ -1,4 +1,6 @@
+using System;
 using HarmonyLib;
+using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -14,7 +16,7 @@ namespace PathfindingFramework.Patches.Pathfinding
 		internal static void Postfix(ref bool __result, Map ___map, IntVec3 start, LocalTargetInfo dest, PathEndMode peMode,
 			TraverseParms traverseParams)
 		{
-			if (__result && traverseParams.pawn != null && !traverseParams.pawn.MovementContext().CanEnter(dest.Cell))
+			if (__result && traverseParams.pawn != null && !traverseParams.pawn.MovementContext().CanEnterTerrain(dest.Cell))
 			{
 				__result = false;
 			}

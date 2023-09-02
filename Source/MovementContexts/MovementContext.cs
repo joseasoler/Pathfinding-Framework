@@ -111,12 +111,20 @@ namespace PathfindingFramework.MovementContexts
 
 		/// <summary>
 		/// Checks if a cell can be entered by pawns with this movement context.
+		/// Only the terrain is considered for this check, as pawns must be able to reach impassable tiles with a wall.
 		/// </summary>
 		/// <param name="cell">Cell to check.</param>
 		/// <returns>True if the cell is passable.</returns>
-		public bool CanEnter(IntVec3 cell)
+		public bool CanEnterTerrain(IntVec3 cell)
 		{
-			return PathingContext.pathGrid.pathGrid[ToIndex(cell)] < PathCost.Avoid.cost;
+			TerrainDef terrainDef = Map.terrainGrid.TerrainAt(ToIndex(cell));
+			if (terrainDef == null)
+			{
+				return false;
+			}
+
+			int cost = MovementDef.PathCosts[terrainDef.index];
+			return cost < PathCost.Avoid.cost;
 		}
 	}
 }

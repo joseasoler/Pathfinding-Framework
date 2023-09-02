@@ -11,7 +11,7 @@ namespace PathfindingFramework.Patches.Pathfinding
 	{
 		internal static bool Prefix(ref bool __result, IntVec3 c, Pawn searcher, bool draftedOnly)
 		{
-			if (!searcher.MovementContext().CanEnter(c))
+			if (!searcher.MovementContext().CanEnterTerrain(c))
 			{
 				__result = false;
 				return false;
