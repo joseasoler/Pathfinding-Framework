@@ -21,10 +21,19 @@
 	</Operation>
 
 	<Operation Class="PatchOperationAddModExtension">
-		<xpath>Defs/GeneDef[defName="FoamSpray"]</xpath>
+		<xpath>Defs/ThingDef[defName="Pig"]</xpath>
 		<value>
 			<li Class="PathfindingFramework.MovementExtension">
-				<movementDef>PF_Amphibious</movementDef>
+				<movementDef>PF_Flying</movementDef>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/GeneDef[defName="AnimalWarcall"]</xpath>
+		<value>
+			<li Class="PathfindingFramework.MovementExtension">
+				<movementDef>PF_Flying</movementDef>
 			</li>
 		</value>
 	</Operation>

@@ -51,7 +51,7 @@ namespace PathfindingFramework.MovementContexts
 						cost = pathCosts.things;
 					}
 
-					if (pathCosts.snow > cost)
+					if (!MovementDef.ignoreSnow && pathCosts.snow > cost)
 					{
 						cost = pathCosts.snow;
 					}
@@ -91,7 +91,7 @@ namespace PathfindingFramework.MovementContexts
 					cost = thingsCost;
 				}
 
-				if (nextMapPathCost.snow > cost)
+				if (!MovementDef.ignoreSnow && nextMapPathCost.snow > cost)
 				{
 					cost = nextMapPathCost.snow;
 				}

@@ -40,6 +40,7 @@
 		<description>Flying creatures can hover over most obstacles.</description>
 		<priority>10000</priority>
 		<defaultCost>0</defaultCost>
+		<ignoreSnow>true</ignoreSnow>
 	</PathfindingFramework.MovementDef>
 
 </Defs>

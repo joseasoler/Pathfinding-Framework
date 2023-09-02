@@ -36,6 +36,6 @@ This mod is an overhaul of TerrainMovementKit and SwimmingKit, with a focus on p
 		<li>Ludeon.RimWorld.Biotech</li>
 	</loadAfter>
 	<incompatibleWith>
-		<li>pyrce.terrain.movement.modkit</li> <!-- TerrainMovementKit -->
+		<li>pyrce.terrain.movement.modkit</li>
 	</incompatibleWith>
 </ModMetaData>

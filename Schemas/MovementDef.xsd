@@ -35,6 +35,11 @@
 					<xs:documentation>Default cost for terrains not present in other fields.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="ignoreSnow" type="xs:boolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>When this flag is set, this movement type will ignore snow path costs.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:all>
 		<xs:attribute name="Name" type="xs:string"/>
 		<xs:attribute name="ParentName" type="xs:string"/>

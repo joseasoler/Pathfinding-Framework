@@ -124,8 +124,14 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Publicize Include="Assembly-CSharp:Verse.DirectXmlToObject.ListFromXml" />
+
 		<Publicize Include="Assembly-CSharp:Verse.ParseHelper.parsers" />
+
+		<!-- Direct access to the snow depth grid to avoid IntVec3 creation costs. -->
+		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.depthGrid" />
+
 		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.map" />
+
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathGrid.IsPathCostIgnoreRepeater" />
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

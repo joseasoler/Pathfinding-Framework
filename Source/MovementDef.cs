@@ -32,6 +32,11 @@ namespace PathfindingFramework
 		public PathCost defaultCost;
 
 		/// <summary>
+		/// When this flag is set, this movement type will ignore snow path costs.
+		/// </summary>
+		public bool ignoreSnow;
+
+		/// <summary>
 		/// Stores a precalculated list of all terrain path costs for this movement type.
 		/// This is initialized after XML references are resolved, and never modified afterwards.
 		/// </summary>
