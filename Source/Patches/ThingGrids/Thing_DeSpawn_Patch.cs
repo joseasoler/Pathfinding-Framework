@@ -10,7 +10,17 @@ namespace PathfindingFramework.Patches.ThingGrids
 		{
 			if (__instance.def.pathCost != 0 || __instance.def.passability == Traversability.Impassable)
 			{
-				__instance.Map.MapPathCostGrid().UpdateThings(__instance.Position);
+				if (__instance.def.size == IntVec2.One)
+				{
+					__instance.Map.MapPathCostGrid().UpdateThings(__instance.Position);
+				}
+				else
+				{
+					foreach (var cell in __instance.OccupiedRect())
+					{
+						__instance.Map.MapPathCostGrid().UpdateThings(cell);
+					}
+				}
 			}
 		}
 	}
