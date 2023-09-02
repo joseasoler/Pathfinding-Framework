@@ -59,6 +59,15 @@ namespace PathfindingFramework
 		}
 
 		/// <summary>
+		/// Warnings are always logged regardless of mod settings.
+		/// </summary>
+		/// <param name="message">Message to log.</param>
+		public static void Warning(string message)
+		{
+			Log.Warning(AddPrefix(message));
+		}
+
+		/// <summary>
 		/// Errors are always logged regardless of mod settings.
 		/// </summary>
 		/// <param name="message">Message to log.</param>
