@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Patch>
 
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/TerrainDef[@Name="WaterShallowBase"]</xpath>
+		<xpath>Defs/TerrainDef[defName="GU_RedWaterShallow"]</xpath>
 		<value>
 			<tags>
 				<li>PF_ShallowWater</li>
@@ -11,16 +12,7 @@
 	</Operation>
 
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/TerrainDef[@Name="WaterChestDeepBase"]</xpath>
-		<value>
-			<tags>
-				<li>PF_ChestWater</li>
-			</tags>
-		</value>
-	</Operation>
-
-	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/TerrainDef[@Name="WaterDeepBase"]</xpath>
+		<xpath>Defs/TerrainDef[defName="GU_RedWaterDeep"]</xpath>
 		<value>
 			<tags>
 				<li>PF_DeepWater</li>

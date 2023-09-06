@@ -3,6 +3,8 @@
 	<v1.4>
 		<li>1.4/Core</li>
 		<li IfModActive="Ludeon.RimWorld.Biotech">1.4/Biotech</li>
-		<li IfModActive="Dubwise.DubsBadHygiene,">1.4/Mods/DubsBadHygiene</li>
+		<li IfModActive="sarg.alphabiomes">1.4/Mods/AlphaBiomes</li>
+		<li IfModActive="BiomesTeam.BiomesCore">1.4/Mods/BiomesCore</li>
+		<li IfModActive="Dubwise.DubsBadHygiene,Dubwise.DubsBadHygieneLite">1.4/Mods/DubsBadHygiene</li>
 	</v1.4>
 </loadFolders>
