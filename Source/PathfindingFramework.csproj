@@ -52,6 +52,7 @@
 		<Compile Include="Patches\CellPathfinding\Pawn_PathFollower_CostToMoveIntoCell_Patch.cs" />
 		<Compile Include="Patches\CellPathfinding\Reachability_CanReach_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
+		<Compile Include="Patches\RegionPathfinding\RegionMaker_FloodFillAndAddCells_Patch.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
 		<Compile Include="Patches\Spawning\RCellFinder_RandomAnimalSpawnCell_MapGen_Patch.cs" />
 		<Compile Include="PathfindingFramework.cs" />
