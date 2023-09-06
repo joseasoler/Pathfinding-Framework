@@ -46,11 +46,11 @@
 		<Compile Include="Parse\PathCostValues.cs" />
 		<Compile Include="Parse\TerrainTagPathCost.cs" />
 		<Compile Include="Patches\DevTool\PathDebugging\Pawn_PathFollower_GenerateNewPath.cs" />
-		<Compile Include="Patches\Pathfinding\Pathing_For_Pawn_Patch.cs" />
-		<Compile Include="Patches\Pathfinding\Pathing_For_TraverseParms_Patch.cs" />
-		<Compile Include="Patches\Pathfinding\PawnDestinationReservationManager_CanReserve_Patch.cs" />
-		<Compile Include="Patches\Pathfinding\Pawn_PathFollower_CostToMoveIntoCell_Patch.cs" />
-		<Compile Include="Patches\Pathfinding\Reachability_CanReach_Patch.cs" />
+		<Compile Include="Patches\CellPathfinding\Pathing_For_Pawn_Patch.cs" />
+		<Compile Include="Patches\CellPathfinding\Pathing_For_TraverseParms_Patch.cs" />
+		<Compile Include="Patches\CellPathfinding\PawnDestinationReservationManager_CanReserve_Patch.cs" />
+		<Compile Include="Patches\CellPathfinding\Pawn_PathFollower_CostToMoveIntoCell_Patch.cs" />
+		<Compile Include="Patches\CellPathfinding\Reachability_CanReach_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
 		<Compile Include="Patches\Spawning\RCellFinder_RandomAnimalSpawnCell_MapGen_Patch.cs" />

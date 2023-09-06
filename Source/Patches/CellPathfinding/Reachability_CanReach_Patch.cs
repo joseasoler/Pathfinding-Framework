@@ -1,10 +1,8 @@
-using System;
 using HarmonyLib;
-using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.Patches.Pathfinding
+namespace PathfindingFramework.Patches.CellPathfinding
 {
 	/// <summary>
 	/// Make pawns avoid cells they should not be in.

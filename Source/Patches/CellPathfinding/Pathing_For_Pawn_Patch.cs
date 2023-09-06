@@ -2,7 +2,7 @@ using HarmonyLib;
 using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.Patches.Pathfinding
+namespace PathfindingFramework.Patches.CellPathfinding
 {
 	[HarmonyPatch(typeof(Pathing), nameof(Pathing.For), typeof(Pawn))]
 	internal static class Pathing_For_Pawn_Patch

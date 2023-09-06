@@ -5,7 +5,7 @@ using HarmonyLib;
 using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.Patches.Pathfinding
+namespace PathfindingFramework.Patches.CellPathfinding
 {
 	/// <summary>
 	/// Use the correct costs for pawns using a TerrainPathGrid.

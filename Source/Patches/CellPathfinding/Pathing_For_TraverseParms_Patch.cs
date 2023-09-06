@@ -1,8 +1,4 @@
-using HarmonyLib;
-using Verse;
-using Verse.AI;
-
-namespace PathfindingFramework.Patches.Pathfinding
+namespace PathfindingFramework.Patches.CellPathfinding
 {
 	/*
 	[HarmonyPatch(typeof(Pathing), nameof(Pathing.For), typeof(TraverseParms))]

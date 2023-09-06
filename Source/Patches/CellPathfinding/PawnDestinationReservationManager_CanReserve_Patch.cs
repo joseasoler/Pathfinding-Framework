@@ -1,7 +1,7 @@
 using HarmonyLib;
 using Verse;
 
-namespace PathfindingFramework.Patches.Pathfinding
+namespace PathfindingFramework.Patches.CellPathfinding
 {
 	/// <summary>
 	/// Prevent pawns from reserving cells they cannot enter.
