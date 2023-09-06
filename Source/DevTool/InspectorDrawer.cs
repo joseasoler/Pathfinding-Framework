@@ -17,8 +17,8 @@ namespace PathfindingFramework.DevTool
 	public static class InspectorDrawer
 	{
 		private const float DistFromMouse = 26.0F;
-		private const float LabelColumnWidth = 180.0F;
-		private const float InfoColumnWidth = 140.0F;
+		private const float LabelColumnWidth = 200.0F;
+		private const float InfoColumnWidth = 160.0F;
 		private const float WindowPadding = 12.0F;
 		private const float ColumnPadding = 12.0F;
 		private const float LineHeight = 24.0F;
