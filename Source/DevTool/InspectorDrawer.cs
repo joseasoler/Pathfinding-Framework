@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.MovementContexts;
 using PathfindingFramework.Parse;
@@ -30,14 +31,24 @@ namespace PathfindingFramework.DevTool
 		private static bool _pathCostInspectorActive;
 
 		/// <summary>
-		/// True while Control+Shift+A is held and the relevant mod setting is enabled.
+		/// True while Control+Shift+E is held and the relevant mod setting is enabled.
 		/// </summary>
 		private static bool _movementContextInspectorActive;
+
+		/// <summary>
+		/// True while Control+Shift+R is held and the relevant mod setting is enabled.
+		/// </summary>
+		private static bool _regionInspectorActive;
 
 		/// <summary>
 		/// Current number of lines of the inspector.
 		/// </summary>
 		private static int _numLines;
+
+		private static bool AnyInspectorActive()
+		{
+			return _pathCostInspectorActive || _movementContextInspectorActive || _regionInspectorActive;
+		}
 
 		public static void Update()
 		{
@@ -46,18 +57,23 @@ namespace PathfindingFramework.DevTool
 			{
 				_pathCostInspectorActive = false;
 				_movementContextInspectorActive = false;
+				_regionInspectorActive = false;
 				return;
 			}
 
-			_pathCostInspectorActive = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
-			                           (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) &&
-			                           Input.GetKey(KeyCode.Q);
+			bool commonShortcutIsPressed = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
+			                               (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
 
-			_movementContextInspectorActive = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
-			                                  (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) &&
-			                                  Input.GetKey(KeyCode.E);
+			if (!commonShortcutIsPressed)
+			{
+				return;
+			}
 
-			if (_pathCostInspectorActive || _movementContextInspectorActive)
+			_pathCostInspectorActive = Input.GetKey(KeyCode.Q);
+			_movementContextInspectorActive = !_pathCostInspectorActive && Input.GetKey(KeyCode.E);
+			_regionInspectorActive = !_pathCostInspectorActive && !_movementContextInspectorActive && Input.GetKey(KeyCode.R);
+
+			if (AnyInspectorActive())
 			{
 				GenUI.RenderMouseoverBracket();
 			}
@@ -65,7 +81,7 @@ namespace PathfindingFramework.DevTool
 
 		public static void OnGui()
 		{
-			if ((!_pathCostInspectorActive && !_movementContextInspectorActive) || Mouse.IsInputBlockedNow)
+			if (!AnyInspectorActive() || Mouse.IsInputBlockedNow)
 			{
 				return;
 			}
@@ -110,7 +126,7 @@ namespace PathfindingFramework.DevTool
 
 		private static void FillWindow()
 		{
-			if (!_pathCostInspectorActive && !_movementContextInspectorActive)
+			if (!AnyInspectorActive())
 			{
 				return;
 			}
@@ -124,7 +140,21 @@ namespace PathfindingFramework.DevTool
 			int cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
 			TerrainDef terrainDef = map.terrainGrid.TerrainAt(cellIndex);
 
-			DrawHeader(_pathCostInspectorActive ? "PF_PathCostsLabel".Translate() : "PF_MovementCostsLabel".Translate());
+			string titleId;
+			if (_pathCostInspectorActive)
+			{
+				titleId = "PF_PathCostsLabel";
+			}
+			else if (_movementContextInspectorActive)
+			{
+				titleId = "PF_MovementCostsLabel";
+			}
+			else
+			{
+				titleId = "PF_RegionLabel";
+			}
+
+			DrawHeader(titleId.Translate());
 			// Draw shared initial properties.
 			DrawRow("PF_CellLabel".Translate(), $"{cell.x}, {cell.z} ({cellIndex})");
 
@@ -138,6 +168,10 @@ namespace PathfindingFramework.DevTool
 			else if (_movementContextInspectorActive)
 			{
 				FillMovementContextInspectorWindow(map, cell);
+			}
+			else if (_regionInspectorActive)
+			{
+				FillRegionInspectorWindow(map, cell);
 			}
 
 			Text.WordWrap = true;
@@ -208,6 +242,33 @@ namespace PathfindingFramework.DevTool
 
 				DrawRow(label, PathCostLabel(cost));
 			}
+		}
+
+		private static void FillRegionInspectorWindow(Map map, IntVec3 cell)
+		{
+			DrawDivider();
+			Region region = map.regionGrid.GetValidRegionAt(cell);
+			if (region == null)
+			{
+				DrawRow("PF_RegionType".Translate(), "PF_RegionNone".Translate());
+				return;
+			}
+
+			string regionType = Enum.GetName(typeof(RegionType), region.type);
+
+			DrawRow("PF_RegionType".Translate(), regionType);
+			DrawRow("PF_RegionLinks".Translate(), region.links.Count.ToString());
+			DrawRow("PF_RegionExtentsClose".Translate(), region.extentsClose.ToString());
+			DrawRow("PF_RegionExtentsLimit".Translate(), region.extentsLimit.ToString());
+			DrawDivider();
+
+			District district = region.District;
+			string districtRegionType = Enum.GetName(typeof(RegionType), district.RegionType);
+			DrawRow("PF_District".Translate(), district.ID.ToString());
+			DrawRow("PF_DistrictRegionType".Translate(), districtRegionType);
+			DrawRow("PF_DistrictRegionCount".Translate(), district.RegionCount.ToString());
+			DrawRow("PF_DistrictCellCount".Translate(), district.CellCount.ToString());
+			DrawRow("PF_DistrictRegionsMapEdge".Translate(), district.numRegionsTouchingMapEdge.ToString());
 		}
 
 		private static void DrawRow(string label, string info)

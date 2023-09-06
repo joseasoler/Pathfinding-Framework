@@ -127,6 +127,9 @@
 	<ItemGroup>
 		<Publicize Include="Assembly-CSharp:Verse.DirectXmlToObject.ListFromXml" />
 
+		<!-- Region inspector. -->
+		<Publicize Include="Assembly-CSharp:Verse.District.numRegionsTouchingMapEdge" />
+
 		<Publicize Include="Assembly-CSharp:Verse.ParseHelper.parsers" />
 
 		<!-- Direct access to the snow depth grid to avoid IntVec3 creation costs. -->
