@@ -117,7 +117,14 @@ namespace PathfindingFramework.MovementContexts
 		/// <returns>True if the cell is passable.</returns>
 		public bool CanEnterTerrain(IntVec3 cell)
 		{
-			TerrainDef terrainDef = Map.terrainGrid.TerrainAt(ToIndex(cell));
+			int cellIndex = ToIndex(cell);
+			if (cellIndex < 0 || cellIndex >= GridSize)
+			{
+				return false;
+			}
+
+			TerrainDef terrainDef = Map.terrainGrid.TerrainAt(cellIndex);
+
 			if (terrainDef == null)
 			{
 				return false;
