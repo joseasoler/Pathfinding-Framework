@@ -40,6 +40,11 @@
 		<label>flying</label>
 		<description>Flying creatures can hover over most obstacles.</description>
 		<priority>10000</priority>
+		<tagCosts>
+			<PF_DeepWater>0</PF_DeepWater>
+			<PF_ChestWater>0</PF_ChestWater>
+			<PF_ShallowWater>0</PF_ShallowWater>
+		</tagCosts>
 		<defaultCost>0</defaultCost>
 		<ignoreSnow>true</ignoreSnow>
 		<ignoreThings>true</ignoreThings>
