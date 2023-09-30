@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using PathfindingFramework.Parse;
+using PathfindingFramework.Patches;
 using Verse;
 
 namespace PathfindingFramework.MovementDefUtils
@@ -58,7 +59,13 @@ namespace PathfindingFramework.MovementDefUtils
 			return defaultCost != PathCost.Default ? defaultCost.cost : Math.Min(terrainPathCost, PathCost.Impassable.cost);
 		}
 
-		public static short[] Get(MovementDef movementDef)
+		/// <summary>
+		/// Update the PathCosts array of a MovementDef.
+		/// Set the PassableWithAnyMovement flag of any impassable TerrainDef that is passable with this movement.
+		/// </summary>
+		/// <param name="movementDef"></param>
+		/// <returns></returns>
+		public static short[] Update(MovementDef movementDef)
 		{
 			PathCost defaultCost = movementDef.defaultCost;
 			List<TerrainDef> terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
@@ -69,8 +76,14 @@ namespace PathfindingFramework.MovementDefUtils
 				TerrainDef terrainDef = terrainDefs[terrainIndex];
 				short maxTagCost = CalculateMaxTagCost(terrainDef, movementDef);
 				int terrainPathCost = Math.Min(short.MaxValue, terrainDef.pathCost);
-				result[terrainIndex] =
-					CalculatePathCost(maxTagCost, terrainDef.passability, defaultCost, (short) terrainPathCost);
+				short pathCost = CalculatePathCost(maxTagCost, terrainDef.passability, defaultCost, (short) terrainPathCost);
+
+				if (terrainDef.passability == Traversability.Impassable && pathCost < PathCost.Impassable.cost)
+				{
+					terrainDef.PassableWithAnyMovement() = true;
+				}
+
+				result[terrainIndex] = pathCost;
 			}
 
 			return result;

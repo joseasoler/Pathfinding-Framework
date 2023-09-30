@@ -86,7 +86,7 @@ namespace PathfindingFramework
 				return;
 			}
 
-			PathCosts = MovementDefUtils.PathCosts.Get(this);
+			PathCosts = MovementDefUtils.PathCosts.Update(this);
 			descriptionHyperlinks = Hyperlinks.Get(this);
 		}
 
