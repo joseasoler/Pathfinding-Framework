@@ -73,6 +73,18 @@ namespace PathfindingFramework.Patches
 		}
 
 		/// <summary>
+		/// Regions with impassable terrains always contain a single TerrainDef. This field allows accessing it.
+		/// </summary>
+		/// <param name="region">Region being checked</param>
+		/// <returns>Null for regions without impassable terrain, the terrain otherwise.</returns>
+		[PrepatcherField]
+		public static ref TerrainDef TerrainDef(this Region region)
+		{
+			Report.ErrorOnce(NoPrepatcher);
+			return ref _noPrepatcherTerrainDef;
+		}
+
+		/// <summary>
 		/// Impassable terrains with this value set to true can be traversed by one of the loaded movement definitions.
 		/// This is set during game load by MovementDefUtils.PathCosts.Update.
 		/// </summary>

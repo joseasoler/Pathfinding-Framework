@@ -9,15 +9,14 @@ namespace PathfindingFramework.Patches.CellPathfinding
 	[HarmonyPatch(typeof(PawnDestinationReservationManager), nameof(PawnDestinationReservationManager.CanReserve))]
 	internal static class PawnDestinationReservationManager_CanReserve_Patch
 	{
-		internal static bool Prefix(ref bool __result, IntVec3 c, Pawn searcher, bool draftedOnly)
+		internal static void Postfix(ref bool __result, IntVec3 c, Pawn searcher)
 		{
-			if (!searcher.MovementContext().CanEnterTerrain(c))
+			bool original = __result;
+			var terrainDef = c.GetTerrain(searcher.Map);
+			if (__result && !searcher.MovementContext().CanEnterTerrain(c))
 			{
 				__result = false;
-				return false;
 			}
-
-			return true;
 		}
 	}
 }

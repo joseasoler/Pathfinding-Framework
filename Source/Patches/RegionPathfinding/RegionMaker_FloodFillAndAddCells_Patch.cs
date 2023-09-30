@@ -7,6 +7,11 @@ using Verse;
 
 namespace PathfindingFramework.Patches.RegionPathfinding
 {
+	/// <summary>
+	/// Impassable regions are split depending on the TerrainDef of their cells.
+	/// This guarantees that each impassable region is composed of a single terrain type, making possible to check if
+	/// a region should be impassable for a specific movement type.
+	/// </summary>
 	[HarmonyPatch(typeof(RegionMaker), "FloodFillAndAddCells")]
 	internal static class RegionMaker_FloodFillAndAddCells_Patch
 	{

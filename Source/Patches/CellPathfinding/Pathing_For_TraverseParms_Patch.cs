@@ -1,6 +1,9 @@
+using HarmonyLib;
+using Verse;
+using Verse.AI;
+
 namespace PathfindingFramework.Patches.CellPathfinding
 {
-	/*
 	[HarmonyPatch(typeof(Pathing), nameof(Pathing.For), typeof(TraverseParms))]
 	internal static class Pathing_For_TraverseParms_Patch
 	{
@@ -16,5 +19,4 @@ namespace PathfindingFramework.Patches.CellPathfinding
 			return pathingContext == null;
 		}
 	}
-	*/
 }

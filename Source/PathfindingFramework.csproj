@@ -27,6 +27,7 @@
 		<Compile Include="DevTool\MemoryUsageDebugOutput.cs" />
 		<Compile Include="DevTool\MovementCostDebugOutput.cs" />
 		<Compile Include="DevTool\InspectorDrawer.cs" />
+		<Compile Include="DevTool\PathFinderErrorDebug.cs" />
 		<Compile Include="DevTool\PathGridDivergenceDebugOutput.cs" />
 		<Compile Include="DevTool\PawnMovementDebugOutput.cs" />
 		<Compile Include="Harmony.cs" />
@@ -50,9 +51,11 @@
 		<Compile Include="Patches\CellPathfinding\Pathing_For_TraverseParms_Patch.cs" />
 		<Compile Include="Patches\CellPathfinding\PawnDestinationReservationManager_CanReserve_Patch.cs" />
 		<Compile Include="Patches\CellPathfinding\Pawn_PathFollower_CostToMoveIntoCell_Patch.cs" />
-		<Compile Include="Patches\CellPathfinding\Reachability_CanReach_Patch.cs" />
+		<Compile Include="Patches\DevTool\PathFinder_FindPath_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_FloodFillAndAddCells_Patch.cs" />
+		<Compile Include="Patches\RegionPathfinding\RegionMaker_TryGenerateRegionFrom_Patch.cs" />
+		<Compile Include="Patches\RegionPathfinding\Region_Allows_Patch.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
 		<Compile Include="Patches\Spawning\RCellFinder_RandomAnimalSpawnCell_MapGen_Patch.cs" />
 		<Compile Include="PathfindingFramework.cs" />
@@ -137,6 +140,13 @@
 		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.depthGrid" />
 
 		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.map" />
+
+		<!-- PathFinder error debugging. -->
+		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.calcGrid" />
+		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.Directions" />
+		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.map" />
+		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.openList" />
+		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.pathGrid" />
 
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathGrid.IsPathCostIgnoreRepeater" />
 	</ItemGroup>
