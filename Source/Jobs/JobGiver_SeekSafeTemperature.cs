@@ -1,33 +1,29 @@
-using HarmonyLib;
 using PathfindingFramework.MovementContexts;
-using RimWorld;
+using PathfindingFramework.Patches;
 using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.Patches.ValidTerrains
+namespace PathfindingFramework.Jobs
 {
-	[HarmonyPatch(typeof(JobGiver_SeekSafeTemperature), "TryGiveJob")]
-	internal static class JobGiver_SeekSafeTemperature_TryGiveJob_Patch
+	public class JobGiver_SeekSafeTemperature : ThinkNode_JobGiver
 	{
-		internal static bool Prefix(ref Job __result, Pawn pawn)
+		protected override Job TryGiveJob(Pawn pawn)
 		{
 			IntVec3 root = pawn.Position;
 			MovementContext context = pawn.MovementContext();
 			if (context.CanEnterTerrain(root))
 			{
-				return true;
+				return null;
 			}
 
 			IntVec3 targetCell = CloseCellWithSafeTerrain(root, pawn.Map, TraverseParms.For(pawn));
 			if (targetCell != IntVec3.Invalid)
 			{
-				__result = JobMaker.MakeJob(JobDefOf.PF_SeekSafeTerrain, targetCell, 300);
-				return false;
+				return JobMaker.MakeJob(JobDefOf.PF_Job_SeekSafeTerrain, targetCell, 300);
 			}
 
-			return true;
+			return null;
 		}
-
 		private static IntVec3 CloseCellWithSafeTerrain(IntVec3 root, Map map, TraverseParms traverseParms)
 		{
 			IntVec3 foundCell = IntVec3.Invalid;
@@ -37,6 +33,10 @@ namespace PathfindingFramework.Patches.ValidTerrains
 			{
 				return foundCell;
 			}
+
+			RegionTraverser.BreadthFirstTraverse(region, EntryCondition, RegionProcessor, 9999);
+			return foundCell;
+
 
 			// Creatures are allowed to traverse regions that should be avoided...
 			bool EntryCondition(Region _, Region r) => r.Allows(traverseParms, false);
@@ -50,17 +50,14 @@ namespace PathfindingFramework.Patches.ValidTerrains
 				}
 
 				IntVec3 destination = r.AnyCell;
-				if (traverseParms.pawn.MovementContext().CanEnterTerrain(destination))
+				if (!traverseParms.pawn.MovementContext().CanEnterTerrain(destination))
 				{
-					foundCell = destination;
-					return true;
+					return false;
 				}
 
-				return false;
+				foundCell = destination;
+				return true;
 			}
-
-			RegionTraverser.BreadthFirstTraverse(region, EntryCondition, RegionProcessor, 9999);
-			return foundCell;
 		}
 	}
 }

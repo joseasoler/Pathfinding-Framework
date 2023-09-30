@@ -9,6 +9,6 @@ namespace PathfindingFramework
 		/// <summary>
 		/// Force pawns in tiles to be avoided to seek safer terrain.
 		/// </summary>
-		public static JobDef PF_SeekSafeTerrain;
+		public static JobDef PF_Job_SeekSafeTerrain;
 	}
 }

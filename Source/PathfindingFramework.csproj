@@ -32,6 +32,7 @@
 		<Compile Include="DevTool\PawnMovementDebugOutput.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="JobDefOf.cs" />
+		<Compile Include="Jobs\JobGiver_SeekSafeTemperature.cs" />
 		<Compile Include="MapPathCosts\MapPathCost.cs" />
 		<Compile Include="MapPathCosts\MapPathCostMemoryReport.cs" />
 		<Compile Include="MapPathCosts\MapPathCostGrid.cs" />
@@ -59,7 +60,6 @@
 		<Compile Include="Patches\RegionPathfinding\Region_Allows_Patch.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
 		<Compile Include="Patches\Spawning\RCellFinder_RandomAnimalSpawnCell_MapGen_Patch.cs" />
-		<Compile Include="Patches\ValidTerrains\JobGiver_SeekSafeTemperature_TryGiveJob_Patch.cs" />
 		<Compile Include="PathfindingFramework.cs" />
 		<Compile Include="Patches\DevTool\DevToolDefGeneration\DefGenerator_GenerateImpliedDefs_PreResolve_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathCostInspector\UIRoot_UIRootOnGUI_Patch.cs" />

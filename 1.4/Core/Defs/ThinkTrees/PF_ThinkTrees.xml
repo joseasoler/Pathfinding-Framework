@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThinkTreeDef>
+		<defName>PF_ThinkTree_Animal_SeekSafeTerrain</defName>
+		<insertTag>Humanlike_PostDuty</insertTag>
+		<insertPriority>300</insertPriority>
+		<thinkRoot Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="PathfindingFramework.Jobs.JobGiver_SeekSafeTemperature"/>
+			</subNodes>
+		</thinkRoot>
+	</ThinkTreeDef>
+
+	<ThinkTreeDef>
+		<defName>PF_ThinkTree_Human_SeekSafeTerrain</defName>
+		<insertTag>Animal_PreMain</insertTag>
+		<insertPriority>300</insertPriority>
+		<thinkRoot Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="PathfindingFramework.Jobs.JobGiver_SeekSafeTemperature"/>
+			</subNodes>
+		</thinkRoot>
+	</ThinkTreeDef>
+</Defs>
