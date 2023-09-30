@@ -19,9 +19,9 @@ Contributions
 
 This project encourages community involvement and contributions. Check the [CONTRIBUTING](CONTRIBUTING.md) file for details.
 
-• Matthew Seal: Original implementation of [TerrainMovementKit](https://github.com/MSeal/RimworldTerrainMovementKit) and [SwimmingKit](https://github.com/MSeal/RimworldSwimming).
+• [MSeal](https://github.com/MSeal/): Original implementation of [TerrainMovementKit](https://github.com/MSeal/RimworldTerrainMovementKit) and [SwimmingKit](https://github.com/MSeal/RimworldSwimming).
 
-• joseasoler: Programming
+• [joseasoler](https://github.com/joseasoler): New implementation of the Pathfinding Framework.
 
 Other contributors can be checked in the [contributors list](https://github.com/joseasoler/pathfinding-framework/graphs/contributors).
 
