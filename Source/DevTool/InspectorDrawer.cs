@@ -256,6 +256,7 @@ namespace PathfindingFramework.DevTool
 
 			string regionType = Enum.GetName(typeof(RegionType), region.type);
 
+			DrawRow("PF_RegionId".Translate(), region.id.ToString());
 			DrawRow("PF_RegionType".Translate(), regionType);
 			DrawRow("PF_RegionLinks".Translate(), region.links.Count.ToString());
 			DrawRow("PF_RegionExtentsClose".Translate(), region.extentsClose.ToString());

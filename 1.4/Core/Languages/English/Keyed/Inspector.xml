@@ -18,6 +18,7 @@
 	<!-- Region inspector. -->
 	<PF_RegionLabel>Region</PF_RegionLabel>
 	<PF_RegionNone>None</PF_RegionNone>
+	<PF_RegionId>Id</PF_RegionId>
 	<PF_RegionType>Type</PF_RegionType>
 	<PF_RegionLinks>Links count</PF_RegionLinks>
 	<PF_RegionExtentsClose>Extents close</PF_RegionExtentsClose>
