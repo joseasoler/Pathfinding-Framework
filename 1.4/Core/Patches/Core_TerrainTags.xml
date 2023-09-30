@@ -91,7 +91,7 @@ each individual TerrainDef is patched explicitly instead.
 	</Operation>
 
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/TerrainDef[defName="WaterShallow" or DefName="WaterOceanShallow" or defName="WaterMovingShallow" or
+		<xpath>Defs/TerrainDef[defName="WaterShallow" or defName="WaterOceanShallow" or defName="WaterMovingShallow" or
 			defName="Marsh"]/tags
 		</xpath>
 		<value>
