@@ -13,8 +13,8 @@
 	<PathfindingFramework.MovementDef Name="AquaticBase" Abstract="True">
 		<tagCosts>
 			<PF_DeepWater>0</PF_DeepWater>
-			<PF_ChestWater>5</PF_ChestWater>
-			<PF_ShallowWater>10</PF_ShallowWater>
+			<PF_ChestWater>2</PF_ChestWater>
+			<PF_ShallowWater>4</PF_ShallowWater>
 		</tagCosts>
 	</PathfindingFramework.MovementDef>
 
@@ -33,6 +33,7 @@
 		<description>Amphibious creatures can move easily on both water and land.</description>
 		<priority>2000</priority>
 		<defaultCost>Default</defaultCost>
+		<defaultCostAdd>8</defaultCostAdd>
 	</PathfindingFramework.MovementDef>
 
 	<PathfindingFramework.MovementDef>

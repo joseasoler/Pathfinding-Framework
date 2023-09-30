@@ -35,6 +35,11 @@
 					<xs:documentation>Default cost for terrains not present in other fields.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="defaultCostAdd" type="xs:float" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Value added to default cost for terrains not present in other fields.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="ignoreSnow" type="xs:boolean" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>When this flag is set, this movement type will ignore snow path costs.</xs:documentation>
@@ -42,12 +47,17 @@
 			</xs:element>
 			<xs:element name="ignoreThings" type="xs:boolean" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>hen this flag is set, this movement type will ignore thing path costs except for impassable ones.</xs:documentation>
+					<xs:documentation>hen this flag is set, this movement type will ignore thing path costs except for impassable
+						ones.
+					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="penAnimalsDisallowed" type="xs:boolean" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Marks this movement type as not intended for penned animals. When this flag is set, all pawns will treat fences normally even if they are set to avoid them. A warning will be displayed when penned animals use this movement type.</xs:documentation>
+					<xs:documentation>Marks this movement type as not intended for penned animals. When this flag is set, all
+						pawns will treat fences normally even if they are set to avoid them. A warning will be displayed when penned
+						animals use this movement type.
+					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:all>

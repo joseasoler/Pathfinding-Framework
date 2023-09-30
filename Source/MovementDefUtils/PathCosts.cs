@@ -41,10 +41,11 @@ namespace PathfindingFramework.MovementDefUtils
 		/// <param name="maxTagCost">Maximum path cost of the tags of this terrain for this movement type.</param>
 		/// <param name="passability">Vanilla traversability of this terrain.</param>
 		/// <param name="defaultCost">Default cost defined in the movement type.</param>
+		/// <param name="defaultCostAdd">Value to add to default cost.</param>
 		/// <param name="terrainPathCost">Vanilla path cost.</param>
 		/// <returns>Cost to use for pathing.</returns>
 		private static short CalculatePathCost(short maxTagCost, Traversability passability, PathCost defaultCost,
-			short terrainPathCost)
+			short defaultCostAdd, short terrainPathCost)
 		{
 			if (maxTagCost > PathCost.Default.cost)
 			{
@@ -56,7 +57,16 @@ namespace PathfindingFramework.MovementDefUtils
 				return PathCost.Impassable.cost;
 			}
 
-			return defaultCost != PathCost.Default ? defaultCost.cost : Math.Min(terrainPathCost, PathCost.Impassable.cost);
+			short result = defaultCost != PathCost.Default
+				? defaultCost.cost
+				: Math.Min(terrainPathCost, PathCost.Impassable.cost);
+
+			if (defaultCostAdd > 0)
+			{
+				result += defaultCostAdd;
+			}
+
+			return result;
 		}
 
 		/// <summary>
@@ -68,6 +78,7 @@ namespace PathfindingFramework.MovementDefUtils
 		public static short[] Update(MovementDef movementDef)
 		{
 			PathCost defaultCost = movementDef.defaultCost;
+			short defaultCostAdd = movementDef.defaultCostAdd;
 			List<TerrainDef> terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
 			short[] result = new short[terrainDefs.Count];
 
@@ -76,7 +87,8 @@ namespace PathfindingFramework.MovementDefUtils
 				TerrainDef terrainDef = terrainDefs[terrainIndex];
 				short maxTagCost = CalculateMaxTagCost(terrainDef, movementDef);
 				int terrainPathCost = Math.Min(short.MaxValue, terrainDef.pathCost);
-				short pathCost = CalculatePathCost(maxTagCost, terrainDef.passability, defaultCost, (short) terrainPathCost);
+				short pathCost = CalculatePathCost(maxTagCost, terrainDef.passability, defaultCost, defaultCostAdd,
+					(short) terrainPathCost);
 
 				if (terrainDef.passability == Traversability.Impassable && pathCost < PathCost.Impassable.cost)
 				{
