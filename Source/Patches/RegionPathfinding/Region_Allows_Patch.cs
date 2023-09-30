@@ -32,8 +32,6 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			bool isDestination)
 		{
 			Pawn pawn = parms.pawn;
-			string regionStr =
-				$"RegionId:{region.id}, type:|{Enum.GetName(typeof(RegionType), region.type)}|, terrainDef:|{region.TerrainDef()}|";
 			// These additional checks are only possible if the request is for a pawn.
 			// Since RegionMaker_TryGenerateRegionFrom_Patch sets impassable regions with a TerrainDef that is passable by at
 			// least one movement type to be passable, if vanilla returns impassable then the region is definitely impassable.
