@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using HarmonyLib;
 
@@ -16,6 +18,9 @@ namespace PathfindingFramework
 		{
 			try
 			{
+				var path = Path.Combine(Path.GetTempPath(), "PF_Harmony.txt");
+				Environment.SetEnvironmentVariable("HARMONY_LOG_FILE", path);
+				// HarmonyLib.Harmony.DEBUG = true;
 				var harmonyInstance = new HarmonyLib.Harmony(PathfindingFramework.PackageId);
 				harmonyInstance.PatchAll();
 				Report.Debug("Harmony patching applied.");

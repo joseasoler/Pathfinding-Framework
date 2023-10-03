@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
@@ -15,15 +16,15 @@ namespace PathfindingFramework.MovementContexts
 		/// <summary>
 		/// Movement definition of this context.
 		/// </summary>
-		public MovementDef MovementDef;
+		public readonly MovementDef MovementDef;
 
 		/// <summary>
 		/// Stores a pathing context instance ready to be used by the vanilla pathfinding code.
 		/// Like in vanilla, the path grid in this context stores perceived pathfinding costs.
 		/// </summary>
-		public PathingContext PathingContext;
+		public readonly PathingContext PathingContext;
 
-		public bool ShouldAvoidFences;
+		public readonly bool ShouldAvoidFences;
 
 		public MovementContext(MovementDef movementDef, Map map, bool shouldAvoidFences) : base(map)
 		{
@@ -109,6 +110,12 @@ namespace PathfindingFramework.MovementContexts
 			return cost;
 		}
 
+		private TerrainDef TerrainAt(IntVec3 cell)
+		{
+			int cellIndex = ToIndex(cell);
+			return (cellIndex < 0 || cellIndex >= GridSize) ? null : Map.terrainGrid.TerrainAt(cellIndex);
+		}
+
 		/// <summary>
 		/// Checks if a cell can be entered by pawns with this movement context.
 		/// Only the terrain is considered for this check, as pawns must be able to reach impassable tiles with a wall.
@@ -117,13 +124,7 @@ namespace PathfindingFramework.MovementContexts
 		/// <returns>True if the cell is passable.</returns>
 		public bool CanEnterTerrain(IntVec3 cell)
 		{
-			int cellIndex = ToIndex(cell);
-			if (cellIndex < 0 || cellIndex >= GridSize)
-			{
-				return false;
-			}
-
-			TerrainDef terrainDef = Map.terrainGrid.TerrainAt(cellIndex);
+			TerrainDef terrainDef = TerrainAt(cell);
 
 			if (terrainDef == null)
 			{
@@ -132,6 +133,49 @@ namespace PathfindingFramework.MovementContexts
 
 			int cost = MovementDef.PathCosts[terrainDef.index];
 			return cost < PathCost.Avoid.cost;
+		}
+
+		/// <summary>
+		/// True if a pawn with this movement can stand in a specific cell.
+		/// See GenGrid.Standable.
+		/// </summary>
+		/// <param name="cell">Cell to check.</param>
+		/// <returns>Standability of the cell.</returns>
+		public bool CanStandAt(IntVec3 cell)
+		{
+			if (!CanEnterTerrain(cell))
+			{
+				return false;
+			}
+
+			List<Thing> thingList = Map.thingGrid.ThingsListAt(cell);
+			for (int index = 0; index < thingList.Count; ++index)
+			{
+				if (thingList[index].def.passability != Traversability.Standable)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Checks if pawns using this movement should avoid wandering at a cell.
+		/// </summary>
+		/// <param name="cell">Cell to check.</param>
+		/// <returns>True if the path cost is equal or greater than in vanilla and the terrain has avoidWander.</returns>
+		public bool AvoidWanderAt(IntVec3 cell)
+		{
+			TerrainDef terrainDef = TerrainAt(cell);
+
+			if (terrainDef == null)
+			{
+				return true;
+			}
+
+			int cost = MovementDef.PathCosts[terrainDef.index];
+			return cost >= terrainDef.pathCost && terrainDef.avoidWander;
 		}
 	}
 }
