@@ -34,6 +34,7 @@
 		<Compile Include="JobDefOf.cs" />
 		<Compile Include="Jobs\JobGiver_SeekSafeTemperature.cs" />
 		<Compile Include="LocationFinding.cs" />
+		<Compile Include="LocomotionExtension.cs" />
 		<Compile Include="MapPathCosts\MapPathCost.cs" />
 		<Compile Include="MapPathCosts\MapPathCostMemoryReport.cs" />
 		<Compile Include="MapPathCosts\MapPathCostGrid.cs" />
@@ -99,6 +100,7 @@
 		<Compile Include="MovementDefUtils\Hyperlinks.cs" />
 		<Compile Include="MovementDefUtils\StatDrawEntries.cs" />
 		<Compile Include="MovementDefUtils\DefsWithMovementType.cs" />
+		<Compile Include="TerrainTagGraphicExtension.cs" />
 		<Reference Include="System" />
 		<Reference Include="System.Xml" />
 		<PackageReference Include="Krafs.Publicizer" Version="2.2.1">
