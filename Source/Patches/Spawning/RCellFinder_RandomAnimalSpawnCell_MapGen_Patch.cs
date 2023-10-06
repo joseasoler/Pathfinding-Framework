@@ -6,6 +6,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
+/*
 namespace PathfindingFramework.Patches.Spawning
 {
 	/// <summary>
@@ -68,3 +69,4 @@ namespace PathfindingFramework.Patches.Spawning
 		}
 	}
 }
+*/

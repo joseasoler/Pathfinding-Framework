@@ -59,6 +59,17 @@ namespace PathfindingFramework
 		/// </summary>
 		public short[] PathCosts = null;
 
+		/// <summary>
+		/// Checks if pawns with this movement should be able to choose a terrain as a valid position.
+		/// </summary>
+		/// <param name="terrainDef">Terrain to check.</param>
+		/// <returns>True if the terrain is passable.</returns>
+		public bool CanEnterTerrain(TerrainDef terrainDef)
+		{
+			int cost = PathCosts[terrainDef.index];
+			return cost < PathCost.Avoid.cost;
+		}
+
 		public override IEnumerable<string> ConfigErrors()
 		{
 			foreach (var error in base.ConfigErrors())

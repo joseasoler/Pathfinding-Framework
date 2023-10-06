@@ -125,14 +125,7 @@ namespace PathfindingFramework.MovementContexts
 		public bool CanEnterTerrain(IntVec3 cell)
 		{
 			TerrainDef terrainDef = TerrainAt(cell);
-
-			if (terrainDef == null)
-			{
-				return false;
-			}
-
-			int cost = MovementDef.PathCosts[terrainDef.index];
-			return cost < PathCost.Avoid.cost;
+			return terrainDef != null && MovementDef.CanEnterTerrain(terrainDef);
 		}
 
 		/// <summary>
@@ -143,21 +136,7 @@ namespace PathfindingFramework.MovementContexts
 		/// <returns>Standability of the cell.</returns>
 		public bool CanStandAt(IntVec3 cell)
 		{
-			if (!CanEnterTerrain(cell))
-			{
-				return false;
-			}
-
-			List<Thing> thingList = Map.thingGrid.ThingsListAt(cell);
-			for (int index = 0; index < thingList.Count; ++index)
-			{
-				if (thingList[index].def.passability != Traversability.Standable)
-				{
-					return false;
-				}
-			}
-
-			return true;
+			return LocationFinding.CanStandAt(MovementDef, Map, cell);
 		}
 
 		/// <summary>

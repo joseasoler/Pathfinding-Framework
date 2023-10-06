@@ -112,7 +112,7 @@ namespace PathfindingFramework.PawnMovement
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
 		private static void FromRace(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
-			var movementDef = MovementExtensionCache.GetMovementDef(pawn.def);
+			MovementDef movementDef = MovementExtensionCache.GetMovementDef(pawn.def);
 			if (movementDef != null)
 			{
 				movementDefs.Add(movementDef);

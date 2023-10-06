@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PathfindingFramework.Patches;
 using Verse;
 
@@ -14,6 +15,26 @@ namespace PathfindingFramework
 	/// </summary>
 	public static class LocationFinding
 	{
+		public static bool CanStandAt(MovementDef movementDef, Map map, IntVec3 cell)
+		{
+			TerrainDef terrainDef = cell.GetTerrain(map);
+			if (terrainDef == null || !movementDef.CanEnterTerrain(terrainDef))
+			{
+				return false;
+			}
+
+			List<Thing> thingList = map.thingGrid.ThingsListAt(cell);
+			for (int index = 0; index < thingList.Count; ++index)
+			{
+				if (thingList[index].def.passability != Traversability.Standable)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		/// <summary>
 		/// Pawn movement aware version of CellFinder.TryRandomClosewalkCellNear.
 		/// </summary>
