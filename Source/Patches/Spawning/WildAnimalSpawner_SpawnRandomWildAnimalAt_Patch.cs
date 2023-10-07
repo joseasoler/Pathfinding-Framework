@@ -12,12 +12,6 @@ namespace PathfindingFramework.Patches.Spawning
 	[HarmonyPatch(typeof(WildAnimalSpawner), nameof(WildAnimalSpawner.SpawnRandomWildAnimalAt))]
 	internal static class WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch
 	{
-		private static bool CanSpawnInCell(MovementDef movementDef, Map map, IntVec3 cell)
-		{
-			return LocationFinding.CanStandAt(movementDef, map, cell) && cell.GetDistrict(map).TouchesMapEdge &&
-			       map.reachability.CanReachColony(cell);
-		}
-
 		private static bool TryReplaceAnimalSpawnLocation(PawnKindDef pawnKindDef, Map map, IntVec3 location,
 			int randomInRange, int radius)
 		{
@@ -34,9 +28,9 @@ namespace PathfindingFramework.Patches.Spawning
 				return false;
 			}
 
-			// The animal to spawn cannot stand in the terrain chosen. A new cell must be found.
-			if (!CellFinder.TryFindRandomEdgeCellWith(cell => CanSpawnInCell(movementDef, map, cell), map,
-				    CellFinder.EdgeRoadChance_Animal, out IntVec3 newCell))
+			// The animal to spawn cannot stand in the chosen terrain. A new cell must be found.
+			if (!LocationFinding.TryFindRandomPawnEntryCell(out IntVec3 newCell, map, CellFinder.EdgeRoadChance_Animal, true,
+				    null, movementDef))
 			{
 				return false;
 			}

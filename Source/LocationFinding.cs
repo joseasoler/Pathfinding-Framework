@@ -15,6 +15,13 @@ namespace PathfindingFramework
 	/// </summary>
 	public static class LocationFinding
 	{
+		/// <summary>
+		/// Checks if pawns with a specific movement type should be standing on a certain cell.
+		/// </summary>
+		/// <param name="movementDef">Movement type to check.</param>
+		/// <param name="map">Current map.</param>
+		/// <param name="cell">Cell to check.</param>
+		/// <returns>True if the movement allows standing here.</returns>
 		public static bool CanStandAt(MovementDef movementDef, Map map, IntVec3 cell)
 		{
 			TerrainDef terrainDef = cell.GetTerrain(map);
@@ -33,6 +40,20 @@ namespace PathfindingFramework
 			}
 
 			return true;
+		}
+
+		/// <summary>
+		/// A pawn can spawn in a cell if it is in the border, there is a path to the colony, and the movement type allows
+		/// standing up in the cell.
+		/// </summary>
+		/// <param name="movementDef">Movement type to check.</param>
+		/// <param name="map">Current map.</param>
+		/// <param name="cell">Cell to check.</param>
+		/// <returns>True if the cell is a good spawning point for this movement type.</returns>
+		public static bool CanSpawnAt(MovementDef movementDef, Map map, IntVec3 cell)
+		{
+			return LocationFinding.CanStandAt(movementDef, map, cell) && cell.GetDistrict(map).TouchesMapEdge &&
+			       map.reachability.CanReachColony(cell);
 		}
 
 		/// <summary>
@@ -56,6 +77,30 @@ namespace PathfindingFramework
 
 					return extraValidator == null || extraValidator(c);
 				}, null, out result);
+		}
+
+		/// <summary>
+		/// Search for a valid entry cell for a pawn with a specific movement type.
+		/// </summary>
+		/// <param name="result">Found cell.</param>
+		/// <param name="map">Current map</param>
+		/// <param name="roadChance">Probability of spawning on a road.</param>
+		/// <param name="allowFogged">Allow spawning in fogged tiles.</param>
+		/// <param name="extraValidator">Optional extra validation.</param>
+		/// <param name="movementDef">Movement definition of the pawn.</param>
+		/// <returns>True if a cell was found.</returns>
+		public static bool TryFindRandomPawnEntryCell(out IntVec3 result, Map map, float roadChance,
+			bool allowFogged, Predicate<IntVec3> extraValidator, MovementDef movementDef)
+		{
+			return CellFinder.TryFindRandomEdgeCellWith( (cell =>
+			{
+				bool foggedPrevents = !allowFogged && cell.Fogged(map);
+				if (foggedPrevents || !CanSpawnAt(movementDef, map, cell))
+				{
+					return false;
+				}
+				return extraValidator == null || extraValidator(cell);
+			}), map, roadChance, out result);
 		}
 	}
 }
