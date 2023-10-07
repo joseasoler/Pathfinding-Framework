@@ -63,6 +63,7 @@
 		<Compile Include="Patches\RegionPathfinding\Region_Allows_Patch.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
 		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_CanFireNowSub_Patch.cs" />
+		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_Util.cs" />
 		<Compile Include="Patches\Spawning\ManhunterPackIncidentUtility_TryFindManhunterAnimalKind_Patch.cs" />
 		<Compile Include="Patches\Spawning\WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch.cs" />
 		<Compile Include="Patches\TranspilerDebugging.cs" />
