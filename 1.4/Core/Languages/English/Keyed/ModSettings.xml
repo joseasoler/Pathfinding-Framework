@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+	<PF_IgnoreFireLabel>Non-flammable pawns ignore fire</PF_IgnoreFireLabel>
+	<PF_IgnoreFireHover>Creatures that are inherently non-flammable such as mechanoids will move through fire. This setting does not affect pawns that cannot catch fire due to apparel, genes or hediffs.</PF_IgnoreFireHover>
 	<PF_InspectorLabel>Inspector</PF_InspectorLabel>
 	<PF_InspectorHover>If enabled, the path cost inspector window will appear while Control+Shift+Q is held. The movement costs inspector will appear while Control+Shift+E is held. The region inspector will appear while Control+Shift+R is held.</PF_InspectorHover>
 	<PF_LogPathNotFoundLabel>Log path not found</PF_LogPathNotFoundLabel>

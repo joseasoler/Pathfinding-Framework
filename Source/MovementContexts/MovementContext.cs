@@ -26,12 +26,15 @@ namespace PathfindingFramework.MovementContexts
 
 		public readonly bool ShouldAvoidFences;
 
-		public MovementContext(MovementDef movementDef, Map map, bool shouldAvoidFences) : base(map)
+		public readonly bool CanIgnoreFire;
+
+		public MovementContext(MovementDef movementDef, Map map, bool shouldAvoidFences, bool ignoreFire) : base(map)
 		{
 			MovementDef = movementDef;
 			PathGrid grid = new PathGrid(map, !shouldAvoidFences);
 			PathingContext = new PathingContext(map, grid);
 			ShouldAvoidFences = shouldAvoidFences;
+			CanIgnoreFire = ignoreFire;
 		}
 
 		/// <summary>
@@ -60,7 +63,10 @@ namespace PathfindingFramework.MovementContexts
 					cost = pathCosts.snow;
 				}
 
-				cost += pathCosts.fire;
+				if (!Settings.Values.IgnoreFire || !CanIgnoreFire)
+				{
+					cost += pathCosts.fire;
+				}
 			}
 
 			cost = Math.Min(cost, PathCost.Impassable.cost);

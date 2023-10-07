@@ -8,6 +8,11 @@ namespace PathfindingFramework
 	public class SettingValues
 	{
 		/// <summary>
+		/// Pawns with a flammability of zero ignore the pathfinding costs of fire.
+		/// </summary>
+		public bool IgnoreFire /* = false*/;
+
+		/// <summary>
 		/// Enable the inspectors.
 		/// </summary>
 		public bool Inspectors /* = false*/;
@@ -48,6 +53,7 @@ namespace PathfindingFramework
 		public override void ExposeData()
 		{
 			base.ExposeData();
+			Scribe_Values.Look(ref Values.IgnoreFire, "IgnoreFire");
 			Scribe_Values.Look(ref Values.Inspectors, "Inspectors");
 			Scribe_Values.Look(ref Values.LogPathNotFound, "LogPathNotFound");
 			Scribe_Values.Look(ref Values.DebugLog, "DebugLog");

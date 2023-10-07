@@ -52,5 +52,11 @@ namespace PathfindingFramework
 			SettingsWindow.DoWindowContents(inRect);
 			base.DoSettingsWindowContents(inRect);
 		}
+		
+		public override void WriteSettings()
+		{
+			base.WriteSettings();
+			SettingsWindow.OnWriteSettings();
+		}
 	}
 }

@@ -19,6 +19,11 @@ namespace PathfindingFramework.MovementContexts
 				id += 0x100000000;
 			}
 
+			if (MovementContextUtil.CanIgnoreFire(pawn))
+			{
+				id += 0x200000000;
+			}
+
 			return id;
 		}
 	}

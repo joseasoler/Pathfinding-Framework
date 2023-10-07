@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using PathfindingFramework.DevTool;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.Patches;
@@ -40,7 +41,9 @@ namespace PathfindingFramework.MovementContexts
 			{
 				// Create a new context and update its path grid.
 				MovementDef movementDef = pawn.MovementDef();
-				context = new MovementContext(movementDef, pawn.Map, !movementDef.penAnimalsDisallowed && pawn.ShouldAvoidFences);
+				context = new MovementContext(movementDef, pawn.Map,
+					!movementDef.penAnimalsDisallowed && pawn.ShouldAvoidFences,
+					MovementContextUtil.CanIgnoreFire(pawn));
 				_contexts[movementContextId] = new WeakReference<MovementContext>(context);
 				for (int cellIndex = 0; cellIndex < GridSize; ++cellIndex)
 				{
@@ -55,14 +58,15 @@ namespace PathfindingFramework.MovementContexts
 		/// <summary>
 		/// Movement contexts that are currently active in this map.
 		/// Exposed to be used in the inspector drawer.
+		/// <param name="ignoreFireOnly">True if the list should only contain IgnoreFire contexts.</param>
 		/// </summary>
 		/// <returns>List of active contexts.</returns>
-		public List<MovementContext> ActiveContexts()
+		public List<MovementContext> ActiveContexts(bool ignoreFireOnly = false)
 		{
 			List<MovementContext> validContexts = new List<MovementContext>();
 			foreach (var entry in _contexts)
 			{
-				if (!entry.Value.IsAlive)
+				if (!entry.Value.IsAlive || ignoreFireOnly && !entry.Value.Target.CanIgnoreFire)
 				{
 					continue;
 				}
@@ -97,9 +101,13 @@ namespace PathfindingFramework.MovementContexts
 			}
 		}
 
-		public void UpdateAll()
+		/// <summary>
+		/// Update cells of all contexts.
+		/// </summary>
+		/// <param name="ignoreFireOnly">True if only IgnoreFire contexts should be updated.</param>
+		public void UpdateAllCells(bool ignoreFireOnly = false)
 		{
-			List<MovementContext> validContexts = ActiveContexts();
+			List<MovementContext> validContexts = ActiveContexts(ignoreFireOnly);
 			for (int cellIndex = 0; cellIndex < GridSize; ++cellIndex)
 			{
 				MapPathCost mapPathCost = Map.MapPathCostGrid().Get(cellIndex);

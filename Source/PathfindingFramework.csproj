@@ -42,6 +42,7 @@
 		<Compile Include="MovementContexts\MovementContext.cs" />
 		<Compile Include="MovementContexts\MovementContextData.cs" />
 		<Compile Include="MovementContexts\MovementContextId.cs" />
+		<Compile Include="MovementContexts\MovementContextUtil.cs" />
 		<Compile Include="MovementDefOf.cs" />
 		<Compile Include="MovementDefUtils\MemoryReport.cs" />
 		<Compile Include="MovementDefUtils\PathCosts.cs" />

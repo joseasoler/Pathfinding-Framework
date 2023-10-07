@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using PathfindingFramework.MovementContexts;
+using PathfindingFramework.Patches;
+using UnityEngine;
 using Verse;
 
 namespace PathfindingFramework
@@ -23,6 +25,11 @@ namespace PathfindingFramework
 			var listing = new Listing_Standard();
 			listing.Begin(inRect);
 
+			listing.CheckboxLabeled("PF_IgnoreFireLabel".Translate(), ref Settings.Values.IgnoreFire,
+				"PF_IgnoreFireHover".Translate());
+
+			listing.Gap();
+
 			listing.CheckboxLabeled("PF_InspectorLabel".Translate(), ref Settings.Values.Inspectors,
 				"PF_InspectorHover".Translate());
 			listing.CheckboxLabeled("PF_LogPathNotFoundLabel".Translate(), ref Settings.Values.LogPathNotFound,
@@ -43,6 +50,14 @@ namespace PathfindingFramework
 			TooltipHandler.TipRegion(resetRect, "PF_ResetSettingsHover".Translate());
 
 			listing.End();
+		}
+
+		public static void OnWriteSettings()
+		{
+			foreach (Map map in Find.Maps)
+			{
+				map.MovementContextData().UpdateAllCells(ignoreFireOnly: true);
+			}
 		}
 	}
 }
