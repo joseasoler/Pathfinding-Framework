@@ -15,7 +15,7 @@ namespace PathfindingFramework.Patches.Spawning
 		private static bool TryReplaceAnimalSpawnLocation(PawnKindDef pawnKindDef, Map map, IntVec3 location,
 			int randomInRange, int radius)
 		{
-			MovementDef movementDef = MovementExtensionCache.GetMovementDef(pawnKindDef.race);
+			MovementDef movementDef = MovementExtensionCache.GetMovementDef(pawnKindDef);
 			if (randomInRange <= 0 || movementDef == null || !location.InBounds(map))
 			{
 				return false;

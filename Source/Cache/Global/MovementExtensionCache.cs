@@ -93,13 +93,54 @@ namespace PathfindingFramework.Cache.Global
 		}
 
 		/// <summary>
-		/// Get the extension of a Def
+		/// Get the extension of a ThingDef.
 		/// </summary>
-		/// <param name="def">Def to check.</param>
+		/// <param name="thingDef">Def to check.</param>
 		/// <returns>MovementDef associated to this Def.</returns>
-		public static MovementDef GetMovementDef(Def def)
+		public static MovementDef GetMovementDef(ThingDef thingDef)
 		{
-			return _defs.TryGetValue(def.shortHash, out var result) ? result : null;
+			return _defs.TryGetValue(thingDef.shortHash, out var result) ? result : null;
+		}
+
+
+		/// <summary>
+		/// Get the extension of a ThingDef.
+		/// </summary>
+		/// <param name="lifeStageDef">Def to check.</param>
+		/// <returns>MovementDef associated to this Def.</returns>
+		public static MovementDef GetMovementDef(LifeStageDef lifeStageDef)
+		{
+			return _defs.TryGetValue(lifeStageDef.shortHash, out var result) ? result : null;
+		}
+
+		/// <summary>
+		/// Get the extension of a GeneDef.
+		/// </summary>
+		/// <param name="geneDef">Def to check.</param>
+		/// <returns>MovementDef associated to this Def.</returns>
+		public static MovementDef GetMovementDef(GeneDef geneDef)
+		{
+			return _defs.TryGetValue(geneDef.shortHash, out var result) ? result : null;
+		}
+
+		/// <summary>
+		/// Get the extension of a HediffDef.
+		/// </summary>
+		/// <param name="hediffDef">Def to check.</param>
+		/// <returns>MovementDef associated to this Def.</returns>
+		public static MovementDef GetMovementDef(HediffDef hediffDef)
+		{
+			return _defs.TryGetValue(hediffDef.shortHash, out var result) ? result : null;
+		}
+
+		/// <summary>
+		/// Get the extension of a PawnKindDef.
+		/// </summary>
+		/// <param name="pawnKindDef">Def to check.</param>
+		/// <returns>MovementDef associated to this Def.</returns>
+		public static MovementDef GetMovementDef(PawnKindDef pawnKindDef)
+		{
+			return GetMovementDef(pawnKindDef.race);
 		}
 
 		public static List<MemoryUsageData> MemoryReport()

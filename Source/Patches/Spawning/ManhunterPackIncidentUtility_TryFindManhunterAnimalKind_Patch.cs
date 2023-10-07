@@ -44,7 +44,7 @@ namespace PathfindingFramework.Patches.Spawning
 			bool accessToWater = HasAccessToWater(tileID);
 			foreach (PawnKindDef manhunterDef in allManhunters)
 			{
-				MovementDef movementDef = MovementExtensionCache.GetMovementDef(manhunterDef.race);
+				MovementDef movementDef = MovementExtensionCache.GetMovementDef(manhunterDef);
 				if (accessToWater || movementDef == null || !movementDef.manhuntersRequireWater)
 				{
 					yield return manhunterDef;

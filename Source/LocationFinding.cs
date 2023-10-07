@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using PathfindingFramework.Patches;
+using RimWorld;
 using Verse;
 
 namespace PathfindingFramework
@@ -92,13 +93,19 @@ namespace PathfindingFramework
 		public static bool TryFindRandomPawnEntryCell(out IntVec3 result, Map map, float roadChance,
 			bool allowFogged, Predicate<IntVec3> extraValidator, MovementDef movementDef)
 		{
-			return CellFinder.TryFindRandomEdgeCellWith( (cell =>
+			if (movementDef == null)
+			{
+				return RCellFinder.TryFindRandomPawnEntryCell(out result, map, roadChance, allowFogged, extraValidator);
+			}
+
+			return CellFinder.TryFindRandomEdgeCellWith((cell =>
 			{
 				bool foggedPrevents = !allowFogged && cell.Fogged(map);
 				if (foggedPrevents || !CanSpawnAt(movementDef, map, cell))
 				{
 					return false;
 				}
+
 				return extraValidator == null || extraValidator(cell);
 			}), map, roadChance, out result);
 		}
