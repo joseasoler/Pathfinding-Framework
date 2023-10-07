@@ -62,7 +62,7 @@
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_TryGenerateRegionFrom_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\Region_Allows_Patch.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
-		<Compile Include="Patches\Spawning\RCellFinder_RandomAnimalSpawnCell_MapGen_Patch.cs" />
+		<Compile Include="Patches\Spawning\ManhunterPackIncidentUtility_TryFindManhunterAnimalKind_Patch.cs" />
 		<Compile Include="Patches\Spawning\WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch.cs" />
 		<Compile Include="Patches\TranspilerDebugging.cs" />
 		<Compile Include="PathfindingFramework.cs" />

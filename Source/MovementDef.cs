@@ -54,6 +54,12 @@ namespace PathfindingFramework
 		public bool penAnimalsDisallowed;
 
 		/// <summary>
+		/// When this flag is set, animals with this movement type can only appear as manhunters on world tiles with access
+		/// to water. This requires a river, a coast, or a biome covered in water (such as ocean or Biomes! Islands).
+		/// </summary>
+		public bool manhuntersRequireWater;
+
+		/// <summary>
 		/// Stores a precalculated list of all terrain path costs for this movement type.
 		/// This is initialized after XML references are resolved, and never modified afterwards.
 		/// </summary>

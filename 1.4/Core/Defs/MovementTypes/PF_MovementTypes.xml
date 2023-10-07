@@ -25,6 +25,7 @@
 		<priority>1000</priority>
 		<defaultCost>Avoid</defaultCost>
 		<penAnimalsDisallowed>true</penAnimalsDisallowed>
+		<manhuntersRequireWater>true</manhuntersRequireWater>
 	</PathfindingFramework.MovementDef>
 
 	<PathfindingFramework.MovementDef ParentName="AquaticBase">
