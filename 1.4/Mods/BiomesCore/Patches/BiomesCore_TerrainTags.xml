@@ -5,7 +5,7 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/TerrainDef[defName="BiomesCore_WaterShallowLagoon"]/tags</xpath>
 		<value>
-			<li>PF_ShallowWater</li>
+			<li>PF_TerrainTag_ShallowWater</li>
 		</value>
 	</Operation>
 

@@ -5,7 +5,7 @@
 		<xpath>Defs/TerrainDef[defName="PoolWater"]</xpath>
 		<value>
 			<tags>
-				<li>PF_ShallowWater</li>
+				<li>PF_TerrainTag_ShallowWater</li>
 			</tags>
 		</value>
 	</Operation>

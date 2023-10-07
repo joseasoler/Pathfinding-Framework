@@ -6,7 +6,7 @@
 		<xpath>Defs/TerrainDef[defName="GU_RedWaterShallow"]</xpath>
 		<value>
 			<tags>
-				<li>PF_ShallowWater</li>
+				<li>PF_TerrainTag_ShallowWater</li>
 			</tags>
 		</value>
 	</Operation>
@@ -15,7 +15,7 @@
 		<xpath>Defs/TerrainDef[defName="GU_RedWaterDeep"]</xpath>
 		<value>
 			<tags>
-				<li>PF_DeepWater</li>
+				<li>PF_TerrainTag_DeepWater</li>
 			</tags>
 		</value>
 	</Operation>

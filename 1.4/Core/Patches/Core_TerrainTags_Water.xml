@@ -11,21 +11,21 @@ each individual TerrainDef is patched explicitly instead.
 			defName="Marsh"]/tags
 		</xpath>
 		<value>
-			<li>PF_ShallowWater</li>
+			<li>PF_TerrainTag_ShallowWater</li>
 		</value>
 	</Operation>
 
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/TerrainDef[defName="WaterMovingChestDeep"]/tags</xpath>
 		<value>
-			<li>PF_ChestWater</li>
+			<li>PF_TerrainTag_ChestWater</li>
 		</value>
 	</Operation>
 
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/TerrainDef[defName="WaterDeep" or defName="WaterOceanDeep"]/tags</xpath>
 		<value>
-			<li>PF_DeepWater</li>
+			<li>PF_TerrainTag_DeepWater</li>
 		</value>
 	</Operation>
 
