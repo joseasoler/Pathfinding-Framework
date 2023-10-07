@@ -51,7 +51,7 @@ namespace PathfindingFramework
 		/// <param name="map">Current map.</param>
 		/// <param name="cell">Cell to check.</param>
 		/// <returns>True if the cell is a good spawning point for this movement type.</returns>
-		public static bool CanSpawnAt(MovementDef movementDef, Map map, IntVec3 cell)
+		private static bool CanSpawnAt(MovementDef movementDef, Map map, IntVec3 cell)
 		{
 			return LocationFinding.CanStandAt(movementDef, map, cell) && cell.GetDistrict(map).TouchesMapEdge &&
 			       map.reachability.CanReachColony(cell);
@@ -61,7 +61,7 @@ namespace PathfindingFramework
 		/// Pawn movement aware version of CellFinder.TryRandomClosewalkCellNear.
 		/// </summary>
 		/// <param name="pawn">Pawn making the request.</param>
-		/// <param name="radius">Maximum lookup radious around the pawn position.</param>
+		/// <param name="radius">Maximum lookup radius around the pawn position.</param>
 		/// <param name="result">Found position if any.</param>
 		/// <param name="extraValidator">Extra condition that the found position must meet.</param>
 		/// <returns>True if a location was found.</returns>
@@ -78,6 +78,18 @@ namespace PathfindingFramework
 
 					return extraValidator == null || extraValidator(c);
 				}, null, out result);
+		}
+
+		/// <summary>
+		/// Pawn movement aware version of CellFinder.RandomClosewalkCellNear.
+		/// </summary>
+		/// <param name="pawn">Pawn making the request.</param>
+		/// <param name="radius">Maximum lookup radius around the pawn position.</param>
+		/// <param name="extraValidator">Extra condition that the found position must meet.</param>
+		/// <returns>Found location, or pawn location otherwise.</returns>
+		public static IntVec3 RandomClosewalkCellNear(Pawn pawn, int radius, Predicate<IntVec3> extraValidator)
+		{
+			return TryRandomClosewalkCellNear(pawn, radius, out IntVec3 result, extraValidator) ? result : pawn.Position;
 		}
 
 		/// <summary>
