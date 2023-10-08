@@ -12,9 +12,9 @@
 
 	<PathfindingFramework.MovementDef Name="PF_Movement_AquaticBase" Abstract="True">
 		<tagCosts>
-			<PF_TerrainTag_DeepWater>0</PF_TerrainTag_DeepWater>
-			<PF_TerrainTag_ChestWater>2</PF_TerrainTag_ChestWater>
-			<PF_TerrainTag_ShallowWater>4</PF_TerrainTag_ShallowWater>
+			<PF_TerrainTag_WaterDeep>0</PF_TerrainTag_WaterDeep>
+			<PF_TerrainTag_WaterChestDeep>2</PF_TerrainTag_WaterChestDeep>
+			<PF_TerrainTag_WaterShallow>4</PF_TerrainTag_WaterShallow>
 		</tagCosts>
 	</PathfindingFramework.MovementDef>
 
@@ -57,9 +57,9 @@
 		<description>Flying creatures can hover over most obstacles.</description>
 		<priority>10000</priority>
 		<tagCosts>
-			<PF_TerrainTag_DeepWater>0</PF_TerrainTag_DeepWater>
-			<PF_TerrainTag_ChestWater>0</PF_TerrainTag_ChestWater>
-			<PF_TerrainTag_ShallowWater>0</PF_TerrainTag_ShallowWater>
+			<PF_TerrainTag_WaterDeep>0</PF_TerrainTag_WaterDeep>
+			<PF_TerrainTag_WaterChestDeep>0</PF_TerrainTag_WaterChestDeep>
+			<PF_TerrainTag_WaterShallow>0</PF_TerrainTag_WaterShallow>
 		</tagCosts>
 		<defaultCost>0</defaultCost>
 		<ignoreSnow>true</ignoreSnow>

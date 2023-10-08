@@ -1,192 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-Ensure that terrains to be patched by PF have a tags node.
+Adds terrain tags to TerrainDefs. These tags are used to define terrain path costs in MovementDefs.
+Abstract TerrainDefs such as WaterDeepBase are used by mods to represent things that are not water, so each individual
+TerrainDef is patched explicitly instead.
 -->
 <Patch>
 
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="Gravel"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="Gravel"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="Marsh"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="Marsh"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="MarshyTerrain"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="MarshyTerrain"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="MossyTerrain"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="MossyTerrain"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="Mud"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="Mud"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="Sand"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="Sand"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="SoftSand"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="SoftSand"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="Soil"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="Soil"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="SoilRich"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="SoilRich"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="WaterDeep"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="WaterDeep"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="WaterMovingChestDeep"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="WaterMovingChestDeep"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="WaterMovingShallow"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="WaterMovingShallow"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="WaterOceanDeep"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="WaterOceanDeep"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="WaterOceanShallow"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="WaterOceanShallow"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
-	</Operation>
-
-	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/TerrainDef[defName="WaterShallow"]/tags
-		</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/TerrainDef[defName="WaterShallow"]
-			</xpath>
-			<value>
-				<tags/>
-			</value>
-		</nomatch>
+	<Operation Class="PathfindingFramework.PatchOperations.AddTagsToTerrainDefs">
+		<operations>
+			<li> <!-- Core -->
+				<li>
+					<tag>PF_TerrainTag_Gravel</tag>
+					<terrainDefs>
+						<li>Gravel</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>MarshyTerrain</li>
+						<li>MossyTerrain</li>
+						<li>Mud</li>
+						<li>Soil</li>
+						<li>SoilRich</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Sand</tag>
+					<terrainDefs>
+						<li>Sand</li>
+						<li>SoftSand</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterChestDeep</tag>
+					<terrainDefs>
+						<li>WaterMovingChestDeep</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterDeep</tag>
+					<terrainDefs>
+						<li>WaterDeep</li>
+						<li>WaterOceanDeep</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterShallow</tag>
+					<terrainDefs>
+						<li>Marsh</li>
+						<li>WaterMovingShallow</li>
+						<li>WaterOceanShallow</li>
+						<li>WaterShallow</li>
+					</terrainDefs>
+				</li>
+			</li>
+		</operations>
 	</Operation>
 
 </Patch>
