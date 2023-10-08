@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Patch>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/TerrainDef[defName="MarshyTerrain" or defName="MossyTerrain" or defName="Mud" or defName="Soil" or
+			defName="SoilRich"]/tags
+		</xpath>
+		<value>
+			<li>PF_TerrainTag_Ground</li>
+		</value>
+	</Operation>
+
+</Patch>

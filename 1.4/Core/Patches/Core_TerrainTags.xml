@@ -1,16 +1,115 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-Add special Pathfinding Framework terrain tags to vanilla terrains. These tags are used to define terrain path costs in
-Movement Defs. Abstract TerrainDefs such as WaterDeepBase are used by mods to represent things that are not water, so
-each individual TerrainDef is patched explicitly instead.
+Ensure that terrains to be patched by PF have a tags node.
 -->
 <Patch>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TerrainDef[defName="Gravel"]/tags
+		</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/TerrainDef[defName="Gravel"]
+			</xpath>
+			<value>
+				<tags/>
+			</value>
+		</nomatch>
+	</Operation>
 
 	<Operation Class="PatchOperationConditional">
 		<xpath>Defs/TerrainDef[defName="Marsh"]/tags
 		</xpath>
 		<nomatch Class="PatchOperationAdd">
 			<xpath>Defs/TerrainDef[defName="Marsh"]
+			</xpath>
+			<value>
+				<tags/>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TerrainDef[defName="MarshyTerrain"]/tags
+		</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/TerrainDef[defName="MarshyTerrain"]
+			</xpath>
+			<value>
+				<tags/>
+			</value>
+		</nomatch>
+	</Operation>
+
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TerrainDef[defName="MossyTerrain"]/tags
+		</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/TerrainDef[defName="MossyTerrain"]
+			</xpath>
+			<value>
+				<tags/>
+			</value>
+		</nomatch>
+	</Operation>
+
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TerrainDef[defName="Mud"]/tags
+		</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/TerrainDef[defName="Mud"]
+			</xpath>
+			<value>
+				<tags/>
+			</value>
+		</nomatch>
+	</Operation>
+
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TerrainDef[defName="Sand"]/tags
+		</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/TerrainDef[defName="Sand"]
+			</xpath>
+			<value>
+				<tags/>
+			</value>
+		</nomatch>
+	</Operation>
+
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TerrainDef[defName="SoftSand"]/tags
+		</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/TerrainDef[defName="SoftSand"]
+			</xpath>
+			<value>
+				<tags/>
+			</value>
+		</nomatch>
+	</Operation>
+
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TerrainDef[defName="Soil"]/tags
+		</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/TerrainDef[defName="Soil"]
+			</xpath>
+			<value>
+				<tags/>
+			</value>
+		</nomatch>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/TerrainDef[defName="SoilRich"]/tags
+		</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/TerrainDef[defName="SoilRich"]
 			</xpath>
 			<value>
 				<tags/>

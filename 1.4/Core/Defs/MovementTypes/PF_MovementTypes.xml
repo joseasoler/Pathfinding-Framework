@@ -38,6 +38,20 @@
 	</PathfindingFramework.MovementDef>
 
 	<PathfindingFramework.MovementDef>
+		<defName>PF_Movement_Drilling</defName>
+		<label>driller</label>
+		<description>Drilling creatures dig through soil and sand, but cannot move over rock or water.</description>
+		<priority>3000</priority>
+		<tagCosts>
+			<PF_TerrainTag_Gravel>32</PF_TerrainTag_Gravel>
+			<PF_TerrainTag_Ground>12</PF_TerrainTag_Ground>
+			<PF_TerrainTag_Sand>0</PF_TerrainTag_Sand>
+		</tagCosts>
+		<defaultCost>Avoid</defaultCost>
+		<penAnimalsDisallowed>true</penAnimalsDisallowed>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef>
 		<defName>PF_Flying</defName>
 		<label>flying</label>
 		<description>Flying creatures can hover over most obstacles.</description>
