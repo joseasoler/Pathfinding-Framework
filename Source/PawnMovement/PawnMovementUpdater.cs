@@ -153,7 +153,7 @@ namespace PathfindingFramework.PawnMovement
 				}
 			}
 
-			movementDef ??= MovementDefOf.PF_Terrestrial;
+			movementDef ??= MovementDefOf.PF_Movement_Terrestrial;
 			pawn.MovementDef() = movementDef;
 			pawn.Map.MovementContextData().UpdatePawn(pawn);
 		}

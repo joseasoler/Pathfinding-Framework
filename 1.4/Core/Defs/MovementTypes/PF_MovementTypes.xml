@@ -3,14 +3,14 @@
       xsi:noNamespaceSchemaLocation="../../../../Schemas/MovementDef.xsd">
 	<!-- Should correspond to vanilla. Used by default if no other type is found. -->
 	<PathfindingFramework.MovementDef>
-		<defName>PF_Terrestrial</defName>
+		<defName>PF_Movement_Terrestrial</defName>
 		<label>terrestrial</label>
 		<description>Terrestrial creatures are adapted to move on land. They can cross shallow water, but deeper bodies of water present a challenge to them.</description>
 		<priority>0</priority>
 		<defaultCost>Default</defaultCost>
 	</PathfindingFramework.MovementDef>
 
-	<PathfindingFramework.MovementDef Name="AquaticBase" Abstract="True">
+	<PathfindingFramework.MovementDef Name="PF_Movement_AquaticBase" Abstract="True">
 		<tagCosts>
 			<PF_TerrainTag_DeepWater>0</PF_TerrainTag_DeepWater>
 			<PF_TerrainTag_ChestWater>2</PF_TerrainTag_ChestWater>
@@ -18,8 +18,8 @@
 		</tagCosts>
 	</PathfindingFramework.MovementDef>
 
-	<PathfindingFramework.MovementDef ParentName="AquaticBase">
-		<defName>PF_Aquatic</defName>
+	<PathfindingFramework.MovementDef ParentName="PF_Movement_AquaticBase">
+		<defName>PF_Movement_Aquatic</defName>
 		<label>aquatic</label>
 		<description>Aquatic creatures can swim through deep water with ease, but are helpless on land.</description>
 		<priority>1000</priority>
@@ -28,8 +28,8 @@
 		<manhuntersRequireWater>true</manhuntersRequireWater>
 	</PathfindingFramework.MovementDef>
 
-	<PathfindingFramework.MovementDef ParentName="AquaticBase">
-		<defName>PF_Amphibious</defName>
+	<PathfindingFramework.MovementDef ParentName="PF_Movement_AquaticBase">
+		<defName>PF_Movement_Amphibious</defName>
 		<label>amphibious</label>
 		<description>Amphibious creatures can move easily on both water and land.</description>
 		<priority>2000</priority>
@@ -52,7 +52,7 @@
 	</PathfindingFramework.MovementDef>
 
 	<PathfindingFramework.MovementDef>
-		<defName>PF_Flying</defName>
+		<defName>PF_Movement_Flying</defName>
 		<label>flying</label>
 		<description>Flying creatures can hover over most obstacles.</description>
 		<priority>10000</priority>

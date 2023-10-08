@@ -18,7 +18,7 @@ namespace PathfindingFramework.DevTool
 			}
 
 			MovementContext context = map.MovementContextData().ActiveContexts()
-				.Find(context => context.MovementDef == MovementDefOf.PF_Terrestrial);
+				.Find(context => context.MovementDef == MovementDefOf.PF_Movement_Terrestrial);
 
 			if (context == null)
 			{

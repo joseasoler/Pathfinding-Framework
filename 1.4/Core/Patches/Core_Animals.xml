@@ -5,7 +5,7 @@
 		<xpath>Defs/ThingDef[defName="Alphabeaver" or defName="Duck"]</xpath>
 		<value>
 			<li Class="PathfindingFramework.MovementExtension">
-				<movementDef>PF_Amphibious</movementDef>
+				<movementDef>PF_Movement_Amphibious</movementDef>
 			</li>
 		</value>
 	</Operation>
