@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/TerrainDef[defName="" or defName="" or defName="" or
+			defName="" or defName="" or defName="" or defName=""
+			or defName="" or defName=""]
+		</xpath>
+		<value>
+			<tags>
+				<li>PF_TerrainTag_Ground</li>
+			</tags>
+		</value>
+	</Operation>
+
+
+</Patch>
