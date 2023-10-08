@@ -56,11 +56,8 @@ namespace PathfindingFramework.PatchOperations
 
 		protected override bool ApplyWorker(XmlDocument xml)
 		{
-			StringBuilder sb = new StringBuilder();
-
 			// Group of terrainDefs which need to be processed.
 			Dictionary<string, HashSet<string>> remainingTerrainDefs = GetTagsByTerrainDef();
-			sb.AppendLine($"remainingTerrainDefs {remainingTerrainDefs.Count}:");
 
 			foreach (XmlNode terrainDefNode in xml.FirstChild.ChildNodes)
 			{
@@ -116,18 +113,6 @@ namespace PathfindingFramework.PatchOperations
 						tagsNode.AppendChild(tagNode);
 					}
 
-					sb.AppendLine($"Testing node {defNameValue}:");
-					foreach (XmlNode terrainDefChild in terrainDefNode.ChildNodes)
-					{
-						if (terrainDefChild.Name == TagsIdentifier)
-						{
-							foreach (XmlNode tagsChild in terrainDefChild.ChildNodes)
-							{
-								sb.AppendLine($"\tTag: {tagsChild.InnerText}:");
-							}
-						}
-					}
-
 					// Remove the TerrainDef from the set of remaining terrain defs to process.
 					remainingTerrainDefs.Remove(defNameValue);
 				}
@@ -143,8 +128,6 @@ namespace PathfindingFramework.PatchOperations
 				Report.Error(
 					$"AddTagsToTerrainDefs could not find the following TerrainDefs: {string.Join(", ", remainingTerrainDefs.Keys)}");
 			}
-
-			Report.Error(sb.ToString());
 
 			return remainingTerrainDefs.Count == 0;
 		}
