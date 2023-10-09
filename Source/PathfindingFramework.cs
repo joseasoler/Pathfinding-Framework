@@ -32,6 +32,8 @@ namespace PathfindingFramework
 			GetSettings<Settings>();
 			// Caches which require DefDatabase being fully initialized.
 			MovementExtensionCache.Initialize();
+			// Graphics are initialized after all defs and mod extensions are fully initialized.
+			GraphicLoader.Initialize();
 		}
 
 		/// <summary>

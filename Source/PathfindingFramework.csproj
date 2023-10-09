@@ -30,6 +30,7 @@
 		<Compile Include="DevTool\PathFinderErrorDebug.cs" />
 		<Compile Include="DevTool\PathGridDivergenceDebugOutput.cs" />
 		<Compile Include="DevTool\PawnMovementDebugOutput.cs" />
+		<Compile Include="GraphicLoader.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="JobDefOf.cs" />
 		<Compile Include="Jobs\JobGiver_SeekSafeTerrain.cs" />
@@ -59,7 +60,10 @@
 		<Compile Include="Patches\DevTool\PathFinder_FindPath_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_FindGroundSleepSpotFor_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\CurrentUrgency_Util.cs" />
+		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_CleanupCurrentJob_Patch.cs" />
+		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_StartJob_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_TicksPerMove_Patch.cs" />
+		<Compile Include="Patches\ModExtensions\PawnGraphicSet_ResolveAllGraphics_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\Reachable\Reachability_CanReach_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_FloodFillAndAddCells_Patch.cs" />
@@ -165,6 +169,9 @@
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.pathGrid" />
 
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathGrid.IsPathCostIgnoreRepeater" />
+
+		<!-- Force updates of the PawnGraphicSet. -->
+		<Publicize Include="Assembly-CSharp:Verse.Pawn.drawer" />
 	</ItemGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
