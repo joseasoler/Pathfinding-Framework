@@ -1,10 +1,12 @@
-﻿using PathfindingFramework.MovementContexts;
-using PathfindingFramework.Patches;
+﻿using PathfindingFramework.Patches;
 using UnityEngine;
 using Verse;
 
 namespace PathfindingFramework
 {
+	/// <summary>
+	/// Implementation of the mod settings window.
+	/// </summary>
 	public static class SettingsWindow
 	{
 		/// <summary>

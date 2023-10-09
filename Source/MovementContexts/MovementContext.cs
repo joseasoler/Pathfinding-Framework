@@ -9,7 +9,7 @@ using Verse.AI;
 namespace PathfindingFramework.MovementContexts
 {
 	/// <summary>
-	/// Context information to use for pawn pathfinding.
+	/// Pathing context information to use for specific pawns.
 	/// </summary>
 	public class MovementContext : MapGrid
 	{
@@ -24,8 +24,14 @@ namespace PathfindingFramework.MovementContexts
 		/// </summary>
 		public readonly PathingContext PathingContext;
 
+		/// <summary>
+		/// Determines if the context should treat fences as impassable.
+		/// </summary>
 		public readonly bool ShouldAvoidFences;
 
+		/// <summary>
+		/// True if the pawn can ignore path costs related to fire. Only used if the option is enabled in mod settings.
+		/// </summary>
 		public readonly bool CanIgnoreFire;
 
 		public MovementContext(MovementDef movementDef, Map map, bool shouldAvoidFences, bool ignoreFire) : base(map)

@@ -4,6 +4,9 @@ using Verse;
 
 namespace PathfindingFramework.MovementDefUtils
 {
+	/// <summary>
+	/// Generate hyperlinks for a specific movement type.
+	/// </summary>
 	public static class Hyperlinks
 	{
 		private static void AddDefHyperlinksFromType<TDefType>(MovementDef movementDef, ref List<DefHyperlink> hyperlinks,

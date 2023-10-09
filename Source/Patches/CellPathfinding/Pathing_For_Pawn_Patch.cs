@@ -4,6 +4,9 @@ using Verse.AI;
 
 namespace PathfindingFramework.Patches.CellPathfinding
 {
+	/// <summary>
+	/// Inject the correct pathing context for each pawn.
+	/// </summary>
 	[HarmonyPatch(typeof(Pathing), nameof(Pathing.For), typeof(Pawn))]
 	internal static class Pathing_For_Pawn_Patch
 	{

@@ -6,7 +6,7 @@ using Verse;
 namespace PathfindingFramework.MapPathCosts
 {
 	/// <summary>
-	/// Stores and keeps updated different pathfinding grids for a specific map.
+	/// Generate a memory usage report of the map path cost grids.
 	/// </summary>
 	public static class MapPathCostMemoryReport
 	{

@@ -3,6 +3,9 @@ using Verse;
 
 namespace PathfindingFramework.DevTool
 {
+	/// <summary>
+	/// Generate a table with the path costs of every loaded movement type.
+	/// </summary>
 	public static class MovementCostDebugOutput
 	{
 		[DebugOutput(category: PathfindingFramework.Name, onlyWhenPlaying: false)]
@@ -14,7 +17,7 @@ namespace PathfindingFramework.DevTool
 			int terrainCount = terrainDefs.Count;
 
 			var dataTable = new string[movementCount + 1, terrainCount + 1];
-			dataTable[0, 0] = "Movement type";
+			dataTable[0, 0] = "Locomotion type";
 
 			for (var movementIndex = 0; movementIndex < movementCount; ++movementIndex)
 			{

@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.Cache.Global;
 using PathfindingFramework.PawnMovement;
 using Verse;
 

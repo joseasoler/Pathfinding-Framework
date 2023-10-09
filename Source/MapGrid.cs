@@ -2,7 +2,10 @@ using Verse;
 
 namespace PathfindingFramework
 {
-	public class MapGrid
+	/// <summary>
+	/// Common implementation for classes which need to store some data for each cell of a map.
+	/// </summary>
+	public abstract class MapGrid
 	{
 		/// <summary>
 		/// X size of the parent map. Stored to convert cells to indexes and other operations without the parent map.

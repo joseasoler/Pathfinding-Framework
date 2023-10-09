@@ -9,6 +9,9 @@ using Verse;
 
 namespace PathfindingFramework.Patches.Spawning
 {
+	/// <summary>
+	/// Transpiler utilities used by the manhunter incident.
+	/// </summary>
 	public static class IncidentWorker_ManhunterPack_Util
 	{
 		public static IEnumerable<CodeInstruction> Transpile_TryFindRandomPawnEntryCell(OpCode pawnKindDefInstruction,

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using Verse;
@@ -7,6 +6,9 @@ using Verse.AI;
 
 namespace PathfindingFramework.MapPathCosts
 {
+	/// <summary>
+	/// Keeps different map path costs up to date. These costs are shared between movement contexts of the same map.
+	/// </summary>
 	public class MapPathCostGrid : MapGrid
 	{
 		/// <summary>
@@ -24,11 +26,11 @@ namespace PathfindingFramework.MapPathCosts
 		}
 
 		/// <summary>
-		/// Update the fire grid after a fire instance is created or removed.
+		/// Update fire path costs after a fire instance is created or removed.
 		/// </summary>
 		/// <param name="cell">Position of the fire.</param>
-		/// <param name="spawned">True for spawning fires, false for de-spawning fires.</param>
-		public void UpdateFire(IntVec3 cell, bool spawned)
+		/// <param name="isSpawning">True for spawning fires, false for de-spawning fires.</param>
+		public void UpdateFire(IntVec3 cell, bool isSpawning)
 		{
 			var cellIndex = ToIndex(cell);
 			if (!InBounds(cellIndex))
@@ -37,7 +39,7 @@ namespace PathfindingFramework.MapPathCosts
 			}
 
 			const short centerCellCost = 1000;
-			_mapGrid[cellIndex].fire += (short) (spawned ? centerCellCost : -centerCellCost);
+			_mapGrid[cellIndex].fire += (short) (isSpawning ? centerCellCost : -centerCellCost);
 			Map.MovementContextData().UpdateCell(cellIndex);
 
 			var adjacentCells = GenAdj.AdjacentCells;
@@ -52,13 +54,13 @@ namespace PathfindingFramework.MapPathCosts
 				}
 
 				const short adjacentCellCost = 150;
-				_mapGrid[adjacentCellIndex].fire += (short) (spawned ? adjacentCellCost : -adjacentCellCost);
+				_mapGrid[adjacentCellIndex].fire += (short) (isSpawning ? adjacentCellCost : -adjacentCellCost);
 				Map.MovementContextData().UpdateCell(adjacentIndex);
 			}
 		}
 
 		/// <summary>
-		/// Update pathing costs related to things present in a cell.
+		/// Update path costs related to things present in a cell.
 		/// </summary>
 		/// <param name="cell">Cell to be updated.</param>
 		public void UpdateThings(IntVec3 cell)
@@ -109,14 +111,19 @@ namespace PathfindingFramework.MapPathCosts
 		/// Update the has door grid when a door spawns or de-spawns.
 		/// </summary>
 		/// <param name="cell">Position of the door</param>
-		/// <param name="value">New value.</param>
-		public void SetHasDoor(IntVec3 cell, bool value)
+		/// <param name="isSpawning">True if the door has appeared. False if it has been removed.</param>
+		public void SetHasDoor(IntVec3 cell, bool isSpawning)
 		{
 			int cellIndex = ToIndex(cell);
-			_mapGrid[cellIndex].hasDoor = value;
+			_mapGrid[cellIndex].hasDoor = isSpawning;
 			Map.MovementContextData().UpdateCell(cellIndex);
 		}
 
+		/// <summary>
+		/// Updates path costs caused by snow.
+		/// </summary>
+		/// <param name="cell">Cell being updated.</param>
+		/// <param name="cost">New path cost of snow.</param>
 		public void UpdateSnow(IntVec3 cell, int cost)
 		{
 			int cellIndex = ToIndex(cell);
@@ -124,7 +131,10 @@ namespace PathfindingFramework.MapPathCosts
 			Map.MovementContextData().UpdateCell(cellIndex);
 		}
 
-		public void UpdateAllSnow()
+		/// <summary>
+		/// Update path costs related to snow in every cell of the map.
+		/// </summary>
+		public void UpdateSnowAllCells()
 		{
 			for (int cellIndex = 0; cellIndex < GridSize; ++cellIndex)
 			{
@@ -136,7 +146,7 @@ namespace PathfindingFramework.MapPathCosts
 		}
 
 		/// <summary>
-		/// Get map path costs of a cell.
+		/// Get the map path costs of a cell.
 		/// </summary>
 		/// <param name="cellIndex">Index to check.</param>
 		/// <returns>Path cost.</returns>

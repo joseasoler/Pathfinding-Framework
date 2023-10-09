@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using PathfindingFramework.DevTool;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.Patches;
@@ -7,6 +6,9 @@ using Verse;
 
 namespace PathfindingFramework.MovementContexts
 {
+	/// <summary>
+	/// Stores movement context information for all of the pawns of a single map.
+	/// </summary>
 	public class MovementContextData : MapGrid
 	{
 		/// <summary>
@@ -29,7 +31,7 @@ namespace PathfindingFramework.MovementContexts
 		/// <param name="pawn">Pawn with updated movement.</param>
 		public void UpdatePawn(Pawn pawn)
 		{
-			MovementContext context = null;
+			MovementContext context;
 			long movementContextId = MovementContextId.From(pawn);
 			if (_contexts.TryGetValue(movementContextId, out WeakReference<MovementContext> contextReference) &&
 			    contextReference.IsAlive)
@@ -102,7 +104,7 @@ namespace PathfindingFramework.MovementContexts
 		}
 
 		/// <summary>
-		/// Update cells of all contexts.
+		/// Update every cell of every context.
 		/// </summary>
 		/// <param name="ignoreFireOnly">True if only IgnoreFire contexts should be updated.</param>
 		public void UpdateAllCells(bool ignoreFireOnly = false)
@@ -118,6 +120,10 @@ namespace PathfindingFramework.MovementContexts
 			}
 		}
 
+		/// <summary>
+		/// Generate a memory usage report for this movement context.
+		/// </summary>
+		/// <returns>Memory report.</returns>
 		public List<MemoryUsageData> MemoryReport()
 		{
 			List<MemoryUsageData> report = new List<MemoryUsageData>();

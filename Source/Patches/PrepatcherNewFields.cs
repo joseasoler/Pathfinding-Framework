@@ -1,4 +1,3 @@
-using System;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.MovementContexts;
 using Prepatcher;
@@ -7,7 +6,7 @@ using Verse;
 namespace PathfindingFramework.Patches
 {
 	/// <summary>
-	/// Defines new fields using prepatcher.
+	/// Defines new fields for some game entities using Prepatcher.
 	/// </summary>
 	public static class PrepatcherNewFields
 	{

@@ -5,7 +5,10 @@ using Verse.AI;
 
 namespace PathfindingFramework.Jobs
 {
-	public class JobGiver_SeekSafeTemperature : ThinkNode_JobGiver
+	/// <summary>
+	/// Implementation of the "Seeking safe terrain" job.
+	/// </summary>
+	public class JobGiver_SeekSafeTerrain : ThinkNode_JobGiver
 	{
 		protected override Job TryGiveJob(Pawn pawn)
 		{

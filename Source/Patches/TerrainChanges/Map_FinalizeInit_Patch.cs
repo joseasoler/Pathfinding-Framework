@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.MovementContexts;
 using Verse;
 
 namespace PathfindingFramework.Patches.TerrainChanges
@@ -12,7 +11,7 @@ namespace PathfindingFramework.Patches.TerrainChanges
 	{
 		internal static void Prefix(Map __instance)
 		{
-			__instance.MapPathCostGrid().UpdateAllSnow();
+			__instance.MapPathCostGrid().UpdateSnowAllCells();
 			__instance.MovementContextData().UpdateAllCells();
 		}
 	}

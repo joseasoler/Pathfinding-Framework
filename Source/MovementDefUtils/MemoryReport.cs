@@ -1,11 +1,13 @@
 using System.Collections.Generic;
-using PathfindingFramework.Cache;
 using PathfindingFramework.DevTool;
 using Verse;
 
 namespace PathfindingFramework.MovementDefUtils
 {
-	public class MemoryReport
+	/// <summary>
+	/// Generate a memory usage report for the path costs of MovementDefs.
+	/// </summary>
+	public static class MemoryReport
 	{
 		public static List<MemoryUsageData> Get()
 		{

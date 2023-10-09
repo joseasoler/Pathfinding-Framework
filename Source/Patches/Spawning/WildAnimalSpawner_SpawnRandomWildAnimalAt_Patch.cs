@@ -9,6 +9,9 @@ using Verse;
 
 namespace PathfindingFramework.Patches.Spawning
 {
+	/// <summary>
+	/// When the animal spawning code chooses an incompatible terrain and animal type, switch to a new target cell.
+	/// </summary>
 	[HarmonyPatch(typeof(WildAnimalSpawner), nameof(WildAnimalSpawner.SpawnRandomWildAnimalAt))]
 	internal static class WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch
 	{

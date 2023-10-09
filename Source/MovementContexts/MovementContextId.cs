@@ -3,6 +3,10 @@ using Verse;
 
 namespace PathfindingFramework.MovementContexts
 {
+	/// <summary>
+	/// Calculates unique identifiers for a movement context.
+	/// Used to determine which MovementContext should be assigned to a pawn.
+	/// </summary>
 	public static class MovementContextId
 	{
 		public static long From(Pawn pawn)

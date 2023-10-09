@@ -7,6 +7,10 @@ using Verse.AI;
 
 namespace PathfindingFramework.DevTool
 {
+	/// <summary>
+	/// Allows debugging errors happening inside of PathFinder.FindPath.
+	/// Using this feature requires enabling the commented-out code in PathFinder_FindPath_Patch.
+	/// </summary>
 	public static class PathFinderErrorDebug
 	{
 		private static IntVec3 _start;

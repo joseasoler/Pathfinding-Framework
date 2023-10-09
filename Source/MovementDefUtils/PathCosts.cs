@@ -6,6 +6,9 @@ using Verse;
 
 namespace PathfindingFramework.MovementDefUtils
 {
+	/// <summary>
+	/// Calculate path costs of terrains for a movement definition.
+	/// </summary>
 	public static class PathCosts
 	{
 		/// <summary>

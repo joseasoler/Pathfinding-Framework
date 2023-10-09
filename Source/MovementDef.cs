@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
 using RimWorld;
@@ -8,7 +7,7 @@ using Verse;
 namespace PathfindingFramework
 {
 	/// <summary>
-	/// A movement type is defined by a set of custom pathing rules that pawns must follow.
+	/// A movement type is defined by a set of custom path costs and rules that pawns must follow.
 	/// </summary>
 	public class MovementDef : Verse.Def
 	{

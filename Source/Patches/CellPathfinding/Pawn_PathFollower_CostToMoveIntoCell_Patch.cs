@@ -8,7 +8,7 @@ using Verse.AI;
 namespace PathfindingFramework.Patches.CellPathfinding
 {
 	/// <summary>
-	/// Use the correct costs for pawns using a TerrainPathGrid.
+	/// When a pawn is moving, use the correct path costs to calculate movement times.
 	/// </summary>
 	[HarmonyPatch(typeof(Pawn_PathFollower), "CostToMoveIntoCell", typeof(Pawn), typeof(IntVec3))]
 	internal static class Pawn_PathFollower_CostToMoveIntoCell_Patch

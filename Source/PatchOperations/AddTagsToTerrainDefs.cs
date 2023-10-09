@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text;
 using System.Xml;
 using Verse;
 
@@ -7,6 +6,7 @@ namespace PathfindingFramework.PatchOperations
 {
 	/// <summary>
 	/// Adds a terrain tag to all specified TerrainDefs.
+	/// Done in a single XML pass, with each TerrainDef being processed only once.
 	/// If any of the TerrainDefs lacked a tags list, one will be created.
 	/// Fails if any of the TerrainDefs is not present.
 	/// </summary>

@@ -6,18 +6,17 @@ using Verse;
 
 namespace PathfindingFramework.DevTool
 {
+	/// <summary>
+	/// Compares the vanilla path grid with the PF path grid and checks for divergences between both grids.
+	/// </summary>
 	public static class PathGridDivergenceDebugOutput
 	{
 		[DebugOutput(category: PathfindingFramework.Name, onlyWhenPlaying: false)]
 		public static void PathGridDivergence()
 		{
 			Map map = Find.CurrentMap;
-			if (map == null)
-			{
-				return;
-			}
 
-			MovementContext context = map.MovementContextData().ActiveContexts()
+			MovementContext context = map?.MovementContextData().ActiveContexts()
 				.Find(context => context.MovementDef == MovementDefOf.PF_Movement_Terrestrial);
 
 			if (context == null)

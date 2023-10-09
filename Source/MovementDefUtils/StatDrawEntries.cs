@@ -5,6 +5,9 @@ using Verse;
 
 namespace PathfindingFramework.MovementDefUtils
 {
+	/// <summary>
+	/// Draw stat entries of a movement def.
+	/// </summary>
 	public static class StatDrawEntries
 	{
 		private static void AddStatDrawEntriesFromType<TDefType>(MovementDef movementDef, ref List<StatDrawEntry> entries

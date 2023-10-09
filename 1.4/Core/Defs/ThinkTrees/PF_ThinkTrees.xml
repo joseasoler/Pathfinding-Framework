@@ -6,7 +6,7 @@
 		<insertPriority>300</insertPriority>
 		<thinkRoot Class="ThinkNode_Priority">
 			<subNodes>
-				<li Class="PathfindingFramework.Jobs.JobGiver_SeekSafeTemperature"/>
+				<li Class="PathfindingFramework.Jobs.JobGiver_SeekSafeTerrain"/>
 			</subNodes>
 		</thinkRoot>
 	</ThinkTreeDef>
@@ -17,7 +17,7 @@
 		<insertPriority>300</insertPriority>
 		<thinkRoot Class="ThinkNode_Priority">
 			<subNodes>
-				<li Class="PathfindingFramework.Jobs.JobGiver_SeekSafeTemperature"/>
+				<li Class="PathfindingFramework.Jobs.JobGiver_SeekSafeTerrain"/>
 			</subNodes>
 		</thinkRoot>
 	</ThinkTreeDef>

@@ -4,14 +4,17 @@ using Verse;
 
 namespace PathfindingFramework.MovementDefUtils
 {
+	/// <summary>
+	/// Utility class for obtaining Defs which grant or have a specific movement type.
+	/// </summary>
 	public static class DefsWithMovementType
 	{
 		public static List<Def> Get<TDefType>(MovementDef movementDef,
 			Func<TDefType, bool> condition = null)
 			where TDefType : Def
 		{
-			var defs = DefDatabase<TDefType>.AllDefsListForReading;
-			var resultList = new List<Def>();
+			List<TDefType> defs = DefDatabase<TDefType>.AllDefsListForReading;
+			List<Def> resultList = new List<Def>();
 			for (int index = 0; index < defs.Count; ++index)
 			{
 				var currentDef = defs[index];

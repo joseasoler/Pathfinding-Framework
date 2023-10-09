@@ -7,7 +7,7 @@ namespace PathfindingFramework.Parse
 	/// <summary>
 	/// Handles the initialization of custom parsing code.
 	/// </summary>
-	public class ParseHandler
+	public static class ParseHandler
 	{
 		/// <summary>
 		/// Initialize the custom parsing code.

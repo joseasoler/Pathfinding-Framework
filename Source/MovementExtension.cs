@@ -10,7 +10,6 @@ namespace PathfindingFramework
 	/// * HediffDef: pawns with this hediff.
 	/// * LifeStageDef: pawns currently in this life stage.
 	/// * ThingDef: pawns with this ThingDef as their race.
-	/// 
 	/// </summary>
 	public class MovementExtension : DefModExtension
 	{

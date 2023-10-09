@@ -8,6 +8,9 @@ using Verse;
 
 namespace PathfindingFramework.Patches.Spawning
 {
+	/// <summary>
+	/// Make the manhunter incident execution aware of different movement types.
+	/// </summary>
 	[HarmonyPatch(typeof(IncidentWorker_ManhunterPack), "TryExecuteWorker")]
 	public class IncidentWorker_ManhunterPack_TryExecuteWorker_Patch
 	{

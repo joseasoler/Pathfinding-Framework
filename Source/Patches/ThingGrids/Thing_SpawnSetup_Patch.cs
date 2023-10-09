@@ -3,6 +3,9 @@ using Verse;
 
 namespace PathfindingFramework.Patches.ThingGrids
 {
+	/// <summary>
+	/// Update path costs of things when a thing spawns.
+	/// </summary>
 	[HarmonyPatch(typeof(Thing), nameof(Thing.SpawnSetup))]
 	internal static class Thing_SpawnSetup_Patch
 	{

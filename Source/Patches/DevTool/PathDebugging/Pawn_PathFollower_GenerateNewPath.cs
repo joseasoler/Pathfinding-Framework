@@ -4,6 +4,9 @@ using Verse.AI;
 
 namespace PathfindingFramework.Patches.DevTool.PathDebugging
 {
+	/// <summary>
+	/// Log additional data when a pawn fails to generate a valid path.
+	/// </summary>
 	[HarmonyPatch(typeof(Pawn_PathFollower), "GenerateNewPath")]
 	internal static class Pawn_PathFollower_GenerateNewPath
 	{

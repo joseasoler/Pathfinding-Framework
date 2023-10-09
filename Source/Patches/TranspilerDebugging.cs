@@ -4,12 +4,18 @@ using HarmonyLib;
 
 namespace PathfindingFramework.Patches
 {
+	/// <summary>
+	/// Utilities to help with the development of transpilers.
+	/// </summary>
 	public static class TranspilerDebugging
 	{
 		public static IEnumerable<CodeInstruction> Print(string label, IEnumerable<CodeInstruction> instructions)
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.AppendLine($"---------- {label} ----------");
+			if (label != "")
+			{
+				sb.AppendLine($"---------- {label} ----------");
+			}
 			foreach (CodeInstruction instruction in instructions)
 			{
 				sb.AppendLine(instruction.ToString());

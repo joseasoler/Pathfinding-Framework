@@ -2,6 +2,9 @@
 
 namespace PathfindingFramework.MapPathCosts
 {
+	/// <summary>
+	/// Stores common path costs of a specific cell of the map. These are shared between different movement contexts.
+	/// </summary>
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
 	public struct MapPathCost
 	{

@@ -5,10 +5,13 @@ namespace PathfindingFramework.Patches.ThingGrids
 {
 	internal class DeSpawnThingState
 	{
-		public CellRect rect;
-		public Map map;
+		public CellRect Rect;
+		public Map Map;
 	}
 
+	/// <summary>
+	/// Update path costs of things when a thing de-spawns.
+	/// </summary>
 	[HarmonyPatch(typeof(Thing), nameof(Thing.DeSpawn))]
 	internal static class Thing_DeSpawn_Patch
 	{
@@ -18,8 +21,8 @@ namespace PathfindingFramework.Patches.ThingGrids
 			{
 				__state = new DeSpawnThingState
 				{
-					map = __instance.Map,
-					rect = __instance.OccupiedRect()
+					Map = __instance.Map,
+					Rect = __instance.OccupiedRect()
 				};
 			}
 			else
@@ -30,14 +33,14 @@ namespace PathfindingFramework.Patches.ThingGrids
 
 		internal static void Postfix(DeSpawnThingState __state)
 		{
-			if (__state.map == null)
+			if (__state.Map == null)
 			{
 				return;
 			}
 
-			foreach (var cell in __state.rect)
+			foreach (var cell in __state.Rect)
 			{
-				__state.map.MapPathCostGrid().UpdateThings(cell);
+				__state.Map.MapPathCostGrid().UpdateThings(cell);
 			}
 		}
 	}
