@@ -43,15 +43,21 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			TerrainDef regionTerrainDef = region.TerrainDef();
 			// Regions with a valid TerrainDef field would be impassable in vanilla, but they have been made passable because
 			// at least one movement type can traverse them.
-			if (regionTerrainDef == null)
-			{
-				return true;
-			}
+			// If the region does not have a valid TerrainDef, grab the terrain from any of its cells. This will be enough to
+			// make aquatic creatures avoid land.
+			Map map = pawn.Map;
+			regionTerrainDef ??= region.AnyCell.GetTerrain(map);
 
-			// Creatures are allowed to traverse regions with an avoid path cost, but it cannot be their destination.
-			short maxPathCost = isDestination ? PathCost.Avoid.cost : PathCost.Impassable.cost;
+			IntVec3 startCell = pawn.Position;
+			TerrainDef startTerrainDef = startCell.GetTerrain(map);
+			bool currentlyOnAvoidTerrain = pawn.MovementDef().PathCosts[startTerrainDef.index] == PathCost.Avoid.cost;
+
+			// Pawns currently on an avoid terrain cell are allowed to traverse regions with an avoid terrain, but it cannot
+			// be their destination.
+			short nonTraversablePathCost =
+				isDestination || !currentlyOnAvoidTerrain ? PathCost.Avoid.cost : PathCost.Impassable.cost;
 			short pathCost = pawn.MovementDef().PathCosts[regionTerrainDef.index];
-			return pathCost < maxPathCost;
+			return pathCost < nonTraversablePathCost;
 		}
 
 		/// <summary>

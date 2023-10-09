@@ -47,7 +47,10 @@
 			<PF_TerrainTag_Ground>12</PF_TerrainTag_Ground>
 			<PF_TerrainTag_Sand>0</PF_TerrainTag_Sand>
 		</tagCosts>
-		<defaultCost>Avoid</defaultCost>
+		<!--
+		Pathfinding framework does not support making vanilla passable terrains impassable for movement types.
+		-->
+		<defaultCost>9998</defaultCost>
 		<penAnimalsDisallowed>true</penAnimalsDisallowed>
 	</PathfindingFramework.MovementDef>
 
