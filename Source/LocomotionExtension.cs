@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -12,8 +13,8 @@ namespace PathfindingFramework
 	{
 		public List<LocomotionUrgency> locomotionUrgencies = new List<LocomotionUrgency>();
 
-		public List<StatModifier> statOffsets = new List<StatModifier>();
-		
+		public float moveSpeedMultiplier;
+
 		public GraphicData graphicData;
 
 		public LocomotionExtension()

@@ -155,6 +155,9 @@ namespace PathfindingFramework.PawnMovement
 
 			movementDef ??= MovementDefOf.PF_Movement_Terrestrial;
 			pawn.MovementDef() = movementDef;
+			pawn.LocomotionExtension() = pawn.def.HasModExtension<LocomotionExtension>()
+				? pawn.def.GetModExtension<LocomotionExtension>()
+				: null;
 			pawn.Map.MovementContextData().UpdatePawn(pawn);
 		}
 	}

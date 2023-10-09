@@ -58,6 +58,8 @@
 		<Compile Include="Patches\CellPathfinding\Pawn_PathFollower_CostToMoveIntoCell_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathFinder_FindPath_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_FindGroundSleepSpotFor_Patch.cs" />
+		<Compile Include="Patches\ModExtensions\Locomotion\CurrentUrgency_Util.cs" />
+		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_TicksPerMove_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\Reachable\Reachability_CanReach_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_FloodFillAndAddCells_Patch.cs" />

@@ -16,6 +16,7 @@ namespace PathfindingFramework.Patches
 		private static MapPathCostGrid _noPrepatcherMapPathCostGrid = null;
 		private static MovementContext _noPrepatcherMovementContext = null;
 		private static MovementContextData _noPrepatcherMovementContextData = null;
+		private static LocomotionExtension _noPrepatcherLocomotionExtension = null;
 		private static TerrainDef _noPrepatcherTerrainDef = null;
 		private static bool _noPrepatcherBool = false;
 
@@ -43,6 +44,19 @@ namespace PathfindingFramework.Patches
 		{
 			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherMovementContext;
+		}
+
+		/// <summary>
+		/// Movement definition currently in use for this pawn.
+		/// Kept up to date by PawnMovementUpdater.Update.
+		/// </summary>
+		/// <param name="pawn">Pawn being checked.</param>
+		/// <returns>Movement used by this pawn.</returns>
+		[PrepatcherField]
+		public static ref LocomotionExtension LocomotionExtension(this Pawn pawn)
+		{
+			Report.ErrorOnce(NoPrepatcher);
+			return ref _noPrepatcherLocomotionExtension;
 		}
 
 		/// <summary>
