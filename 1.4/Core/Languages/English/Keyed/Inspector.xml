@@ -14,7 +14,8 @@
 	<!-- Movement context inspector. -->
 	<PF_MovementCostsLabel>Total movement costs</PF_MovementCostsLabel>
 	<PF_VanillaLabel>Vanilla</PF_VanillaLabel>
-	<PF_NoFencesMovementLabel>{0} (avoid fences)</PF_NoFencesMovementLabel>
+	<PF_IgnoreFireMovementLabel>Ignore fire</PF_IgnoreFireMovementLabel>
+	<PF_NoFencesMovementLabel>Avoid fences</PF_NoFencesMovementLabel>
 	<!-- Region inspector. -->
 	<PF_RegionLabel>Region</PF_RegionLabel>
 	<PF_RegionNone>None</PF_RegionNone>

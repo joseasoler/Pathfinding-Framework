@@ -134,7 +134,22 @@ namespace PathfindingFramework.MovementContexts
 			foreach (MovementContext context in validContexts)
 			{
 				string label = context.MovementDef.LabelCap;
-				string grid = context.ShouldAvoidFences ? $"{label} (fences) context" : $"{label} context";
+				
+				List<string> extraLabels = new List<string>();
+				if (context.ShouldAvoidFences)
+				{
+					extraLabels.Add("PF_NoFencesMovementLabel".Translate());
+				}
+
+				if (context.CanIgnoreFire)
+				{
+					extraLabels.Add("PF_IgnoreFireMovementLabel".Translate());
+				}
+
+				string grid = extraLabels.Count == 0
+					?  $"{label} context"
+					: $"{label} ({string.Join(", ", extraLabels)}) context";
+
 				report.Add(new MemoryUsageData(nameof(MovementContextData), Map.GetUniqueLoadID(),
 					grid, pathGridCount));
 			}

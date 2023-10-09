@@ -13,7 +13,7 @@ namespace PathfindingFramework.DevTool
 		[DebugOutput(category: PathfindingFramework.Name, onlyWhenPlaying: true)]
 		public static void PawnLocomotion()
 		{
-			var input = new List<Tuple<string, string, string, string, string>>();
+			var input = new List<Tuple<string, string, string, string, string, string>>();
 			foreach (var map in Find.Maps)
 			{
 				foreach (var pawn in map.mapPawns.AllPawnsSpawned)
@@ -22,18 +22,20 @@ namespace PathfindingFramework.DevTool
 					string thingID = pawn.ThingID;
 					string mapId = map.ToString();
 					string movementDefName = pawn.MovementDef().ToString();
-					bool shouldAvoidFences = pawn.ShouldAvoidFences;
-					input.Add(new Tuple<string, string, string, string, string>(name, thingID, mapId, movementDefName,
-						shouldAvoidFences.ToString()));
+					bool shouldAvoidFences = pawn.MovementContext().ShouldAvoidFences;
+					bool ignoreFire = pawn.MovementContext().CanIgnoreFire;
+					input.Add(new Tuple<string, string, string, string, string, string>(name, thingID, mapId, movementDefName,
+						shouldAvoidFences.ToString(), ignoreFire.ToString()));
 				}
 			}
 
-			var dataTable = new string[5, input.Count + 1];
+			var dataTable = new string[6, input.Count + 1];
 			dataTable[0, 0] = "Name";
 			dataTable[1, 0] = "Id";
 			dataTable[2, 0] = "Map";
 			dataTable[3, 0] = "Movement";
-			dataTable[4, 0] = "Avoid fences";
+			dataTable[4, 0] = "PF_NoFencesMovementLabel".Translate();
+			dataTable[5, 0] = "PF_IgnoreFireMovementLabel".Translate();
 
 			for (var inputIndex = 0; inputIndex < input.Count; ++inputIndex)
 			{
@@ -43,6 +45,7 @@ namespace PathfindingFramework.DevTool
 				dataTable[2, inputIndex + 1] = tuple.Item3;
 				dataTable[3, inputIndex + 1] = tuple.Item4;
 				dataTable[4, inputIndex + 1] = tuple.Item5;
+				dataTable[5, inputIndex + 1] = tuple.Item6;
 			}
 
 			Find.WindowStack.Add(new Window_DebugTable(dataTable));

@@ -17,7 +17,7 @@ namespace PathfindingFramework.DevTool
 	public static class InspectorDrawer
 	{
 		private const float DistFromMouse = 26.0F;
-		private const float LabelColumnWidth = 200.0F;
+		private const float LabelColumnWidth = 260.0F;
 		private const float InfoColumnWidth = 160.0F;
 		private const float WindowPadding = 12.0F;
 		private const float ColumnPadding = 12.0F;
@@ -108,7 +108,7 @@ namespace PathfindingFramework.DevTool
 		private static string PathCostLabel(short pathCost)
 		{
 			string movementPathCostLabel;
-			switch ((PathCostValues) pathCost)
+			switch ((PathCostValues)pathCost)
 			{
 				case PathCostValues.Avoid:
 					movementPathCostLabel = "Avoid";
@@ -221,8 +221,8 @@ namespace PathfindingFramework.DevTool
 		private static void FillMovementContextInspectorWindow(Map map, IntVec3 cell)
 		{
 			DrawDivider();
-			short vanillaNormalCost = (short) map.pathing.Normal.pathGrid.PerceivedPathCostAt(cell);
-			short vanillaFenceCost = (short) map.pathing.FenceBlocked.pathGrid.PerceivedPathCostAt(cell);
+			short vanillaNormalCost = (short)map.pathing.Normal.pathGrid.PerceivedPathCostAt(cell);
+			short vanillaFenceCost = (short)map.pathing.FenceBlocked.pathGrid.PerceivedPathCostAt(cell);
 			string vanillaLabel = "PF_VanillaLabel".Translate();
 			DrawRow(vanillaLabel, PathCostLabel(vanillaNormalCost));
 			DrawRow("PF_NoFencesMovementLabel".Translate(vanillaLabel), PathCostLabel(vanillaFenceCost));
@@ -234,12 +234,22 @@ namespace PathfindingFramework.DevTool
 
 			foreach (MovementContext context in activeContexts)
 			{
-				short cost = (short) context.PathingContext.pathGrid.PerceivedPathCostAt(cell);
+				short cost = (short)context.PathingContext.pathGrid.PerceivedPathCostAt(cell);
 				string movementLabelCap = context.MovementDef.LabelCap;
-				string label = context.ShouldAvoidFences
-					? "PF_NoFencesMovementLabel".Translate(movementLabelCap)
-					: movementLabelCap;
+				List<string> extraLabels = new List<string>();
+				if (context.ShouldAvoidFences)
+				{
+					extraLabels.Add("PF_NoFencesMovementLabel".Translate());
+				}
 
+				if (context.CanIgnoreFire)
+				{
+					extraLabels.Add("PF_IgnoreFireMovementLabel".Translate());
+				}
+
+				string label = extraLabels.Count == 0
+					? movementLabelCap
+					: $"{movementLabelCap} ({string.Join(", ", extraLabels)})";
 				DrawRow(label, PathCostLabel(cost));
 			}
 		}
