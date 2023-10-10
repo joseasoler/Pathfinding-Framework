@@ -18,11 +18,16 @@ TerrainDef is patched explicitly instead.
 				<li>
 					<tag>PF_TerrainTag_Ground</tag>
 					<terrainDefs>
-						<li>MarshyTerrain</li>
 						<li>MossyTerrain</li>
-						<li>Mud</li>
 						<li>Soil</li>
 						<li>SoilRich</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Mud</tag>
+					<terrainDefs>
+						<li>MarshyTerrain</li>
+						<li>Mud</li>
 					</terrainDefs>
 				</li>
 				<li>
@@ -83,12 +88,8 @@ TerrainDef is patched explicitly instead.
 				<li>
 					<tag>PF_TerrainTag_Ground</tag>
 					<terrainDefs>
-						<li>AB_CrackedMud</li>
-						<li>AB_DarkMud</li>
 						<li>AB_DenseGrass</li>
-						<li>AB_DenseMud</li>
 						<li>AB_FertileGrassyFlowerySoil</li>
-						<li>AB_FertileMud</li>
 						<li>AB_GrassyFlowerySoil</li>
 						<li>AB_HardenedGrass</li>
 						<li>AB_HardenedGrassFertile</li>
@@ -98,13 +99,22 @@ TerrainDef is patched explicitly instead.
 						<li>AB_MycoticSoilRich</li>
 						<li>AB_ParchedEarth</li>
 						<li>AB_RichCrackedMud</li>
+						<li>GU_MossyRed</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Mud</tag>
+					<terrainDefs>
+						<li>AB_CrackedMud</li>
+						<li>AB_DarkMud</li>
+						<li>AB_DenseMud</li>
+						<li>AB_FertileMud</li>
 						<li>AB_RichSlime</li>
 						<li>AB_Slime</li>
 						<li>AB_SlimeGrass</li>
 						<li>AB_SlimyMud</li>
 						<li>AB_TarMud</li>
 						<li>AB_WebbedMarshyTerrain</li>
-						<li>GU_MossyRed</li>
 					</terrainDefs>
 				</li>
 				<li>
