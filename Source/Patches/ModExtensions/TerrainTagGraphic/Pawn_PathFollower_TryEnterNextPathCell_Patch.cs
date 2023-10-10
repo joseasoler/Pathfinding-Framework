@@ -14,6 +14,11 @@ namespace PathfindingFramework.Patches.ModExtensions.TerrainTagGraphic
 	{
 		private static void Postfix(Pawn ___pawn)
 		{
+			if (___pawn == null || !___pawn.Spawned)
+			{
+				return;
+			}
+
 			TerrainDef newTerrainDef = ___pawn.Position.GetTerrain(___pawn.Map);
 			TerrainDef previousTerrainDef = ___pawn.CurrentTerrainDef();
 			if (newTerrainDef == previousTerrainDef)
