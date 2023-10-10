@@ -5,6 +5,7 @@ Developing a RimWorld mod is a huge task that is only made possible because its 
 * **[Andreas Pardeike](https://www.patreon.com/pardeike/posts)** - [Harmony](https://harmony.pardeike.net/).
 * **[bbradson](https://github.com/bbradson)** - [Performance Fish](https://github.com/bbradson/Performance-Fish), suggestions and advice.
 * **[Biomes! Team](https://github.com/biomes-team/)**
+* **[CaptainArbitrary](https://github.com/CaptainArbitrary/)** - Suggestions and advice.
 * **[Dubs Mods](https://www.patreon.com/dubwise56)** - [Dubs Mods community](https://discord.gg/bajcjsu)
 * **[krafs](https://github.com/krafs/)** - [Publicizer](https://github.com/krafs/Publicizer)
 * **[Matthew Seal](https://github.com/MSeal)** - [TerrainMovementKit](https://github.com/MSeal/RimworldTerrainMovementKit) and [SwimmingKit](https://github.com/MSeal/RimworldSwimming).

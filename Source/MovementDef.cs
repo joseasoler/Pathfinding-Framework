@@ -24,19 +24,18 @@ namespace PathfindingFramework
 		public TerrainTagPathCosts tagCosts;
 
 		/// <summary>
-		/// By default, passable terrains not affected by other movement type changes will use the costs defined in their
-		/// defs. If this field is set to a value equal or larger than zero, this will be the default path cost instead.
-		/// defaultCost cannot make impassable terrain passable.
+		/// Default path cost for terrains that are not affected by other movement type changes. Cannot make impassable
+		/// terrains passable.
 		/// </summary>
 		public PathCost defaultCost;
 
 		/// <summary>
-		/// Passable terrains not affected by other movement type changes will get their path cost multiplied by this value.
+		/// Passable terrains not affected by other movement type changes will get this value added to their path cost.
 		/// </summary>
 		public short defaultCostAdd = -1;
 
 		/// <summary>
-		/// When this flag is set, this movement type will ignore snow path costs.
+		/// When this flag is set, this movement type will not consider snow path costs.
 		/// </summary>
 		public bool ignoreSnow;
 

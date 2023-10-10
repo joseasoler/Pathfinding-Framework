@@ -40,7 +40,7 @@
 	<PathfindingFramework.MovementDef>
 		<defName>PF_Movement_Drilling</defName>
 		<label>driller</label>
-		<description>Drilling creatures dig through soil and sand, but cannot move over rock or water.</description>
+		<description>Drilling creatures dig through soil and sand, but avoid moving over rock or water.</description>
 		<priority>3000</priority>
 		<tagCosts>
 			<PF_TerrainTag_Gravel>32</PF_TerrainTag_Gravel>

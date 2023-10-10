@@ -15,7 +15,8 @@ namespace PathfindingFramework
 		public List<string> terrainTags = new();
 
 		/// <summary>
-		/// New graphic to use. DrawSize and shader will be taken from the pawn's original graphic.
+		/// Contains graphical data for the pawn when it is over a terrain with one of the defined tags.
+		/// DrawSize and shader will be taken from the pawn's original graphic.
 		/// </summary>
 		public GraphicData graphicData;
 
