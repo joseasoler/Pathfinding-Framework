@@ -48,7 +48,6 @@
 			<PF_TerrainTag_Ground>12</PF_TerrainTag_Ground>
 			<PF_TerrainTag_Sand>0</PF_TerrainTag_Sand>
 		</tagCosts>
-		<!-- Making passable terrains unsafe is not supported. -->
 		<defaultCost>Avoid</defaultCost>
 		<penAnimalsDisallowed>true</penAnimalsDisallowed>
 	</PathfindingFramework.MovementDef>

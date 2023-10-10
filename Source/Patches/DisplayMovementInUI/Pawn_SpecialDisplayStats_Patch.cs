@@ -144,13 +144,13 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 				}
 			}
 
-			string reportText = "PF_LocomotionReportText".Translate();
+			string reportText = "PF_MovementReportText".Translate();
 			if (!extraReportText.NullOrEmpty())
 			{
 				reportText += "PF_GrantedBy".Translate(extraReportText);
 			}
 
-			yield return new StatDrawEntry(StatCategoryDefOf.BasicsPawn, "PF_Locomotion".Translate(),
+			yield return new StatDrawEntry(StatCategoryDefOf.BasicsPawn, "PF_Movement".Translate(),
 				movementDef.LabelCap, reportText, 2501, null, hyperlinks);
 		}
 	}

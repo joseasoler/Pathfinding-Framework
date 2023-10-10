@@ -34,6 +34,7 @@
 		<Compile Include="Harmony.cs" />
 		<Compile Include="JobDefOf.cs" />
 		<Compile Include="Jobs\JobGiver_SeekSafeTerrain.cs" />
+		<Compile Include="LoadedDataReport.cs" />
 		<Compile Include="LocationFinding.cs" />
 		<Compile Include="LocomotionExtension.cs" />
 		<Compile Include="MapPathCosts\MapPathCost.cs" />

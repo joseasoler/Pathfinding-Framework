@@ -56,6 +56,11 @@ namespace PathfindingFramework
 
 		public static void OnWriteSettings()
 		{
+			if (Find.Maps == null)
+			{
+				return;
+			}
+
 			foreach (Map map in Find.Maps)
 			{
 				map.MovementContextData().UpdateAllCells(ignoreFireOnly: true);

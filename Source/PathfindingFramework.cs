@@ -34,6 +34,9 @@ namespace PathfindingFramework
 			MovementExtensionCache.Initialize();
 			// Graphics are initialized after all defs and mod extensions are fully initialized.
 			GraphicLoader.Initialize();
+			// Add some useful (but brief) information to the log.
+			// Enabling debug logging expands upon this.
+			LoadedDataReport.Write();
 		}
 
 		/// <summary>
