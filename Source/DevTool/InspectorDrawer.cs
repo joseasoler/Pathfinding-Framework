@@ -111,6 +111,7 @@ namespace PathfindingFramework.DevTool
 			PathCostValues pathCostValue = (PathCostValues)pathCost;
 			switch (pathCostValue)
 			{
+				case PathCostValues.Avoid:
 				case PathCostValues.Unsafe:
 				case PathCostValues.Impassable:
 				case PathCostValues.Invalid:

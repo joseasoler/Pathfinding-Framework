@@ -13,6 +13,11 @@ namespace PathfindingFramework.Parse
 		Default = -1,
 
 		/// <summary>
+		/// Terrain that the pawn should avoid. The pawn can still move extremely slowly over it.
+		/// </summary>
+		Avoid = PathGrid.ImpassableCost - 2,
+
+		/// <summary>
 		/// Terrain that is unsafe for the pawn. The pawn can still move extremely slowly over it.
 		/// </summary>
 		Unsafe = PathGrid.ImpassableCost - 1,
