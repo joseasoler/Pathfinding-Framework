@@ -107,23 +107,7 @@ namespace PathfindingFramework.DevTool
 
 		private static string PathCostLabel(short pathCost)
 		{
-			string movementPathCostLabel;
-			PathCostValues pathCostValue = (PathCostValues)pathCost;
-			switch (pathCostValue)
-			{
-				case PathCostValues.Avoid:
-				case PathCostValues.Unsafe:
-				case PathCostValues.Impassable:
-				case PathCostValues.Invalid:
-					movementPathCostLabel = Enum.GetName(typeof(PathCostValues), pathCostValue);
-					break;
-				case PathCostValues.Default:
-				default:
-					movementPathCostLabel = pathCost.ToString();
-					break;
-			}
-
-			return movementPathCostLabel;
+			return new PathCost(pathCost).ToString();
 		}
 
 		private static void FillWindow()

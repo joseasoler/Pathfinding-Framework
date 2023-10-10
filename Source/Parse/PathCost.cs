@@ -41,10 +41,10 @@ namespace PathfindingFramework.Parse
 		public static readonly PathCost Impassable = new((short)PathCostValues.Impassable);
 
 		/// <summary>
-		/// Initialize directly from a numerical value. Only intended for internal use in this class.
+		/// Initialize directly from a numerical value.
 		/// </summary>
 		/// <param name="value">Integer value to use for the cost.</param>
-		private PathCost(short value)
+		public PathCost(short value)
 		{
 			cost = value;
 		}

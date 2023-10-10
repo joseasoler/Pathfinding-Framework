@@ -27,7 +27,6 @@ namespace PathfindingFramework.Parse
 		/// </summary>
 		Impassable = PathGrid.ImpassableCost,
 
-
 		/// <summary>
 		/// PathCost value not correctly defined in XML files.
 		/// </summary>
