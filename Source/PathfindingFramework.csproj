@@ -150,25 +150,27 @@
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
-		<Publicize Include="Assembly-CSharp:Verse.DirectXmlToObject.ListFromXml" />
-
-		<!-- Region inspector. -->
-		<Publicize Include="Assembly-CSharp:Verse.District.numRegionsTouchingMapEdge" />
-
-		<Publicize Include="Assembly-CSharp:Verse.ParseHelper.parsers" />
-
-		<!-- Direct access to the snow depth grid to avoid IntVec3 creation costs. -->
-		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.depthGrid" />
-
-		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.map" />
-
-		<!-- PathFinder error debugging. -->
+		<!-- PathFinder.FindPath error debugging. -->
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.calcGrid" />
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.Directions" />
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.map" />
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.openList" />
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.pathGrid" />
 
+		<!-- Parsing custom XML lists. -->
+		<Publicize Include="Assembly-CSharp:Verse.DirectXmlToObject.ListFromXml" />
+
+		<!-- Region inspector. -->
+		<Publicize Include="Assembly-CSharp:Verse.District.numRegionsTouchingMapEdge" />
+
+		<!-- Registering custom XML parsers into the vanilla code. -->
+		<Publicize Include="Assembly-CSharp:Verse.ParseHelper.parsers" />
+
+		<!-- Direct access to the snow depth grid to avoid IntVec3 creation costs. -->
+		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.depthGrid" />
+		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.map" />
+
+		<!-- MapPathCostGrid implementation. -->
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathGrid.IsPathCostIgnoreRepeater" />
 
 		<!-- Force updates of the PawnGraphicSet. -->
