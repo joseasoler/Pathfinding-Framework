@@ -71,7 +71,7 @@ namespace PathfindingFramework
 		public bool CanEnterTerrain(TerrainDef terrainDef)
 		{
 			int cost = PathCosts[terrainDef.index];
-			return cost < PathCost.Avoid.cost;
+			return cost < PathCost.Unsafe.cost;
 		}
 
 		public override IEnumerable<string> ConfigErrors()

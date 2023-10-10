@@ -40,13 +40,12 @@ namespace PathfindingFramework.Jobs
 			RegionTraverser.BreadthFirstTraverse(region, EntryCondition, RegionProcessor, 9999);
 			return foundCell;
 
-
-			// Creatures are allowed to traverse regions that should be avoided...
+			// Creatures are allowed to traverse regions with unsafe terrain...
 			bool EntryCondition(Region _, Region r) => r.Allows(traverseParms, false);
 
 			bool RegionProcessor(Region r)
 			{
-				// ... but they cannot choose regions to be avoided as a destination.
+				// ... but they cannot choose unsafe regions as a destination.
 				if (r.IsDoorway || !r.Allows(traverseParms, true))
 				{
 					return false;

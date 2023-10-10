@@ -26,7 +26,7 @@ namespace PathfindingFramework.Patches.Spawning
 
 			TerrainDef terrainDef = location.GetTerrain(map);
 
-			if (movementDef.PathCosts[terrainDef.index] < PathCost.Avoid.cost)
+			if (movementDef.PathCosts[terrainDef.index] < PathCost.Unsafe.cost)
 			{
 				return false;
 			}

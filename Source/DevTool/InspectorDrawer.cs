@@ -108,14 +108,15 @@ namespace PathfindingFramework.DevTool
 		private static string PathCostLabel(short pathCost)
 		{
 			string movementPathCostLabel;
-			switch ((PathCostValues)pathCost)
+			PathCostValues pathCostValue = (PathCostValues)pathCost;
+			switch (pathCostValue)
 			{
-				case PathCostValues.Avoid:
-					movementPathCostLabel = "Avoid";
-					break;
+				case PathCostValues.Unsafe:
 				case PathCostValues.Impassable:
-					movementPathCostLabel = "Impassable";
+				case PathCostValues.Invalid:
+					movementPathCostLabel = Enum.GetName(typeof(PathCostValues), pathCostValue);
 					break;
+				case PathCostValues.Default:
 				default:
 					movementPathCostLabel = pathCost.ToString();
 					break;

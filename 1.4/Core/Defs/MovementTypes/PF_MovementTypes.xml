@@ -23,7 +23,7 @@
 		<label>aquatic</label>
 		<description>Aquatic creatures can swim through deep water with ease, but are helpless on land.</description>
 		<priority>1000</priority>
-		<defaultCost>Avoid</defaultCost>
+		<defaultCost>Unsafe</defaultCost>
 		<penAnimalsDisallowed>true</penAnimalsDisallowed>
 		<manhuntersRequireWater>true</manhuntersRequireWater>
 	</PathfindingFramework.MovementDef>

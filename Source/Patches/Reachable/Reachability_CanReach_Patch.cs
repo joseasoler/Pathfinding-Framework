@@ -29,9 +29,9 @@ namespace PathfindingFramework.Patches.Reachable
 			// Usually, if the start and end of the path are in the same district, the reachability code returns true as it
 			// can be sure that all tiles between both cells are traversable.
 			// This is not true for aquatic creatures so they must disable this check.
-			_disableDistrictCheck = context.MovementDef.defaultCost == PathCost.Avoid;
+			_disableDistrictCheck = context.MovementDef.defaultCost == PathCost.Unsafe;
 
-			// Prevent any movement to a terrain type which which the pawn should avoid.
+			// Prevent movement into a terrain type unsafe for the pawn.
 			if (!context.CanEnterTerrain(dest.Cell))
 			{
 				__result = false;

@@ -58,7 +58,7 @@ namespace PathfindingFramework.MovementContexts
 				cost = MovementDef.PathCosts[terrainDef.index];
 				if (pathCosts.things > cost)
 				{
-					if (!MovementDef.ignoreThings || pathCosts.things >= PathCost.Avoid.cost)
+					if (!MovementDef.ignoreThings || pathCosts.things >= PathCost.Unsafe.cost)
 					{
 						cost = pathCosts.things;
 					}
@@ -102,7 +102,7 @@ namespace PathfindingFramework.MovementContexts
 				: nextMapPathCost.things;
 			if (thingsCost > cost)
 			{
-				if (!MovementDef.ignoreThings || thingsCost >= PathCost.Avoid.cost)
+				if (!MovementDef.ignoreThings || thingsCost >= PathCost.Unsafe.cost)
 				{
 					cost = thingsCost;
 				}

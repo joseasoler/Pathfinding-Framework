@@ -10,7 +10,7 @@ namespace PathfindingFramework
 	public class JobDefOf
 	{
 		/// <summary>
-		/// Force pawns in tiles to be avoided to seek safer terrain.
+		/// Force pawns in unsafe terrain to seek safer terrain.
 		/// </summary>
 		public static JobDef PF_Job_SeekSafeTerrain;
 	}

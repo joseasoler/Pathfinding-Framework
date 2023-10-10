@@ -49,12 +49,11 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 
 			IntVec3 startCell = pawn.Position;
 			TerrainDef startTerrainDef = startCell.GetTerrain(map);
-			bool currentlyOnAvoidTerrain = pawn.MovementDef().PathCosts[startTerrainDef.index] == PathCost.Avoid.cost;
+			bool currentOnUnsafeTerrain = pawn.MovementDef().PathCosts[startTerrainDef.index] == PathCost.Unsafe.cost;
 
-			// Pawns currently on an avoid terrain cell are allowed to traverse regions with an avoid terrain, but it cannot
-			// be their destination.
+			// Pawns currently on unsafe terrain are allowed to traverse regions with unsafe terrain, but it cannot be their destination.
 			short nonTraversablePathCost =
-				isDestination || !currentlyOnAvoidTerrain ? PathCost.Avoid.cost : PathCost.Impassable.cost;
+				isDestination || !currentOnUnsafeTerrain ? PathCost.Unsafe.cost : PathCost.Impassable.cost;
 			short pathCost = pawn.MovementDef().PathCosts[regionTerrainDef.index];
 			return pathCost < nonTraversablePathCost;
 		}
