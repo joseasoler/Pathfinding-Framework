@@ -6,9 +6,6 @@ using Verse.AI;
 
 namespace PathfindingFramework
 {
-	/// <summary>
-	/// ToDo: Implementation
-	/// </summary>
 	public class LocomotionExtension : DefModExtension
 	{
 		public List<LocomotionUrgency> locomotionUrgencies = new List<LocomotionUrgency>();
@@ -20,7 +17,6 @@ namespace PathfindingFramework
 		public LocomotionExtension()
 		{
 		}
-
 		public override IEnumerable<string> ConfigErrors()
 		{
 			foreach (var line in base.ConfigErrors())
@@ -40,5 +36,6 @@ namespace PathfindingFramework
 				}
 			}
 		}
+
 	}
 }

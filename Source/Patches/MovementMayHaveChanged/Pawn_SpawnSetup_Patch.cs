@@ -13,6 +13,14 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 		internal static void Postfix(Pawn __instance)
 		{
 			PawnMovementUpdater.Update(__instance);
+
+			__instance.LocomotionExtension() = __instance.def.HasModExtension<LocomotionExtension>()
+				? __instance.def.GetModExtension<LocomotionExtension>()
+				: null;
+			__instance.TerrainTagGraphicExtension() = __instance.def.HasModExtension<TerrainTagGraphicExtension>()
+				? __instance.def.GetModExtension<TerrainTagGraphicExtension>()
+				: null;
+			__instance.CurrentTerrainDef() = __instance.Position.GetTerrain(__instance.Map);
 		}
 	}
 }

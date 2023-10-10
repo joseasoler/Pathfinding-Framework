@@ -11,24 +11,51 @@ namespace PathfindingFramework.Patches.ModExtensions
 	[HarmonyPatch(typeof(PawnGraphicSet), nameof(PawnGraphicSet.ResolveAllGraphics))]
 	internal static class PawnGraphicSet_ResolveAllGraphics_Patch
 	{
-		private static void Postfix(PawnGraphicSet __instance)
+		private static bool TryApplyLocomotionChanges(PawnGraphicSet graphicSet, Pawn pawn)
 		{
-			Pawn pawn = __instance.pawn;
 			LocomotionExtension locomotionExtension = pawn?.LocomotionExtension();
 			if (locomotionExtension?.graphicData == null || !pawn.pather.Moving)
 			{
 				// Locomotion graphic changes are only applied if the pawn is moving.
-				return;
+				return false;
 			}
 
 			LocomotionUrgency locomotion = CurrentUrgency_Util.Get(pawn);
 
 			if (!locomotionExtension.locomotionUrgencies.Contains(locomotion))
 			{
-				return;
+				return false;
 			}
 
-			__instance.nakedGraphic = locomotionExtension.graphicData.Graphic;
+			graphicSet.nakedGraphic =
+				locomotionExtension.graphicData.Graphic.GetCopy(graphicSet.nakedGraphic.drawSize,
+					graphicSet.nakedGraphic.Shader);
+
+			return true;
+		}
+
+		private static bool TryApplyTerrainTagChanges(PawnGraphicSet graphicSet, Pawn pawn)
+		{
+			TerrainTagGraphicExtension extension = pawn?.TerrainTagGraphicExtension();
+			if (extension == null || !extension.Affects(pawn.Position.GetTerrain(pawn.Map)))
+			{
+				return false;
+			}
+
+			graphicSet.nakedGraphic =
+				extension.graphicData.Graphic.GetCopy(graphicSet.nakedGraphic.drawSize,
+					graphicSet.nakedGraphic.Shader);
+
+			return true;
+		}
+
+		private static void Postfix(PawnGraphicSet __instance)
+		{
+			Pawn pawn = __instance.pawn;
+			if (!TryApplyLocomotionChanges(__instance, pawn))
+			{
+				TryApplyTerrainTagChanges(__instance, pawn);
+			}
 		}
 	}
 }
