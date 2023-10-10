@@ -4,10 +4,19 @@ using Verse;
 
 namespace PathfindingFramework
 {
+	/// <summary>
+	/// Pawns with this extension can change their graphic depending on the terrain tag their are on.
+	/// </summary>
 	public class TerrainTagGraphicExtension : DefModExtension
 	{
+		/// <summary>
+		/// List of terrain tags that will trigger a graphics change.
+		/// </summary>
 		public List<string> terrainTags = new();
 
+		/// <summary>
+		/// New graphic to use. DrawSize and shader will be taken from the pawn's original graphic.
+		/// </summary>
 		public GraphicData graphicData;
 
 		public TerrainTagGraphicExtension()

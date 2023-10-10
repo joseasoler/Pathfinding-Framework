@@ -14,7 +14,7 @@ namespace PathfindingFramework
 	public class MovementExtension : DefModExtension
 	{
 		/// <summary>
-		/// Enable this movement type for this pawn.
+		/// Enable this movement type for a pawn having this apparel, gene, hediff, life stage or race.
 		/// </summary>
 		public MovementDef movementDef;
 
