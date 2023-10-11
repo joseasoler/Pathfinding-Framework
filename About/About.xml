@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
 	<name>Pathfinding Framework</name>
-	<author>Pyrce, José Ángel Soler Ortiz</author>
+	<author>José Ángel Soler Ortiz</author>
 	<supportedVersions>
 		<li>1.4</li>
 	</supportedVersions>
@@ -9,9 +9,15 @@
 	<packageId>pathfinding.framework</packageId>
 	<description><![CDATA[<size=18><b><color=teal>Pathfinding Framework</color></b></size>
 
-Enables the creation of custom movement rules for pawns.
+Ever wished your colonists could do more than just walk? With the Pathfinding Framework mod, they can! The mod introduces a variety of new movement types, allowing pawns to move across the world in entirely new ways.
 
-This mod is an overhaul of TerrainMovementKit and SwimmingKit, with a focus on performance and mod compatibility.
+• <b>Diverse movement types:</b> Introduces a variety of movement types, including aquatic, flying, and drilling.
+
+• <b>Terrain interaction:</b> Pawns intelligently interact with terrains based on their movement type. Watch as birds effortlessly fly over obstacles or fish navigate through deep waters.
+
+• <b>Extensible framework for modders:</b> Modders can easily patch movement type support for their pawns, apparel genes or other items, or even integrate and define custom movement types.
+
+• <b>Compatible and performance-friendly:</b> Designed to play well with other mods and optimized for smooth gameplay.
 ]]></description>
 	<modDependencies>
 		<li>
@@ -37,5 +43,6 @@ This mod is an overhaul of TerrainMovementKit and SwimmingKit, with a focus on p
 	</loadAfter>
 	<incompatibleWith>
 		<li>pyrce.terrain.movement.modkit</li>
+		<li>pyrce.swimming.modkit</li>
 	</incompatibleWith>
 </ModMetaData>
