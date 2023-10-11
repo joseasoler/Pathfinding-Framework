@@ -50,7 +50,7 @@ namespace PathfindingFramework
 			for (int index = 0; index < movementDefs.Count; ++index)
 			{
 				MovementDef movementDef = movementDefs[index];
-				string packageId = movementDef.modContentPack?.PackageIdPlayerFacing ?? "Null";
+				string packageId = movementDef.modContentPack?.PackageIdPlayerFacing ?? "Unknown";
 				data.Add(new MovementDefData(packageId, movementDef.defName));
 			}
 

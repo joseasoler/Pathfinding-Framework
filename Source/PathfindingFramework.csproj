@@ -30,6 +30,7 @@
 		<Compile Include="DevTool\PathFinderErrorDebug.cs" />
 		<Compile Include="DevTool\PathGridDivergenceDebugOutput.cs" />
 		<Compile Include="DevTool\PawnMovementDebugOutput.cs" />
+		<Compile Include="DevTool\TerrainTagsDebugOutput.cs" />
 		<Compile Include="GraphicLoader.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="JobDefOf.cs" />
