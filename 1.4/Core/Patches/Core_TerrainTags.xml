@@ -86,13 +86,13 @@ XML lookup, thus running considerably faster than regular XPath operations.
 					<tag>PF_TerrainTag_Lava</tag>
 					<terrainDefs>
 						<li>AB_LiquidLava</li>
+						<li>AB_SolidifiedLava</li>
 					</terrainDefs>
 				</li>
 				<li>
 					<tag>PF_TerrainTag_Gravel</tag>
 					<terrainDefs>
 						<li>AB_Obsidian</li>
-						<li>AB_SolidifiedLava</li>
 					</terrainDefs>
 				</li>
 				<li>
@@ -161,6 +161,7 @@ XML lookup, thus running considerably faster than regular XPath operations.
 					<tag>PF_TerrainTag_Lava</tag>
 					<terrainDefs>
 						<li>BiomeCore_Magma</li>
+						<li>BMT_MagmaStone</li>
 					</terrainDefs>
 				</li>
 				<li>
