@@ -36,15 +36,17 @@ No.
 
 Pathfinding Framework should be compatible with almost every mod. Other pathfinding mods can be found in the table below.
 
-| Mod                                                                                                        | Compatible  |
-|------------------------------------------------------------------------------------------------------------|-------------|
-| [Clean Pathfinding 2](https://steamcommunity.com/sharedfiles/filedetails/?id=2603765747)                   | Yes         |
-| [Vanilla Expanded Framework](https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013)            | Yes         |
-| [Vanilla Furniture Expanded - Security](https://steamcommunity.com/sharedfiles/filedetails/?id=1845154007) | Partial (1) |
-| [SwimmingKit](https://steamcommunity.com/sharedfiles/filedetails/?id=1542399915)                           | No          |
-| [TerrainMovementKit](https://steamcommunity.com/sharedfiles/filedetails/?id=2048567351)                    | No          |
+| Mod                                                                                                        | Compatible                                                                                                                                                 |
+|------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Clean Pathfinding 2](https://steamcommunity.com/sharedfiles/filedetails/?id=2603765747)                   | Yes                                                                                                                                                        |
+| [Combat Extended](https://steamcommunity.com/workshop/filedetails/?id=2890901044)                          | [Link](https://github.com/CombatExtended-Continued/CombatExtended/wiki/Frequently-Asked-Questions#does-mod-work-with-combat-extended-does-it-need-a-patch) |
+| [Vanilla Expanded Framework](https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013)            | Yes                                                                                                                                                        |
+| [Vehicles Framework](https://steamcommunity.com/workshop/filedetails/?id=3014915404)                       | Yes                                                                                                                                                        |
+| [Vanilla Furniture Expanded - Security](https://steamcommunity.com/sharedfiles/filedetails/?id=1845154007) | Partial (1)                                                                                                                                                |
+| [SwimmingKit](https://steamcommunity.com/sharedfiles/filedetails/?id=1542399915)                           | No                                                                                                                                                         |
+| [TerrainMovementKit](https://steamcommunity.com/sharedfiles/filedetails/?id=2048567351)                    | No                                                                                                                                                         |
 
-1. Pawns move at normal speed over trenches. See https://github.com/joseasoler/Pathfinding-Framework/issues/7
+1. Pawns move at normal speed over trenches. A fix is being planned, see https://github.com/joseasoler/Pathfinding-Framework/issues/7
 
 Development
 ---
