@@ -32,6 +32,10 @@ Yes.
 
 No.
 
+**Where should I place Pathfinding Framework in my mod list load order?**
+
+As long as the mod does not trigger any load order warnings, it will work fine. Using [RimSort](https://github.com/oceancabbage/RimSort) or [RimPy](https://github.com/rimpy-custom/RimPy/releases) to sort your list should always give optimal results.
+
 **Is this mod compatible with...**
 
 Pathfinding Framework should be compatible with almost every mod. Other pathfinding mods can be found in the table below.
