@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
 Adds terrain tags to TerrainDefs. These tags are used to define terrain path costs in MovementDefs.
+
 Abstract TerrainDefs such as WaterDeepBase are used by mods to represent things that are not water, so each individual
 TerrainDef is patched explicitly instead.
+
+Tags for modded terrain are also added here because AddTagsToTerrainDefs guarantees that all tags are added in a single
+XML lookup, thus running considerably faster than regular XPath operations.
 -->
 <Patch>
 
@@ -79,6 +83,12 @@ TerrainDef is patched explicitly instead.
 
 			<li MayRequire="sarg.alphabiomes"> <!-- Alpha Biomes -->
 				<li>
+					<tag>PF_TerrainTag_Lava</tag>
+					<terrainDefs>
+						<li>AB_LiquidLava</li>
+					</terrainDefs>
+				</li>
+				<li>
 					<tag>PF_TerrainTag_Gravel</tag>
 					<terrainDefs>
 						<li>AB_Obsidian</li>
@@ -148,6 +158,12 @@ TerrainDef is patched explicitly instead.
 
 			<li MayRequire="BiomesTeam.BiomesCore"> <!-- Biomes! Core -->
 				<li>
+					<tag>PF_TerrainTag_Lava</tag>
+					<terrainDefs>
+						<li>BiomeCore_Magma</li>
+					</terrainDefs>
+				</li>
+				<li>
 					<tag>PF_TerrainTag_Sand</tag>
 					<terrainDefs>
 						<li>BiomesCore_Pebbles</li>
@@ -187,6 +203,12 @@ TerrainDef is patched explicitly instead.
 			</li>
 
 			<li MayRequire="ReGrowth.BOTR.Core"> <!-- ReGrowth: Core -->
+				<li>
+					<tag>PF_TerrainTag_Lava</tag>
+					<terrainDefs>
+						<li>RG_Lava</li>
+					</terrainDefs>
+				</li>
 				<li>
 					<tag>PF_TerrainTag_Gravel</tag>
 					<terrainDefs>
