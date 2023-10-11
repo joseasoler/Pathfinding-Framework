@@ -11,21 +11,21 @@ namespace PathfindingFramework.DevTool
 	public static class PawnMovementDebugOutput
 	{
 		[DebugOutput(category: PathfindingFramework.Name, onlyWhenPlaying: true)]
-		public static void PawnLocomotion()
+		public static void CurrentPawnMovement()
 		{
 			var input = new List<Tuple<string, string, string, string, string, string>>();
 			foreach (var map in Find.Maps)
 			{
 				foreach (var pawn in map.mapPawns.AllPawnsSpawned)
 				{
-					string name = pawn.Name != null ? pawn.Name.ToString() : pawn.def.label;
-					string thingID = pawn.ThingID;
+					string name = pawn.Name != null ? pawn.Name.ToString() : pawn.def.LabelCap;
+					string thingID = pawn.ThingID.CapitalizeFirst();
 					string mapId = map.ToString();
 					string movementDefName = pawn.MovementDef().ToString();
-					bool shouldAvoidFences = pawn.MovementContext().ShouldAvoidFences;
-					bool ignoreFire = pawn.MovementContext().CanIgnoreFire;
+					string shouldAvoidFences = pawn.MovementContext().ShouldAvoidFences.ToString().CapitalizeFirst();
+					string ignoreFire = pawn.MovementContext().CanIgnoreFire.ToString().CapitalizeFirst();
 					input.Add(new Tuple<string, string, string, string, string, string>(name, thingID, mapId, movementDefName,
-						shouldAvoidFences.ToString(), ignoreFire.ToString()));
+						shouldAvoidFences, ignoreFire));
 				}
 			}
 
