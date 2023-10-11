@@ -23,6 +23,16 @@ namespace PathfindingFramework.PatchOperations
 		private const string DefNameIdentifier = "defName";
 		private const string TagsIdentifier = "tags";
 
+		private static readonly HashSet<string> TerrainDefNames = new()
+		{
+			// RimWorld
+			"TerrainDef",
+			// Biomes! Core
+			"BiomesCore.ActiveTerrainDef",
+			// Vanilla Expanded Framework
+			"VFECore.ActiveTerrainDef"
+		};
+
 		/// <summary>
 		/// Translate the provided tag groups into a format more performant for XML traversal.
 		/// </summary>
@@ -61,7 +71,7 @@ namespace PathfindingFramework.PatchOperations
 
 			foreach (XmlNode terrainDefNode in xml.FirstChild.ChildNodes)
 			{
-				if (terrainDefNode.Name != "TerrainDef")
+				if (!TerrainDefNames.Contains(terrainDefNode.Name))
 				{
 					// Process only TerrainDefs, all other nodes can be safely ignored.
 					continue;
