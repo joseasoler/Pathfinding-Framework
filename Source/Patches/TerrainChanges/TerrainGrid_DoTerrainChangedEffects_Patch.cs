@@ -11,7 +11,7 @@ namespace PathfindingFramework.Patches.TerrainChanges
 	{
 		internal static void Postfix(Map ___map, IntVec3 c)
 		{
-			___map.MovementContextData().UpdateCell(c);
+			___map?.MovementContextData()?.UpdateCell(c);
 		}
 	}
 }
