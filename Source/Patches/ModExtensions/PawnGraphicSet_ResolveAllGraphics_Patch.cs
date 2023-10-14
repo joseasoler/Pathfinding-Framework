@@ -52,9 +52,12 @@ namespace PathfindingFramework.Patches.ModExtensions
 		private static void Postfix(PawnGraphicSet __instance)
 		{
 			Pawn pawn = __instance.pawn;
-			if (!TryApplyLocomotionChanges(__instance, pawn))
+			if (pawn.Spawned && !pawn.Dead)
 			{
-				TryApplyTerrainTagChanges(__instance, pawn);
+				if (!TryApplyLocomotionChanges(__instance, pawn))
+				{
+					TryApplyTerrainTagChanges(__instance, pawn);
+				}
 			}
 		}
 	}
