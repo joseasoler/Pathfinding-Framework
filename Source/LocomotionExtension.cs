@@ -31,6 +31,7 @@ namespace PathfindingFramework
 		public LocomotionExtension()
 		{
 		}
+
 		public override IEnumerable<string> ConfigErrors()
 		{
 			foreach (var line in base.ConfigErrors())
@@ -38,18 +39,10 @@ namespace PathfindingFramework
 				yield return line;
 			}
 
-			if (graphicData != null)
+			if (graphicData != null && graphicData.texPath.NullOrEmpty())
 			{
-				if (graphicData.texPath.NullOrEmpty())
-				{
-					yield return Report.ConfigError(typeof(LocomotionExtension), "graphicData has a null or empty texPath.");
-				}
-				else
-				{
-					GraphicLoader.InitializeWhenLoadingFinished(graphicData);
-				}
+				yield return Report.ConfigError(typeof(LocomotionExtension), "graphicData has a null or empty texPath.");
 			}
 		}
-
 	}
 }

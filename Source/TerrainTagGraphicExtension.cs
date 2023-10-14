@@ -47,15 +47,10 @@ namespace PathfindingFramework
 					yield return Report.ConfigError(typeof(TerrainTagGraphicExtension),
 						"graphicData has a null or empty texPath.");
 				}
-				else
+				else if (graphicData.drawSize != Vector2.one)
 				{
-					if (graphicData.drawSize != Vector2.one)
-					{
-						yield return Report.ConfigError(typeof(TerrainTagGraphicExtension),
-							"graphicData should not define a drawSize, as this will be overriden by the pawn's current drawSize.");
-					}
-
-					GraphicLoader.InitializeWhenLoadingFinished(graphicData);
+					yield return Report.ConfigError(typeof(TerrainTagGraphicExtension),
+						"graphicData should not define a drawSize, as this will be overriden by the pawn's current drawSize.");
 				}
 			}
 		}
