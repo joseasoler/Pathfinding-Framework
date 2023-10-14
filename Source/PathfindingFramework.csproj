@@ -69,9 +69,14 @@
 		<Compile Include="Patches\ModExtensions\TerrainTagGraphic\Pawn_PathFollower_TryEnterNextPathCell_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\Reachable\Reachability_CanReach_Patch.cs" />
+		<Compile Include="Patches\RegionPathfinding\RegionAndRoomUpdater_ShouldBeInTheSameRoom_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_FloodFillAndAddCells_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_TryGenerateRegionFrom_Patch.cs" />
+		<Compile Include="Patches\RegionPathfinding\RegionTraverser_FloodAndSetDistricts_Patch.cs" />
+		<Compile Include="Patches\RegionPathfinding\RegionTraverser_FloodAndSetNewRegionIndex_Patch.cs" />
+		<Compile Include="Patches\RegionPathfinding\RegionTraverserUtil.cs" />
 		<Compile Include="Patches\RegionPathfinding\Region_Allows_Patch.cs" />
+		<Compile Include="Patches\RegionPathfinding\Region_NeighborsOfSameType_Patch.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
 		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_CanFireNowSub_Patch.cs" />
 		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_TryExecuteWorker_Patch.cs" />
