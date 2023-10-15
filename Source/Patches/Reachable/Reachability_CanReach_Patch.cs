@@ -32,15 +32,17 @@ namespace PathfindingFramework.Patches.Reachable
 		private static void Postfix(bool __result, IntVec3 start, LocalTargetInfo dest, TraverseParms traverseParams)
 		{
 			Pawn pawn = traverseParams.pawn;
+			IntVec3 desti = dest.Cell;
 			if (pawn == null)
 			{
+				Report.Error(
+					$"Reachability.CanReach postfix without pawn: [{start.x}, {start.z}] -> [{desti.x}, {desti.z}] = {__result}");
 				return;
 			}
 
 			Map map = pawn.Map;
-			IntVec3 desti = dest.Cell;
 			Report.Error(
-				$"GlobalReachability: [{start.x}, {start.z}, {start.GetTerrain(map)}] -> [{desti.x}, {desti.z}, {desti.GetTerrain(map)}] = {__result}");
+				$"Reachability.CanReach postfix: [{start.x}, {start.z}, {start.GetTerrain(map)}] -> [{desti.x}, {desti.z}, {desti.GetTerrain(map)}] = {__result}");
 		}
 		*/
 	}

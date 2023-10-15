@@ -61,6 +61,7 @@
 		<Compile Include="Patches\CellPathfinding\Pawn_PathFollower_CostToMoveIntoCell_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathFinder_FindPath_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_FindGroundSleepSpotFor_Patch.cs" />
+		<Compile Include="Patches\LocationChoosing\Pawn_PathFollower_StartPath_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\CurrentUrgency_Util.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_CleanupCurrentJob_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_StartJob_Patch.cs" />
