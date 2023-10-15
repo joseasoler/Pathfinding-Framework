@@ -8,7 +8,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 {
 	public static class RegionTraverserUtil
 	{
-		private static RegionEntryPredicate GeneratePredicate(RegionEntryPredicate originalPredicate, Region root)
+		private static RegionEntryPredicate GeneratePredicate(RegionEntryPredicate originalPredicate)
 		{
 			return (from, to) => originalPredicate(from, to) && from.TerrainDef() == to.TerrainDef();
 		}
@@ -23,7 +23,6 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			{
 				if (instruction.opcode == OpCodes.Stloc_1) // entryCondition, both functions share the same position for it.
 				{
-					yield return new CodeInstruction(OpCodes.Ldarg_0); // root
 					yield return new CodeInstruction(OpCodes.Call, generatePredicateMethod);
 				}
 

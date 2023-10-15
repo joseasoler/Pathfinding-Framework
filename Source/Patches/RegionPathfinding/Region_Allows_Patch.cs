@@ -30,16 +30,23 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 		private static bool MovementTypePassable(bool regionTypePassable, Region region, TraverseParms parms,
 			bool isDestination)
 		{
-			Pawn pawn = parms.pawn;
-			// These additional checks are only possible if the request is for a pawn.
-			// Since RegionMaker_TryGenerateRegionFrom_Patch sets impassable regions with a TerrainDef that is passable by at
-			// least one movement type to be passable, if vanilla returns impassable then the region is definitely impassable.
-			if (pawn == null || !regionTypePassable)
+			// Since RegionMaker_TryGenerateRegionFrom_Patch sets a TerrainDef to impassable regions with a terrain passable
+			// for at least one movement type and then sets the region as passable, if vanilla returns impassable then the
+			// region is definitely impassable for every movement type.
+			if (!regionTypePassable)
 			{
-				return regionTypePassable;
+				return false;
 			}
 
+			Pawn pawn = parms.pawn;
 			TerrainDef regionTerrainDef = region.TerrainDef();
+			if (pawn == null)
+			{
+				// When Region.Allows is called without a pawn, assume that the caller wants a result as similar to vanilla as
+				// possible. Since regions with a TerrainDef() are impassable with vanilla, disallow moving through them.
+				return regionTerrainDef == null;
+			}
+
 			// Regions with a valid TerrainDef field would be impassable in vanilla, but they have been made passable because
 			// at least one movement type can traverse them.
 			// If the region does not have a valid TerrainDef, grab the terrain from any of its cells. This will be enough to
@@ -47,11 +54,14 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			Map map = pawn.Map;
 			regionTerrainDef ??= region.AnyCell.GetTerrain(map);
 
+			// Pawns are not allowed to move through unsafe terrain, with just an exception. Is the pawn is currently on
+			// unsafe terrain, they can move to safe terrain.
 			IntVec3 startCell = pawn.Position;
 			TerrainDef startTerrainDef = startCell.GetTerrain(map);
 			bool currentOnUnsafeTerrain = pawn.MovementDef().PathCosts[startTerrainDef.index] == PathCost.Unsafe.cost;
 
-			// Pawns currently on unsafe terrain are allowed to traverse regions with unsafe terrain, but it cannot be their destination.
+			// If the pawn is on unsafe terrain, allow them to traverse unsafe terrain regions as long as the destination
+			// is safe.
 			short nonTraversablePathCost =
 				isDestination || !currentOnUnsafeTerrain ? PathCost.Unsafe.cost : PathCost.Impassable.cost;
 			short pathCost = pawn.MovementDef().PathCosts[regionTerrainDef.index];
