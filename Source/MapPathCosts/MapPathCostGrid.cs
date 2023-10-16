@@ -73,6 +73,7 @@ namespace PathfindingFramework.MapPathCosts
 			mapPathCostRef.things = 0;
 			mapPathCostRef.nonIgnoreRepeaterThings = 0;
 			mapPathCostRef.hasIgnoreRepeater = false;
+			mapPathCostRef.hasFence = false;
 
 			var thingList = Map.thingGrid.ThingsListAtFast(cellIndex);
 			for (int thingIndex = 0; thingIndex < thingList.Count; ++thingIndex)

@@ -14,8 +14,12 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 		{
 			if (__result == PawnPath.NotFound && Settings.Values.LogPathNotFound)
 			{
+				Map map = ___pawn.Map;
+				IntVec3 start = ___pawn.Position;
+				IntVec3 end = ___destination.Cell;
 				Report.Warning(
-					$"Additional pathfinding failure information: {___pawn.GetUniqueLoadID()} ({___pawn.Name}) with movement {___pawn.MovementDef().LabelCap} moving from {___pawn.Position} to {___destination.Cell}");
+					$"Additional pathfinding failure information: {___pawn.GetUniqueLoadID()} ({___pawn.Name}) with movement type{___pawn.MovementDef().LabelCap}.\n" +
+					$"Moving from {start}[{start.GetTerrain(map)}] to {end}[{end.GetTerrain(map)}]");
 			}
 		}
 	}
