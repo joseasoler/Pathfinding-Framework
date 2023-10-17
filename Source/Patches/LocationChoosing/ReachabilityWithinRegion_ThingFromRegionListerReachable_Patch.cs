@@ -17,20 +17,15 @@ namespace PathfindingFramework.Patches.LocationChoosing
 			PathEndMode peMode,
 			Pawn traveler)
 		{
-			if (!__result)
+			if (!__result || traveler == null)
 			{
 				return;
-			}
-
-			Map map = region.Map;
-			if (peMode == PathEndMode.ClosestTouch)
-			{
-				peMode = GenPath.ResolveClosestTouchPathMode(traveler, map, thing.Position);
 			}
 
 			MovementContext context = traveler.MovementContext();
 			switch (peMode)
 			{
+				case PathEndMode.ClosestTouch:
 				case PathEndMode.OnCell:
 				case PathEndMode.Touch:
 					if (thing.def.size.x == 1 && thing.def.size.z == 1)
@@ -64,7 +59,6 @@ namespace PathfindingFramework.Patches.LocationChoosing
 
 					break;
 				case PathEndMode.None:
-				case PathEndMode.ClosestTouch:
 				default:
 					break;
 			}
