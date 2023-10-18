@@ -12,10 +12,7 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	[HarmonyPatch(typeof(ReachabilityWithinRegion), nameof(ReachabilityWithinRegion.ThingFromRegionListerReachable))]
 	internal static class ReachabilityWithinRegion_ThingFromRegionListerReachable_Patch
 	{
-		private static void Postfix(ref bool __result, Thing thing,
-			Region region,
-			PathEndMode peMode,
-			Pawn traveler)
+		private static void Postfix(ref bool __result, Thing thing, PathEndMode peMode, Pawn traveler)
 		{
 			if (!__result || traveler == null)
 			{
@@ -30,29 +27,29 @@ namespace PathfindingFramework.Patches.LocationChoosing
 				case PathEndMode.Touch:
 					if (thing.def.size.x == 1 && thing.def.size.z == 1)
 					{
-						if (!context.CanStandAt(thing.Position))
+						if (!context.CanEnterTerrain(thing.Position))
 						{
 							__result = false;
 						}
 					}
 					else
 					{
-						bool canStandAtAnyCell = false;
+						bool canEnterAnyCell = false;
 						foreach (IntVec3 loc in thing.OccupiedRect())
 						{
-							if (context.CanStandAt(thing.Position))
+							if (context.CanEnterTerrain(thing.Position))
 							{
-								canStandAtAnyCell = true;
+								canEnterAnyCell = true;
 								break;
 							}
 						}
 
-						__result = canStandAtAnyCell;
+						__result = canEnterAnyCell;
 					}
 
 					break;
 				case PathEndMode.InteractionCell:
-					if (!context.CanStandAt(thing.InteractionCell))
+					if (!context.CanEnterTerrain(thing.InteractionCell))
 					{
 						__result = false;
 					}
