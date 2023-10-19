@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using HarmonyLib;
+using PathfindingFramework.MovementContexts;
 using Verse;
 using Verse.AI;
 
@@ -50,7 +51,8 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 		}
 
 		internal static void Postfix(Region region, TraverseParms ___traverseParms, IntVec3 ___destinationCell,
-			Dictionary<RegionLink, IntVec3> ___linkTargetCells, Dictionary<int, float> ___tmpDistances)
+			Dictionary<RegionLink, IntVec3> ___linkTargetCells, Dictionary<int, float> ___tmpDistances,
+			List<int> ___tmpCellIndices)
 		{
 			if (_regionLink == null || count > 10)
 			{
@@ -69,19 +71,23 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 			StringBuilder sb = new StringBuilder();
 			sb.AppendLine(
 				$"RegionCostCalculator error (Dijkstra) detected: {pawnName} moving from {startCellStr}[region:{startRegionStr}] to {destCellStr}[region:{destRegionStr}]");
+			MovementContext context = pawn?.MovementContext();
+			if (context != null)
+			{
+				sb.AppendLine(
+					$"{pawnName} movement context {context.MovementDef} should avoid fences: {context.ShouldAvoidFences}, ignore fire: {context.CanIgnoreFire}");
+			}
+
 			sb.AppendLine(
-				$"While processing link {_regionLink.span.ToString()} between regions {_regionLink.RegionA.id}[cell:{_regionLink.RegionA.AnyCell}] and  {_regionLink.RegionB.id}[cell:{_regionLink.RegionB.AnyCell}]");
+				$"While processing link {_regionLink.span.ToString()} between regions {_regionLink.RegionA.id}[cell:{_regionLink.RegionA.AnyCell}] and {_regionLink.RegionB.id}[cell:{_regionLink.RegionB.AnyCell}]");
 
 			if (___linkTargetCells.TryGetValue(_regionLink, out IntVec3 cell))
 			{
-				if (map != null && ___tmpDistances.TryGetValue(map.cellIndices.CellToIndex(cell), out float distance))
-				{
-					sb.AppendLine($"Targeting cell [{cell.x}, {cell.z}] at a distance of {distance}");
-				}
-				else
-				{
-					sb.AppendLine($"Targeting cell [{cell.x}, {cell.z}]. Distance could not be found!");
-				}
+				sb.Append($"Targeting cell [{cell.x}, {cell.z}], presumed to have invalid distance according to Dijkstra. ");
+				sb.AppendLine(
+					context != null
+						? $"Context at this cell: Path cost: {context.PathingContext.pathGrid.pathGrid[map.cellIndices.CellToIndex(cell)]}, CanEnterTerrain: {context.CanEnterTerrain(cell)}, CanStandAt:{context.CanStandAt(cell)}"
+						: "There is no context information.");
 			}
 			else
 			{
@@ -90,6 +96,19 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 
 			if (map != null)
 			{
+				sb.AppendLine($"Cells traversed by Dijkstra:");
+				List<string> traversedCells = new List<string>();
+				foreach (int node in ___tmpCellIndices)
+				{
+					IntVec3 currentCell = map.cellIndices.IndexToCell(node);
+					traversedCells.Add($"[{currentCell.x}, {currentCell.z}]");
+				}
+
+				foreach (string logEntry in traversedCells)
+				{
+					sb.AppendLine(logEntry);
+				}
+
 				List<string> distances = new List<string>();
 				foreach (var entry in ___tmpDistances)
 				{
@@ -98,7 +117,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 				}
 
 				distances.Sort();
-				sb.AppendLine($"Full distance map:");
+				sb.AppendLine($"Full distance map calculated by Dijkstra:");
 				foreach (string logEntry in distances)
 				{
 					sb.AppendLine(logEntry);
