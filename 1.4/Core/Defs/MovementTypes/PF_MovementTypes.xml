@@ -6,7 +6,7 @@
 		<defName>PF_Movement_Terrestrial</defName>
 		<label>terrestrial</label>
 		<description>Terrestrial creatures are adapted to move on land. They can cross shallow water, but deeper bodies of water present a challenge to them.</description>
-		<priority>0</priority>
+		<priority>1000</priority>
 		<defaultCost>Default</defaultCost>
 	</PathfindingFramework.MovementDef>
 
@@ -22,7 +22,7 @@
 		<defName>PF_Movement_Aquatic</defName>
 		<label>aquatic</label>
 		<description>Aquatic creatures can swim through deep water with ease, but are helpless on land.</description>
-		<priority>1000</priority>
+		<priority>0</priority>
 		<defaultCost>Unsafe</defaultCost>
 		<penAnimalsDisallowed>true</penAnimalsDisallowed>
 		<manhuntersRequireWater>true</manhuntersRequireWater>
