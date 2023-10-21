@@ -62,6 +62,7 @@
 		<Compile Include="Patches\CellPathfinding\PawnDestinationReservationManager_CanReserve_Patch.cs" />
 		<Compile Include="Patches\CellPathfinding\Pawn_PathFollower_CostToMoveIntoCell_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathDebugging\RegionCostCalculator_GetPreciseRegionLinkDistances_Patch.cs" />
+		<Compile Include="Patches\LocationChoosing\AnimalPenEnclosureCalculator_EnterRegion_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_FindGroundSleepSpotFor_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Pawn_PathFollower_StartPath_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\ReachabilityWithinRegion_ThingFromRegionListerReachable_Patch.cs" />
