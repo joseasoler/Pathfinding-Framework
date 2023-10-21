@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using Verse;
+using Verse.AI;
 
 namespace PathfindingFramework.Patches.RegionPathfinding
 {
@@ -15,24 +16,38 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	[HarmonyPatch(typeof(RegionMaker), "FloodFillAndAddCells")]
 	internal static class RegionMaker_FloodFillAndAddCells_Patch
 	{
-		private static Predicate<IntVec3> ReplaceRegionFloodFillPredicate(Predicate<IntVec3> original, RegionType type,
-			IntVec3 root, Map map)
+		private static bool TerrainsShouldBelongToSameRegion(TerrainDef lhs, TerrainDef rhs)
 		{
-			if (type != RegionType.ImpassableFreeAirExchange)
+			if (lhs.passability != rhs.passability)
 			{
-				return original;
+				// Two regions must never contain terrains with different vanilla passability values.
+				return false;
 			}
 
-			TerrainDef terrainDef = root.GetTerrain(map);
-			return cell => original(cell) && cell.GetTerrain(map) == terrainDef;
+			if (lhs.passability == Traversability.Standable)
+			{
+				// Vanilla case; all standable cells get grouped together.
+				return true;
+			}
+
+			// In the case of impassable terrains, they can only be grouped together with the same terrain.
+			return lhs == rhs;
+		}
+
+		private static Predicate<IntVec3> ReplaceRegionFloodFillPredicate(Predicate<IntVec3> original,
+			IntVec3 root, Map map)
+		{
+			// RegionTypeUtility_GetExpectedRegionType_Patch makes sure that regions with impassable terrains that are made
+			// passable by any movement type are considered normal region. To avoid pathfinding issues in other movement
+			// types, terrains impassable in vanilla must be grouped together in regions without any other terrains.
+			TerrainDef rootTerrain = root.GetTerrain(map);
+			return cell => original(cell) && TerrainsShouldBelongToSameRegion(rootTerrain, cell.GetTerrain(map));
 		}
 
 		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo replaceRegionFloodFillPredicateMethod =
 				AccessTools.Method(typeof(RegionMaker_FloodFillAndAddCells_Patch), nameof(ReplaceRegionFloodFillPredicate));
-			FieldInfo newRegField = AccessTools.Field(typeof(RegionMaker), "newReg");
-			FieldInfo regionTypeField = AccessTools.Field(typeof(Region), nameof(Region.type));
 			FieldInfo mapField = AccessTools.Field(typeof(RegionMaker), "map");
 
 			int foundCount = 0;
@@ -54,10 +69,6 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 					continue;
 				}
 
-				// RegionType additional parameter
-				yield return new CodeInstruction(OpCodes.Ldarg_0); // this
-				yield return new CodeInstruction(OpCodes.Ldfld, newRegField); // Verse.RegionMaker::newReg
-				yield return new CodeInstruction(OpCodes.Ldfld, regionTypeField); // Verse.Region::'type'
 				// Root cell additional parameter
 				yield return new CodeInstruction(OpCodes.Ldarg_1); // root
 				// Map additional parameter.

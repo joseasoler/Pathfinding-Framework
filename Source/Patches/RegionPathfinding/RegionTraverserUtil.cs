@@ -10,6 +10,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	{
 		private static RegionEntryPredicate GeneratePredicate(RegionEntryPredicate originalPredicate)
 		{
+			// For vanilla-like regions, their TerrainDef call will return null.
 			return (from, to) => originalPredicate(from, to) && from.TerrainDef() == to.TerrainDef();
 		}
 

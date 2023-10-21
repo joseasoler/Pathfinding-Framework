@@ -54,6 +54,7 @@
 		<Compile Include="Parse\PathCost.cs" />
 		<Compile Include="Parse\PathCostValues.cs" />
 		<Compile Include="Parse\TerrainTagPathCost.cs" />
+		<Compile Include="Patches\DevTool\PathDebugging\Map_FinalizeInit_DebugPatch.cs" />
 		<Compile Include="Patches\DevTool\PathDebugging\PathFinder_FindPath_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathDebugging\Pawn_PathFollower_GenerateNewPath.cs" />
 		<Compile Include="Patches\CellPathfinding\Pathing_For_Pawn_Patch.cs" />
@@ -74,10 +75,12 @@
 		<Compile Include="Patches\Reachable\Reachability_CanReach_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionAndRoomUpdater_ShouldBeInTheSameRoom_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_FloodFillAndAddCells_Patch.cs" />
+		<Compile Include="Patches\RegionPathfinding\RegionMaker_SweepInTwoDirectionsAndTryToCreateLink_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_TryGenerateRegionFrom_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionTraverser_FloodAndSetDistricts_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionTraverser_FloodAndSetNewRegionIndex_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionTraverserUtil.cs" />
+		<Compile Include="Patches\RegionPathfinding\RegionTypeUtility_GetExpectedRegionType_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\Region_Allows_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\Region_NeighborsOfSameType_Patch.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
@@ -186,5 +189,8 @@
 		<!-- Force updates of the PawnGraphicSet. -->
 		<Publicize Include="Assembly-CSharp:Verse.Pawn.drawer" />
 	</ItemGroup>
+	<PropertyGroup>
+		<PublicizerClearCacheOnClean>true</PublicizerClearCacheOnClean>
+	</PropertyGroup>
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
