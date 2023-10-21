@@ -73,6 +73,7 @@
 		<Compile Include="Patches\ModExtensions\PawnGraphicSet_ResolveAllGraphics_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\TerrainTagGraphic\Pawn_PathFollower_TryEnterNextPathCell_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
+		<Compile Include="Patches\Reachable\Reachability_CanReachFactionBase_Patch.cs" />
 		<Compile Include="Patches\Reachable\Reachability_CanReach_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionAndRoomUpdater_ShouldBeInTheSameRoom_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_FloodFillAndAddCells_Patch.cs" />
