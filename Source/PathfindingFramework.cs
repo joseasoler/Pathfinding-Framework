@@ -1,4 +1,4 @@
-using PathfindingFramework.Cache.Global;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
 using UnityEngine;
 using Verse;
@@ -30,8 +30,8 @@ namespace PathfindingFramework
 		private void InitializeWhenLoadingFinished()
 		{
 			GetSettings<Settings>();
-			// Caches which require DefDatabase being fully initialized.
-			MovementExtensionCache.Initialize();
+			// Reads and stores the MovementDef granted by MovementExtensions of each Def.
+			MovementExtensionReader.Initialize();
 			// Graphics are initialized after all defs and mod extensions are fully initialized.
 			GraphicLoader.Initialize();
 			// Add some useful (but brief) information to the log.

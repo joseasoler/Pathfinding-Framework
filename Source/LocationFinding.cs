@@ -100,11 +100,12 @@ namespace PathfindingFramework
 		/// <param name="roadChance">Probability of spawning on a road.</param>
 		/// <param name="allowFogged">Allow spawning in fogged tiles.</param>
 		/// <param name="extraValidator">Optional extra validation.</param>
-		/// <param name="movementDef">Movement definition of the pawn.</param>
+		/// <param name="pawnKindDef">Definition of the pawn.</param>
 		/// <returns>True if a cell was found.</returns>
 		public static bool TryFindRandomPawnEntryCell(out IntVec3 result, Map map, float roadChance,
-			bool allowFogged, Predicate<IntVec3> extraValidator, MovementDef movementDef)
+			bool allowFogged, Predicate<IntVec3> extraValidator, PawnKindDef pawnKindDef)
 		{
+			MovementDef movementDef = pawnKindDef.race?.MovementDef();
 			if (movementDef == null)
 			{
 				return RCellFinder.TryFindRandomPawnEntryCell(out result, map, roadChance, allowFogged, extraValidator);

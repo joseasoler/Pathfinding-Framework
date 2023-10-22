@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using PathfindingFramework.Cache.Global;
 using PathfindingFramework.MapPathCosts;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Patches;
 using Verse;
 
@@ -28,7 +28,6 @@ namespace PathfindingFramework.DevTool
 		public static void MemoryUsageEstimation()
 		{
 			var reports = new List<MemoryUsageData>();
-			reports.AddRange(MovementExtensionCache.MemoryReport());
 			reports.AddRange(MovementDefUtils.MemoryReport.Get());
 			reports.AddRange(MapPathCostMemoryReport.MemoryReport());
 			foreach (Map map in Find.Maps)

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
-using PathfindingFramework.Cache.Global;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
 using RimWorld;
 using Verse;
@@ -18,7 +18,7 @@ namespace PathfindingFramework.Patches.Spawning
 		private static bool TryReplaceAnimalSpawnLocation(PawnKindDef pawnKindDef, Map map, IntVec3 location,
 			int randomInRange, int radius)
 		{
-			MovementDef movementDef = MovementExtensionCache.GetMovementDef(pawnKindDef);
+			MovementDef movementDef = pawnKindDef.race?.MovementDef();
 			if (randomInRange <= 0 || movementDef == null || !location.InBounds(map))
 			{
 				return false;
@@ -33,7 +33,7 @@ namespace PathfindingFramework.Patches.Spawning
 
 			// The animal to spawn cannot stand in the chosen terrain. A new cell must be found.
 			if (!LocationFinding.TryFindRandomPawnEntryCell(out IntVec3 newCell, map, CellFinder.EdgeRoadChance_Animal, true,
-				    null, movementDef))
+				    null, pawnKindDef))
 			{
 				return false;
 			}

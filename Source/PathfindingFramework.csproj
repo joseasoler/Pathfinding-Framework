@@ -21,7 +21,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="Cache\Global\MovementExtensionCache.cs" />
 		<Compile Include="DevTool\HediffDefGenerator_Movement.cs" />
 		<Compile Include="DevTool\MemoryUsageData.cs" />
 		<Compile Include="DevTool\MemoryUsageDebugOutput.cs" />
@@ -48,6 +47,7 @@
 		<Compile Include="MovementContexts\MovementContextUtil.cs" />
 		<Compile Include="MovementDefOf.cs" />
 		<Compile Include="MovementDefUtils\MemoryReport.cs" />
+		<Compile Include="MovementDefUtils\MovementExtensionReader.cs" />
 		<Compile Include="MovementDefUtils\PathCosts.cs" />
 		<Compile Include="MovementExtension.cs" />
 		<Compile Include="Parse\ParseHandler.cs" />

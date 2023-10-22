@@ -1,6 +1,7 @@
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.MovementContexts;
 using Prepatcher;
+using RimWorld;
 using Verse;
 
 namespace PathfindingFramework.Patches
@@ -20,6 +21,58 @@ namespace PathfindingFramework.Patches
 		private static TerrainDef _noPrepatcherTerrainDef = null;
 		private static TerrainTagGraphicExtension _noPrepatcherTerrainTagGraphicExtension = null;
 		private static bool _noPrepatcherBool = false;
+
+		/// <summary>
+		/// Stores the movement type granted by the MovementExtensions of this def.
+		/// This is initialized after the game loads, and never modified afterwards.
+		/// </summary>
+		/// <param name="thingDef">Apparel or pawn race being checked.</param>
+		/// <returns>Movement related to this def.</returns>
+		[PrepatcherField]
+		public static ref MovementDef MovementDef(this ThingDef thingDef)
+		{
+			Report.ErrorOnce(NoPrepatcher);
+			return ref _noPrepatcherMovementDef;
+		}
+
+		/// <summary>
+		/// Stores the movement type granted by the MovementExtensions of this def.
+		/// This is initialized after the game loads, and never modified afterwards.
+		/// </summary>
+		/// <param name="lifeStageDef">Life stage being checked.</param>
+		/// <returns>Movement related to this def.</returns>
+		[PrepatcherField]
+		public static ref MovementDef MovementDef(this LifeStageDef lifeStageDef)
+		{
+			Report.ErrorOnce(NoPrepatcher);
+			return ref _noPrepatcherMovementDef;
+		}
+
+		/// <summary>
+		/// Stores the movement type granted by the MovementExtensions of this def.
+		/// This is initialized after the game loads, and never modified afterwards.
+		/// </summary>
+		/// <param name="geneDef">Gene being checked.</param>
+		/// <returns>Movement related to this def.</returns>
+		[PrepatcherField]
+		public static ref MovementDef MovementDef(this GeneDef geneDef)
+		{
+			Report.ErrorOnce(NoPrepatcher);
+			return ref _noPrepatcherMovementDef;
+		}
+
+		/// <summary>
+		/// Stores the movement type granted by the MovementExtensions of this def.
+		/// This is initialized after the game loads, and never modified afterwards.
+		/// </summary>
+		/// <param name="hediffDef">Health difference being checked.</param>
+		/// <returns>Movement related to this def.</returns>
+		[PrepatcherField]
+		public static ref MovementDef MovementDef(this HediffDef hediffDef)
+		{
+			Report.ErrorOnce(NoPrepatcher);
+			return ref _noPrepatcherMovementDef;
+		}
 
 		/// <summary>
 		/// Movement definition currently in use for this pawn.

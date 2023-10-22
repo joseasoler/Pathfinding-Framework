@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using HarmonyLib;
-using PathfindingFramework.Cache.Global;
+using PathfindingFramework.MovementDefUtils;
 using RimWorld;
 using Verse;
 
@@ -23,7 +23,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			for (int index = 0; index < apparelList.Count; ++index)
 			{
 				var apparelDef = apparelList[index].def;
-				var extensionMovementDef = MovementExtensionCache.GetMovementDef(apparelDef);
+				var extensionMovementDef = apparelDef.MovementDef();
 				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return new Pair<string, Dialog_InfoCard.Hyperlink?>(apparelDef.label,
@@ -45,7 +45,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 					continue;
 				}
 
-				var extensionMovementDef = MovementExtensionCache.GetMovementDef(gene.def);
+				var extensionMovementDef = gene.def.MovementDef();
 				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return gene.def;
@@ -91,7 +91,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			{
 				var hediffDef = hediffList[index].def;
 
-				var extensionMovementDef = MovementExtensionCache.GetMovementDef(hediffDef);
+				var extensionMovementDef = hediffDef.MovementDef();
 				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return new Pair<string, Dialog_InfoCard.Hyperlink?>(hediffDef.label,
@@ -131,7 +131,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 
 			var movementDef = __instance.MovementDef();
 
-			var hyperlinks = new List<Dialog_InfoCard.Hyperlink> {new(movementDef)};
+			var hyperlinks = new List<Dialog_InfoCard.Hyperlink> { new(movementDef) };
 
 			var extraReportText = "";
 			var extraReportInfo = GetExtraReportInfo(__instance, movementDef);

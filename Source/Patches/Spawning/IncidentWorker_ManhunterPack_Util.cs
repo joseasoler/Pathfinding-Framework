@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
-using PathfindingFramework.Cache.Global;
+using PathfindingFramework.MovementDefUtils;
 using RimWorld;
 using Verse;
 
@@ -21,10 +21,6 @@ namespace PathfindingFramework.Patches.Spawning
 				AccessTools.Method(typeof(RCellFinder),
 					nameof(RCellFinder.TryFindRandomPawnEntryCell));
 
-			MethodInfo getMovementDefMethod =
-				AccessTools.Method(typeof(MovementExtensionCache),
-					nameof(MovementExtensionCache.GetMovementDef), new Type[] {typeof(PawnKindDef)});
-
 			MethodInfo movementEntryCellMethod =
 				AccessTools.Method(typeof(LocationFinding),
 					nameof(LocationFinding.TryFindRandomPawnEntryCell));
@@ -35,7 +31,6 @@ namespace PathfindingFramework.Patches.Spawning
 				if (instruction.Calls(vanillaEntryCellMethod))
 				{
 					yield return new CodeInstruction(pawnKindDefInstruction); // animal kind pawnKindDef.
-					yield return new CodeInstruction(OpCodes.Call, getMovementDefMethod);
 					yield return new CodeInstruction(OpCodes.Call, movementEntryCellMethod);
 				}
 				else

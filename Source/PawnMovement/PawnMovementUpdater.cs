@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PathfindingFramework.Cache.Global;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Patches;
 using RimWorld;
 using Verse;
@@ -28,7 +28,7 @@ namespace PathfindingFramework.PawnMovement
 			for (int index = 0; index < apparelList.Count; ++index)
 			{
 				var apparelDef = apparelList[index].def;
-				var movementDef = MovementExtensionCache.GetMovementDef(apparelDef);
+				var movementDef = apparelDef.MovementDef();
 				if (movementDef != null)
 				{
 					movementDefs.Add(movementDef);
@@ -57,7 +57,7 @@ namespace PathfindingFramework.PawnMovement
 					continue;
 				}
 
-				MovementDef movementDef = MovementExtensionCache.GetMovementDef(gene.def);
+				MovementDef movementDef = gene.def.MovementDef();
 				if (movementDef != null)
 				{
 					movementDefs.Add(movementDef);
@@ -82,7 +82,7 @@ namespace PathfindingFramework.PawnMovement
 			{
 				var hediff = hediffList[index];
 
-				MovementDef movementDef = MovementExtensionCache.GetMovementDef(hediff.def);
+				MovementDef movementDef = hediff.def.MovementDef();
 				if (movementDef != null)
 				{
 					movementDefs.Add(movementDef);
@@ -98,7 +98,7 @@ namespace PathfindingFramework.PawnMovement
 		private static void FromLifeStage(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
 			LifeStageDef lifeStageDef = pawn.ageTracker?.CurLifeStage;
-			MovementDef movementDef = MovementExtensionCache.GetMovementDef(lifeStageDef);
+			MovementDef movementDef = lifeStageDef.MovementDef();
 			if (movementDef != null)
 			{
 				movementDefs.Add(movementDef);
@@ -112,7 +112,7 @@ namespace PathfindingFramework.PawnMovement
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
 		private static void FromRace(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
-			MovementDef movementDef = MovementExtensionCache.GetMovementDef(pawn.def);
+			MovementDef movementDef = pawn.def.MovementDef();
 			if (movementDef != null)
 			{
 				movementDefs.Add(movementDef);

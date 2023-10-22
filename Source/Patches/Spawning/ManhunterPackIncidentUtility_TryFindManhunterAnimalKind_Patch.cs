@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
-using PathfindingFramework.Cache.Global;
+using PathfindingFramework.MovementDefUtils;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
@@ -42,7 +42,7 @@ namespace PathfindingFramework.Patches.Spawning
 			bool accessToWater = HasAccessToWater(tileID);
 			foreach (PawnKindDef manhunterDef in allManhunters)
 			{
-				MovementDef movementDef = MovementExtensionCache.GetMovementDef(manhunterDef);
+				MovementDef movementDef = manhunterDef.race.MovementDef();
 				if (accessToWater || movementDef == null || !movementDef.manhuntersRequireWater)
 				{
 					yield return manhunterDef;
