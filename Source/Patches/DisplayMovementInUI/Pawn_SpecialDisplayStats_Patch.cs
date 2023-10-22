@@ -102,7 +102,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			return null;
 		}
 
-		
+
 		private static Pair<string, Dialog_InfoCard.Hyperlink?>? GetGrantedByInfo(Pawn pawn, MovementDef movementDef)
 		{
 			// This function must query potential granted movement types in the same order as PawnMovementUpdater.Update.
@@ -126,15 +126,17 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 
 		internal static IEnumerable<StatDrawEntry> Postfix(IEnumerable<StatDrawEntry> values, Pawn __instance)
 		{
-			if (values != null)
+			foreach (StatDrawEntry value in values)
 			{
-				foreach (StatDrawEntry value in values)
-				{
-					yield return value;
-				}
+				yield return value;
 			}
 
-			MovementDef movementDef = __instance.MovementDef();
+			MovementDef movementDef = __instance?.MovementDef();
+
+			if (movementDef == null)
+			{
+				yield break;
+			}
 
 			List<Dialog_InfoCard.Hyperlink> hyperlinks = new List<Dialog_InfoCard.Hyperlink> { new(movementDef) };
 
