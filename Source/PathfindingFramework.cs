@@ -19,6 +19,7 @@ namespace PathfindingFramework
 		/// <param name="content">Content pack data of this mod.</param>
 		public PathfindingFramework(ModContentPack content) : base(content)
 		{
+			ModAssemblyInfo.Initialize();
 			Harmony.Initialize();
 			ParseHandler.Initialize();
 			LongEventHandler.ExecuteWhenFinished(InitializeWhenLoadingFinished);

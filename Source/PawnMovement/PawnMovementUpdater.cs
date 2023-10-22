@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GiddyUp;
 using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Patches;
 using RimWorld;
@@ -120,11 +121,42 @@ namespace PathfindingFramework.PawnMovement
 		}
 
 		/// <summary>
+		/// Compatibility with Giddy-Up 2. Finds out if the pawn is a rider. In that case, it copies the MovementDef
+		/// and MovementContext of the mount.
+		/// </summary>
+		/// <param name="pawn">Pawn to check.</param>
+		/// <returns>True if the pawn is a rider and the values from the mount have been copied successfully.</returns>
+		private static bool TryGetFromMount(Pawn pawn)
+		{
+			if (ModAssemblyInfo.GiddyUp2Assembly == null)
+			{
+				return false;
+			}
+
+			Pawn mount = pawn.GetGUData()?.mount;
+			// During game initialization it is not possible to assume that the movement context of the mount is initialized
+			// before the movement context of the rider.
+			if (mount?.MovementContext() != null)
+			{
+				pawn.MovementDef() = mount.MovementDef();
+				pawn.MovementContext() = mount.MovementContext();
+				return true;
+			}
+
+			return false;
+		}
+
+		/// <summary>
 		/// Updates the MovementDef to use for this pawn. See MovementExtension for details.
 		/// </summary>
 		/// <param name="pawn">Pawn to evaluate.</param>
 		public static void Update(Pawn pawn)
 		{
+			if (TryGetFromMount(pawn))
+			{
+				return;
+			}
+
 			/*
 			 * Recalculate this. Now, MovementDef has a priority. And MovementExtension can combine.
 			 * Also do canCombine in the MovementExtensions for testing.
@@ -157,5 +189,6 @@ namespace PathfindingFramework.PawnMovement
 			pawn.MovementDef() = movementDef;
 			pawn.Map.MovementContextData().UpdatePawn(pawn);
 		}
+
 	}
 }

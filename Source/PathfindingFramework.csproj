@@ -41,6 +41,7 @@
 		<Compile Include="MapPathCosts\MapPathCostMemoryReport.cs" />
 		<Compile Include="MapPathCosts\MapPathCostGrid.cs" />
 		<Compile Include="MapGrid.cs" />
+		<Compile Include="ModAssemblyInfo.cs" />
 		<Compile Include="MovementContexts\MovementContext.cs" />
 		<Compile Include="MovementContexts\MovementContextData.cs" />
 		<Compile Include="MovementContexts\MovementContextId.cs" />
@@ -66,6 +67,10 @@
 		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_FindGroundSleepSpotFor_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Pawn_PathFollower_StartPath_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\ReachabilityWithinRegion_ThingFromRegionListerReachable_Patch.cs" />
+		<Compile Include="Patches\ModCompatibility\GiddyUp2\MountUtility_Dismount_Patch.cs" />
+		<Compile Include="Patches\ModCompatibility\GiddyUp2\MountUtility_Mount_Patch.cs" />
+		<Compile Include="Patches\ModCompatibility\GiddyUp2\Pawn_PostMapInit_Patch.cs" />
+		<Compile Include="Patches\ModCompatibility\ModCompatibilityUtility.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\CurrentUrgency_Util.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_CleanupCurrentJob_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_StartJob_Patch.cs" />
@@ -139,6 +144,10 @@
 		</PackageReference>
 		<PackageReference Include="Lib.Harmony" Version="2.*" ExcludeAssets="runtime" />
 		<PackageReference Include="Zetrith.Prepatcher" Version="1.*" />
+		<Reference Include="GiddyUpCore">
+			<HintPath>..\ReferenceAssemblies\GiddyUp2\$(Configuration)\Assemblies\GiddyUpCore.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
 		<Reference Include="Assembly-CSharp">
 			<HintPath Condition="$([MSBuild]::IsOSPlatform('Windows'))">..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
 			<HintPath Condition="$([MSBuild]::IsOSPlatform('Linux'))">..\..\..\RimWorldLinux_Data\Managed\Assembly-CSharp.dll</HintPath>
@@ -191,6 +200,9 @@
 
 		<!-- Force updates of the PawnGraphicSet. -->
 		<Publicize Include="Assembly-CSharp:Verse.Pawn.drawer" />
+
+		<!-- Access internal class StorageUtility. -->
+		<Publicize Include="GiddyUpCore:GiddyUp.StorageUtility" />
 	</ItemGroup>
 	<PropertyGroup>
 		<PublicizerClearCacheOnClean>true</PublicizerClearCacheOnClean>
