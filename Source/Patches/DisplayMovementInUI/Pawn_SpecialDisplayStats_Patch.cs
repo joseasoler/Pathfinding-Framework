@@ -22,8 +22,8 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 
 			for (int index = 0; index < apparelList.Count; ++index)
 			{
-				var apparelDef = apparelList[index].def;
-				var extensionMovementDef = apparelDef.MovementDef();
+				ThingDef apparelDef = apparelList[index].def;
+				MovementDef extensionMovementDef = apparelDef.MovementDef();
 				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return new Pair<string, Dialog_InfoCard.Hyperlink?>(apparelDef.label,
@@ -39,7 +39,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 		{
 			for (int index = 0; index < genes.Count; ++index)
 			{
-				var gene = genes[index];
+				Gene gene = genes[index];
 				if (!gene.Active)
 				{
 					continue;
@@ -62,14 +62,14 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 				return null;
 			}
 
-			var xenogeneDef = MovementFromGeneList(pawn.genes.Xenogenes, movementDef);
+			GeneDef xenogeneDef = MovementFromGeneList(pawn.genes.Xenogenes, movementDef);
 			if (xenogeneDef != null)
 			{
 				return new Pair<string, Dialog_InfoCard.Hyperlink?>("PF_GrantedByXenogene".Translate(xenogeneDef.label),
 					new Dialog_InfoCard.Hyperlink(xenogeneDef));
 			}
 
-			var endogeneDef = MovementFromGeneList(pawn.genes.Endogenes, movementDef);
+			GeneDef endogeneDef = MovementFromGeneList(pawn.genes.Endogenes, movementDef);
 			if (endogeneDef != null)
 			{
 				return new Pair<string, Dialog_InfoCard.Hyperlink?>("PF_GrantedByEndogene".Translate(endogeneDef.label),
@@ -81,13 +81,13 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 
 		private static Pair<string, Dialog_InfoCard.Hyperlink?>? MovementFromHediffs(Pawn pawn, MovementDef movementDef)
 		{
-			var hediffList = pawn.health?.hediffSet?.hediffs;
+			List<Hediff> hediffList = pawn.health?.hediffSet?.hediffs;
 			if (hediffList == null)
 			{
 				return null;
 			}
 
-			for (var index = 0; index < hediffList.Count; ++index)
+			for (int index = 0; index < hediffList.Count; ++index)
 			{
 				var hediffDef = hediffList[index].def;
 
@@ -102,9 +102,11 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			return null;
 		}
 
-		private static Pair<string, Dialog_InfoCard.Hyperlink?>? GetExtraReportInfo(Pawn pawn, MovementDef movementDef)
+		
+		private static Pair<string, Dialog_InfoCard.Hyperlink?>? GetGrantedByInfo(Pawn pawn, MovementDef movementDef)
 		{
-			var apparelResult = MovementFromApparel(pawn, movementDef);
+			// This function must query potential granted movement types in the same order as PawnMovementUpdater.Update.
+			Pair<string, Dialog_InfoCard.Hyperlink?>? apparelResult = MovementFromApparel(pawn, movementDef);
 			if (apparelResult != null)
 			{
 				return apparelResult;
@@ -112,7 +114,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 
 			if (ModLister.BiotechInstalled)
 			{
-				var geneResult = MovementFromGenes(pawn, movementDef);
+				Pair<string, Dialog_InfoCard.Hyperlink?>? geneResult = MovementFromGenes(pawn, movementDef);
 				if (geneResult != null)
 				{
 					return geneResult;
@@ -124,17 +126,20 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 
 		internal static IEnumerable<StatDrawEntry> Postfix(IEnumerable<StatDrawEntry> values, Pawn __instance)
 		{
-			foreach (var value in values)
+			if (values != null)
 			{
-				yield return value;
+				foreach (StatDrawEntry value in values)
+				{
+					yield return value;
+				}
 			}
 
-			var movementDef = __instance.MovementDef();
+			MovementDef movementDef = __instance.MovementDef();
 
-			var hyperlinks = new List<Dialog_InfoCard.Hyperlink> { new(movementDef) };
+			List<Dialog_InfoCard.Hyperlink> hyperlinks = new List<Dialog_InfoCard.Hyperlink> { new(movementDef) };
 
-			var extraReportText = "";
-			var extraReportInfo = GetExtraReportInfo(__instance, movementDef);
+			string extraReportText = "";
+			Pair<string, Dialog_InfoCard.Hyperlink?>? extraReportInfo = GetGrantedByInfo(__instance, movementDef);
 			if (extraReportInfo != null)
 			{
 				extraReportText = extraReportInfo.Value.First;
