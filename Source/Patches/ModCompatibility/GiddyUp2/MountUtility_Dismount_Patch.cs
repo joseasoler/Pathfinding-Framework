@@ -27,7 +27,10 @@ namespace PathfindingFramework.Patches.ModCompatibility.GiddyUp2
 
 		private static void Postfix(Pawn rider)
 		{
-			PawnMovementUpdater.Update(rider);
+			if (rider.Spawned)
+			{
+				PawnMovementUpdater.Update(rider);
+			}
 		}
 	}
 }
