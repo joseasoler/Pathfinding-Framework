@@ -11,8 +11,13 @@ namespace PathfindingFramework.Patches.CellPathfinding
 	{
 		internal static void Postfix(ref bool __result, IntVec3 c, Pawn searcher)
 		{
+			if (!c.InBounds(searcher.Map))
+			{
+				return;
+			}
+
 			bool original = __result;
-			var terrainDef = c.GetTerrain(searcher.Map);
+			TerrainDef terrainDef = c.GetTerrain(searcher.Map);
 			if (__result && !searcher.MovementContext().CanEnterTerrain(c))
 			{
 				__result = false;

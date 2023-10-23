@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using HarmonyLib;
+using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.PawnMovement;
 using Verse;
 
@@ -26,7 +27,10 @@ namespace PathfindingFramework.Patches.ModCompatibility.GiddyUp2
 
 		private static void Prefix(Pawn __instance)
 		{
-			PawnMovementUpdater.Update(__instance);
+			if (GiddyUp2Compat.GetMount(__instance) != null)
+			{
+				PawnMovementUpdater.Update(__instance);
+			}
 		}
 	}
 }

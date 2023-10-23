@@ -32,6 +32,8 @@
 		<Compile Include="DevTool\TerrainTagsDebugOutput.cs" />
 		<Compile Include="GraphicLoader.cs" />
 		<Compile Include="Harmony.cs" />
+		<Compile Include="HediffsDefOf.cs" />
+		<Compile Include="Hediffs\Hediff_TemporaryMovement.cs" />
 		<Compile Include="JobDefOf.cs" />
 		<Compile Include="Jobs\JobGiver_SeekSafeTerrain.cs" />
 		<Compile Include="LoadedDataReport.cs" />
@@ -42,6 +44,8 @@
 		<Compile Include="MapPathCosts\MapPathCostGrid.cs" />
 		<Compile Include="MapGrid.cs" />
 		<Compile Include="ModAssemblyInfo.cs" />
+		<Compile Include="ModCompatibility\GiddyUp2Compat.cs" />
+		<Compile Include="ModCompatibility\ModCompatibilityUtility.cs" />
 		<Compile Include="MovementContexts\MovementContext.cs" />
 		<Compile Include="MovementContexts\MovementContextData.cs" />
 		<Compile Include="MovementContexts\MovementContextId.cs" />
@@ -67,10 +71,10 @@
 		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_FindGroundSleepSpotFor_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Pawn_PathFollower_StartPath_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\ReachabilityWithinRegion_ThingFromRegionListerReachable_Patch.cs" />
+		<Compile Include="Patches\ModCompatibility\GiddyUp2\ExtendedDataStorage_FinalizeInit_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\MountUtility_Dismount_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\MountUtility_Mount_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\Pawn_PostMapInit_Patch.cs" />
-		<Compile Include="Patches\ModCompatibility\ModCompatibilityUtility.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\CurrentUrgency_Util.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_CleanupCurrentJob_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_StartJob_Patch.cs" />
@@ -196,6 +200,9 @@
 
 		<!-- Force updates of the PawnGraphicSet. -->
 		<Publicize Include="Assembly-CSharp:Verse.Pawn.drawer" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Patches\ModExtensions\TerrainTagGraphic\" />
 	</ItemGroup>
 	<PropertyGroup>
 		<PublicizerClearCacheOnClean>true</PublicizerClearCacheOnClean>

@@ -1,13 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="../../../../Schemas/MovementDef.xsd">
-	<!-- Should correspond to vanilla. Used by default if no other type is found. -->
-	<PathfindingFramework.MovementDef>
-		<defName>PF_Movement_Terrestrial</defName>
+	<PathfindingFramework.MovementDef Name="PF_Movement_Terrestrial_Base" Abstract="True">
 		<label>terrestrial</label>
 		<description>Terrestrial creatures are adapted to move on land. They can cross shallow water, but deeper bodies of water present a challenge to them.</description>
-		<priority>1000</priority>
 		<defaultCost>Default</defaultCost>
+	</PathfindingFramework.MovementDef>
+
+	<!-- Should correspond to vanilla. Used by default if no other type is found. -->
+	<PathfindingFramework.MovementDef ParentName="PF_Movement_Terrestrial_Base">
+		<defName>PF_Movement_Terrestrial</defName>
+		<priority>1000</priority>
+	</PathfindingFramework.MovementDef>
+
+	<!--
+	Granted temporarily when a terrestrial creature finds itself in water unexpectedly in specific cases. Currently this
+	only happens with Giddy-Up 2.
+	-->
+	<PathfindingFramework.MovementDef ParentName="PF_Movement_Terrestrial_Base">
+		<defName>PF_Movement_Terrestrial_Unsafe</defName>
+		<priority>500</priority>
+		<tagCosts>
+			<PF_TerrainTag_WaterDeep>Unsafe</PF_TerrainTag_WaterDeep>
+		</tagCosts>
 	</PathfindingFramework.MovementDef>
 
 	<PathfindingFramework.MovementDef Name="PF_Movement_AquaticBase" Abstract="True">

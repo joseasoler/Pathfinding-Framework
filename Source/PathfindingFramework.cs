@@ -1,5 +1,7 @@
+using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
+using PathfindingFramework.PawnMovement;
 using UnityEngine;
 using Verse;
 
@@ -35,6 +37,8 @@ namespace PathfindingFramework
 			MovementExtensionReader.Initialize();
 			// Graphics are initialized after all defs and mod extensions are fully initialized.
 			GraphicLoader.Initialize();
+			// Enable mod compatibility patches.
+			GiddyUp2Compat.Initialize();
 			// Add some useful (but brief) information to the log.
 			// Enabling debug logging expands upon this.
 			LoadedDataReport.Write();

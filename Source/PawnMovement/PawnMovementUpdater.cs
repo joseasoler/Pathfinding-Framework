@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using PathfindingFramework.MovementDefUtils;
+﻿using System.Collections.Generic;
+using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Patches;
-using PathfindingFramework.Patches.ModCompatibility;
 using RimWorld;
 using Verse;
 
@@ -14,28 +11,7 @@ namespace PathfindingFramework.PawnMovement
 	/// </summary>
 	public static class PawnMovementUpdater
 	{
-		private static Func<Pawn, Pawn> GetMount = null;
 
-		public static void Initialize()
-		{
-			GetMount = pawn => null;
-			if (ModAssemblyInfo.GiddyUp2Assembly == null)
-			{
-				return;
-			}
-			
-			const string TypeName = "StorageUtility";
-			const string MethodName = "GetGUData";
-			MethodInfo GetGUData = ModCompatibilityUtility.MethodFromAssembly(ModAssemblyInfo.GiddyUp2Assembly, TypeName, MethodName);
-			if (GetGUData == null)
-			{
-				Report.Error($"Could not find a method required for Giddy-Up 2 compatibility. Compatibility patch will not work.");
-				return;
-			}
-			
-			// ToDo
-		}
-		
 		/// <summary>
 		/// Add all movement definitions obtained from apparel to the set.
 		/// </summary>
@@ -152,14 +128,7 @@ namespace PathfindingFramework.PawnMovement
 		/// <returns>True if the pawn is a rider and the values from the mount have been copied successfully.</returns>
 		private static bool TryGetFromMount(Pawn pawn)
 		{
-			if (ModAssemblyInfo.GiddyUp2Assembly == null)
-			{
-				return false;
-			}
-
-			Pawn mount = null;
-			// During game initialization it is not possible to assume that the movement context of the mount is initialized
-			// before the movement context of the rider.
+			Pawn mount = GiddyUp2Compat.GetMount(pawn);
 			if (mount?.MovementContext() != null)
 			{
 				pawn.MovementDef() = mount.MovementDef();
@@ -178,13 +147,10 @@ namespace PathfindingFramework.PawnMovement
 		{
 			if (TryGetFromMount(pawn))
 			{
+				// If the pawn is riding a mount, it will just use the MovementContext of its mount.
 				return;
 			}
 
-			/*
-			 * Recalculate this. Now, MovementDef has a priority. And MovementExtension can combine.
-			 * Also do canCombine in the MovementExtensions for testing.
-			 */
 			var movementDefs = new HashSet<MovementDef>();
 			FromApparel(pawn, ref movementDefs);
 
@@ -213,6 +179,5 @@ namespace PathfindingFramework.PawnMovement
 			pawn.MovementDef() = movementDef;
 			pawn.Map.MovementContextData().UpdatePawn(pawn);
 		}
-
 	}
 }
