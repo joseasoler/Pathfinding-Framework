@@ -55,10 +55,6 @@ Pathfinding Framework should be compatible with almost every mod. Other pathfind
 Development
 ---
 
-Before loading the project or compiling it, you will need to update the git submodules that store required reference assemblies to other mods.
-
-`git submodule update --init --recursive`
-
 To compile this mod on Windows, you will need to install the [.NET Framework 4.8 Developer Pack](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48). On Linux the packages you need vary depending on your distribution of choice. Dependencies are managed using NuGet. Your checkout must be placed in the RimWorld/Mods folder to let it find the RimWorld assemblies required for compilation.
 
 Contributions
