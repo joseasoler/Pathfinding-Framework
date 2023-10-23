@@ -144,10 +144,6 @@
 		</PackageReference>
 		<PackageReference Include="Lib.Harmony" Version="2.*" ExcludeAssets="runtime" />
 		<PackageReference Include="Zetrith.Prepatcher" Version="1.*" />
-		<Reference Include="GiddyUpCore">
-			<HintPath>..\ReferenceAssemblies\GiddyUp2\$(Configuration)\Assemblies\GiddyUpCore.dll</HintPath>
-			<Private>False</Private>
-		</Reference>
 		<Reference Include="Assembly-CSharp">
 			<HintPath Condition="$([MSBuild]::IsOSPlatform('Windows'))">..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
 			<HintPath Condition="$([MSBuild]::IsOSPlatform('Linux'))">..\..\..\RimWorldLinux_Data\Managed\Assembly-CSharp.dll</HintPath>
@@ -200,9 +196,6 @@
 
 		<!-- Force updates of the PawnGraphicSet. -->
 		<Publicize Include="Assembly-CSharp:Verse.Pawn.drawer" />
-
-		<!-- Access internal class StorageUtility. -->
-		<Publicize Include="GiddyUpCore:GiddyUp.StorageUtility" />
 	</ItemGroup>
 	<PropertyGroup>
 		<PublicizerClearCacheOnClean>true</PublicizerClearCacheOnClean>

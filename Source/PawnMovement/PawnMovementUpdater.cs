@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using GiddyUp;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Patches;
+using PathfindingFramework.Patches.ModCompatibility;
 using RimWorld;
 using Verse;
 
@@ -12,6 +14,28 @@ namespace PathfindingFramework.PawnMovement
 	/// </summary>
 	public static class PawnMovementUpdater
 	{
+		private static Func<Pawn, Pawn> GetMount = null;
+
+		public static void Initialize()
+		{
+			GetMount = pawn => null;
+			if (ModAssemblyInfo.GiddyUp2Assembly == null)
+			{
+				return;
+			}
+			
+			const string TypeName = "StorageUtility";
+			const string MethodName = "GetGUData";
+			MethodInfo GetGUData = ModCompatibilityUtility.MethodFromAssembly(ModAssemblyInfo.GiddyUp2Assembly, TypeName, MethodName);
+			if (GetGUData == null)
+			{
+				Report.Error($"Could not find a method required for Giddy-Up 2 compatibility. Compatibility patch will not work.");
+				return;
+			}
+			
+			// ToDo
+		}
+		
 		/// <summary>
 		/// Add all movement definitions obtained from apparel to the set.
 		/// </summary>
@@ -133,7 +157,7 @@ namespace PathfindingFramework.PawnMovement
 				return false;
 			}
 
-			Pawn mount = pawn.GetGUData()?.mount;
+			Pawn mount = null;
 			// During game initialization it is not possible to assume that the movement context of the mount is initialized
 			// before the movement context of the rider.
 			if (mount?.MovementContext() != null)

@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using GiddyUp;
 using HarmonyLib;
 using PathfindingFramework.PawnMovement;
 using Verse;
