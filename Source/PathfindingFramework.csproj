@@ -30,7 +30,6 @@
 		<Compile Include="DevTool\PathGridDivergenceDebugOutput.cs" />
 		<Compile Include="DevTool\PawnMovementDebugOutput.cs" />
 		<Compile Include="DevTool\TerrainTagsDebugOutput.cs" />
-		<Compile Include="GraphicLoader.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="HediffsDefOf.cs" />
 		<Compile Include="Hediffs\Hediff_TemporaryMovement.cs" />
@@ -38,7 +37,8 @@
 		<Compile Include="Jobs\JobGiver_SeekSafeTerrain.cs" />
 		<Compile Include="LoadedDataReport.cs" />
 		<Compile Include="LocationFinding.cs" />
-		<Compile Include="LocomotionExtension.cs" />
+		<Compile Include="LocomotionGraphicExtension.cs" />
+		<Compile Include="LocomotionMovementExtension.cs" />
 		<Compile Include="MapPathCosts\MapPathCost.cs" />
 		<Compile Include="MapPathCosts\MapPathCostMemoryReport.cs" />
 		<Compile Include="MapPathCosts\MapPathCostGrid.cs" />
@@ -75,7 +75,6 @@
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\MountUtility_Dismount_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\MountUtility_Mount_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\Pawn_PostMapInit_Patch.cs" />
-		<Compile Include="Patches\ModExtensions\Locomotion\CurrentUrgency_Util.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_CleanupCurrentJob_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_StartJob_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_TicksPerMove_Patch.cs" />
@@ -129,6 +128,10 @@
 		<Compile Include="Patches\TerrainChanges\TerrainGrid_DoTerrainChangedEffects_Patch.cs" />
 		<Compile Include="Patches\ThingGrids\Thing_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\ThingGrids\Thing_SpawnSetup_Patch.cs" />
+		<Compile Include="PawnGraphic\CurrentUrgencyUtil.cs" />
+		<Compile Include="PawnGraphic\GraphicContext.cs" />
+		<Compile Include="PawnGraphic\GraphicExtension.cs" />
+		<Compile Include="PawnGraphic\GraphicLoader.cs" />
 		<Compile Include="PawnMovement\PawnMovementUpdater.cs" />
 		<Compile Include="Report.cs" />
 		<Compile Include="MovementDef.cs" />

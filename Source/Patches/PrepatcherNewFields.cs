@@ -1,5 +1,6 @@
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.MovementContexts;
+using PathfindingFramework.PawnGraphic;
 using Prepatcher;
 using RimWorld;
 using Verse;
@@ -17,9 +18,8 @@ namespace PathfindingFramework.Patches
 		private static MapPathCostGrid _noPrepatcherMapPathCostGrid = null;
 		private static MovementContext _noPrepatcherMovementContext = null;
 		private static MovementContextData _noPrepatcherMovementContextData = null;
-		private static LocomotionExtension _noPrepatcherLocomotionExtension = null;
+		private static GraphicContext _noPrepatcherGraphicContext = null;
 		private static TerrainDef _noPrepatcherTerrainDef = null;
-		private static TerrainTagGraphicExtension _noPrepatcherTerrainTagGraphicExtension = null;
 		private static bool _noPrepatcherBool = false;
 
 		/// <summary>
@@ -101,15 +101,15 @@ namespace PathfindingFramework.Patches
 		}
 
 		/// <summary>
-		/// Locomotion extension of this pawn, if any.
+		/// Graphic context of this pawn, if any.
 		/// </summary>
 		/// <param name="pawn">Pawn being checked.</param>
-		/// <returns>Locomotion extension of this pawn.</returns>
+		/// <returns>Graphic context of this pawn.</returns>
 		[PrepatcherField]
-		public static ref LocomotionExtension LocomotionExtension(this Pawn pawn)
+		public static ref GraphicContext GraphicContext(this Pawn pawn)
 		{
 			Report.ErrorOnce(NoPrepatcher);
-			return ref _noPrepatcherLocomotionExtension;
+			return ref _noPrepatcherGraphicContext;
 		}
 
 		/// <summary>
@@ -122,18 +122,6 @@ namespace PathfindingFramework.Patches
 		{
 			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherTerrainDef;
-		}
-
-		/// <summary>
-		/// Terrain tag graphic extension of this pawn, if any.
-		/// </summary>
-		/// <param name="pawn">Pawn being checked.</param>
-		/// <returns>Terrain tag graphic extension of this pawn.</returns>
-		[PrepatcherField]
-		public static ref TerrainTagGraphicExtension TerrainTagGraphicExtension(this Pawn pawn)
-		{
-			Report.ErrorOnce(NoPrepatcher);
-			return ref _noPrepatcherTerrainTagGraphicExtension;
 		}
 
 		/// <summary>

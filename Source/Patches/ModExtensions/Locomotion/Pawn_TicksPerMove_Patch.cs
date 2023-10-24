@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
+using PathfindingFramework.PawnGraphic;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace PathfindingFramework.Patches.ModExtensions.Locomotion
 {
@@ -13,18 +13,19 @@ namespace PathfindingFramework.Patches.ModExtensions.Locomotion
 	{
 		private static void Postfix(Pawn __instance, ref int __result)
 		{
-			LocomotionExtension locomotionExtension = __instance.LocomotionExtension();
-			if (locomotionExtension == null)
+			LocomotionMovementExtension locomotionMovementExtension =
+				__instance.def.GetModExtension<LocomotionMovementExtension>();
+			if (locomotionMovementExtension == null)
 			{
 				return;
 			}
 
-			if (!locomotionExtension.locomotionUrgencies.Contains(CurrentUrgency_Util.Get(__instance)))
+			if (!locomotionMovementExtension.locomotionUrgencies.Contains(CurrentUrgencyUtil.Get(__instance)))
 			{
 				return;
 			}
 
-			__result = Mathf.Clamp(Mathf.RoundToInt(__result / locomotionExtension.moveSpeedMultiplier), 1, 450);
+			__result = Mathf.Clamp(Mathf.RoundToInt(__result / locomotionMovementExtension.moveSpeedMultiplier), 1, 450);
 		}
 	}
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Verse;
 using Verse.AI;
 
@@ -19,26 +18,15 @@ namespace PathfindingFramework.Patches.ModExtensions.TerrainTagGraphic
 				return;
 			}
 
-			TerrainDef newTerrainDef = ___pawn.Position.GetTerrain(___pawn.Map);
+			TerrainDef currentTerrainDef = ___pawn.Position.GetTerrain(___pawn.Map);
 			TerrainDef previousTerrainDef = ___pawn.CurrentTerrainDef();
-			if (newTerrainDef == previousTerrainDef)
+			if (currentTerrainDef == previousTerrainDef)
 			{
 				return;
 			}
 
-			___pawn.CurrentTerrainDef() = newTerrainDef;
-
-			TerrainTagGraphicExtension extension = ___pawn.TerrainTagGraphicExtension();
-			if (extension == null)
-			{
-				return;
-			}
-
-			if (extension.Affects(previousTerrainDef) != extension.Affects(newTerrainDef))
-			{
-				// Force an update of the PawnGraphicSet.
-				___pawn.drawer.renderer.graphics.nakedGraphic = null;
-			}
+			___pawn.CurrentTerrainDef() = currentTerrainDef;
+			___pawn.GraphicContext()?.TerrainUpdated(previousTerrainDef, currentTerrainDef);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
+using PathfindingFramework.PawnGraphic;
 using PathfindingFramework.PawnMovement;
 using UnityEngine;
 using Verse;

@@ -1,12 +1,12 @@
 ﻿using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.Patches.ModExtensions.Locomotion
+namespace PathfindingFramework.PawnGraphic
 {
 	/// <summary>
 	/// Common implementation for obtaining the current locomotion urgency of a pawn.
 	/// </summary>
-	public static class CurrentUrgency_Util
+	public static class CurrentUrgencyUtil
 	{
 		public static LocomotionUrgency Get(Pawn pawn)
 		{

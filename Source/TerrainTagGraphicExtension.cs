@@ -1,27 +1,20 @@
 using System.Collections.Generic;
-using UnityEngine;
+using PathfindingFramework.PawnGraphic;
 using Verse;
 
 namespace PathfindingFramework
 {
 	/// <summary>
 	/// Pawns with this extension can change their graphic depending on the terrain tag their are on.
+	/// Must be added to the PawnKindDef of the pawn. Incompatible with human-like pawns.
+	/// Not compatible with PawnKindDefs which have different graphics on their life stages.
 	/// </summary>
-	public class TerrainTagGraphicExtension : DefModExtension
+	public class TerrainTagGraphicExtension : GraphicExtension
 	{
 		/// <summary>
 		/// List of terrain tags that will trigger a graphics change.
 		/// </summary>
 		public List<string> terrainTags = new();
-
-		/// <summary>
-		/// Contains graphical data for the pawn when it is over a terrain with one of the defined tags.
-		/// DrawSize and shader will be taken from the pawn's original graphic.
-		/// </summary>
-		public GraphicData graphicData;
-
-		// ToDo
-		public List<GraphicData> alternateGraphicsData;
 
 		public TerrainTagGraphicExtension()
 		{
@@ -37,24 +30,6 @@ namespace PathfindingFramework
 			if (terrainTags.NullOrEmpty())
 			{
 				yield return Report.ConfigError(typeof(TerrainTagGraphicExtension), "terrainTags must not be empty.");
-			}
-
-			if (graphicData == null)
-			{
-				yield return Report.ConfigError(typeof(TerrainTagGraphicExtension), "graphicData must be defined.");
-			}
-			else
-			{
-				if (graphicData.texPath.NullOrEmpty())
-				{
-					yield return Report.ConfigError(typeof(TerrainTagGraphicExtension),
-						"graphicData has a null or empty texPath.");
-				}
-				else if (graphicData.drawSize != Vector2.one)
-				{
-					yield return Report.ConfigError(typeof(TerrainTagGraphicExtension),
-						"graphicData should not define a drawSize, as this will be overriden by the pawn's current drawSize.");
-				}
 			}
 		}
 
