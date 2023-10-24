@@ -20,6 +20,9 @@ namespace PathfindingFramework
 		/// </summary>
 		public GraphicData graphicData;
 
+		// ToDo
+		public List<GraphicData> alternateGraphicsData;
+
 		public TerrainTagGraphicExtension()
 		{
 		}
