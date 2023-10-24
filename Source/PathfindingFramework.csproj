@@ -77,9 +77,9 @@
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\Pawn_PostMapInit_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_CleanupCurrentJob_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_StartJob_Patch.cs" />
-		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_TicksPerMove_Patch.cs" />
+		<Compile Include="Patches\ModExtensions\MovementMultiplier\Pawn_TicksPerMove_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\PawnGraphicSet_ResolveAllGraphics_Patch.cs" />
-		<Compile Include="Patches\ModExtensions\TerrainTagGraphic\Pawn_PathFollower_TryEnterNextPathCell_Patch.cs" />
+		<Compile Include="Patches\ModExtensions\TerrainTag\Pawn_PathFollower_TryEnterNextPathCell_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\Reachable\Reachability_CanReachFactionBase_Patch.cs" />
 		<Compile Include="Patches\Reachable\Reachability_CanReach_Patch.cs" />
@@ -143,6 +143,7 @@
 		<Compile Include="MovementDefUtils\StatDrawEntries.cs" />
 		<Compile Include="MovementDefUtils\DefsWithMovementType.cs" />
 		<Compile Include="TerrainTagGraphicExtension.cs" />
+		<Compile Include="TerrainTagMovementExtension.cs" />
 		<Reference Include="System" />
 		<Reference Include="System.Xml" />
 		<PackageReference Include="Krafs.Publicizer" Version="2.2.1">
@@ -205,7 +206,7 @@
 		<Publicize Include="Assembly-CSharp:Verse.Pawn.drawer" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Patches\ModExtensions\TerrainTagGraphic\" />
+	  <Folder Include="Patches\ModExtensions\TerrainTag\" />
 	</ItemGroup>
 	<PropertyGroup>
 		<PublicizerClearCacheOnClean>true</PublicizerClearCacheOnClean>

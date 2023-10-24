@@ -2,7 +2,7 @@
 using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.Patches.ModExtensions.TerrainTagGraphic
+namespace PathfindingFramework.Patches.ModExtensions.TerrainTag
 {
 	/// <summary>
 	/// Detect when a pawn is standing on a new terrain type.
