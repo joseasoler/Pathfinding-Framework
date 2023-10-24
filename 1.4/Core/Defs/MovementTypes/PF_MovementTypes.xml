@@ -58,13 +58,24 @@
 		<description>Drilling creatures dig through soil and sand, but avoid moving over rock or water.</description>
 		<priority>3000</priority>
 		<tagCosts>
-			<PF_TerrainTag_Gravel>36</PF_TerrainTag_Gravel>
-			<PF_TerrainTag_Mud>24</PF_TerrainTag_Mud>
-			<PF_TerrainTag_Ground>12</PF_TerrainTag_Ground>
+			<PF_TerrainTag_Gravel>16</PF_TerrainTag_Gravel>
+			<PF_TerrainTag_Mud>8</PF_TerrainTag_Mud>
+			<PF_TerrainTag_Ground>2</PF_TerrainTag_Ground>
 			<PF_TerrainTag_Sand>0</PF_TerrainTag_Sand>
 		</tagCosts>
 		<defaultCost>Avoid</defaultCost>
 		<penAnimalsDisallowed>true</penAnimalsDisallowed>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef>
+		<defName>PF_Movement_Digging</defName>
+		<label>digger</label>
+		<description>Digger creatures can move faster through sand and soil, but otherwise move as normal terrestrial creatures.</description>
+		<priority>4000</priority>
+		<tagCosts>
+			<PF_TerrainTag_Ground>0</PF_TerrainTag_Ground>
+			<PF_TerrainTag_Sand>0</PF_TerrainTag_Sand>
+		</tagCosts>
 	</PathfindingFramework.MovementDef>
 
 	<PathfindingFramework.MovementDef>
