@@ -16,6 +16,20 @@ namespace PathfindingFramework
 	/// </summary>
 	public static class LocationFinding
 	{
+		private static bool ThingsAllowStandingAt(Map map, IntVec3 cell)
+		{
+			List<Thing> thingList = map.thingGrid.ThingsListAt(cell);
+			for (int index = 0; index < thingList.Count; ++index)
+			{
+				if (thingList[index].def.passability != Traversability.Standable)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		/// <summary>
 		/// Checks if pawns with a specific movement type should be standing on a certain cell.
 		/// </summary>
@@ -31,16 +45,7 @@ namespace PathfindingFramework
 				return false;
 			}
 
-			List<Thing> thingList = map.thingGrid.ThingsListAt(cell);
-			for (int index = 0; index < thingList.Count; ++index)
-			{
-				if (thingList[index].def.passability != Traversability.Standable)
-				{
-					return false;
-				}
-			}
-
-			return true;
+			return ThingsAllowStandingAt(map, cell);
 		}
 
 		/// <summary>
@@ -53,8 +58,8 @@ namespace PathfindingFramework
 		/// <returns>True if the cell is a good spawning point for this movement type.</returns>
 		private static bool CanSpawnAt(MovementDef movementDef, Map map, IntVec3 cell)
 		{
-			return LocationFinding.CanStandAt(movementDef, map, cell) && cell.GetDistrict(map).TouchesMapEdge &&
-			       map.reachability.CanReachColony(cell);
+			return CanStandAt(movementDef, map, cell) && cell.GetDistrict(map).TouchesMapEdge &&
+				map.reachability.CanReachColony(cell);
 		}
 
 		/// <summary>
@@ -121,6 +126,64 @@ namespace PathfindingFramework
 
 				return extraValidator == null || extraValidator(cell);
 			}), map, roadChance, out result);
+		}
+
+		/// <summary>
+		/// Pawn aware version of CellFinder.StandableCellNear.
+		/// </summary>
+		/// <param name="cell">Destination cell.</param>
+		/// <param name="map">Map of the cell.</param>
+		/// <param name="radius">Search radius.</param>
+		/// <param name="selectedPawns">List of pawns trying to find a standable cell.</param>
+		/// <returns>Standable cell if any was found, otherwise an invalid cell.</returns>
+		public static IntVec3 StandableCellNearForMovementTypes(IntVec3 cell, Map map, float radius,
+			List<Pawn> selectedPawns)
+		{
+			List<MovementDef> movementDefs = new List<MovementDef>();
+
+			for (int selectedPawnIndex = 0; selectedPawnIndex < selectedPawns.Count; ++selectedPawnIndex)
+			{
+				movementDefs.Add(selectedPawns[selectedPawnIndex].MovementDef());
+			}
+
+			int numCellsInRadius = GenRadial.NumCellsInRadius(radius);
+			for (int cellIndex = 0; cellIndex < numCellsInRadius; ++cellIndex)
+			{
+				IntVec3 nearbyCell = GenRadial.RadialPattern[cellIndex] + cell;
+				if (!ThingsAllowStandingAt(map, nearbyCell))
+				{
+					continue;
+				}
+
+				for (int movementDefIndex = 0; movementDefIndex < movementDefs.Count; ++movementDefIndex)
+				{
+					if (!movementDefs[movementDefIndex].CanEnterTerrain(nearbyCell.GetTerrain(map)))
+					{
+						nearbyCell = IntVec3.Invalid;
+						break;
+					}
+				}
+
+				if (nearbyCell != IntVec3.Invalid)
+				{
+					return nearbyCell;
+				}
+			}
+
+			return IntVec3.Invalid;
+		}
+
+		/// <summary>
+		/// Pawn aware version of CellFinder.StandableCellNear.
+		/// </summary>
+		/// <param name="cell">Destination cell.</param>
+		/// <param name="map">Map of the cell.</param>
+		/// <param name="radius">Search radius.</param>
+		/// <param name="pawn">Pawn trying to find a standable cell.</param>
+		/// <returns>Standable cell if any was found, otherwise an invalid cell.</returns>
+		public static IntVec3 StandableCellNearForMovementType(IntVec3 cell, Map map, float radius, Pawn pawn)
+		{
+			return StandableCellNearForMovementTypes(cell, map, radius, new List<Pawn> { pawn });
 		}
 	}
 }

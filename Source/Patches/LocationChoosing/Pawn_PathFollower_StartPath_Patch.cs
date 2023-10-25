@@ -10,17 +10,17 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	[HarmonyPatch(typeof(Pawn_PathFollower), nameof(Pawn_PathFollower.StartPath))]
 	internal static class Pawn_PathFollower_StartPath_Patch
 	{
-		private static Pawn pawn;
+		private static Pawn _pawn;
 
 		private static TraverseParms ModifiedParmsFor(TraverseMode mode, Danger maxDanger, bool canBashDoors,
 			bool alwaysUseAvoidGrid, bool canBashFences)
 		{
-			return TraverseParms.For(pawn, maxDanger, mode, canBashDoors, alwaysUseAvoidGrid, canBashFences);
+			return TraverseParms.For(_pawn, maxDanger, mode, canBashDoors, alwaysUseAvoidGrid, canBashFences);
 		}
 
 		private static void Prefix(Pawn ___pawn)
 		{
-			pawn = ___pawn;
+			_pawn = ___pawn;
 		}
 
 		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
