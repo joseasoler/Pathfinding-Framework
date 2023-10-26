@@ -1,3 +1,11 @@
+using System.Collections.Generic;
+using System.Reflection;
+using System.Reflection.Emit;
+using HarmonyLib;
+using PathfindingFramework.DevTool;
+using Verse;
+using Verse.AI;
+
 namespace PathfindingFramework.Patches.DevTool.PathDebugging
 {
 	/*
