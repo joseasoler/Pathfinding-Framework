@@ -11,7 +11,7 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	{
 		private static void Postfix(ref bool __result, Region from, Region to)
 		{
-			__result &= to.TerrainDef() == null;
+			__result &= to.UniqueTerrainDef() == null;
 		}
 	}
 }

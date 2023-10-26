@@ -66,6 +66,7 @@
 		<Compile Include="Patches\CellPathfinding\Pathing_For_TraverseParms_Patch.cs" />
 		<Compile Include="Patches\CellPathfinding\PawnDestinationReservationManager_CanReserve_Patch.cs" />
 		<Compile Include="Patches\CellPathfinding\Pawn_PathFollower_CostToMoveIntoCell_Patch.cs" />
+		<Compile Include="Patches\DevTool\PathDebugging\Reachability_CanReach_DebugPatch.cs" />
 		<Compile Include="Patches\DevTool\PathDebugging\RegionCostCalculator_GetPreciseRegionLinkDistances_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\AnimalPenEnclosureCalculator_EnterRegion_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\FloatMenuMakerMap_GotoLocationOption_Patch.cs" />
@@ -85,7 +86,6 @@
 		<Compile Include="Patches\ModExtensions\TerrainTag\Pawn_PathFollower_TryEnterNextPathCell_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\Reachable\Reachability_CanReachFactionBase_Patch.cs" />
-		<Compile Include="Patches\Reachable\Reachability_CanReach_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionAndRoomUpdater_ShouldBeInTheSameRoom_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_FloodFillAndAddCells_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionMaker_SweepInTwoDirectionsAndTryToCreateLink_Patch.cs" />
@@ -136,6 +136,7 @@
 		<Compile Include="PawnGraphic\GraphicExtension.cs" />
 		<Compile Include="PawnGraphic\GraphicLoader.cs" />
 		<Compile Include="PawnMovement\PawnMovementUpdater.cs" />
+		<Compile Include="RegionGeneration\TerrainRegionType.cs" />
 		<Compile Include="Report.cs" />
 		<Compile Include="MovementDef.cs" />
 		<Compile Include="Parse\TerrainTagPathCosts.cs" />

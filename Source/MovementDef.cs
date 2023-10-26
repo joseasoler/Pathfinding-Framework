@@ -81,9 +81,9 @@ namespace PathfindingFramework
 				yield return error;
 			}
 
-			if (defaultCost == PathCost.Invalid)
+			if (defaultCost.cost >= PathCost.Impassable.cost)
 			{
-				yield return Report.ConfigError(this, "defaultCost must be a numeric value or a valid PathingCost.");
+				yield return Report.ConfigError(this, "defaultCost must be a numeric value or a valid PathingCost smaller than Impassable.");
 			}
 
 			if (tagCosts != null)

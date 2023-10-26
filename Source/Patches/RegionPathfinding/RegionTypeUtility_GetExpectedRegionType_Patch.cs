@@ -22,7 +22,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	{
 		internal static void Postfix(ref RegionType __result, IntVec3 c, Map map)
 		{
-			if (__result == RegionType.ImpassableFreeAirExchange && c.GetTerrain(map).PassableWithAnyMovement())
+			if (__result == RegionType.ImpassableFreeAirExchange && c.GetTerrain(map).ExtendedRegionType() > 0)
 			{
 				__result = RegionType.Normal;
 			}

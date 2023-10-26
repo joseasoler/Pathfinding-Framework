@@ -1,8 +1,10 @@
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
+using PathfindingFramework.Patches;
 using PathfindingFramework.PawnGraphic;
 using PathfindingFramework.PawnMovement;
+using PathfindingFramework.RegionGeneration;
 using UnityEngine;
 using Verse;
 
@@ -36,6 +38,8 @@ namespace PathfindingFramework
 			GetSettings<Settings>();
 			// Reads and stores the MovementDef granted by MovementExtensions of each Def.
 			MovementExtensionReader.Initialize();
+			// Initialize the extended region types of terrains.
+			TerrainRegionType.Initialize();
 			// Graphics are initialized after all defs and mod extensions are fully initialized.
 			GraphicLoader.Initialize();
 			// Enable mod compatibility patches.
@@ -63,7 +67,7 @@ namespace PathfindingFramework
 			SettingsWindow.DoWindowContents(inRect);
 			base.DoSettingsWindowContents(inRect);
 		}
-		
+
 		public override void WriteSettings()
 		{
 			base.WriteSettings();

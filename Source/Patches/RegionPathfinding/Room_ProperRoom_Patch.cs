@@ -25,7 +25,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 				for (int regionIndex = 0; regionIndex < regions.Count; ++regionIndex)
 				{
 					Region region = regions[regionIndex];
-					if (region.TerrainDef() == null)
+					if (region.UniqueTerrainDef() == null || region.UniqueTerrainDef().passability != Traversability.Impassable)
 					{
 						allImpassableInVanilla = false;
 						break;

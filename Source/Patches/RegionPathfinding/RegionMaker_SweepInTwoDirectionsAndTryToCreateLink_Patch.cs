@@ -26,10 +26,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			if (regionType == RegionType.Normal)
 			{
 				TerrainDef terrainDef = c.GetTerrain(map);
-				if (terrainDef.PassableWithAnyMovement())
-				{
-					regionType += terrainDef.index;
-				}
+				regionType += terrainDef.ExtendedRegionType();
 			}
 
 			return regionType;

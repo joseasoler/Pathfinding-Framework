@@ -20,7 +20,7 @@ namespace PathfindingFramework.Patches
 		private static MovementContextData _noPrepatcherMovementContextData = null;
 		private static GraphicContext _noPrepatcherGraphicContext = null;
 		private static TerrainDef _noPrepatcherTerrainDef = null;
-		private static bool _noPrepatcherBool = false;
+		private static int _noPrepatcherInt = 0;
 
 		/// <summary>
 		/// Stores the movement type granted by the MovementExtensions of this def.
@@ -151,28 +151,33 @@ namespace PathfindingFramework.Patches
 		}
 
 		/// <summary>
-		/// Regions with impassable terrains always contain a single TerrainDef. This field allows accessing it.
+		/// Certain terrains must belong to regions which only have that terrain type. This field has a value in those
+		/// cases.
 		/// </summary>
 		/// <param name="region">Region being checked</param>
-		/// <returns>Null for regions without impassable terrain, the terrain otherwise.</returns>
+		/// <returns>Null for regions that do not need to follow this rule, the terrain otherwise.</returns>
 		[PrepatcherField]
-		public static ref TerrainDef TerrainDef(this Region region)
+		public static ref TerrainDef UniqueTerrainDef(this Region region)
 		{
 			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherTerrainDef;
 		}
 
 		/// <summary>
-		/// Impassable terrains with this value set to true can be traversed by one of the loaded movement definitions.
-		/// This is set during game load by MovementDefUtils.PathCosts.Update.
+		/// Certain terrains must only sare regions with cells having the same terrain. This is identified by this field
+		/// having a value larger than zero.
+		/// Impassable terrains with values larger than zero have been made passable by one of the movement types.
+		/// See TerrainRegionType for details.
 		/// </summary>
 		/// <param name="terrainDef">Terrain being checked.</param>
-		/// <returns>True if it is impassable but some movement type can make it passable.</returns>
+		/// <returns>Zero if vanilla region formation is allowed for this terrain. A number larger than zero if the
+		/// terrain should only be grouped with terrains with the same value.
+		/// </returns>
 		[PrepatcherField]
-		public static ref bool PassableWithAnyMovement(this TerrainDef terrainDef)
+		public static ref int ExtendedRegionType(this TerrainDef terrainDef)
 		{
 			Report.ErrorOnce(NoPrepatcher);
-			return ref _noPrepatcherBool;
+			return ref _noPrepatcherInt;
 		}
 	}
 }

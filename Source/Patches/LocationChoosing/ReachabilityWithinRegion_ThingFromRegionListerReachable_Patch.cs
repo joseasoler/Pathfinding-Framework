@@ -24,7 +24,6 @@ namespace PathfindingFramework.Patches.LocationChoosing
 			{
 				case PathEndMode.ClosestTouch:
 				case PathEndMode.OnCell:
-				case PathEndMode.Touch:
 					if (thing.def.size.x == 1 && thing.def.size.z == 1)
 					{
 						if (!context.CanEnterTerrain(thing.Position))
@@ -37,7 +36,7 @@ namespace PathfindingFramework.Patches.LocationChoosing
 						bool canEnterAnyCell = false;
 						foreach (IntVec3 loc in thing.OccupiedRect())
 						{
-							if (context.CanEnterTerrain(thing.Position))
+							if (context.CanEnterTerrain(loc))
 							{
 								canEnterAnyCell = true;
 								break;
@@ -48,6 +47,7 @@ namespace PathfindingFramework.Patches.LocationChoosing
 					}
 
 					break;
+
 				case PathEndMode.InteractionCell:
 					if (!context.CanEnterTerrain(thing.InteractionCell))
 					{
@@ -55,10 +55,47 @@ namespace PathfindingFramework.Patches.LocationChoosing
 					}
 
 					break;
+
+				case PathEndMode.Touch:
+					if (context.CanEnterTerrain(thing.Position))
+					{
+						__result = true;
+					}
+					else
+					{
+						bool canEnterAnyAdjacentCell = false;
+						foreach (IntVec3 loc in GenAdj.CellsAdjacent8Way(thing))
+						{
+							if (context.CanEnterTerrain(loc))
+							{
+								canEnterAnyAdjacentCell = true;
+								break;
+							}
+						}
+
+						__result = canEnterAnyAdjacentCell;
+					}
+
+					break;
+
 				case PathEndMode.None:
 				default:
 					break;
 			}
+
+			/*
+			Map map = traveler.Map;
+			string pawnStr = traveler.GetUniqueLoadID();
+			string startStr = $"[{traveler.Position.x}, {traveler.Position.z}]";
+			string startTerrain = traveler.Position.GetTerrain(map).defName;
+			string destStr = $"[{thing.Position.x}, {thing.Position.z}]";
+			string destTerrain = thing.Position.GetTerrain(map).defName;
+			string targetStr = thing.GetUniqueLoadID();
+			string pathEndMode = Enum.GetName(typeof(PathEndMode), peMode);
+
+			Report.Warning(
+				$"{pawnStr} requests a ThingFromRegionListerReachable from {startStr}[{startTerrain}] to {destStr}[{destTerrain}] to reach {targetStr}. Using path end mode {pathEndMode}. Result is {__result}");
+				*/
 		}
 	}
 }

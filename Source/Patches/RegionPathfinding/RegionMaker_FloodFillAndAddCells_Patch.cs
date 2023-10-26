@@ -4,34 +4,23 @@ using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using Verse;
-using Verse.AI;
 
 namespace PathfindingFramework.Patches.RegionPathfinding
 {
 	/// <summary>
-	/// Impassable regions are split depending on the TerrainDef of their cells.
-	/// This guarantees that each impassable region is composed of a single terrain type, making possible to check if
-	/// a region should be impassable for a specific movement type.
+	/// Certain terrains must be in regions that only contain the same terrain, as described in TerrainRegionType.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionMaker), "FloodFillAndAddCells")]
 	internal static class RegionMaker_FloodFillAndAddCells_Patch
 	{
 		private static bool TerrainsShouldBelongToSameRegion(TerrainDef lhs, TerrainDef rhs)
 		{
-			if (lhs.passability != rhs.passability)
-			{
-				// Two regions must never contain terrains with different vanilla passability values.
-				return false;
-			}
-
-			if (lhs.passability == Traversability.Standable)
-			{
-				// Vanilla case; all standable cells get grouped together.
-				return true;
-			}
-
-			// In the case of impassable terrains, they can only be grouped together with the same terrain.
-			return lhs == rhs;
+			// Two regions must never contain terrains with different vanilla passability values.
+			// This check is necessary because regions of impassable terrain might have a normal RegionType if they can be
+			// traversed by at least one movement type.
+			return lhs.passability == rhs.passability &&
+				// See TerrainRegionType for details.
+				lhs.ExtendedRegionType() == rhs.ExtendedRegionType();
 		}
 
 		private static Predicate<IntVec3> ReplaceRegionFloodFillPredicate(Predicate<IntVec3> original,

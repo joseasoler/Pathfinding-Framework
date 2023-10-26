@@ -17,9 +17,9 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			if (__result?.type == RegionType.Normal)
 			{
 				TerrainDef terrainDef = root.GetTerrain(__result.Map);
-				if (terrainDef.PassableWithAnyMovement())
+				if (terrainDef.ExtendedRegionType() > 0)
 				{
-					__result.TerrainDef() = terrainDef;
+					__result.UniqueTerrainDef() = terrainDef;
 				}
 			}
 		}
