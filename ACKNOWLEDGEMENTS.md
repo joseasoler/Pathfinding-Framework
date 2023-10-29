@@ -12,6 +12,7 @@ Developing a RimWorld mod is a huge task that is only made possible because its 
 * **[Nadia Eghbal](https://github.com/nayafia)** - [Contributing Guides: A Template](https://github.com/nayafia/contributing-template).
 * **[Owlchemist](https://steamcommunity.com/id/owlchemist/myworkshopfiles/?appid=294100)** - Implementation suggestions and advice.
 * **[Semantic versioning](https://semver.org/)**
+* **[Scorpio](https://steamcommunity.com/id/scorpio/myworkshopfiles/?appid=294100)** - Testing, ideas and help.
 * **[Vicky Brasseur](https://www.vmbrasseur.com)** - [Forge your future with Open Source](https://pragprog.com/titles/vbopens/forge-your-future-with-open-source/).
 * **[Zeracronius](https://github.com/Zeracronius/)** - Suggestions and advice.
 * **[Zetrith](https://github.com/Zetrith)** - [Prepatcher](https://github.com/Zetrith/Prepatcher/)
