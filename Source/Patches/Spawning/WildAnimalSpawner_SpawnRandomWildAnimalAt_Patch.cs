@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
-using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
 using RimWorld;
 using Verse;

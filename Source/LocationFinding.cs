@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using RimWorld;
 using Verse;
@@ -184,6 +185,60 @@ namespace PathfindingFramework
 		public static IntVec3 StandableCellNearForMovementType(IntVec3 cell, Map map, float radius, Pawn pawn)
 		{
 			return StandableCellNearForMovementTypes(cell, map, radius, new List<Pawn> { pawn });
+		}
+
+		/// <summary>
+		/// Check if a region is passable. See Region_Allows_Patch for details.
+		/// </summary>
+		public static bool IsPassableRegion(Region region, MovementDef movementDef, Map map, bool isDestination,
+			bool currentlyOnUnsafeTerrain)
+		{
+			TerrainDef regionTerrainDef = region.UniqueTerrainDef() ?? region.AnyCell.GetTerrain(map);
+
+			// If the pawn is standing on unsafe terrain, allow traversing unsafe terrain regions if the destination is safe.
+			short nonTraversablePathCost =
+				isDestination || !currentlyOnUnsafeTerrain ? PathCost.Unsafe.cost : PathCost.Impassable.cost;
+			short pathCost = movementDef.PathCosts[regionTerrainDef.index];
+			return pathCost < nonTraversablePathCost;
+		}
+
+		/// <summary>
+		/// Check if a pawn with the given movement type can reach the map edge from this position.
+		/// </summary>
+		/// <param name="movementDef">Movement type to check.</param>
+		/// <param name="map">Current map.</param>
+		/// <param name="cell">Starting position.</param>
+		/// <returns></returns>
+		public static bool CanReachMapEdge(MovementDef movementDef, Map map, IntVec3 cell)
+		{
+			Region region = cell.GetRegion(map);
+			if (region == null)
+			{
+				return false;
+			}
+
+			if (region.District.TouchesMapEdge)
+			{
+				return true;
+			}
+
+			bool currentlyOnUnsafeTerrain = movementDef.PathCosts[cell.GetTerrain(map).index] == PathCost.Unsafe.cost;
+
+			bool foundReg = false;
+
+			RegionTraverser.BreadthFirstTraverse(region, EntryCondition, RegionProcessor, 9999);
+			return foundReg;
+
+			bool RegionProcessor(Region r)
+			{
+				foundReg = r.District.TouchesMapEdge;
+				return foundReg;
+			}
+
+			bool EntryCondition(Region from, Region to)
+			{
+				return IsPassableRegion(to, movementDef, map, true, currentlyOnUnsafeTerrain);
+			}
 		}
 	}
 }

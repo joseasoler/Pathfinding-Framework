@@ -64,7 +64,6 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			// passability result.
 			// See RegionTypeExtended for even more details.
 			Map map = pawn.Map;
-			regionTerrainDef ??= region.AnyCell.GetTerrain(map);
 
 			// Pawns are not allowed to move through unsafe terrain, with just an exception. Is the pawn is currently on
 			// unsafe terrain, they can move to safe terrain.
@@ -72,11 +71,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			TerrainDef startTerrainDef = startCell.GetTerrain(map);
 			bool currentlyOnUnsafeTerrain = pawn.MovementDef().PathCosts[startTerrainDef.index] == PathCost.Unsafe.cost;
 
-			// If the pawn is standing on unsafe terrain, allow traversing unsafe terrain regions if the destination is safe.
-			short nonTraversablePathCost =
-				isDestination || !currentlyOnUnsafeTerrain ? PathCost.Unsafe.cost : PathCost.Impassable.cost;
-			short pathCost = pawn.MovementDef().PathCosts[regionTerrainDef.index];
-			return pathCost < nonTraversablePathCost;
+			return LocationFinding.IsPassableRegion(region, pawn.MovementDef(), map, isDestination, currentlyOnUnsafeTerrain);
 		}
 
 		/// <summary>
