@@ -41,6 +41,7 @@
 		<defaultCost>Unsafe</defaultCost>
 		<penAnimalsDisallowed>true</penAnimalsDisallowed>
 		<manhuntersRequireWater>true</manhuntersRequireWater>
+		<ignoreColonyReachability>true</ignoreColonyReachability>
 	</PathfindingFramework.MovementDef>
 
 	<PathfindingFramework.MovementDef ParentName="PF_Movement_AquaticBase">

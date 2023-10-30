@@ -58,6 +58,12 @@ namespace PathfindingFramework
 		public bool manhuntersRequireWater;
 
 		/// <summary>
+		/// If this flag is set, animals with this movement type will be able to spawn in points in which it is not possible
+		/// to reach the colony.
+		/// </summary>
+		public bool ignoreColonyReachability;
+
+		/// <summary>
 		/// Stores a precalculated list of all terrain path costs for this movement type.
 		/// This is initialized after XML references are resolved, and never modified afterwards.
 		/// </summary>

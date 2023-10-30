@@ -60,7 +60,7 @@ namespace PathfindingFramework
 		private static bool CanSpawnAt(MovementDef movementDef, Map map, IntVec3 cell)
 		{
 			return CanStandAt(movementDef, map, cell) && cell.GetDistrict(map).TouchesMapEdge &&
-				map.reachability.CanReachColony(cell);
+				(movementDef.ignoreColonyReachability || map.reachability.CanReachColony(cell));
 		}
 
 		/// <summary>
