@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
-using PathfindingFramework.DevTool;
+using PathfindingFramework.ErrorHandling;
 using Verse;
 using Verse.AI;
 
@@ -11,7 +11,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 	/*
 	/// <summary>
 	/// Allow debugging PathFinder.FindPath failures. Commented out by default for performance reasons.
-	/// ToDo: better way to conditionally enable this feature.
+	/// Failures of this kind have not been common through development, so there was no need to add an option for this.
 	/// </summary>
 	[HarmonyPatch(typeof(PathFinder), nameof(PathFinder.FindPath), typeof(IntVec3), typeof(LocalTargetInfo),
 		typeof(TraverseParms), typeof(PathEndMode), typeof(PathFinderCostTuning))]
@@ -19,12 +19,12 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 	{
 		private static void AddData(PathFinder instance, string str)
 		{
-			PathFinderErrorDebug.AddPathFinderData(instance.map, instance.openList, instance.pathGrid, str);
+			PathFinderErrorReport.AddPathFinderData(instance.map, instance.openList, instance.pathGrid, str);
 		}
 
 		internal static void Prefix(IntVec3 start, LocalTargetInfo dest, TraverseParms traverseParms)
 		{
-			PathFinderErrorDebug.StartEntry(start, dest, traverseParms);
+			PathFinderErrorReport.StartEntry(start, dest, traverseParms);
 		}
 
 		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -36,7 +36,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 			MethodInfo logErrorMethod = AccessTools.Method(typeof(Log), nameof(Log.Error), new[] {typeof(string)});
 			MethodInfo logWarningMethod = AccessTools.Method(typeof(Log), nameof(Log.Warning), new[] {typeof(string)});
 			MethodInfo enablePrintMethod =
-				AccessTools.Method(typeof(PathFinderErrorDebug), nameof(PathFinderErrorDebug.EnablePrint));
+				AccessTools.Method(typeof(PathFinderErrorReport), nameof(PathFinderErrorReport.EnablePrint));
 
 			foreach (CodeInstruction instruction in instructions)
 			{
@@ -58,7 +58,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 
 		internal static void Postfix()
 		{
-			PathFinderErrorDebug.FinishEntry();
+			PathFinderErrorReport.FinishEntry();
 		}
 	}
 	*/

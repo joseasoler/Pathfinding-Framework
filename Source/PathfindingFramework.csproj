@@ -21,15 +21,20 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="DevTool\ErrorReportInformationDebugAction.cs" />
 		<Compile Include="DevTool\HediffDefGenerator_Movement.cs" />
 		<Compile Include="DevTool\MemoryUsageData.cs" />
 		<Compile Include="DevTool\MemoryUsageDebugOutput.cs" />
 		<Compile Include="DevTool\MovementCostDebugOutput.cs" />
 		<Compile Include="DevTool\InspectorDrawer.cs" />
-		<Compile Include="DevTool\PathFinderErrorDebug.cs" />
 		<Compile Include="DevTool\PathGridDivergenceDebugOutput.cs" />
 		<Compile Include="DevTool\PawnMovementDebugOutput.cs" />
 		<Compile Include="DevTool\TerrainTagsDebugOutput.cs" />
+		<Compile Include="ErrorHandling\ErrorReport.cs" />
+		<Compile Include="ErrorHandling\LastReachabilityResult.cs" />
+		<Compile Include="ErrorHandling\PathFinderErrorReport.cs" />
+		<Compile Include="ErrorHandling\RegionErrorReport.cs" />
+		<Compile Include="ErrorHandling\ToReportStringUtil.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="HediffsDefOf.cs" />
 		<Compile Include="Hediffs\Hediff_TemporaryMovement.cs" />
@@ -67,6 +72,7 @@
 		<Compile Include="Patches\CellPathfinding\PawnDestinationReservationManager_CanReserve_Patch.cs" />
 		<Compile Include="Patches\CellPathfinding\Pawn_PathFollower_CostToMoveIntoCell_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathDebugging\Reachability_CanReach_DebugPatch.cs" />
+		<Compile Include="Patches\DevTool\PathDebugging\RegionCostCalculatorWrapper_Init_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathDebugging\RegionCostCalculator_GetPreciseRegionLinkDistances_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\AnimalPenEnclosureCalculator_EnterRegion_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\FloatMenuMakerMap_GotoLocationOption_Patch.cs" />
@@ -105,6 +111,7 @@
 		<Compile Include="Patches\Spawning\WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch.cs" />
 		<Compile Include="Patches\TranspilerDebugging.cs" />
 		<Compile Include="PatchOperations\AddTagsToTerrainDefs.cs" />
+		<Compile Include="PatchOperations\AddSubtreeToMatchingThinkTrees.cs" />
 		<Compile Include="PathfindingFramework.cs" />
 		<Compile Include="Patches\DevTool\DevToolDefGeneration\DefGenerator_GenerateImpliedDefs_PreResolve_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathCostInspector\UIRoot_UIRootOnGUI_Patch.cs" />

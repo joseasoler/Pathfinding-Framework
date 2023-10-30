@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using HarmonyLib;
+using PathfindingFramework.ErrorHandling;
 using PathfindingFramework.MovementContexts;
 using Verse;
 using Verse.AI;
@@ -63,7 +64,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 			Map map = pawn?.Map;
 			string pawnName = pawn != null ? pawn.GetUniqueLoadID() : "No pawn";
 			string startCellStr = pawn != null ? pawn.Position.ToString() : "Unknown";
-			string startRegionStr = pawn != null ? pawn.Position.GetRegion(pawn.Map).id.ToString() : "Unknown";
+			string startRegionStr = pawn != null ? pawn.Position.GetRegion(map).id.ToString() : "Unknown";
 
 			string destCellStr = ___destinationCell.ToString();
 			string destRegionStr = region != null ? region.id.ToString() : "None";
@@ -124,6 +125,8 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 				}
 			}
 
+			sb.AppendLine("Additional error report information.");
+			sb.AppendLine(ErrorReport.Get(map));
 			Report.Error(sb.ToString());
 
 			// Update for next error case.

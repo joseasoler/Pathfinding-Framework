@@ -5,13 +5,13 @@ using PathfindingFramework.Patches;
 using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.DevTool
+namespace PathfindingFramework.ErrorHandling
 {
 	/// <summary>
 	/// Allows debugging errors happening inside of PathFinder.FindPath.
 	/// Using this feature requires enabling the commented-out code in PathFinder_FindPath_Patch.
 	/// </summary>
-	public static class PathFinderErrorDebug
+	public static class PathFinderErrorReport
 	{
 		private static IntVec3 _start;
 		private static LocalTargetInfo _dest;

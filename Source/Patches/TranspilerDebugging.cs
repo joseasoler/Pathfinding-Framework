@@ -9,7 +9,7 @@ namespace PathfindingFramework.Patches
 	/// </summary>
 	public static class TranspilerDebugging
 	{
-		public static IEnumerable<CodeInstruction> Print(string label, IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Print(IEnumerable<CodeInstruction> instructions, string label = "")
 		{
 			StringBuilder sb = new StringBuilder();
 			if (label != "")
@@ -18,7 +18,15 @@ namespace PathfindingFramework.Patches
 			}
 			foreach (CodeInstruction instruction in instructions)
 			{
-				sb.AppendLine(instruction.ToString());
+				sb.Append(instruction);
+				if (instruction.operand != null)
+				{
+					sb.AppendLine($" of type {instruction.operand.GetType()}");
+				}
+				else
+				{
+					sb.AppendLine();
+				}
 				yield return instruction;
 			}
 
