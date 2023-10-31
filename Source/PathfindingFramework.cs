@@ -44,6 +44,7 @@ namespace PathfindingFramework
 			GraphicLoader.Initialize();
 			// Enable mod compatibility patches.
 			GiddyUp2Compat.Initialize();
+			VanillaFurnitureExpandedSecurityCompat.Initialize();
 			// Add some useful (but brief) information to the log.
 			// Enabling debug logging expands upon this.
 			LoadedDataReport.Write();

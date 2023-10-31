@@ -49,9 +49,10 @@
 		<Compile Include="MapPathCosts\MapPathCostMemoryReport.cs" />
 		<Compile Include="MapPathCosts\MapPathCostGrid.cs" />
 		<Compile Include="MapGrid.cs" />
-		<Compile Include="ModAssemblyInfo.cs" />
 		<Compile Include="ModCompatibility\GiddyUp2Compat.cs" />
+		<Compile Include="ModCompatibility\ModAssemblyInfo.cs" />
 		<Compile Include="ModCompatibility\ModCompatibilityUtility.cs" />
+		<Compile Include="ModCompatibility\VanillaFurnitureExpandedSecurityCompat.cs" />
 		<Compile Include="MovementContexts\MovementContext.cs" />
 		<Compile Include="MovementContexts\MovementContextData.cs" />
 		<Compile Include="MovementContexts\MovementContextId.cs" />
