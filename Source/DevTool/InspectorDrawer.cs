@@ -117,14 +117,18 @@ namespace PathfindingFramework.DevTool
 				return;
 			}
 
+			IntVec3 cell = UI.MouseCell();
+			Map map = Find.CurrentMap;
+			if (!cell.InBounds(map))
+			{
+				return;
+			}
+			int cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
+			TerrainDef terrainDef = map.terrainGrid.TerrainAt(cellIndex);
+
 			Text.Font = GameFont.Small;
 			Text.Anchor = TextAnchor.MiddleLeft;
 			Text.WordWrap = false;
-
-			IntVec3 cell = UI.MouseCell();
-			Map map = Find.CurrentMap;
-			int cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
-			TerrainDef terrainDef = map.terrainGrid.TerrainAt(cellIndex);
 
 			string titleId;
 			if (_pathCostInspectorActive)
