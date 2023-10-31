@@ -211,6 +211,9 @@
 		<!-- Registering custom XML parsers into the vanilla code. -->
 		<Publicize Include="Assembly-CSharp:Verse.ParseHelper.parsers" />
 
+		<!-- Trigger region regeneration. -->
+		<Publicize Include="Assembly-CSharp:Verse.RegionDirtyer.Notify_WalkabilityChanged" />
+
 		<!-- Direct access to the snow depth grid to avoid IntVec3 creation costs. -->
 		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.depthGrid" />
 		<Publicize Include="Assembly-CSharp:Verse.SnowGrid.map" />
