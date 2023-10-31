@@ -1,5 +1,6 @@
 using System;
 using PathfindingFramework.MapPathCosts;
+using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using Verse;
@@ -95,6 +96,7 @@ namespace PathfindingFramework.MovementContexts
 			}
 
 			int cost = MovementDef.PathCosts[terrainDef.index];
+			cost = VanillaFurnitureExpandedSecurityCompat.MoveIntoCellTerrainCost(cost, terrainDef, prevCell, Map);
 			MapPathCost prevMapPathCost = Map.MapPathCostGrid().Get(ToIndex(prevCell));
 			short thingsCost = prevMapPathCost.hasIgnoreRepeater
 				? nextMapPathCost.nonIgnoreRepeaterThings
