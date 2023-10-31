@@ -6,7 +6,7 @@
 		<defName>BiomesIslands_AquaticSleepingSpot</defName>
 		<thingClass>Building_Bed</thingClass>
 		<label>aquatic sleeping spot</label>
-		<description>Designates a spot in the water where aquatic animals should sleep.</description>
+		<description>Designates a spot in the water where aquatic beings can rest. Not cozy, and also wet.</description>
 		<size>(1,1)</size>
 		<passability>Standable</passability>
 		<designationCategory>Furniture</designationCategory>

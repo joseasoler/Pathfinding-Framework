@@ -6,7 +6,7 @@
 
 		<defName>PF_Movement_Magmatic</defName>
 		<label>magmatic</label>
-		<description>Magmatic creatures can traverse land and deftly swim through lava. However, they instinctively avoid water.</description>
+		<description>Born of fire and earth, these creatures roam the land and swim through molten lava with ease, yet they have an innate aversion to water.</description>
 		<priority>1500</priority>
 		<defaultCost>Default</defaultCost>
 		<tagCosts>
