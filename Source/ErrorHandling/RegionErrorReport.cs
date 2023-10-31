@@ -1,9 +1,11 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using Verse;
 
 namespace PathfindingFramework.ErrorHandling
 {
+	/// <summary>
+	/// Generate a region / region link error report.
+	/// </summary>
 	public static class RegionErrorReport
 	{
 		private static bool AnyValidCell(Region region)

@@ -5,6 +5,9 @@ using Verse;
 
 namespace PathfindingFramework
 {
+	/// <summary>
+	/// Report about loaded movement types.
+	/// </summary>
 	public static class LoadedDataReport
 	{
 		public static void Write()

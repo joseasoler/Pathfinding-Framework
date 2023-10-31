@@ -1,5 +1,4 @@
 using HarmonyLib;
-using RimWorld;
 using Verse;
 
 namespace PathfindingFramework.Patches.SnowPathCost

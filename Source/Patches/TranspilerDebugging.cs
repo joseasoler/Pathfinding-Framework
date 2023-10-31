@@ -16,6 +16,7 @@ namespace PathfindingFramework.Patches
 			{
 				sb.AppendLine($"---------- {label} ----------");
 			}
+
 			foreach (CodeInstruction instruction in instructions)
 			{
 				sb.Append(instruction);
@@ -27,6 +28,7 @@ namespace PathfindingFramework.Patches
 				{
 					sb.AppendLine();
 				}
+
 				yield return instruction;
 			}
 

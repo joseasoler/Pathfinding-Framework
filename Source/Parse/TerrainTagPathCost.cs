@@ -12,7 +12,7 @@ namespace PathfindingFramework.Parse
 		/// One of the values used in TerrainDef.tags.
 		/// </summary>
 		public string tag;
-		
+
 		/// <summary>
 		/// Path cost associated to this tag.
 		/// </summary>

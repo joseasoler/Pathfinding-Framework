@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using HarmonyLib;
+﻿using HarmonyLib;
 using PathfindingFramework.ErrorHandling;
 using Verse;
 

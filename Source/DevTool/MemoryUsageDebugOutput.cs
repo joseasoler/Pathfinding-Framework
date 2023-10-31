@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using PathfindingFramework.MapPathCosts;
-using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Patches;
 using Verse;
 
@@ -24,7 +23,7 @@ namespace PathfindingFramework.DevTool
 			return $"{(bytes / 1024.0F).ToString("0.##", CultureInfo.InvariantCulture)} KiB";
 		}
 
-		[DebugOutput(category: PathfindingFramework.Name, onlyWhenPlaying: false)]
+		[DebugOutput(category: PathfindingFrameworkMod.Name, onlyWhenPlaying: false)]
 		public static void MemoryUsageEstimation()
 		{
 			var reports = new List<MemoryUsageData>();

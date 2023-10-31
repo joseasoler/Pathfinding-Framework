@@ -134,7 +134,7 @@ namespace PathfindingFramework.MovementContexts
 			foreach (MovementContext context in validContexts)
 			{
 				string label = context.MovementDef.LabelCap;
-				
+
 				List<string> extraLabels = new List<string>();
 				if (context.ShouldAvoidFences)
 				{
@@ -147,7 +147,7 @@ namespace PathfindingFramework.MovementContexts
 				}
 
 				string grid = extraLabels.Count == 0
-					?  $"{label} context"
+					? $"{label} context"
 					: $"{label} ({string.Join(", ", extraLabels)}) context";
 
 				report.Add(new MemoryUsageData(nameof(MovementContextData), Map.GetUniqueLoadID(),

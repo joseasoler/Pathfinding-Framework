@@ -9,7 +9,6 @@ namespace PathfindingFramework.Parse
 	/// </summary>
 	public struct PathCost
 	{
-
 		/// <summary>
 		/// Final integer path cost associated with this instance.
 		/// </summary>
@@ -81,7 +80,7 @@ namespace PathfindingFramework.Parse
 		{
 			return Enum.GetName(typeof(PathCostValues), cost) ?? cost.ToString();
 		}
-		
+
 		public static bool operator ==(PathCost lhs, PathCost rhs)
 		{
 			return lhs.cost == rhs.cost;

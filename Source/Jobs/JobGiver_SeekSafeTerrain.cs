@@ -6,7 +6,7 @@ using Verse.AI;
 namespace PathfindingFramework.Jobs
 {
 	/// <summary>
-	/// Implementation of the "Seeking safe terrain" job.
+	/// Pawns with this job will move to the closest safe terrain cell.
 	/// </summary>
 	public class JobGiver_SeekSafeTerrain : ThinkNode_JobGiver
 	{

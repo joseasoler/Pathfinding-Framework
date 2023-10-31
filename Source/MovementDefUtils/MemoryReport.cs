@@ -12,7 +12,7 @@ namespace PathfindingFramework.MovementDefUtils
 		public static List<MemoryUsageData> Get()
 		{
 			int count = DefDatabase<TerrainDef>.AllDefsListForReading.Count *
-			            DefDatabase<MovementDef>.AllDefsListForReading.Count * sizeof(short);
+				DefDatabase<MovementDef>.AllDefsListForReading.Count * sizeof(short);
 			return new List<MemoryUsageData>
 			{
 				new("DefDatabase<MovementDef>", MemoryUsageData.Global, "Path costs",

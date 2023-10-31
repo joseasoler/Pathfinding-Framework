@@ -2,6 +2,9 @@
 
 namespace PathfindingFramework.ModCompatibility
 {
+	/// <summary>
+	/// Mod compatibility with Vanilla Furniture Expanded - Security.
+	/// </summary>
 	public static class VanillaFurnitureExpandedSecurityCompat
 	{
 		/// <summary>

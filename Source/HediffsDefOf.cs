@@ -3,6 +3,9 @@ using Verse;
 
 namespace PathfindingFramework
 {
+	/// <summary>
+	/// HediffDefs used by the C# code of Pathfinding Framework.
+	/// </summary>
 	[DefOf]
 	public static class HediffsDefOf
 	{

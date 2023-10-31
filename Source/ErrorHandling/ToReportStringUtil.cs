@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Text;
 using Verse;
 using Verse.AI;
 
 namespace PathfindingFramework.ErrorHandling
 {
+	/// <summary>
+	/// Utility functions for error report generation.
+	/// </summary>
 	public static class ToReportStringUtil
 	{
 		public static string ToReportString(this IntVec3 cell)

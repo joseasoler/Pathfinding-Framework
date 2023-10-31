@@ -23,7 +23,7 @@ namespace PathfindingFramework
 		/// <summary>
 		/// Prefix used in configuration errors and logs.
 		/// </summary>
-		private static readonly string Prefix = $"[{PathfindingFramework.Name} v{Version}] ";
+		private static readonly string Prefix = $"[{PathfindingFrameworkMod.Name} v{Version}] ";
 
 		private static readonly HashSet<int> UsedHashes = new HashSet<int>();
 

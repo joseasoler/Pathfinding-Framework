@@ -16,8 +16,6 @@ namespace PathfindingFramework.Patches.CellPathfinding
 				return;
 			}
 
-			bool original = __result;
-			TerrainDef terrainDef = c.GetTerrain(searcher.Map);
 			if (__result && !searcher.MovementContext().CanEnterTerrain(c))
 			{
 				__result = false;

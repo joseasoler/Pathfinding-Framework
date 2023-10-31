@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Verse;
 using Verse.AI;
 
@@ -59,6 +58,7 @@ namespace PathfindingFramework.PawnGraphic
 
 				_alternateGraphicIndex = indexesByWeight.RandomElementByWeight(x => x.Second).First;
 			}
+
 			Rand.PopState();
 		}
 

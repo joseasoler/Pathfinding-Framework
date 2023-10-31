@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using PathfindingFramework.Parse;
-using PathfindingFramework.Patches;
 using Verse;
 
 namespace PathfindingFramework.MovementDefUtils
@@ -90,7 +89,7 @@ namespace PathfindingFramework.MovementDefUtils
 				short maxTagCost = CalculateMaxTagCost(terrainDef, movementDef);
 				int terrainPathCost = Math.Min(short.MaxValue, terrainDef.pathCost);
 				short pathCost = CalculatePathCost(maxTagCost, terrainDef.passability, defaultCost, defaultCostAdd,
-					(short) terrainPathCost);
+					(short)terrainPathCost);
 				result[terrainIndex] = pathCost;
 			}
 

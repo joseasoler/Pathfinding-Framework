@@ -11,7 +11,6 @@ namespace PathfindingFramework.PawnMovement
 	/// </summary>
 	public static class PawnMovementUpdater
 	{
-
 		/// <summary>
 		/// Add all movement definitions obtained from apparel to the set.
 		/// </summary>

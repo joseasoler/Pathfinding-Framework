@@ -30,7 +30,7 @@ namespace PathfindingFramework.ModCompatibility
 			Report.ErrorOnce($"{ErrorPrefix}: Could not find type {typeName} in assembly {assembly}.");
 			return null;
 		}
-		
+
 		/// <summary>
 		/// Obtain a method from a specific assembly and type. Caller is responsible for ensuring that assembly is valid.
 		/// Logs an error if the method could not be found.

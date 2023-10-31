@@ -10,7 +10,7 @@ namespace PathfindingFramework.DevTool
 	/// </summary>
 	public static class PawnMovementDebugOutput
 	{
-		[DebugOutput(category: PathfindingFramework.Name, onlyWhenPlaying: true)]
+		[DebugOutput(category: PathfindingFrameworkMod.Name, onlyWhenPlaying: true)]
 		public static void CurrentPawnMovement()
 		{
 			var input = new List<Tuple<string, string, string, string, string, string>>();

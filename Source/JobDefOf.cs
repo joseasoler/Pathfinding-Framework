@@ -4,8 +4,9 @@ using Verse;
 namespace PathfindingFramework
 {
 	/// <summary>
-	/// Job definitions used in the code of the mod.
+	/// Job definitions used by the C# code of Pathfinding Framework.
 	/// </summary>
+
 	[DefOf]
 	public class JobDefOf
 	{

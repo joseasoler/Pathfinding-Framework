@@ -10,6 +10,9 @@ using Verse.AI;
 
 namespace PathfindingFramework.Patches.DevTool.PathDebugging
 {
+	/// <summary>
+	/// Add additional information when the region cost calculator Dijkstra stage fails.
+	/// </summary>
 	[HarmonyPatch(typeof(RegionCostCalculator), "GetPreciseRegionLinkDistances")]
 	internal static class RegionCostCalculator_GetPreciseRegionLinkDistances_Patch
 	{

@@ -15,7 +15,7 @@ namespace PathfindingFramework
 		/// <returns>Name of the mod in the settings list.</returns>
 		public static string SettingsCategory()
 		{
-			return PathfindingFramework.Name;
+			return PathfindingFrameworkMod.Name;
 		}
 
 		/// <summary>

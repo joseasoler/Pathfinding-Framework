@@ -15,7 +15,8 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	{
 		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
-			MethodInfo standableCellNearOriginalMethod = AccessTools.Method(typeof(CellFinder), nameof(CellFinder.StandableCellNear));
+			MethodInfo standableCellNearOriginalMethod =
+				AccessTools.Method(typeof(CellFinder), nameof(CellFinder.StandableCellNear));
 
 			MethodInfo standableCellNearNewMethod =
 				AccessTools.Method(typeof(LocationFinding),

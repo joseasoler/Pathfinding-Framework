@@ -9,7 +9,7 @@ namespace PathfindingFramework.DevTool
 	/// </summary>
 	public static class MovementCostDebugOutput
 	{
-		[DebugOutput(category: PathfindingFramework.Name, onlyWhenPlaying: false)]
+		[DebugOutput(category: PathfindingFrameworkMod.Name, onlyWhenPlaying: false)]
 		public static void MovementCosts()
 		{
 			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;

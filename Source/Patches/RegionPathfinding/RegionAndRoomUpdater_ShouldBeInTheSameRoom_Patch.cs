@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Verse;
 
 namespace PathfindingFramework.Patches.RegionPathfinding

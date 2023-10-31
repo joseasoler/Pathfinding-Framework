@@ -1,5 +1,4 @@
-﻿
-namespace PathfindingFramework.DevTool
+﻿namespace PathfindingFramework.DevTool
 {
 	/// <summary>
 	/// Contains estimations of memory usage. Used to get a general idea of memory usage and detect regressions

@@ -1,9 +1,7 @@
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
-using PathfindingFramework.Patches;
 using PathfindingFramework.PawnGraphic;
-using PathfindingFramework.PawnMovement;
 using PathfindingFramework.RegionGeneration;
 using UnityEngine;
 using Verse;
@@ -13,7 +11,7 @@ namespace PathfindingFramework
 	/// <summary>
 	/// Main class of the mod. Handles initialization order and settings loading. Defines the settings UI.
 	/// </summary>
-	public class PathfindingFramework : Mod
+	public class PathfindingFrameworkMod : Mod
 	{
 		public const string PackageId = "pathfinding.framework";
 		public const string Name = "Pathfinding Framework";
@@ -22,7 +20,7 @@ namespace PathfindingFramework
 		/// Handles the initialization of every component of this mod.
 		/// </summary>
 		/// <param name="content">Content pack data of this mod.</param>
-		public PathfindingFramework(ModContentPack content) : base(content)
+		public PathfindingFrameworkMod(ModContentPack content) : base(content)
 		{
 			ModAssemblyInfo.Initialize();
 			Harmony.Initialize();

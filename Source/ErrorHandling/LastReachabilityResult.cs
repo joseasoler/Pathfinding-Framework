@@ -1,9 +1,11 @@
-﻿using System;
-using Verse;
+﻿using Verse;
 using Verse.AI;
 
 namespace PathfindingFramework.ErrorHandling
 {
+	/// <summary>
+	/// Store the parameters and result of the last reachability check. Used for error report generation.
+	/// </summary>
 	public static class LastReachabilityResult
 	{
 		private static bool _result;

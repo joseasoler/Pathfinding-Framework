@@ -2,7 +2,6 @@
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
-using PathfindingFramework.Patches.LocationChoosing;
 using RimWorld;
 using Verse;
 

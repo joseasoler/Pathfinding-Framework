@@ -114,7 +114,7 @@
 		<Compile Include="Patches\TranspilerDebugging.cs" />
 		<Compile Include="PatchOperations\AddTagsToTerrainDefs.cs" />
 		<Compile Include="PatchOperations\AddSubtreeToMatchingThinkTrees.cs" />
-		<Compile Include="PathfindingFramework.cs" />
+		<Compile Include="PathfindingFrameworkMod.cs" />
 		<Compile Include="Patches\DevTool\DevToolDefGeneration\DefGenerator_GenerateImpliedDefs_PreResolve_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathCostInspector\UIRoot_UIRootOnGUI_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathCostInspector\UIRoot_UIRootUpdate_Patch.cs" />

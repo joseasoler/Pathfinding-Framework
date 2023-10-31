@@ -11,7 +11,7 @@ namespace PathfindingFramework.DevTool
 	/// </summary>
 	public static class PathGridDivergenceDebugOutput
 	{
-		[DebugOutput(category: PathfindingFramework.Name, onlyWhenPlaying: false)]
+		[DebugOutput(category: PathfindingFrameworkMod.Name, onlyWhenPlaying: false)]
 		public static void PathGridDivergence()
 		{
 			Map map = Find.CurrentMap;
