@@ -33,11 +33,12 @@ namespace PathfindingFramework.ErrorHandling
 			string startStr = _start.ToReportString(map);
 			string destStr = _dest.Cell.ToReportString(map);
 			string targetStr = thing != null ? thing.GetUniqueLoadID() : "Cell";
+			string jobStr = pawn?.CurJob?.ToString() ?? "None";
 			string traverseModeStr = _traverseParams.mode.ToReportString();
 			string pathEndMode = _peMode.ToReportString();
 
 			return
-				$"Last Reachability.CanReach: {pawnStr} from {startStr} to {destStr}. Trying to reach {targetStr}. Traverse: {traverseModeStr}, path end: {pathEndMode}. Result: {_result}";
+				$"Last Reachability.CanReach: {pawnStr} from {startStr} to {destStr}. Trying to reach {targetStr}. Job: {jobStr}. Traverse: {traverseModeStr}, path end: {pathEndMode}. Result: {_result}";
 		}
 	}
 }

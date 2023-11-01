@@ -12,7 +12,8 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 		{
 			// For vanilla-like regions, their TerrainDef call will return null.
 			// For regions composed of terrains that must have unique regions, this returns their terrain.
-			return (from, to) => originalPredicate(from, to) && from.UniqueTerrainDef() == to.UniqueTerrainDef();
+			return (from, to) => originalPredicate(from, to) &&
+				(to.type != RegionType.Normal || from.UniqueTerrainDef() == to.UniqueTerrainDef());
 		}
 
 		public static IEnumerable<CodeInstruction> PatchRegionMergingPredicate(IEnumerable<CodeInstruction> instructions)

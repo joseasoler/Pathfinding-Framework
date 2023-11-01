@@ -37,12 +37,28 @@ namespace PathfindingFramework.ErrorHandling
 				{
 					sb.AppendLine("Null region");
 					errors = true;
+					continue;
+				}
+
+				if (region.District == null)
+				{
+					sb.AppendLine($"Region without district: {region.ToReportString()}");
+					errors = true;
+					continue;
+				}
+
+				if (region.Room == null)
+				{
+					sb.AppendLine($"Region without room: {region.ToReportString()}");
+					errors = true;
+					continue;
 				}
 
 				if (!AnyValidCell(region))
 				{
 					sb.AppendLine($"Region lacking cells: {region.ToReportString()}");
 					errors = true;
+					continue;
 				}
 
 				foreach (RegionLink link in region.links)
