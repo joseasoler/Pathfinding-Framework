@@ -164,6 +164,22 @@ namespace PathfindingFramework.Patches
 		}
 
 		/// <summary>
+		/// Index of this TerrainDef in the array of path costs of MovementDef instances.
+		/// Originally the plan was to use TerrainDef.index. Unfortunately this value is not valid for Defs that inherit
+		/// from TerrainDef, such as the ActiveTerrains from Biomes! Core or Vanilla Expanded Framework.
+		/// </summary>
+		/// <param name="terrainDef">Terrain definition being checked.</param>
+		/// <returns>Value equal or large to zero, and unique for all TerrainDefs. Corresponds to its position in
+		/// DefDatabase.AllDefsListForReading.
+		/// </returns>
+		[PrepatcherField]
+		public static ref int MovementIndex(this TerrainDef terrainDef)
+		{
+			Report.ErrorOnce(NoPrepatcher);
+			return ref _noPrepatcherInt;
+		}
+
+		/// <summary>
 		/// Certain terrains must only sare regions with cells having the same terrain. This is identified by this field
 		/// having a value larger than zero.
 		/// Impassable terrains with values larger than zero have been made passable by one of the movement types.

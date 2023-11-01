@@ -55,7 +55,7 @@ namespace PathfindingFramework.MovementContexts
 			int cost = PathCost.Impassable.cost;
 			if (terrainDef != null && (!ShouldAvoidFences || !pathCosts.hasFence))
 			{
-				cost = MovementDef.PathCosts[terrainDef.index];
+				cost = MovementDef.PathCosts[terrainDef.MovementIndex()];
 				if (pathCosts.things > cost)
 				{
 					if (!MovementDef.ignoreThings || pathCosts.things >= PathCost.Unsafe.cost)
@@ -95,7 +95,7 @@ namespace PathfindingFramework.MovementContexts
 				return PathCost.Impassable.cost;
 			}
 
-			int cost = MovementDef.PathCosts[terrainDef.index];
+			int cost = MovementDef.PathCosts[terrainDef.MovementIndex()];
 			cost = VanillaFurnitureExpandedSecurityCompat.MoveIntoCellTerrainCost(cost, terrainDef, prevCell, Map);
 			MapPathCost prevMapPathCost = Map.MapPathCostGrid().Get(ToIndex(prevCell));
 			short thingsCost = prevMapPathCost.hasIgnoreRepeater
@@ -166,7 +166,7 @@ namespace PathfindingFramework.MovementContexts
 				return true;
 			}
 
-			int cost = MovementDef.PathCosts[terrainDef.index];
+			int cost = MovementDef.PathCosts[terrainDef.MovementIndex()];
 			return cost >= terrainDef.pathCost && terrainDef.avoidWander;
 		}
 	}

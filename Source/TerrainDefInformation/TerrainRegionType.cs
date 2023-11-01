@@ -3,7 +3,7 @@ using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using Verse;
 
-namespace PathfindingFramework.RegionGeneration
+namespace PathfindingFramework.TerrainDefInformation
 {
 	/// <summary>
 	/// In vanilla, region types are determined as follows.
@@ -41,7 +41,7 @@ namespace PathfindingFramework.RegionGeneration
 						    movementDef.defaultCost == PathCost.Unsafe) && // Second case
 					    movementDef.CanEnterTerrain(terrainDef))
 					{
-						terrainDef.ExtendedRegionType() = extendedRegionTypeOffset + terrainDef.index;
+						terrainDef.ExtendedRegionType() = extendedRegionTypeOffset + terrainDef.MovementIndex();
 						break;
 					}
 				}

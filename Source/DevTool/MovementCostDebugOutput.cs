@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PathfindingFramework.Parse;
+using PathfindingFramework.Patches;
 using Verse;
 
 namespace PathfindingFramework.DevTool
@@ -31,7 +32,7 @@ namespace PathfindingFramework.DevTool
 				{
 					TerrainDef terrainDef = terrainDefs[terrainIndex];
 					dataTable[0, terrainIndex + 1] = terrainDef.defName;
-					dataTable[1, terrainIndex + 1] = terrainDef.index.ToString();
+					dataTable[1, terrainIndex + 1] = terrainDef.MovementIndex().ToString();
 					dataTable[movementIndex + 2, terrainIndex + 1] = new PathCost(movementDef.PathCosts[terrainIndex]).ToString();
 				}
 			}

@@ -182,7 +182,7 @@ namespace PathfindingFramework.DevTool
 				MovementDef movementDef = movementDefs[movementIndex];
 				string label = movementDef.LabelCap;
 				movementTypeLabels.Add(label);
-				short terrainPathCost = movementDef.PathCosts[terrainDef.index];
+				short terrainPathCost = movementDef.PathCosts[terrainDef.MovementIndex()];
 				terrainPathCosts.Add(terrainPathCost);
 			}
 

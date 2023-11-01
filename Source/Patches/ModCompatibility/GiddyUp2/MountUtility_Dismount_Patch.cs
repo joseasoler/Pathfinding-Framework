@@ -36,7 +36,7 @@ namespace PathfindingFramework.Patches.ModCompatibility.GiddyUp2
 				TerrainDef terrainDef = rider.Position.GetTerrain(rider.Map);
 
 				if (!rider.MovementDef().CanEnterTerrain(terrainDef) &&
-				    MovementDefOf.PF_Movement_Terrestrial_Unsafe.PathCosts[terrainDef.index] < PathCost.Impassable.cost)
+				    MovementDefOf.PF_Movement_Terrestrial_Unsafe.PathCosts[terrainDef.MovementIndex()] < PathCost.Impassable.cost)
 				{
 					rider.health.AddHediff(HediffsDefOf.PF_Hediff_SwimToSafety);
 				}

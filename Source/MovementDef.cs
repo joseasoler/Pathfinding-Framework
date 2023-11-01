@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
+using PathfindingFramework.Patches;
 using RimWorld;
 using Verse;
 
@@ -76,7 +77,7 @@ namespace PathfindingFramework
 		/// <returns>True if the terrain is passable.</returns>
 		public bool CanEnterTerrain(TerrainDef terrainDef)
 		{
-			int cost = PathCosts[terrainDef.index];
+			int cost = PathCosts[terrainDef.MovementIndex()];
 			return cost < PathCost.Unsafe.cost;
 		}
 
@@ -108,12 +109,11 @@ namespace PathfindingFramework
 
 		public override void ResolveReferences()
 		{
-			if (PathCosts != null)
+			if (descriptionHyperlinks != null)
 			{
 				return;
 			}
 
-			PathCosts = MovementDefUtils.PathCosts.Update(this);
 			descriptionHyperlinks = Hyperlinks.Get(this);
 		}
 

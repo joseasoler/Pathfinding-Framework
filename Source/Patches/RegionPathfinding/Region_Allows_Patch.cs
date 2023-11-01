@@ -69,7 +69,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			// unsafe terrain, they can move to safe terrain.
 			IntVec3 startCell = pawn.Position;
 			TerrainDef startTerrainDef = startCell.GetTerrain(map);
-			bool currentlyOnUnsafeTerrain = pawn.MovementDef().PathCosts[startTerrainDef.index] == PathCost.Unsafe.cost;
+			bool currentlyOnUnsafeTerrain = pawn.MovementDef().PathCosts[startTerrainDef.MovementIndex()] == PathCost.Unsafe.cost;
 
 			return LocationFinding.IsPassableRegion(region, pawn.MovementDef(), map, isDestination, currentlyOnUnsafeTerrain);
 		}

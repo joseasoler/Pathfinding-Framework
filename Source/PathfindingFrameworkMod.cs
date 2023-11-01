@@ -1,8 +1,9 @@
+using PathfindingFramework.ErrorHandling;
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
 using PathfindingFramework.PawnGraphic;
-using PathfindingFramework.RegionGeneration;
+using PathfindingFramework.TerrainDefInformation;
 using UnityEngine;
 using Verse;
 
@@ -36,6 +37,10 @@ namespace PathfindingFramework
 			GetSettings<Settings>();
 			// Reads and stores the MovementDef granted by MovementExtensions of each Def.
 			MovementExtensionReader.Initialize();
+			// Set the indexes of TerrainDefs to use when accessing the path cost arrays of MovementDefs.
+			TerrainMovementIndex.Initialize();
+			// Precalculate movement path costs for each terrain.
+			MovementDefPathCosts.Initialize();
 			// Initialize the extended region types of terrains.
 			TerrainRegionType.Initialize();
 			// Graphics are initialized after all defs and mod extensions are fully initialized.

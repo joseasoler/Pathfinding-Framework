@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using PathfindingFramework.Parse;
+using PathfindingFramework.Patches;
 using Verse;
 
 namespace PathfindingFramework.MovementDefUtils
@@ -8,7 +9,7 @@ namespace PathfindingFramework.MovementDefUtils
 	/// <summary>
 	/// Calculate path costs of terrains for a movement definition.
 	/// </summary>
-	public static class PathCosts
+	public static class MovementDefPathCosts
 	{
 		/// <summary>
 		/// Obtain the largest pathing cost of the tags of a specific terrain.
@@ -76,24 +77,37 @@ namespace PathfindingFramework.MovementDefUtils
 		/// </summary>
 		/// <param name="movementDef"></param>
 		/// <returns>Array of path costs.</returns>
-		public static short[] Update(MovementDef movementDef)
+		private static void Update(MovementDef movementDef)
 		{
 			PathCost defaultCost = movementDef.defaultCost;
 			short defaultCostAdd = movementDef.defaultCostAdd;
 			List<TerrainDef> terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
-			short[] result = new short[terrainDefs.Count];
+			movementDef.PathCosts = new short[terrainDefs.Count];
 
-			for (var terrainIndex = 0; terrainIndex < terrainDefs.Count; ++terrainIndex)
+			for (int terrainIndex = 0; terrainIndex < terrainDefs.Count; ++terrainIndex)
 			{
 				TerrainDef terrainDef = terrainDefs[terrainIndex];
+				if (terrainDef.MovementIndex() != terrainIndex)
+				{
+					Report.Error(
+						$"Index mismatch detected in {terrainDef}. Expected {terrainIndex}, got {terrainDef.MovementIndex()}.");
+				}
+
 				short maxTagCost = CalculateMaxTagCost(terrainDef, movementDef);
 				int terrainPathCost = Math.Min(short.MaxValue, terrainDef.pathCost);
 				short pathCost = CalculatePathCost(maxTagCost, terrainDef.passability, defaultCost, defaultCostAdd,
 					(short)terrainPathCost);
-				result[terrainIndex] = pathCost;
+				movementDef.PathCosts[terrainIndex] = pathCost;
 			}
+		}
 
-			return result;
+		public static void Initialize()
+		{
+			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
+			for (int movementDefIndex = 0; movementDefIndex < movementDefs.Count; ++movementDefIndex)
+			{
+				Update(movementDefs[movementDefIndex]);
+			}
 		}
 	}
 }

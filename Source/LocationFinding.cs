@@ -198,7 +198,7 @@ namespace PathfindingFramework
 			// If the pawn is standing on unsafe terrain, allow traversing unsafe terrain regions if the destination is safe.
 			short nonTraversablePathCost =
 				isDestination || !currentlyOnUnsafeTerrain ? PathCost.Unsafe.cost : PathCost.Impassable.cost;
-			short pathCost = movementDef.PathCosts[regionTerrainDef.index];
+			short pathCost = movementDef.PathCosts[regionTerrainDef.MovementIndex()];
 			return pathCost < nonTraversablePathCost;
 		}
 
