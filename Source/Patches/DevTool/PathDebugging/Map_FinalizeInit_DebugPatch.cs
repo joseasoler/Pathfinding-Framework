@@ -12,10 +12,14 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 	{
 		internal static void Postfix(Map __instance)
 		{
+			// Commented out, as it sometimes cause false positives. When this happens, this code will report a failure, but
+			// later on the manual divergence check will not detect any issues.
+			/*
 			if (RegionErrorReport.TryGet(__instance, out string regionErrorReport))
 			{
 				Report.Error($"Region generation failures detected:\n{regionErrorReport}");
 			}
+			*/
 		}
 	}
 }

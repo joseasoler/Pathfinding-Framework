@@ -5,40 +5,38 @@ using Verse;
 namespace PathfindingFramework.Patches.RegionPathfinding
 {
 	/// <summary>
-	/// Rooms composed only of regions which were impassable in vanilla should not be considered proper rooms.
+	/// Since all passable regions in the map usually connect to the outside, vanilla can use district types and
+	/// "touches map borders" to optimize Room calculation. In Pathfinding Framework, all of the regions of the room must
+	/// only link to other rooms in the same district, or Portal regions.
 	/// </summary>
 	[HarmonyPatch(typeof(Room), nameof(Room.ProperRoom), MethodType.Getter)]
 	internal static class Room_ProperRoom_Patch
 	{
-		private static void Postfix(List<District> ___districts, ref bool __result)
+		private static void Postfix(Room __instance, List<District> ___districts, ref bool __result)
 		{
 			if (!__result)
 			{
+				// We only need to check for false positives.
 				return;
 			}
 
-			bool allImpassableInVanilla = true;
-			for (int districtIndex = 0; districtIndex < ___districts.Count; ++districtIndex)
+			if (___districts.Count != 1)
 			{
-				District district = ___districts[districtIndex];
-				List<Region> regions = district.Regions;
-				for (int regionIndex = 0; regionIndex < regions.Count; ++regionIndex)
-				{
-					Region region = regions[regionIndex];
-					if (region.UniqueTerrainDef() == null || region.UniqueTerrainDef().passability != Traversability.Impassable)
-					{
-						allImpassableInVanilla = false;
-						break;
-					}
-				}
+				__result = false;
+				return;
+			}
 
-				if (allImpassableInVanilla)
+			District district = ___districts[0];
+			List<Region> regions = district.Regions;
+			for (int regionIndex = 0; regionIndex < regions.Count; ++regionIndex)
+			{
+				Region region = regions[regionIndex];
+				if (region.UniqueTerrainDef() != null)
 				{
+					__result = __instance.PsychologicallyOutdoors;
 					break;
 				}
 			}
-
-			__result &= !allImpassableInVanilla;
 		}
 	}
 }

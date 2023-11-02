@@ -20,7 +20,6 @@ namespace PathfindingFramework.ModCompatibility
 			}
 
 			BuildingWindowType = ModCompatibilityUtility.TypeFromAssembly(windowsAssembly, "Building_Window");
-			Report.Error($"Type: {BuildingWindowType}");
 		}
 
 		public static bool IsWindow(Thing thing)
