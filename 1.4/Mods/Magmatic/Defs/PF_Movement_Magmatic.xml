@@ -14,6 +14,7 @@
 			<PF_TerrainTag_WaterChestDeep>Avoid</PF_TerrainTag_WaterChestDeep>
 			<PF_TerrainTag_WaterShallow>Avoid</PF_TerrainTag_WaterShallow>
 		</tagCosts>
+		<ignoreAvoidWander>true</ignoreAvoidWander>
 	</PathfindingFramework.MovementDef>
 
 </Defs>

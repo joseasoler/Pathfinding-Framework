@@ -42,6 +42,7 @@
 		<penAnimalsDisallowed>true</penAnimalsDisallowed>
 		<manhuntersRequireWater>true</manhuntersRequireWater>
 		<ignoreColonyReachability>true</ignoreColonyReachability>
+		<ignoreAvoidWander>true</ignoreAvoidWander>
 	</PathfindingFramework.MovementDef>
 
 	<PathfindingFramework.MovementDef ParentName="PF_Movement_AquaticBase">

@@ -75,6 +75,12 @@
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="ignoreAvoidWander" type="xs:boolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>When this flag is set, pawns ignore the "avoidWander" value of vanilla terrains.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:all>
 		<xs:attribute name="Name" type="xs:string"/>
 		<xs:attribute name="ParentName" type="xs:string"/>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PathfindingFramework.ErrorHandling;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using RimWorld;
@@ -82,7 +83,8 @@ namespace PathfindingFramework
 						return false;
 					}
 
-					return extraValidator == null || extraValidator(c);
+					bool result = extraValidator == null || extraValidator(c);
+					return result;
 				}, null, out result);
 		}
 

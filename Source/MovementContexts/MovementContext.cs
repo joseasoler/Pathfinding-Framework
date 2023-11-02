@@ -159,15 +159,13 @@ namespace PathfindingFramework.MovementContexts
 		/// <returns>True if the path cost is equal or greater than in vanilla and the terrain has avoidWander.</returns>
 		public bool AvoidWanderAt(IntVec3 cell)
 		{
-			TerrainDef terrainDef = TerrainAt(cell);
-
-			if (terrainDef == null)
+			if (MovementDef.ignoreAvoidWander)
 			{
 				return true;
 			}
 
-			int cost = MovementDef.PathCosts[terrainDef.MovementIndex()];
-			return cost >= terrainDef.pathCost && terrainDef.avoidWander;
+			TerrainDef terrainDef = TerrainAt(cell);
+			return terrainDef == null || terrainDef.avoidWander;
 		}
 	}
 }

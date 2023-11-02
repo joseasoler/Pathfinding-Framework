@@ -130,7 +130,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 
 			sb.AppendLine("Additional error report information.");
 			sb.AppendLine(ErrorReport.Get(map));
-			Report.Error(sb.ToString());
+			Report.ErrorOnce(sb.ToString());
 
 			// Update for next error case.
 			_regionLink = null;
