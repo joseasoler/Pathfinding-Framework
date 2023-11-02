@@ -47,11 +47,9 @@ Pathfinding Framework should be compatible with almost every mod. Other pathfind
 | [Giddy-Up 2](https://steamcommunity.com/workshop/filedetails/?id=2934245647)                               | Yes                                                                                                                                                        |
 | [Vanilla Expanded Framework](https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013)            | Yes                                                                                                                                                        |
 | [Vehicles Framework](https://steamcommunity.com/workshop/filedetails/?id=3014915404)                       | Yes                                                                                                                                                        |
-| [Vanilla Furniture Expanded - Security](https://steamcommunity.com/sharedfiles/filedetails/?id=1845154007) | Partial (1)                                                                                                                                                |
+| [Vanilla Furniture Expanded - Security](https://steamcommunity.com/sharedfiles/filedetails/?id=1845154007) | Yes                                                                                                                                                        |
 | [SwimmingKit](https://steamcommunity.com/sharedfiles/filedetails/?id=1542399915)                           | No                                                                                                                                                         |
 | [TerrainMovementKit](https://steamcommunity.com/sharedfiles/filedetails/?id=2048567351)                    | No                                                                                                                                                         |
-
-1. Pawns move at normal speed over trenches. A fix is being planned, see https://github.com/joseasoler/Pathfinding-Framework/issues/7
 
 Development
 ---
