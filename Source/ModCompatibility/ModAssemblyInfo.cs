@@ -20,18 +20,33 @@ namespace PathfindingFramework.ModCompatibility
 		/// </summary>
 		public static Assembly VanillaFurnitureExpandedSecurity;
 
+		/// <summary>
+		/// Windows
+		/// https://steamcommunity.com/sharedfiles/filedetails/?id=2571189146
+		/// </summary>
+		public static Assembly Windows;
+
 		public static void Initialize()
 		{
 			foreach (var pack in LoadedModManager.RunningMods)
 			{
+				if (pack.assemblies.loadedAssemblies.NullOrEmpty())
+				{
+					continue;
+				}
+
 				string packageId = pack.PackageId.ToLower();
+				Assembly firstAssembly = pack.assemblies.loadedAssemblies[0];
 				switch (packageId)
 				{
 					case "owlchemist.giddyup":
-						GiddyUp2Assembly = pack.assemblies.loadedAssemblies[0];
+						GiddyUp2Assembly = firstAssembly;
+						break;
+					case "owlchemist.windows":
+						Windows = firstAssembly;
 						break;
 					case "vanillaexpanded.vfesecurity":
-						VanillaFurnitureExpandedSecurity = pack.assemblies.loadedAssemblies[0];
+						VanillaFurnitureExpandedSecurity = firstAssembly;
 						break;
 				}
 			}

@@ -53,6 +53,7 @@
 		<Compile Include="ModCompatibility\ModAssemblyInfo.cs" />
 		<Compile Include="ModCompatibility\ModCompatibilityUtility.cs" />
 		<Compile Include="ModCompatibility\VanillaFurnitureExpandedSecurityCompat.cs" />
+		<Compile Include="ModCompatibility\WindowsCompat.cs" />
 		<Compile Include="MovementContexts\MovementContext.cs" />
 		<Compile Include="MovementContexts\MovementContextData.cs" />
 		<Compile Include="MovementContexts\MovementContextId.cs" />

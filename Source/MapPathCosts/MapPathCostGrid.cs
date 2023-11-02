@@ -1,4 +1,5 @@
 using System;
+using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using Verse;
@@ -78,7 +79,15 @@ namespace PathfindingFramework.MapPathCosts
 			var thingList = Map.thingGrid.ThingsListAtFast(cellIndex);
 			for (int thingIndex = 0; thingIndex < thingList.Count; ++thingIndex)
 			{
-				var thing = thingList[thingIndex];
+				Thing thing = thingList[thingIndex];
+
+				// Compatibility with the Windows mod.
+				if (WindowsCompat.IsWindow(thing))
+				{
+					mapPathCostRef.things = 10;
+					mapPathCostRef.nonIgnoreRepeaterThings = 10;
+					break;
+				}
 
 				if (thing.def.passability == Traversability.Impassable)
 				{

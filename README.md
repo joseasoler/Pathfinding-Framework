@@ -52,6 +52,7 @@ Pathfinding Framework should be compatible with almost every mod. Other pathfind
 | [Vanilla Furniture Expanded - Security](https://steamcommunity.com/sharedfiles/filedetails/?id=1845154007) | Yes                                                                                                                                                        |
 | [SwimmingKit](https://steamcommunity.com/sharedfiles/filedetails/?id=1542399915)                           | No                                                                                                                                                         |
 | [TerrainMovementKit](https://steamcommunity.com/sharedfiles/filedetails/?id=2048567351)                    | No                                                                                                                                                         |
+| [Windows](https://steamcommunity.com/sharedfiles/filedetails/?id=2571189146)                               | Yes                                                                                                                                                        |
 
 Development
 ---
