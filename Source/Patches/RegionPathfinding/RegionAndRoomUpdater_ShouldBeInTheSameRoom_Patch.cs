@@ -4,9 +4,8 @@ using Verse;
 namespace PathfindingFramework.Patches.RegionPathfinding
 {
 	/// <summary>
-	/// Patches district generation to take into account the changes from RegionMaker_TryGenerateRegionFrom_Patch.
-	/// Districts can only be merged if their regions have the same UniqueTerrainDef.
-	/// UniqueTerrainDef will be null for passable regions which do not need to perform any extra checks.
+	/// Two districts can be added to the same room if both of them are passable by the terrestrial movement type (in
+	/// other words, both of them would be passable in vanilla) or if they have exactly the same UniqueTerrainDef.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionAndRoomUpdater), "ShouldBeInTheSameRoom")]
 	internal static class RegionAndRoomUpdater_ShouldBeInTheSameRoom_Patch
@@ -18,7 +17,16 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 				return;
 			}
 
-			__result = a.Regions[0].UniqueTerrainDef() == b.Regions[0].UniqueTerrainDef();
+			TerrainDef terrainDefA = a.Regions[0].UniqueTerrainDef();
+			bool aIsPassableByTerrestrial =
+				terrainDefA == null || MovementDefOf.PF_Movement_Terrestrial.CanEnterTerrain(terrainDefA);
+
+			TerrainDef terrainDefB = b.Regions[0].UniqueTerrainDef();
+			bool bIsPassableByTerrestrial =
+				terrainDefB == null || MovementDefOf.PF_Movement_Terrestrial.CanEnterTerrain(terrainDefB);
+
+			__result = aIsPassableByTerrestrial && bIsPassableByTerrestrial ||
+				a.Regions[0].UniqueTerrainDef() == b.Regions[0].UniqueTerrainDef();
 		}
 	}
 }

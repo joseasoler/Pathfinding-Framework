@@ -62,7 +62,7 @@ namespace PathfindingFramework.DevTool
 			}
 
 			bool commonShortcutIsPressed = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
-			                               (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+				(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
 
 			if (!commonShortcutIsPressed)
 			{
@@ -123,6 +123,7 @@ namespace PathfindingFramework.DevTool
 			{
 				return;
 			}
+
 			int cellIndex = map.cellIndices.CellToIndex(UI.MouseCell());
 			TerrainDef terrainDef = map.terrainGrid.TerrainAt(cellIndex);
 
@@ -270,6 +271,21 @@ namespace PathfindingFramework.DevTool
 			DrawRow("PF_DistrictRegionCount".Translate(), district.RegionCount.ToString());
 			DrawRow("PF_DistrictCellCount".Translate(), district.CellCount.ToString());
 			DrawRow("PF_DistrictRegionsMapEdge".Translate(), district.numRegionsTouchingMapEdge.ToString());
+			Room room = district.Room;
+			if (room == null)
+			{
+				return;
+			}
+
+			DrawDivider();
+			DrawRow("PF_Room".Translate(), room.ID.ToString());
+			string roleStr = room.Role != null ? room.Role.label : "PF_RoomRoleNone".Translate().CapitalizeFirst().ToString();
+			DrawRow("PF_RoomRole".Translate(), roleStr);
+			var properStr = room.ProperRoom ? "Yes" : "No";
+			DrawRow("PF_RoomProper".Translate(), properStr.Translate());
+			var outdoorsStr = room.PsychologicallyOutdoors ? "Yes" : "No";
+			DrawRow("PF_RoomOutdoors".Translate(), outdoorsStr.Translate());
+			DrawRow("PF_RoomDistrictCount".Translate(), room.DistrictCount.ToString());
 		}
 
 		private static void DrawRow(string label, string info)
