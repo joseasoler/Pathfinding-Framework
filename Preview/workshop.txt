@@ -2,7 +2,7 @@
 
 Mod authors can use this framework to easily patch movement type support for their pawns, apparel, genes (with Biotech) or other items, or even define custom movement types. How to achieve all of this is described in the wiki.
 
-Players only need to add this mod to their mod list, along with any other mods of their choice that have support for this framework (such as for example mods in the Biomes! series).
+Players only need to add this mod to their mod list, along with any other mods of their choice that have support for this framework. You can find a list of all known mods with Pathfinding Framework support in this collection: https://steamcommunity.com/sharedfiles/filedetails/?id=3071093000
 
 The framework is designed to play well with other mods and optimized for smooth gameplay.
 
@@ -60,6 +60,7 @@ In the mod options window of Pathfinding Framework, you can enable an option to 
 
 [table]
 [tr][th]Mod[/th][th]Compatible[/th][/tr]
+[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2038001322]Biomes! Islands[/url][/td][td]Yes[/td][/tr]
 [tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2603765747]Clean Pathfinding 2[/url][/td][td]Yes[/td][/tr]
 [tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url][/td][td][url=https://github.com/CombatExtended-Continued/CombatExtended/wiki/Frequently-Asked-Questions#does-mod-work-with-combat-extended-does-it-need-a-patch]Link[/url][/td][/tr]
 [tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2934245647]Giddy-Up 2[/url][/td][td]Yes[/td][/tr]
