@@ -1,11 +1,11 @@
 Pathfinding Framework
 ===
 
-[![RimWorld](https://img.shields.io/badge/RimWorld-1.4-informational)](https://rimworldgame.com/) [![Steam Downloads](https://img.shields.io/steam/downloads/ToDo)](https://steamcommunity.com/sharedfiles/filedetails/?id=2813426619) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+[![RimWorld](https://img.shields.io/badge/RimWorld-1.4-informational)](https://rimworldgame.com/) [![Steam Downloads](https://img.shields.io/steam/downloads/3070914628)](https://steamcommunity.com/sharedfiles/filedetails/?id=2813426619) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 ![Mod preview](About/Preview.png)
 
-Ever wished your colonists in [RimWorld](https://rimworldgame.com/) could do more than just walk? With the [Pathfinding Framework](https://steamcommunity.com/sharedfiles/filedetails/?id=ToDo) mod, they can! The mod introduces a variety of new movement types, allowing pawns to move across the world in entirely new ways.
+Ever wished your colonists in [RimWorld](https://rimworldgame.com/) could do more than just walk? With the [Pathfinding Framework](https://steamcommunity.com/sharedfiles/filedetails/?id=3070914628) mod, they can! The mod introduces a variety of new movement types, allowing pawns to move across the world in entirely new ways.
 
 You only need to add this mod to your mod list, along with any other mods of your choice that have support for this framework (such as for example mods in the Biomes! series). Pathfinding Framework will then automatically assign appropriate movement types to pawns based on their characteristics, apparel, and other factors.
 

@@ -18,12 +18,12 @@ All bug reports must provide a HugsLibs log. To obtain one, follow these steps:
 
 If you do not have HugsLib, you can also use a RimWorld log. You can look how to obtain it in [this link](https://steamcommunity.com/sharedfiles/filedetails/?id=725234314).
 
-Please use the [issue tracker](https://github.com/joseasoler/pathfinding-framework/issues) or the [bug reports thread in the Steam Workshop](https://steamcommunity.com/workshop/filedetails/discussion/ToDo/ToDo/) to report bugs.
+Please use the [issue tracker](https://github.com/joseasoler/pathfinding-framework/issues) or the [discord server](https://discord.gg/HB3KyzStgp) to report bugs.
 
 Questions
 ---
 
-Questions about the mod can be asked in the discussion thread of the mod in the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=ToDo) or using the [issue tracker](https://github.com/joseasoler/pathfinding-framework/issues).
+Questions about the mod can be asked in the discussion thread of the mod in the [discord server](https://discord.gg/HB3KyzStgp) or using the [issue tracker](https://github.com/joseasoler/pathfinding-framework/issues).
 
 
 Contributions
