@@ -15,7 +15,7 @@ Ever wished your colonists could do more than just walk? With the Pathfinding Fr
 
 • <b>Terrain interaction:</b> Pawns intelligently interact with terrains based on their movement type. Watch as birds effortlessly fly over obstacles or fish navigate through deep waters.
 
-• <b>Extensible framework for modders:</b> Modders can easily patch movement type support for their pawns, apparel genes or other items, or even integrate and define custom movement types.
+• <b>Extensible framework for mod authors:</b> Mod authors can easily patch movement type support for their pawns, apparel genes or other items, or even integrate and define custom movement types.
 
 • <b>Compatible and performance-friendly:</b> Designed to play well with other mods and optimized for smooth gameplay.
 ]]></description>

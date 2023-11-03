@@ -1,0 +1,102 @@
+﻿Ever wished your colonists could do more than just walk? Now they can! The mod introduces a variety of new movement types, allowing pawns to move across the world in entirely new ways.
+
+Mod authors can use this framework to easily patch movement type support for their pawns, apparel, genes (with Biotech) or other items, or even define custom movement types. How to achieve all of this is described in the wiki.
+
+Players only need to add this mod to their mod list, along with any other mods of their choice that have support for this framework (such as for example mods in the Biomes! series).
+
+The framework is designed to play well with other mods and optimized for smooth gameplay.
+
+[b]Wiki:[/b] https://github.com/joseasoler/Pathfinding-Framework/wiki
+
+[b]Discord server:[/b]
+
+[url=https://discord.gg/HB3KyzStgp][img]https://i.imgur.com/tuvp3Yd.png[/img][/url]
+
+[h1]Movement types[/h1]
+
+[h2]Aquatic[/h2]
+
+[img]https://i.imgur.com/n8IwxiC.png[/img]
+
+Aquatic creatures swim effortlessly through all bodies of water. However, they find themselves out of their element on land.
+
+[h2]Flying[/h2]
+
+[img]https://i.imgur.com/QywRIjt.png[/img]
+
+Soaring above obstacles, these creatures have the skies as their domain, hovering gracefully over most landscapes.
+
+[h2]Digging[/h2]
+
+[img]https://i.imgur.com/XrMIO4G.png[/img]
+
+Specialized for rapid movement beneath the surface, these creatures excel in sand and soil. On other terrains, they move similarly to their terrestrial counterparts.
+
+[h2]Magmatic[/h2]
+
+[img]https://i.imgur.com/9RE7K8M.png[/img]
+
+Born of fire and earth, these creatures roam the land and swim through molten lava with ease, yet they have an innate aversion to water.
+
+[h2]Custom movement types[/h2]
+
+It is also possible to define custom movement types using the framework, check the [url=https://github.com/joseasoler/Pathfinding-Framework/wiki]wiki[/url] for details.
+
+[h1]Other features[/h1]
+
+With Pathfinding Framework, you can create apparel, genes or hediffs which grant movement types to your pawns.
+
+[img]https://i.imgur.com/aNqeM4W.png[/img]
+
+Using the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2934245647]Giddy-Up 2[/url] mod, your colonists can ride on animals to take advantage of their movement type.
+
+[img]https://i.imgur.com/y8MZnYO.png[/img]
+
+In the mod options window of Pathfinding Framework, you can enable an option to let creatures that are inherently non-flammable such as mechanoids move through fire.
+
+[img]https://i.imgur.com/Y27AuqA.png[/img]
+
+[h1]Mod compatibility[/h1]
+
+[table]
+[tr][th]Mod[/th][th]Compatible[/th][/tr]
+[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2603765747]Clean Pathfinding 2[/url][/td][td]Yes[/td][/tr]
+[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url][/td][td][url=https://github.com/CombatExtended-Continued/CombatExtended/wiki/Frequently-Asked-Questions#does-mod-work-with-combat-extended-does-it-need-a-patch]Link[/url][/td][/tr]
+[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2934245647]Giddy-Up 2[/url][/td][td]Yes[/td][/tr]
+[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013]Vanilla Expanded Framework[/url][/td][td]Yes[/td][/tr]
+[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3014915404]Vehicles Framework[/url][/td][td]Yes[/td][/tr]
+[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1845154007]Vanilla Furniture Expanded - Security[/url][/td][td]Yes[/td][/tr]
+[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2571189146]Windows[/url][/td][td]Yes[/td][/tr]
+[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1542399915]SwimmingKit[/url][/td][td]No[/td][/tr]
+[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2048567351]TerrainMovementKit[/url][/td][td]No[/td][/tr]
+[/table]
+
+[h1]Frequently Asked Questions[/h1]
+
+[h3]Can I safely add this mod to an existing save?[/h3]
+
+Yes.
+
+[h3]Can I safely remove this mod from an existing save?[/h3]
+
+No.
+
+[h3]Where should I place Pathfinding Framework in my mod list load order?[/h3]
+
+Using RimSort or RimPy to sort your mod list should have optimal results.
+
+[h1]Troubleshooting[/h1]
+
+Pathfinding Framework includes some useful features for troubleshooting bugs, which can be checked at the [url=https://github.com/joseasoler/Pathfinding-Framework/wiki/Testing-and-troubleshooting]troubleshooting wiki[/url]. 
+
+For bug reports, prefer using the [url=https://discord.gg/HB3KyzStgp]Discord server[/url] or the [url=https://github.com/joseasoler/Pathfinding-Framework/issues]GitHub issue tracker[/url].
+
+[h1]Credits[/h1]
+
+[b]Project website:[/b] https://github.com/joseasoler/Pathfinding-Framework
+
+• [b]MSeal[/b]: Original implementation of [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2048567351]TerrainMovementKit[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1542399915]SwimmingKit[/url].
+
+• [b][url=https://github.com/joseasoler/]joseasoler[/url][/b]: New implementation of the Pathfinding Framework.
+
+• [b][url=https://ko-fi.com/elseud]Elseud[/url][/b]: Preview image.
