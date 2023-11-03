@@ -83,7 +83,7 @@
 	<PathfindingFramework.MovementDef>
 		<defName>PF_Movement_Flying</defName>
 		<label>flying</label>
-		<description>Soaring above obstacles, these creatures have the skies as their domain, hovering gracefully over varied landscapes.</description>
+		<description>Soaring above obstacles, these creatures have the skies as their domain, hovering gracefully over most landscapes.</description>
 		<priority>10000</priority>
 		<tagCosts>
 			<PF_TerrainTag_WaterDeep>0</PF_TerrainTag_WaterDeep>
