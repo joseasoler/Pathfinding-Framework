@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PathfindingFramework.MovementContexts;
 using PathfindingFramework.Patches;
 using Verse;
+using Verse.AI;
 
 namespace PathfindingFramework.DevTool
 {
@@ -11,22 +12,33 @@ namespace PathfindingFramework.DevTool
 	/// </summary>
 	public static class PathGridDivergenceDebugOutput
 	{
-		[DebugOutput(category: PathfindingFrameworkMod.Name, onlyWhenPlaying: false)]
-		public static void PathGridDivergence()
+		/// <summary>
+		/// Generate a path divergence error report. For the parameters, see MovementContextId.
+		/// </summary>
+		/// <param name="avoidFences">True if the pawn is an animal who must avoid fences.</param>
+		private static void CalculatePathGridDivergence(bool avoidFences)
 		{
 			Map map = Find.CurrentMap;
-
-			MovementContext context = map?.MovementContextData().ActiveContexts()
-				.Find(context => context.MovementDef == MovementDefOf.PF_Movement_Terrestrial);
+			MovementContext context = null;
+			foreach (MovementContext currentContext in map.MovementContextData().ActiveContexts())
+			{
+				if (currentContext.MovementDef == MovementDefOf.PF_Movement_Terrestrial &&
+				    currentContext.CanIgnoreFire == false &&
+				    currentContext.ShouldAvoidFences == avoidFences)
+				{
+					context = currentContext;
+					break;
+				}
+			}
 
 			if (context == null)
 			{
 				return;
 			}
 
-			int[] vanillaPathGrid = map.pathing.Normal.pathGrid.pathGrid;
+			PathingContext vanillaPathingContext = avoidFences ? map.pathing.FenceBlocked : map.pathing.Normal;
+			int[] vanillaPathGrid = vanillaPathingContext.pathGrid.pathGrid;
 			int[] modPathGrid = context.PathingContext.pathGrid.pathGrid;
-
 			int minSize = Math.Min(vanillaPathGrid.Length, modPathGrid.Length);
 			List<Tuple<IntVec3, int, int>> divergencesList = new List<Tuple<IntVec3, int, int>>();
 
@@ -70,6 +82,18 @@ namespace PathfindingFramework.DevTool
 			}
 
 			Find.WindowStack.Add(new Window_DebugTable(dataTable));
+		}
+
+		[DebugOutput(category: PathfindingFrameworkMod.Name, onlyWhenPlaying: true)]
+		public static void NormalPathGridDivergence()
+		{
+			CalculatePathGridDivergence(false);
+		}
+		
+		[DebugOutput(category: PathfindingFrameworkMod.Name, onlyWhenPlaying: true)]
+		public static void FencesPathGridDivergence()
+		{
+			CalculatePathGridDivergence(true);
 		}
 	}
 }

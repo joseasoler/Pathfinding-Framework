@@ -178,9 +178,14 @@ namespace PathfindingFramework.DevTool
 			List<string> movementTypeLabels = new List<string>();
 			List<short> terrainPathCosts = new List<short>();
 			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
+			movementDefs.Remove(MovementDefOf.PF_Movement_Terrestrial_Unsafe);
+
+			movementDefs.Sort((lhs, rhs) => lhs.priority.CompareTo(rhs.priority));
+
 			for (int movementIndex = 0; movementIndex < movementDefs.Count; ++movementIndex)
 			{
 				MovementDef movementDef = movementDefs[movementIndex];
+
 				string label = movementDef.LabelCap;
 				movementTypeLabels.Add(label);
 				short terrainPathCost = movementDef.PathCosts[terrainDef.MovementIndex()];
