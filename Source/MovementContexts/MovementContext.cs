@@ -114,7 +114,7 @@ namespace PathfindingFramework.MovementContexts
 				cost = nextMapPathCost.snow;
 			}
 
-			if (prevMapPathCost.hasDoor)
+			if (prevMapPathCost.hasDoor && nextMapPathCost.hasDoor)
 			{
 				cost += 45;
 			}
