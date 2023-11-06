@@ -18,7 +18,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			// Two regions must never contain terrains with different vanilla passability values.
 			// This check is necessary because regions of impassable terrain might have a normal RegionType if they can be
 			// traversed by at least one movement type.
-			return lhs.passability == rhs.passability &&
+			return lhs != null && rhs != null && lhs.passability == rhs.passability &&
 				// See TerrainRegionType for details.
 				lhs.ExtendedRegionType() == rhs.ExtendedRegionType();
 		}
