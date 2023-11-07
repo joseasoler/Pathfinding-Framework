@@ -15,10 +15,14 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	{
 		private static bool TerrainsShouldBelongToSameRegion(TerrainDef lhs, TerrainDef rhs)
 		{
-			// Two regions must never contain terrains with different vanilla passability values.
-			// This check is necessary because regions of impassable terrain might have a normal RegionType if they can be
-			// traversed by at least one movement type.
-			return lhs != null && rhs != null && lhs.passability == rhs.passability &&
+
+			return
+				// terrainDef can be null when generating a new map and playing with Dubs Performance Analyzer. See #94.
+				lhs != null && rhs != null &&
+				// Two regions must never contain terrains with different vanilla passability values.
+				// This check is necessary because regions of impassable terrain might have a normal RegionType if they can be
+				// traversed by at least one movement type.
+				lhs.passability == rhs.passability &&
 				// See TerrainRegionType for details.
 				lhs.ExtendedRegionType() == rhs.ExtendedRegionType();
 		}

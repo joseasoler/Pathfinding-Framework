@@ -17,7 +17,10 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 			if (__result?.type == RegionType.Normal)
 			{
 				TerrainDef terrainDef = root.GetTerrain(__result.Map);
-				if (terrainDef.ExtendedRegionType() > 0)
+				if (
+					// terrainDef can be null when generating a new map and playing with Dubs Performance Analyzer. See #94.
+					terrainDef != null &&
+					terrainDef.ExtendedRegionType() > 0)
 				{
 					__result.UniqueTerrainDef() = terrainDef;
 				}
