@@ -11,6 +11,13 @@ namespace PathfindingFramework.Patches.ThingGrids
 	{
 		internal static void Postfix(Thing __instance)
 		{
+			if (__instance.Map == null)
+			{
+				// With Project RimFactory Revived, an assembler outputting directly to a digital storage unit can create items
+				// without an associated map.
+				return;
+			}
+
 			if (__instance.def.pathCost != 0 || __instance.def.passability == Traversability.Impassable)
 			{
 				if (__instance.def.size == IntVec2.One)
