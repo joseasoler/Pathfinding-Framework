@@ -30,11 +30,6 @@ namespace PathfindingFramework.DevTool
 				else
 				{
 					packageId = terrainDef.modContentPack.PackageIdPlayerFacing ?? "Unknown";
-					if (terrainDef.modContentPack.PackageIdPlayerFacing == null)
-					{
-						Report.Error(
-							$"[{terrainDef}]: null PackageIdPlayerFacing. Alternatives: |packageId:{terrainDef.modContentPack.PackageId}|name:{terrainDef.modContentPack.Name}|steamAppId:{terrainDef.modContentPack.SteamAppId}|generated:{terrainDef.generated}");
-					}
 				}
 
 				string terrainDefName = terrainDef.defName;
