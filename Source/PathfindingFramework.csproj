@@ -17,7 +17,7 @@
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<Deterministic>true</Deterministic>
-		<OutputPath>..\$(Configuration)\Core\Assemblies\</OutputPath>
+		<OutputPath>..\$(Configuration)\Assemblies\</OutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
