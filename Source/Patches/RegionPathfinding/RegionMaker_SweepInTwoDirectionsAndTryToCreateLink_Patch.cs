@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using PathfindingFramework.ErrorHandling;
 using Verse;
 
 namespace PathfindingFramework.Patches.RegionPathfinding
@@ -22,15 +24,18 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	{
 		private static RegionType GetExpectedRegionTypeExtended(IntVec3 c, Map map)
 		{
+			const RegionType combinableRegion = RegionType.Fence | RegionType.Normal;
 			RegionType regionType = c.GetExpectedRegionType(map);
-			if (regionType == RegionType.Normal)
+			if ((regionType & combinableRegion) == 0)
 			{
-				TerrainDef terrainDef = c.GetTerrain(map);
-				// terrainDef can be null when generating a new map and playing with Dubs Performance Analyzer. See #94.
-				if (terrainDef != null)
-				{
-					regionType += terrainDef.ExtendedRegionType();
-				}
+				return regionType;
+			}
+
+			TerrainDef terrainDef = c.GetTerrain(map);
+			// terrainDef can be null when generating a new map and playing with Dubs Performance Analyzer. See #94.
+			if (terrainDef != null)
+			{
+				regionType += terrainDef.ExtendedRegionType();
 			}
 
 			return regionType;

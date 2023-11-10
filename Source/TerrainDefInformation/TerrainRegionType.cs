@@ -26,7 +26,7 @@ namespace PathfindingFramework.TerrainDefInformation
 	{
 		public static void Initialize()
 		{
-			const int extendedRegionTypeOffset = (int)RegionType.Set_All + 1;
+			const int extendedRegionTypeOffset = (int)RegionType.Set_All * 2;
 			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
 			List<TerrainDef> terrainDefs = DefDatabase<TerrainDef>.AllDefsListForReading;
 
