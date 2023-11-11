@@ -5,7 +5,7 @@ using System.Reflection.Emit;
 using HarmonyLib;
 using Verse;
 
-namespace PathfindingFramework.Patches.RegionPathfinding
+namespace PathfindingFramework.Patches.RegionGeneration
 {
 	/// <summary>
 	/// Certain terrains must be in regions that only contain the same terrain, as described in TerrainRegionType.

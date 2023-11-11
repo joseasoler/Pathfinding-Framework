@@ -2,7 +2,7 @@
 using HarmonyLib;
 using Verse;
 
-namespace PathfindingFramework.Patches.RegionPathfinding
+namespace PathfindingFramework.Patches.RegionGeneration
 {
 	/// <summary>
 	/// RegionAndRoomUpdater.FindCurrentRegionGroupNeighborWithMostRegions uses this method to identify neighbors to

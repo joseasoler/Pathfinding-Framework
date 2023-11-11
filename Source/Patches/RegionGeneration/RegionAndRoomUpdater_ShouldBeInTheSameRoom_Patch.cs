@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using Verse;
 
-namespace PathfindingFramework.Patches.RegionPathfinding
+namespace PathfindingFramework.Patches.RegionGeneration
 {
 	/// <summary>
 	/// Two districts can be added to the same room if both of them are passable by the terrestrial movement type (in

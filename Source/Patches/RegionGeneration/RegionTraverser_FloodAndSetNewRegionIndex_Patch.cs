@@ -2,7 +2,7 @@
 using HarmonyLib;
 using Verse;
 
-namespace PathfindingFramework.Patches.RegionPathfinding
+namespace PathfindingFramework.Patches.RegionGeneration
 {
 	/// <summary>
 	/// Patches region merging to take into account the changes from RegionMaker_TryGenerateRegionFrom_Patch.
@@ -13,7 +13,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	{
 		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
-			return RegionTraverserUtil.PatchRegionMergingPredicate(instructions);
+			return RegionMergerUtil.PatchRegionMergingPredicate(instructions);
 		}
 	}
 }

@@ -4,9 +4,9 @@ using System.Reflection.Emit;
 using HarmonyLib;
 using Verse;
 
-namespace PathfindingFramework.Patches.RegionPathfinding
+namespace PathfindingFramework.Patches.RegionGeneration
 {
-	public static class RegionTraverserUtil
+	public static class RegionMergerUtil
 	{
 		private static RegionEntryPredicate GeneratePredicate(RegionEntryPredicate originalPredicate)
 		{
@@ -19,7 +19,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 		public static IEnumerable<CodeInstruction> PatchRegionMergingPredicate(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo generatePredicateMethod =
-				AccessTools.Method(typeof(RegionTraverserUtil),
+				AccessTools.Method(typeof(RegionMergerUtil),
 					nameof(GeneratePredicate));
 
 			foreach (CodeInstruction instruction in instructions)

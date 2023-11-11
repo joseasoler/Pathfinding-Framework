@@ -1,7 +1,7 @@
 using HarmonyLib;
 using Verse;
 
-namespace PathfindingFramework.Patches.RegionPathfinding
+namespace PathfindingFramework.Patches.RegionGeneration
 {
 	/// <summary>
 	/// Set the TerrainDef for each region composed of impassable terrain that can be walked by some movement type.
