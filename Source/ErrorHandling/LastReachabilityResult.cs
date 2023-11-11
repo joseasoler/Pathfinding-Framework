@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using PathfindingFramework.Patches;
+using Verse;
 using Verse.AI;
 
 namespace PathfindingFramework.ErrorHandling
@@ -13,6 +14,9 @@ namespace PathfindingFramework.ErrorHandling
 		private static LocalTargetInfo _dest;
 		private static PathEndMode _peMode;
 		private static TraverseParms _traverseParams;
+		private static MovementDef _movementDef;
+		private static bool _avoidFences;
+		private static Job _job;
 
 		public static void Store(bool result, IntVec3 start, LocalTargetInfo dest, PathEndMode peMode,
 			TraverseParms traverseParams)
@@ -22,6 +26,18 @@ namespace PathfindingFramework.ErrorHandling
 			_dest = dest;
 			_peMode = peMode;
 			_traverseParams = traverseParams;
+			Pawn pawn = _traverseParams.pawn;
+			if (pawn != null)
+			{
+				_movementDef = pawn.MovementDef();
+				_avoidFences = pawn.MovementContext().ShouldAvoidFences;
+				_job = pawn.CurJob;
+			}
+			else
+			{
+				_movementDef = null;
+				_job = null;
+			}
 		}
 
 		public static string Get()
@@ -33,12 +49,12 @@ namespace PathfindingFramework.ErrorHandling
 			string startStr = _start.ToReportString(map);
 			string destStr = _dest.Cell.ToReportString(map);
 			string targetStr = thing != null ? thing.GetUniqueLoadID() : "Cell";
-			string jobStr = pawn?.CurJob?.ToString() ?? "None";
+			string jobStr = _job?.ToString() ?? "None";
 			string traverseModeStr = _traverseParams.mode.ToReportString();
 			string pathEndMode = _peMode.ToReportString();
 
 			return
-				$"Last Reachability.CanReach: {pawnStr} from {startStr} to {destStr}. Trying to reach {targetStr}. Job: {jobStr}. Traverse: {traverseModeStr}, path end: {pathEndMode}. Result: {_result}";
+				$"Last Reachability.CanReach: {pawnStr} using movement {_movementDef}(avoid fences: {_avoidFences}) to move from {startStr} to {destStr}. Trying to reach {targetStr}. Job: {jobStr}. Traverse: {traverseModeStr}, path end: {pathEndMode}. Result: {_result}";
 		}
 	}
 }

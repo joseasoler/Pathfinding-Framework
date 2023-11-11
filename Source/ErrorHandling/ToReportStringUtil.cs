@@ -1,4 +1,5 @@
 ﻿using System;
+using PathfindingFramework.Patches;
 using Verse;
 using Verse.AI;
 
@@ -39,8 +40,10 @@ namespace PathfindingFramework.ErrorHandling
 			}
 
 			string doorStr = region.door == null ? "Null" : region.door.GetUniqueLoadID();
+			string typeStr = Enum.GetName(typeof(RegionType), region.type);
+			string uniqueTerrainDefStr = region.UniqueTerrainDef() != null ? region.UniqueTerrainDef().defName : "None";
 			return
-				$"Region[id:{region.id}, district:{region.District.ToReportString()}] -> extents:{region.extentsClose.ToReportString()}, links:{region.links.Count}, cells:{region.CellCount}, door:{doorStr}";
+				$"Region[id:{region.id}, district:{region.District.ToReportString()}] -> type:{typeStr}, uniqueTerrainDef:{uniqueTerrainDefStr}, extents:{region.extentsClose.ToReportString()}, links:{region.links.Count}, cells:{region.CellCount}, door:{doorStr}";
 		}
 
 		public static string ToReportString(this RegionLink link)

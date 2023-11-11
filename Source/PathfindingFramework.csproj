@@ -82,7 +82,6 @@
 		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_FindGroundSleepSpotFor_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Pawn_PathFollower_StartPath_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\RCellFinder_BestOrderedGotoDestNear_Patch.cs" />
-		<Compile Include="Patches\LocationChoosing\ReachabilityWithinRegion_ThingFromRegionListerReachable_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Selector_MassTakeFirstAutoTakeableOptionOrGoto_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\ExtendedDataStorage_FinalizeInit_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\MountUtility_Dismount_Patch.cs" />
@@ -94,6 +93,8 @@
 		<Compile Include="Patches\ModExtensions\PawnGraphicSet_ResolveAllGraphics_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Pawn_HealthTracker_SetDead_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\TerrainTag\Pawn_PathFollower_TryEnterNextPathCell_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Pawn_JobTracker_CleanupCurrentJob_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Pawn_JobTracker_StartJob_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\Reachable\Reachability_CanReachFactionBase_Patch.cs" />
 		<Compile Include="Patches\RegionGeneration\RegionAndRoomUpdater_ShouldBeInTheSameRoom_Patch.cs" />
@@ -104,6 +105,7 @@
 		<Compile Include="Patches\RegionGeneration\RegionTraverser_FloodAndSetDistricts_Patch.cs" />
 		<Compile Include="Patches\RegionGeneration\RegionTraverser_FloodAndSetNewRegionIndex_Patch.cs" />
 		<Compile Include="Patches\RegionGeneration\Region_NeighborsOfSameType_Patch.cs" />
+		<Compile Include="Patches\RegionPathfinding\ReachabilityWithinRegion_ThingFromRegionListerReachable_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\RegionTypeUtility_GetExpectedRegionType_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\Region_Allows_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\Room_ProperRoom_Patch.cs" />

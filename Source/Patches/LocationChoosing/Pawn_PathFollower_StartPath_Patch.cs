@@ -2,11 +2,15 @@
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using PathfindingFramework.MovementContexts;
 using Verse;
 using Verse.AI;
 
 namespace PathfindingFramework.Patches.LocationChoosing
 {
+	/// <summary>
+	/// Make the reachability check of this function pawn aware.
+	/// </summary>
 	[HarmonyPatch(typeof(Pawn_PathFollower), nameof(Pawn_PathFollower.StartPath))]
 	internal static class Pawn_PathFollower_StartPath_Patch
 	{
@@ -15,7 +19,11 @@ namespace PathfindingFramework.Patches.LocationChoosing
 		private static TraverseParms ModifiedParmsFor(TraverseMode mode, Danger maxDanger, bool canBashDoors,
 			bool alwaysUseAvoidGrid, bool canBashFences)
 		{
-			return TraverseParms.For(_pawn, maxDanger, mode, canBashDoors, alwaysUseAvoidGrid, canBashFences);
+			TraverseParms result = TraverseParms.For(_pawn, maxDanger, mode, canBashDoors, alwaysUseAvoidGrid, canBashFences);
+			// The TraverseParms.For overload used above does not take into account the current pawn job to set fenceBlocked.
+			// Set it correctly here instead.
+			result.fenceBlocked = MovementContextUtil.ShouldAvoidFences(_pawn);
+			return result;
 		}
 
 		private static void Prefix(Pawn ___pawn)

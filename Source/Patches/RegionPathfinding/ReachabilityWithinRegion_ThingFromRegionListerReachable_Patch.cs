@@ -1,9 +1,11 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 using PathfindingFramework.MovementContexts;
+using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.Patches.LocationChoosing
+namespace PathfindingFramework.Patches.RegionPathfinding
 {
 	/// <summary>
 	/// Pawns can only reach things in cells they can stand over.

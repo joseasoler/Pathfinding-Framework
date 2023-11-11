@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using PathfindingFramework.ErrorHandling;
+using RimWorld;
 using Verse;
 using Verse.AI;
 
