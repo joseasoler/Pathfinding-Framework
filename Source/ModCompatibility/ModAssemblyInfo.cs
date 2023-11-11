@@ -9,6 +9,12 @@ namespace PathfindingFramework.ModCompatibility
 	public static class ModAssemblyInfo
 	{
 		/// <summary>
+		/// Prepatcher
+		/// https://steamcommunity.com/workshop/filedetails/?id=2934420800
+		/// </summary>
+		public static bool PrepatcherPresent;
+
+		/// <summary>
 		/// Giddy-Up 2
 		/// https://steamcommunity.com/sharedfiles/filedetails/?id=2934245647
 		/// </summary>
@@ -47,6 +53,9 @@ namespace PathfindingFramework.ModCompatibility
 						break;
 					case "vanillaexpanded.vfesecurity":
 						VanillaFurnitureExpandedSecurity = firstAssembly;
+						break;
+					case "zetrith.prepatcher":
+						PrepatcherPresent = true;
 						break;
 				}
 			}

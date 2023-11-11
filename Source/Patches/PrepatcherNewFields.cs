@@ -12,8 +12,6 @@ namespace PathfindingFramework.Patches
 	/// </summary>
 	public static class PrepatcherNewFields
 	{
-		private const string NoPrepatcher = "Fatal error: Prepatcher is required!";
-
 		private static MovementDef _noPrepatcherMovementDef = null;
 		private static MapPathCostGrid _noPrepatcherMapPathCostGrid = null;
 		private static MovementContext _noPrepatcherMovementContext = null;
@@ -31,7 +29,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this ThingDef thingDef)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherMovementDef;
 		}
 
@@ -44,7 +41,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this LifeStageDef lifeStageDef)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherMovementDef;
 		}
 
@@ -57,7 +53,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this GeneDef geneDef)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherMovementDef;
 		}
 
@@ -70,7 +65,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this HediffDef hediffDef)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherMovementDef;
 		}
 
@@ -83,7 +77,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this Pawn pawn)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherMovementDef;
 		}
 
@@ -96,7 +89,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementContext MovementContext(this Pawn pawn)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherMovementContext;
 		}
 
@@ -108,7 +100,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref GraphicContext GraphicContext(this Pawn pawn)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherGraphicContext;
 		}
 
@@ -120,7 +111,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref TerrainDef CurrentTerrainDef(this Pawn pawn)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherTerrainDef;
 		}
 
@@ -133,7 +123,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MapPathCostGrid MapPathCostGrid(this Map map)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherMapPathCostGrid;
 		}
 
@@ -146,7 +135,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementContextData MovementContextData(this Map map)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherMovementContextData;
 		}
 
@@ -159,7 +147,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref TerrainDef UniqueTerrainDef(this Region region)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherTerrainDef;
 		}
 
@@ -175,7 +162,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref int MovementIndex(this TerrainDef terrainDef)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherInt;
 		}
 
@@ -192,7 +178,6 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref int ExtendedRegionType(this TerrainDef terrainDef)
 		{
-			Report.ErrorOnce(NoPrepatcher);
 			return ref _noPrepatcherInt;
 		}
 	}
