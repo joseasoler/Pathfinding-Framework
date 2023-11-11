@@ -101,6 +101,14 @@ namespace PathfindingFramework.PawnGraphic
 		}
 
 		/// <summary>
+		/// Death forces an unconditional graphic set recalculation.
+		/// </summary>
+		public void Death()
+		{
+			_pawn.drawer.renderer.graphics.nakedGraphic = null;
+		}
+
+		/// <summary>
 		/// Obtains the replacement graphic.
 		/// </summary>
 		/// <param name="nakedGraphic">Naked graphic of the pawn without modifications.</param>

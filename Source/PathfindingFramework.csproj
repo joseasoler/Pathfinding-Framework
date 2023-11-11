@@ -92,6 +92,7 @@
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_StartJob_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\MovementMultiplier\Pawn_TicksPerMove_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\PawnGraphicSet_ResolveAllGraphics_Patch.cs" />
+		<Compile Include="Patches\ModExtensions\Pawn_HealthTracker_SetDead_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\TerrainTag\Pawn_PathFollower_TryEnterNextPathCell_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\Reachable\Reachability_CanReachFactionBase_Patch.cs" />
