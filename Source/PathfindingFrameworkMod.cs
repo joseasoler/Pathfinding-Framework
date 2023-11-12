@@ -57,6 +57,8 @@ namespace PathfindingFramework
 			GiddyUp2Compat.Initialize();
 			VanillaFurnitureExpandedSecurityCompat.Initialize();
 			WindowsCompat.Initialize();
+			// Settings window initialization.
+			SettingsWindow.Initialize(WriteSettings);
 			// Add some useful (but brief) information to the log.
 			// Enabling debug logging expands upon this.
 			LoadedDataReport.Write();
