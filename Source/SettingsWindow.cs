@@ -31,6 +31,21 @@ namespace PathfindingFramework
 		private const float TabsHeight = GenUI.ListSpacing;
 
 		/// <summary>
+		/// Used to separate the button row from the rest of the tab content.
+		/// </summary>
+		private const float GapHuge = GenUI.GapWide * 2;
+
+		/// <summary>
+		/// Height of the row with buttons at the bottom of each tab view.
+		/// </summary>
+		private const float ButtonHeight = GenUI.ListSpacing;
+
+		/// <summary>
+		/// Maximum number of buttons that can be placed at the button row.
+		/// </summary>
+		private const int ButtonRowMaxCount = 5;
+
+		/// <summary>
 		/// Current tab shown in the UI.
 		/// </summary>
 		private static SettingsWindowTab _tab = SettingsWindowTab.General;
@@ -108,9 +123,9 @@ namespace PathfindingFramework
 					throw new ArgumentOutOfRangeException();
 			}
 
-			listing.Gap();
-			Rect buttonsRect = listing.GetRect(30.0F);
-			float buttonWidth = buttonsRect.width / 5.0F;
+			listing.Gap(GapHuge);
+			Rect buttonsRect = listing.GetRect(ButtonHeight);
+			float buttonWidth = buttonsRect.width / ButtonRowMaxCount;
 
 			Rect resetRect = new Rect(buttonsRect.width - buttonWidth, buttonsRect.y, buttonWidth, buttonsRect.height);
 			if (Widgets.ButtonText(resetRect, "PF_ResetSettingsLabel".Translate()))
