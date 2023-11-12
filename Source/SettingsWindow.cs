@@ -31,21 +31,6 @@ namespace PathfindingFramework
 		private const float TabsHeight = GenUI.ListSpacing;
 
 		/// <summary>
-		/// Used to separate the button row from the rest of the tab content.
-		/// </summary>
-		private const float GapHuge = GenUI.GapWide * 2;
-
-		/// <summary>
-		/// Height of the row with buttons at the bottom of each tab view.
-		/// </summary>
-		private const float ButtonHeight = GenUI.ListSpacing;
-
-		/// <summary>
-		/// Maximum number of buttons that can be placed at the button row.
-		/// </summary>
-		private const int ButtonRowMaxCount = 5;
-
-		/// <summary>
 		/// Current tab shown in the UI.
 		/// </summary>
 		private static SettingsWindowTab _tab = SettingsWindowTab.General;
@@ -123,18 +108,6 @@ namespace PathfindingFramework
 					throw new ArgumentOutOfRangeException();
 			}
 
-			listing.Gap(GapHuge);
-			Rect buttonsRect = listing.GetRect(ButtonHeight);
-			float buttonWidth = buttonsRect.width / ButtonRowMaxCount;
-
-			Rect resetRect = new Rect(buttonsRect.width - buttonWidth, buttonsRect.y, buttonWidth, buttonsRect.height);
-			if (Widgets.ButtonText(resetRect, "PF_ResetSettingsLabel".Translate()))
-			{
-				Settings.Reset();
-			}
-
-			TooltipHandler.TipRegion(resetRect, "PF_ResetSettingsHover".Translate());
-
 			listing.End();
 		}
 
@@ -151,6 +124,22 @@ namespace PathfindingFramework
 			TabDrawer.DrawTabs(tabArea, Tabs());
 
 			DoTabContents(settingsArea.ContractedBy(15.0f));
+
+			// Draw the reset button at the right side of the area that Dialog_ModSettings reserves for the close button.
+
+			// The reset button is placed at the bottom right corner.
+			float resetX = inRect.width - Window.CloseButSize.x;
+			// Dialog_ModSettings leaves a margin of Window.CloseButSize.y at the bottom for the close button.
+			// Then, there are three pixels between the top border of the close button and the rest of this window.
+			float resetY = inRect.height + Window.CloseButSize.y + 3;
+			Rect resetButtonArea = new Rect(resetX, resetY, Window.CloseButSize.x, Window.CloseButSize.y);
+
+			if (Widgets.ButtonText(resetButtonArea, "PF_ResetSettingsLabel".Translate()))
+			{
+				Settings.Reset();
+			}
+
+			TooltipHandler.TipRegion(resetButtonArea, "PF_ResetSettingsHover".Translate());
 		}
 
 		public static void OnWriteSettings()
