@@ -34,7 +34,7 @@ namespace PathfindingFramework.ModCompatibility
 
 		public static void Initialize()
 		{
-			foreach (var pack in LoadedModManager.RunningMods)
+			foreach (ModContentPack pack in LoadedModManager.RunningMods)
 			{
 				if (pack.assemblies.loadedAssemblies.NullOrEmpty())
 				{

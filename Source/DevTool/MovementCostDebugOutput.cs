@@ -18,17 +18,17 @@ namespace PathfindingFramework.DevTool
 			int movementCount = movementDefs.Count;
 			int terrainCount = terrainDefs.Count;
 
-			var dataTable = new string[movementCount + 2, // Terrain, terrainindex, ...
+			string[,] dataTable = new string[movementCount + 2, // Terrain, terrainindex, ...
 				terrainCount + 1];
 			dataTable[0, 0] = "TerrainDef";
 			dataTable[1, 0] = "Terrain Index";
 
-			for (var movementIndex = 0; movementIndex < movementCount; ++movementIndex)
+			for (int movementIndex = 0; movementIndex < movementCount; ++movementIndex)
 			{
 				MovementDef movementDef = movementDefs[movementIndex];
 				dataTable[movementIndex + 2, 0] = movementDef.label;
 
-				for (var terrainIndex = 0; terrainIndex < terrainCount; ++terrainIndex)
+				for (int terrainIndex = 0; terrainIndex < terrainCount; ++terrainIndex)
 				{
 					TerrainDef terrainDef = terrainDefs[terrainIndex];
 					dataTable[0, terrainIndex + 1] = terrainDef.defName;

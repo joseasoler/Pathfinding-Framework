@@ -24,7 +24,7 @@ namespace PathfindingFramework
 		/// <param name="inRect">Available area for drawing the settings.</param>
 		public static void DoWindowContents(Rect inRect)
 		{
-			var listing = new Listing_Standard();
+			Listing_Standard listing = new Listing_Standard();
 			listing.Begin(inRect);
 
 			listing.CheckboxLabeled("PF_IgnoreFireLabel".Translate(), ref Settings.Values.IgnoreFire,
@@ -40,10 +40,10 @@ namespace PathfindingFramework
 				"PF_DebugLogHover".Translate());
 
 			listing.Gap();
-			var buttonsRect = listing.GetRect(30.0F);
-			var buttonWidth = buttonsRect.width / 5.0F;
+			Rect buttonsRect = listing.GetRect(30.0F);
+			float buttonWidth = buttonsRect.width / 5.0F;
 
-			var resetRect = new Rect(buttonsRect.width - buttonWidth, buttonsRect.y, buttonWidth, buttonsRect.height);
+			Rect resetRect = new Rect(buttonsRect.width - buttonWidth, buttonsRect.y, buttonWidth, buttonsRect.height);
 			if (Widgets.ButtonText(resetRect, "PF_ResetSettingsLabel".Translate()))
 			{
 				Settings.Reset();

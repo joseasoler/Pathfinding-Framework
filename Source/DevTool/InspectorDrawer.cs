@@ -86,7 +86,7 @@ namespace PathfindingFramework.DevTool
 				return;
 			}
 
-			var rect = new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, WindowWidth,
+			Rect rect = new Rect(Event.current.mousePosition.x, Event.current.mousePosition.y, WindowWidth,
 				_numLines * LineHeight + LineHeight);
 
 			_numLines = 0;
@@ -206,11 +206,11 @@ namespace PathfindingFramework.DevTool
 			DrawRow("PF_FirePathCostLabel".Translate(), mapPathCost.fire.ToString());
 			DrawRow("PF_ThingsPathCostLabel".Translate(), PathCostLabel(mapPathCost.things));
 			DrawRow("PF_NonIgnoreRepeatersPathCostLabel".Translate(), PathCostLabel(mapPathCost.nonIgnoreRepeaterThings));
-			var hasIgnoreRepeater = mapPathCost.hasIgnoreRepeater ? "Yes" : "No";
+			string hasIgnoreRepeater = mapPathCost.hasIgnoreRepeater ? "Yes" : "No";
 			DrawRow("PF_HasIgnoreRepeatersLabel".Translate(), hasIgnoreRepeater.Translate());
-			var hasDoor = mapPathCost.hasDoor ? "Yes" : "No";
+			string hasDoor = mapPathCost.hasDoor ? "Yes" : "No";
 			DrawRow("PF_HasDoorLabel".Translate(), hasDoor.Translate());
-			var hasFence = mapPathCost.hasFence ? "Yes" : "No";
+			string hasFence = mapPathCost.hasFence ? "Yes" : "No";
 			DrawRow("PF_HasFenceLabel".Translate(), hasFence.Translate());
 		}
 
@@ -286,28 +286,28 @@ namespace PathfindingFramework.DevTool
 			DrawRow("PF_Room".Translate(), room.ID.ToString());
 			string roleStr = room.Role != null ? room.Role.label : "PF_RoomRoleNone".Translate().CapitalizeFirst().ToString();
 			DrawRow("PF_RoomRole".Translate(), roleStr);
-			var properStr = room.ProperRoom ? "Yes" : "No";
+			string properStr = room.ProperRoom ? "Yes" : "No";
 			DrawRow("PF_RoomProper".Translate(), properStr.Translate());
-			var outdoorsStr = room.PsychologicallyOutdoors ? "Yes" : "No";
+			string outdoorsStr = room.PsychologicallyOutdoors ? "Yes" : "No";
 			DrawRow("PF_RoomOutdoors".Translate(), outdoorsStr.Translate());
 			DrawRow("PF_RoomDistrictCount".Translate(), room.DistrictCount.ToString());
 		}
 
 		private static void DrawRow(string label, string info)
 		{
-			var currentTextHeight = _numLines * LineHeight + LineHeight / 2.0F;
+			float currentTextHeight = _numLines * LineHeight + LineHeight / 2.0F;
 			if (_numLines % 2 == 1)
 			{
-				var rect = new Rect(WindowPadding, currentTextHeight, LabelColumnWidth + ColumnPadding + InfoColumnWidth,
+				Rect rect = new Rect(WindowPadding, currentTextHeight, LabelColumnWidth + ColumnPadding + InfoColumnWidth,
 					LineHeight);
 				Widgets.DrawLightHighlight(rect);
 			}
 
 			GUI.color = Color.gray;
-			var labelRect = new Rect(WindowPadding + ColumnPadding, currentTextHeight, LabelColumnWidth, LineHeight);
+			Rect labelRect = new Rect(WindowPadding + ColumnPadding, currentTextHeight, LabelColumnWidth, LineHeight);
 			Widgets.Label(labelRect, label);
 			GUI.color = Color.white;
-			var infoRect = new Rect(WindowPadding + ColumnPadding + LabelColumnWidth, currentTextHeight, InfoColumnWidth,
+			Rect infoRect = new Rect(WindowPadding + ColumnPadding + LabelColumnWidth, currentTextHeight, InfoColumnWidth,
 				LineHeight);
 			Widgets.Label(infoRect, info);
 			++_numLines;
@@ -318,8 +318,8 @@ namespace PathfindingFramework.DevTool
 			const int extraTextHeight = 4;
 			Text.Anchor = TextAnchor.UpperCenter;
 			Text.Font = GameFont.Medium;
-			var currentTextHeight = _numLines * LineHeight + LineHeight / 2.0F - extraTextHeight * 2;
-			var rect = new Rect(WindowPadding, currentTextHeight, LabelColumnWidth + ColumnPadding + InfoColumnWidth,
+			float currentTextHeight = _numLines * LineHeight + LineHeight / 2.0F - extraTextHeight * 2;
+			Rect rect = new Rect(WindowPadding, currentTextHeight, LabelColumnWidth + ColumnPadding + InfoColumnWidth,
 				LineHeight + extraTextHeight);
 			Widgets.Label(rect, text);
 			Text.Font = GameFont.Small;
@@ -329,7 +329,7 @@ namespace PathfindingFramework.DevTool
 
 		private static void DrawDivider()
 		{
-			var currentTextHeight = _numLines * LineHeight;
+			float currentTextHeight = _numLines * LineHeight;
 			GUI.color = Color.gray;
 			Widgets.DrawLineHorizontal(0.0F, currentTextHeight + LineHeight, WindowWidth);
 			GUI.color = Color.white;

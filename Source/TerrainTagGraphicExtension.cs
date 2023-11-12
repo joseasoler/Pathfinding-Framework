@@ -22,7 +22,7 @@ namespace PathfindingFramework
 
 		public override IEnumerable<string> ConfigErrors()
 		{
-			foreach (var line in base.ConfigErrors())
+			foreach (string line in base.ConfigErrors())
 			{
 				yield return line;
 			}

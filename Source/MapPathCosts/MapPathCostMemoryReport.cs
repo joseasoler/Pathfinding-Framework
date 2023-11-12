@@ -12,20 +12,20 @@ namespace PathfindingFramework.MapPathCosts
 	{
 		public static List<MemoryUsageData> MemoryReport()
 		{
-			var cacheName = nameof(MapPathCostMemoryReport);
-			var report = new List<MemoryUsageData>();
+			string cacheName = nameof(MapPathCostMemoryReport);
+			List<MemoryUsageData> report = new List<MemoryUsageData>();
 
 			int mapPathCostSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(MapPathCost));
 
 			foreach (Map map in Find.Maps)
 			{
-				var mapPathCostGrid = map.MapPathCostGrid();
+				MapPathCostGrid mapPathCostGrid = map.MapPathCostGrid();
 				if (mapPathCostGrid == null)
 				{
 					continue;
 				}
 
-				var mapName = map.GetUniqueLoadID();
+				string mapName = map.GetUniqueLoadID();
 
 				report.Add(new MemoryUsageData(cacheName, mapName, "Map path cost grid",
 					mapPathCostSize * mapPathCostGrid.GridSize));

@@ -49,7 +49,7 @@ namespace PathfindingFramework.ModCompatibility
 				return null;
 			}
 
-			foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic |
+			foreach (MethodInfo method in type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic |
 				         BindingFlags.Instance | BindingFlags.Static))
 			{
 				if (method.Name == methodName)
@@ -81,12 +81,12 @@ namespace PathfindingFramework.ModCompatibility
 				return null;
 			}
 
-			foreach (var method in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic |
+			foreach (FieldInfo field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic |
 				         BindingFlags.Instance | BindingFlags.Static))
 			{
-				if (method.Name == fieldName)
+				if (field.Name == fieldName)
 				{
-					return method;
+					return field;
 				}
 			}
 

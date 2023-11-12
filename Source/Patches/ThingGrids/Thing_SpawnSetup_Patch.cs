@@ -26,7 +26,7 @@ namespace PathfindingFramework.Patches.ThingGrids
 				}
 				else
 				{
-					foreach (var cell in __instance.OccupiedRect())
+					foreach (IntVec3 cell in __instance.OccupiedRect())
 					{
 						__instance.Map.MapPathCostGrid().UpdateThings(cell);
 					}

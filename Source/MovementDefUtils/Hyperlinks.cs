@@ -13,7 +13,7 @@ namespace PathfindingFramework.MovementDefUtils
 			Func<TDefType, bool> condition = null) where TDefType : Def
 		{
 			List<Def> defsWithThisMovement = DefsWithMovementType.Get<TDefType>(movementDef, condition);
-			foreach (var result in defsWithThisMovement)
+			foreach (Def result in defsWithThisMovement)
 			{
 				hyperlinks.Add(new DefHyperlink(result));
 			}

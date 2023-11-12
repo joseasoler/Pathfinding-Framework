@@ -39,7 +39,7 @@ namespace PathfindingFramework
 
 			public int CompareTo(MovementDefData other)
 			{
-				var packageIdComparison = string.Compare(packageId, other.packageId, StringComparison.Ordinal);
+				int packageIdComparison = string.Compare(packageId, other.packageId, StringComparison.Ordinal);
 				return packageIdComparison != 0
 					? packageIdComparison
 					: string.Compare(defName, other.defName, StringComparison.Ordinal);
@@ -59,7 +59,7 @@ namespace PathfindingFramework
 
 			data.Sort();
 			sb.AppendLine("Loaded MovementDefs:");
-			foreach (var entry in data)
+			foreach (MovementDefData entry in data)
 			{
 				sb.AppendLine($"{entry.defName} ({entry.packageId})");
 			}

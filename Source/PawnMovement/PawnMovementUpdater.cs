@@ -19,16 +19,16 @@ namespace PathfindingFramework.PawnMovement
 		/// <returns>MovementExtension granted by apparel.</returns>
 		private static void FromApparel(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
-			var apparelList = pawn.apparel?.WornApparel;
+			List<Apparel> apparelList = pawn.apparel?.WornApparel;
 			if (apparelList == null)
 			{
 				return;
 			}
 
-			for (int index = 0; index < apparelList.Count; ++index)
+			for (int apparelIndex = 0; apparelIndex < apparelList.Count; ++apparelIndex)
 			{
-				var apparelDef = apparelList[index].def;
-				var movementDef = apparelDef.MovementDef();
+				ThingDef apparelDef = apparelList[apparelIndex].def;
+				MovementDef movementDef = apparelDef.MovementDef();
 				if (movementDef != null)
 				{
 					movementDefs.Add(movementDef);
@@ -43,15 +43,15 @@ namespace PathfindingFramework.PawnMovement
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
 		private static void FromGenes(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
-			var geneList = pawn.genes?.GenesListForReading;
+			List<Gene> geneList = pawn.genes?.GenesListForReading;
 			if (geneList == null)
 			{
 				return;
 			}
 
-			for (int index = 0; index < geneList.Count; ++index)
+			for (int geneIndex = 0; geneIndex < geneList.Count; ++geneIndex)
 			{
-				var gene = geneList[index];
+				var gene = geneList[geneIndex];
 				if (!gene.Active)
 				{
 					continue;
@@ -72,15 +72,15 @@ namespace PathfindingFramework.PawnMovement
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
 		private static void FromHediffs(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
-			var hediffList = pawn.health?.hediffSet?.hediffs;
+			List<Hediff> hediffList = pawn.health?.hediffSet?.hediffs;
 			if (hediffList == null)
 			{
 				return;
 			}
 
-			for (int index = 0; index < hediffList.Count; ++index)
+			for (int hediffIndex = 0; hediffIndex < hediffList.Count; ++hediffIndex)
 			{
-				var hediff = hediffList[index];
+				var hediff = hediffList[hediffIndex];
 
 				MovementDef movementDef = hediff.def.MovementDef();
 				if (movementDef != null)
@@ -150,7 +150,7 @@ namespace PathfindingFramework.PawnMovement
 				return;
 			}
 
-			var movementDefs = new HashSet<MovementDef>();
+			HashSet<MovementDef> movementDefs = new HashSet<MovementDef>();
 			FromApparel(pawn, ref movementDefs);
 
 			if (ModLister.BiotechInstalled && pawn.genes != null)
@@ -165,7 +165,7 @@ namespace PathfindingFramework.PawnMovement
 			int priority = int.MinValue;
 			MovementDef movementDef = null;
 
-			foreach (var currentDef in movementDefs)
+			foreach (MovementDef currentDef in movementDefs)
 			{
 				if (priority < currentDef.priority)
 				{

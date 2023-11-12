@@ -19,17 +19,17 @@ namespace PathfindingFramework.MovementDefUtils
 		/// <returns>Default if no tag was found, the maximum pathing cost otherwise.</returns>
 		private static short CalculateMaxTagCost(TerrainDef terrainDef, MovementDef movementDef)
 		{
-			var maxTagCost = PathCost.Default.cost;
+			short maxTagCost = PathCost.Default.cost;
 
 			if (terrainDef.tags == null || movementDef.tagCosts == null)
 			{
 				return maxTagCost;
 			}
 
-			var pathCostData = movementDef.tagCosts.data;
+			Dictionary<string, PathCost> pathCostData = movementDef.tagCosts.data;
 			foreach (string tag in terrainDef.tags)
 			{
-				if (pathCostData.TryGetValue(tag, out var tagCost))
+				if (pathCostData.TryGetValue(tag, out PathCost tagCost))
 				{
 					maxTagCost = Math.Max(maxTagCost, tagCost.cost);
 				}

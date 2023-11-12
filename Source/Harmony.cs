@@ -15,10 +15,10 @@ namespace PathfindingFramework
 		{
 			try
 			{
-				var path = Path.Combine(Path.GetTempPath(), "PF_Harmony.txt");
+				string path = Path.Combine(Path.GetTempPath(), "PF_Harmony.txt");
 				Environment.SetEnvironmentVariable("HARMONY_LOG_FILE", path);
 				// HarmonyLib.Harmony.DEBUG = true;
-				var harmonyInstance = new HarmonyLib.Harmony(PathfindingFrameworkMod.PackageId);
+				HarmonyLib.Harmony harmonyInstance = new HarmonyLib.Harmony(PathfindingFrameworkMod.PackageId);
 				harmonyInstance.PatchAll();
 				Report.Debug("Harmony patching applied.");
 			}

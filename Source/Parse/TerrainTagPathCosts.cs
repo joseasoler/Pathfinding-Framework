@@ -21,8 +21,8 @@ namespace PathfindingFramework.Parse
 		public void LoadDataFromXmlCustom(XmlNode xmlRoot)
 		{
 			data = new Dictionary<string, PathCost>();
-			var tagCosts = DirectXmlToObject.ListFromXml<TerrainTagPathCost>(xmlRoot);
-			foreach (var tagCost in tagCosts)
+			List<TerrainTagPathCost> tagCosts = DirectXmlToObject.ListFromXml<TerrainTagPathCost>(xmlRoot);
+			foreach (TerrainTagPathCost tagCost in tagCosts)
 			{
 				data.Add(tagCost.tag, tagCost.cost);
 			}

@@ -59,7 +59,7 @@ namespace PathfindingFramework.DevTool
 				++divergenceCount;
 			}
 
-			var dataTable = new string[3, 1 + divergenceCount];
+			string[,] dataTable = new string[3, 1 + divergenceCount];
 			dataTable[0, 0] = "Cell";
 			dataTable[1, 0] = "Vanilla";
 			dataTable[2, 0] = "Modded";

@@ -15,10 +15,10 @@ namespace PathfindingFramework.MovementDefUtils
 		{
 			List<TDefType> defs = DefDatabase<TDefType>.AllDefsListForReading;
 			List<Def> resultList = new List<Def>();
-			for (int index = 0; index < defs.Count; ++index)
+			for (int defIndex = 0; defIndex < defs.Count; ++defIndex)
 			{
-				var currentDef = defs[index];
-				var extension = currentDef.GetModExtension<MovementExtension>();
+				TDefType currentDef = defs[defIndex];
+				MovementExtension extension = currentDef.GetModExtension<MovementExtension>();
 				if (!currentDef.generated && extension != null && extension.movementDef == movementDef &&
 				    (condition == null || condition(currentDef)))
 				{

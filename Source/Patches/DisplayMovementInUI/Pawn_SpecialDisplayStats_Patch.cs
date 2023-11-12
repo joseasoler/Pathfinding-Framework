@@ -13,7 +13,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 	{
 		private static Pair<string, Dialog_InfoCard.Hyperlink?>? MovementFromApparel(Pawn pawn, MovementDef movementDef)
 		{
-			var apparelList = pawn.apparel?.WornApparel;
+			List<Apparel> apparelList = pawn.apparel?.WornApparel;
 			if (apparelList == null)
 			{
 				return null;
@@ -44,7 +44,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 					continue;
 				}
 
-				var extensionMovementDef = gene.def.MovementDef();
+				MovementDef extensionMovementDef = gene.def.MovementDef();
 				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return gene.def;
@@ -86,11 +86,11 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 				return null;
 			}
 
-			for (int index = 0; index < hediffList.Count; ++index)
+			for (int hediffIndex = 0; hediffIndex < hediffList.Count; ++hediffIndex)
 			{
-				var hediffDef = hediffList[index].def;
+				HediffDef hediffDef = hediffList[hediffIndex].def;
 
-				var extensionMovementDef = hediffDef.MovementDef();
+				MovementDef extensionMovementDef = hediffDef.MovementDef();
 				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return new Pair<string, Dialog_InfoCard.Hyperlink?>(hediffDef.label,

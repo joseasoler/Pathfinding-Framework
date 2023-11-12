@@ -88,7 +88,7 @@ namespace PathfindingFramework
 
 		public override IEnumerable<string> ConfigErrors()
 		{
-			foreach (var error in base.ConfigErrors())
+			foreach (string error in base.ConfigErrors())
 			{
 				yield return error;
 			}

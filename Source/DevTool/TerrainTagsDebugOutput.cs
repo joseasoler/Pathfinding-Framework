@@ -41,12 +41,12 @@ namespace PathfindingFramework.DevTool
 
 			input.Sort();
 
-			var dataTable = new string[3, input.Count + 1];
+			string[,] dataTable = new string[3, input.Count + 1];
 			dataTable[0, 0] = "Tag";
 			dataTable[1, 0] = "TerrainDef";
 			dataTable[2, 0] = "PackageId";
 
-			for (var inputIndex = 0; inputIndex < input.Count; ++inputIndex)
+			for (int inputIndex = 0; inputIndex < input.Count; ++inputIndex)
 			{
 				var tuple = input[inputIndex];
 				dataTable[0, inputIndex + 1] = tuple.Item1;

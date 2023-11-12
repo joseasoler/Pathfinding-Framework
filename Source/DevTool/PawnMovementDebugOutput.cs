@@ -14,9 +14,9 @@ namespace PathfindingFramework.DevTool
 		public static void CurrentPawnMovement()
 		{
 			var input = new List<Tuple<string, string, string, string, string, string>>();
-			foreach (var map in Find.Maps)
+			foreach (Map map in Find.Maps)
 			{
-				foreach (var pawn in map.mapPawns.AllPawnsSpawned)
+				foreach (Pawn pawn in map.mapPawns.AllPawnsSpawned)
 				{
 					string name = pawn.Name != null ? pawn.Name.ToString() : pawn.def.LabelCap;
 					string thingID = pawn.ThingID.CapitalizeFirst();
@@ -29,7 +29,7 @@ namespace PathfindingFramework.DevTool
 				}
 			}
 
-			var dataTable = new string[6, input.Count + 1];
+			string[,] dataTable = new string[6, input.Count + 1];
 			dataTable[0, 0] = "Name";
 			dataTable[1, 0] = "Id";
 			dataTable[2, 0] = "Map";
@@ -37,7 +37,7 @@ namespace PathfindingFramework.DevTool
 			dataTable[4, 0] = "PF_NoFencesMovementLabel".Translate();
 			dataTable[5, 0] = "PF_IgnoreFireMovementLabel".Translate();
 
-			for (var inputIndex = 0; inputIndex < input.Count; ++inputIndex)
+			for (int inputIndex = 0; inputIndex < input.Count; ++inputIndex)
 			{
 				var tuple = input[inputIndex];
 				dataTable[0, inputIndex + 1] = tuple.Item1;

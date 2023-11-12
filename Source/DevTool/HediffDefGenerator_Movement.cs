@@ -14,11 +14,11 @@ namespace PathfindingFramework.DevTool
 		/// </summary>
 		public static void GenerateMovementHediffDefs()
 		{
-			var movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
+			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
 			for (int index = 0; index < movementDefs.Count; ++index)
 			{
-				var movementDef = movementDefs[index];
-				var hediffDef = new HediffDef
+				MovementDef movementDef = movementDefs[index];
+				HediffDef hediffDef = new HediffDef
 				{
 					defName = $"{movementDef.defName}_DebugHediff",
 					label = $"Add movement type {movementDef.label}",

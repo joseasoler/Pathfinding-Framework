@@ -11,7 +11,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 	{
 		internal static void Postfix(Hediff __instance, ref string __result)
 		{
-			var extension = __instance.def.GetModExtension<MovementExtension>();
+			MovementExtension extension = __instance.def.GetModExtension<MovementExtension>();
 			if (extension != null)
 			{
 				__result +=

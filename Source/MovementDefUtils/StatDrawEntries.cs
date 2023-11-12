@@ -16,7 +16,7 @@ namespace PathfindingFramework.MovementDefUtils
 			List<Dialog_InfoCard.Hyperlink> hyperlinks = new List<Dialog_InfoCard.Hyperlink>();
 
 			List<Def> defsWithThisMovement = DefsWithMovementType.Get<TDefType>(movementDef, condition);
-			foreach (var result in defsWithThisMovement)
+			foreach (Def result in defsWithThisMovement)
 			{
 				hyperlinks.Add(new Dialog_InfoCard.Hyperlink(result));
 			}

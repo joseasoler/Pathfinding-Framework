@@ -38,7 +38,7 @@ namespace PathfindingFramework.Patches.ThingGrids
 				return;
 			}
 
-			foreach (var cell in __state.Rect)
+			foreach (IntVec3 cell in __state.Rect)
 			{
 				__state.Map.MapPathCostGrid().UpdateThings(cell);
 			}

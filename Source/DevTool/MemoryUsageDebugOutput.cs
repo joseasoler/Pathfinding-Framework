@@ -26,7 +26,7 @@ namespace PathfindingFramework.DevTool
 		[DebugOutput(category: PathfindingFrameworkMod.Name, onlyWhenPlaying: false)]
 		public static void MemoryUsageEstimation()
 		{
-			var reports = new List<MemoryUsageData>();
+			List<MemoryUsageData> reports = new List<MemoryUsageData>();
 			reports.AddRange(MovementDefUtils.MemoryReport.Get());
 			reports.AddRange(MapPathCostMemoryReport.MemoryReport());
 			foreach (Map map in Find.Maps)
@@ -34,16 +34,16 @@ namespace PathfindingFramework.DevTool
 				reports.AddRange(map.MovementContextData().MemoryReport());
 			}
 
-			var dataTable = new string[4, reports.Count + 2];
+			string[,] dataTable = new string[4, reports.Count + 2];
 			dataTable[0, 0] = "Cache";
 			dataTable[1, 0] = "Map";
 			dataTable[2, 0] = "Grid";
 			dataTable[3, 0] = "KiB";
 
-			var totalBytes = 0;
-			for (var reportIndex = 0; reportIndex < reports.Count; ++reportIndex)
+			int totalBytes = 0;
+			for (int reportIndex = 0; reportIndex < reports.Count; ++reportIndex)
 			{
-				var report = reports[reportIndex];
+				MemoryUsageData report = reports[reportIndex];
 				dataTable[0, reportIndex + 1] = report.Cache;
 				dataTable[1, reportIndex + 1] = report.Map;
 				dataTable[2, reportIndex + 1] = report.Grid;

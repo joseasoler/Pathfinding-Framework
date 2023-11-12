@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
@@ -33,7 +34,7 @@ namespace PathfindingFramework.MapPathCosts
 		/// <param name="isSpawning">True for spawning fires, false for de-spawning fires.</param>
 		public void UpdateFire(IntVec3 cell, bool isSpawning)
 		{
-			var cellIndex = ToIndex(cell);
+			int cellIndex = ToIndex(cell);
 			if (!InBounds(cellIndex))
 			{
 				return;
@@ -43,11 +44,11 @@ namespace PathfindingFramework.MapPathCosts
 			_mapGrid[cellIndex].fire += (short)(isSpawning ? centerCellCost : -centerCellCost);
 			Map.MovementContextData().UpdateCell(cellIndex);
 
-			var adjacentCells = GenAdj.AdjacentCells;
+			IntVec3[] adjacentCells = GenAdj.AdjacentCells;
 			for (int adjacentIndex = 0; adjacentIndex < adjacentCells.Length; ++adjacentIndex)
 			{
-				var adjacentCell = cell + adjacentCells[adjacentIndex];
-				var adjacentCellIndex = ToIndex(adjacentCell);
+				IntVec3 adjacentCell = cell + adjacentCells[adjacentIndex];
+				int adjacentCellIndex = ToIndex(adjacentCell);
 
 				if (!InBounds(adjacentCellIndex))
 				{
@@ -66,9 +67,9 @@ namespace PathfindingFramework.MapPathCosts
 		/// <param name="cell">Cell to be updated.</param>
 		public void UpdateThings(IntVec3 cell)
 		{
-			var cellIndex = ToIndex(cell);
+			int cellIndex = ToIndex(cell);
 
-			ref var mapPathCostRef = ref _mapGrid[cellIndex];
+			ref MapPathCost mapPathCostRef = ref _mapGrid[cellIndex];
 
 			// Reset the current values.
 			mapPathCostRef.things = 0;
@@ -76,7 +77,7 @@ namespace PathfindingFramework.MapPathCosts
 			mapPathCostRef.hasIgnoreRepeater = false;
 			mapPathCostRef.hasFence = false;
 
-			var thingList = Map.thingGrid.ThingsListAtFast(cellIndex);
+			List<Thing> thingList = Map.thingGrid.ThingsListAtFast(cellIndex);
 			for (int thingIndex = 0; thingIndex < thingList.Count; ++thingIndex)
 			{
 				Thing thing = thingList[thingIndex];

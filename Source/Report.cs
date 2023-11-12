@@ -82,7 +82,7 @@ namespace PathfindingFramework
 		/// <param name="message">Message to log.</param>
 		public static void ErrorOnce(string message)
 		{
-			var hash = message.GetHashCode();
+			int hash = message.GetHashCode();
 			if (UsedHashes.Contains(hash))
 			{
 				return;
