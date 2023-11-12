@@ -83,6 +83,7 @@
 		<Compile Include="Patches\LocationChoosing\Pawn_PathFollower_StartPath_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\RCellFinder_BestOrderedGotoDestNear_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Selector_MassTakeFirstAutoTakeableOptionOrGoto_Patch.cs" />
+		<Compile Include="Patches\ModCompatibility\DubsBadHygiene\MapComponent_Hygiene_SetWaterCellsCache_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\ExtendedDataStorage_FinalizeInit_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\MountUtility_Dismount_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\MountUtility_Mount_Patch.cs" />
@@ -206,6 +207,10 @@
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.map" />
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.openList" />
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.pathGrid" />
+
+		<!-- Dubs Bad Hygiene compatibility patch. -->
+		<Publicize Include="Assembly-CSharp:Verse.Area.Drawer" />
+		<Publicize Include="Assembly-CSharp:Verse.Area.innerGrid" />
 
 		<!-- Parsing custom XML lists. -->
 		<Publicize Include="Assembly-CSharp:Verse.DirectXmlToObject.ListFromXml" />
