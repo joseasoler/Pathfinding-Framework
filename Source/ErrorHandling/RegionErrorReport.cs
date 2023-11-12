@@ -33,17 +33,8 @@ namespace PathfindingFramework.ErrorHandling
 			sb.AppendLine("---");
 			foreach (Region region in map.regionGrid.AllRegions_NoRebuild_InvalidAllowed)
 			{
-				if (region == null)
+				if (region?.District == null)
 				{
-					sb.AppendLine("Null region");
-					errors = true;
-					continue;
-				}
-
-				if (region.District == null)
-				{
-					sb.AppendLine($"Region without district: {region.ToReportString()}");
-					errors = true;
 					continue;
 				}
 
