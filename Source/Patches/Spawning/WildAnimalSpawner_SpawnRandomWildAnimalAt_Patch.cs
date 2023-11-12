@@ -12,9 +12,9 @@ namespace PathfindingFramework.Patches.Spawning
 	/// When the animal spawning code chooses an incompatible terrain and animal type, switch to a new target cell.
 	/// </summary>
 	[HarmonyPatch(typeof(WildAnimalSpawner), nameof(WildAnimalSpawner.SpawnRandomWildAnimalAt))]
-	internal static class WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch
+	public static class WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch
 	{
-		private static bool TryReplaceAnimalSpawnLocation(PawnKindDef pawnKindDef, Map map, IntVec3 location,
+		public static bool TryReplaceAnimalSpawnLocation(PawnKindDef pawnKindDef, Map map, IntVec3 location,
 			int randomInRange, int radius)
 		{
 			MovementDef movementDef = pawnKindDef.race?.MovementDef();

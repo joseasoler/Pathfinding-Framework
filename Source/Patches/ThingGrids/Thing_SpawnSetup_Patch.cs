@@ -7,9 +7,9 @@ namespace PathfindingFramework.Patches.ThingGrids
 	/// Update path costs of things when a thing spawns.
 	/// </summary>
 	[HarmonyPatch(typeof(Thing), nameof(Thing.SpawnSetup))]
-	internal static class Thing_SpawnSetup_Patch
+	public static class Thing_SpawnSetup_Patch
 	{
-		internal static void Postfix(Thing __instance)
+		public static void Postfix(Thing __instance)
 		{
 			if (__instance.Map == null)
 			{

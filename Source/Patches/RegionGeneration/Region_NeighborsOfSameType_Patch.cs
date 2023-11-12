@@ -11,9 +11,9 @@ namespace PathfindingFramework.Patches.RegionGeneration
 	/// RegionMaker_TryGenerateRegionFrom_Patch and TerrainRegionType.
 	/// </summary>
 	[HarmonyPatch(typeof(Region), nameof(Region.NeighborsOfSameType), MethodType.Getter)]
-	internal static class Region_NeighborsOfSameType_Patch
+	public static class Region_NeighborsOfSameType_Patch
 	{
-		private static IEnumerable<Region> Postfix(IEnumerable<Region> __result, Region __instance)
+		public static IEnumerable<Region> Postfix(IEnumerable<Region> __result, Region __instance)
 		{
 			TerrainDef terrainDef = __instance.UniqueTerrainDef();
 			foreach (Region region in __result)

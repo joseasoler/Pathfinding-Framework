@@ -7,9 +7,9 @@ namespace PathfindingFramework.Patches.ModExtensions
 	/// Apply any required graphic changes.
 	/// </summary>
 	[HarmonyPatch(typeof(PawnGraphicSet), nameof(PawnGraphicSet.ResolveAllGraphics))]
-	internal static class PawnGraphicSet_ResolveAllGraphics_Patch
+	public static class PawnGraphicSet_ResolveAllGraphics_Patch
 	{
-		private static void Postfix(PawnGraphicSet __instance)
+		public static void Postfix(PawnGraphicSet __instance)
 		{
 			__instance.pawn?.GraphicContext()?.ApplyGraphicChanges(__instance);
 		}

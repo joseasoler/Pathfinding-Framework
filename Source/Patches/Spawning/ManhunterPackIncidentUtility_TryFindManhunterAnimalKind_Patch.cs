@@ -12,9 +12,9 @@ namespace PathfindingFramework.Patches.Spawning
 	/// Remove animals with MovementDef.manhuntersRequireWater enabled from maps lacking access to water.
 	/// </summary>
 	[HarmonyPatch(typeof(ManhunterPackIncidentUtility), nameof(ManhunterPackIncidentUtility.TryFindManhunterAnimalKind))]
-	public class ManhunterPackIncidentUtility_TryFindManhunterAnimalKind_Patch
+	public static class ManhunterPackIncidentUtility_TryFindManhunterAnimalKind_Patch
 	{
-		private static bool HasAccessToWater(int tileID)
+		public static bool HasAccessToWater(int tileID)
 		{
 			WorldGrid grid = Find.WorldGrid;
 			if (!grid.InBounds(tileID))
@@ -35,7 +35,7 @@ namespace PathfindingFramework.Patches.Spawning
 			return false;
 		}
 
-		private static IEnumerable<PawnKindDef> RemoveWaterManhuntersIfNeeded(IEnumerable<PawnKindDef> allManhunters,
+		public static IEnumerable<PawnKindDef> RemoveWaterManhuntersIfNeeded(IEnumerable<PawnKindDef> allManhunters,
 			int tileID)
 		{
 			bool accessToWater = HasAccessToWater(tileID);
@@ -49,7 +49,7 @@ namespace PathfindingFramework.Patches.Spawning
 			}
 		}
 
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo removeWaterManhuntersIfNeededMethod =
 				AccessTools.Method(typeof(ManhunterPackIncidentUtility_TryFindManhunterAnimalKind_Patch),

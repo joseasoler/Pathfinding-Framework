@@ -10,9 +10,9 @@ namespace PathfindingFramework.Patches.RegionGeneration
 	/// use the region type to filter impassable regions out of pathfinding.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionMaker), nameof(RegionMaker.TryGenerateRegionFrom))]
-	internal static class RegionMaker_TryGenerateRegionFrom_Patch
+	public static class RegionMaker_TryGenerateRegionFrom_Patch
 	{
-		internal static void Postfix(IntVec3 root, Region __result)
+		public static void Postfix(IntVec3 root, Region __result)
 		{
 			if (__result?.type == RegionType.Normal)
 			{

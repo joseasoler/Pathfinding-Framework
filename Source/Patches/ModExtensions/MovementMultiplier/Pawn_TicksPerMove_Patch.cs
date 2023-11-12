@@ -9,9 +9,9 @@ namespace PathfindingFramework.Patches.ModExtensions.MovementMultiplier
 	/// Apply move speed stat offsets coming from mod extensions.
 	/// </summary>
 	[HarmonyPatch(typeof(Pawn), "TicksPerMove")]
-	internal static class Pawn_TicksPerMove_Patch
+	public static class Pawn_TicksPerMove_Patch
 	{
-		private static bool TryGetLocomotionMovementExtensionMultiplier(Pawn pawn, ref float multiplier)
+		public static bool TryGetLocomotionMovementExtensionMultiplier(Pawn pawn, ref float multiplier)
 		{
 			LocomotionMovementExtension locomotionMovementExtension =
 				pawn.def.GetModExtension<LocomotionMovementExtension>();
@@ -29,7 +29,7 @@ namespace PathfindingFramework.Patches.ModExtensions.MovementMultiplier
 			return true;
 		}
 
-		private static bool TryGetTerrainTagMovementExtensionMultiplier(Pawn pawn, ref float multiplier)
+		public static bool TryGetTerrainTagMovementExtensionMultiplier(Pawn pawn, ref float multiplier)
 		{
 			TerrainTagMovementExtension terrainTagMovementExtension =
 				pawn.def.GetModExtension<TerrainTagMovementExtension>();
@@ -47,7 +47,7 @@ namespace PathfindingFramework.Patches.ModExtensions.MovementMultiplier
 			return true;
 		}
 
-		private static void Postfix(Pawn __instance, ref int __result)
+		public static void Postfix(Pawn __instance, ref int __result)
 		{
 			float multiplier = 1.0F;
 			if (!TryGetLocomotionMovementExtensionMultiplier(__instance, ref multiplier) &&

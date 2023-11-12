@@ -14,9 +14,9 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 	/// Logs additional information when the dreaded "Couldn't find any destination regions." error appears.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionCostCalculatorWrapper), nameof(RegionCostCalculatorWrapper.Init))]
-	internal static class RegionCostCalculatorWrapper_Init_Patch
+	public static class RegionCostCalculatorWrapper_Init_Patch
 	{
-		private static void LogCouldNotFindDestinationError(string error, Map map, CellRect end,
+		public static void LogCouldNotFindDestinationError(string error, Map map, CellRect end,
 			TraverseParms traverseParms,
 			List<int> disallowedCorners)
 		{
@@ -73,7 +73,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 			Report.Error(sb.ToString());
 		}
 
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo logErrorMethod = AccessTools.Method(typeof(Log), nameof(Log.Error), new[] { typeof(string) });
 			foreach (CodeInstruction instruction in instructions)

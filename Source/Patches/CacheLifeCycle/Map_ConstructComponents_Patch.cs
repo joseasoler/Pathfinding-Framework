@@ -10,9 +10,9 @@ namespace PathfindingFramework.Patches.CacheLifeCycle
 	/// It is created as early as possible in the map life cycle to avoid the need for presence checks.
 	/// </summary>
 	[HarmonyPatch(typeof(Map), nameof(Map.ConstructComponents))]
-	internal static class Map_ConstructComponents_Patch
+	public static class Map_ConstructComponents_Patch
 	{
-		internal static void Prefix(Map __instance)
+		public static void Prefix(Map __instance)
 		{
 			if (__instance.uniqueID < 0)
 			{

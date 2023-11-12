@@ -7,9 +7,9 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 	/// Add granted locomotion to the hediff tooltip.
 	/// </summary>
 	[HarmonyPatch(typeof(Hediff), nameof(Hediff.GetTooltip))]
-	internal static class Hediff_GetTooltip_Patch
+	public static class Hediff_GetTooltip_Patch
 	{
-		internal static void Postfix(Hediff __instance, ref string __result)
+		public static void Postfix(Hediff __instance, ref string __result)
 		{
 			MovementExtension extension = __instance.def.GetModExtension<MovementExtension>();
 			if (extension != null)

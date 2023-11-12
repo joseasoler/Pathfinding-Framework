@@ -12,14 +12,14 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	/// Allow drafted move into impassable terrain if the movement context of the pawn allows it.
 	/// </summary>
 	[HarmonyPatch]
-	internal static class RCellFinder_BestOrderedGotoDestNear_Patch
+	public static class RCellFinder_BestOrderedGotoDestNear_Patch
 	{
-		private static bool CanPawnStandAt(IntVec3 c, Map _, Pawn pawn)
+		public static bool CanPawnStandAt(IntVec3 c, Map _, Pawn pawn)
 		{
 			return pawn.MovementContext().CanStandAt(c);
 		}
 
-		private static MethodBase TargetMethod()
+		public static MethodBase TargetMethod()
 		{
 			foreach (Type nestedType in typeof(RCellFinder).GetNestedTypes(AccessTools.all))
 			{
@@ -35,7 +35,7 @@ namespace PathfindingFramework.Patches.LocationChoosing
 			return null;
 		}
 
-		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo originalMethod = AccessTools.Method(typeof(GenGrid), nameof(GenGrid.Standable));
 

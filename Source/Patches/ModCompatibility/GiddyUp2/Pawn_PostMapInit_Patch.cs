@@ -13,19 +13,19 @@ namespace PathfindingFramework.Patches.ModCompatibility.GiddyUp2
 	/// consistent.
 	/// </summary>
 	[HarmonyPatch]
-	internal static class Pawn_PostMapInit_Patch
+	public static class Pawn_PostMapInit_Patch
 	{
-		static bool Prepare(MethodBase original)
+		public static bool Prepare(MethodBase original)
 		{
 			return ModAssemblyInfo.GiddyUp2Assembly != null;
 		}
 
-		static MethodBase TargetMethod()
+		public static MethodBase TargetMethod()
 		{
 			return AccessTools.Method(typeof(Pawn), nameof(Pawn.PostMapInit));
 		}
 
-		private static void Prefix(Pawn __instance)
+		public static void Prefix(Pawn __instance)
 		{
 			if (GiddyUp2Compat.GetMount(__instance) != null)
 			{

@@ -7,9 +7,9 @@ namespace PathfindingFramework.Patches.CellPathfinding
 	/// Prevent pawns from reserving cells they cannot enter.
 	/// </summary>
 	[HarmonyPatch(typeof(PawnDestinationReservationManager), nameof(PawnDestinationReservationManager.CanReserve))]
-	internal static class PawnDestinationReservationManager_CanReserve_Patch
+	public static class PawnDestinationReservationManager_CanReserve_Patch
 	{
-		internal static void Postfix(ref bool __result, IntVec3 c, Pawn searcher)
+		public static void Postfix(ref bool __result, IntVec3 c, Pawn searcher)
 		{
 			if (!c.InBounds(searcher.Map))
 			{

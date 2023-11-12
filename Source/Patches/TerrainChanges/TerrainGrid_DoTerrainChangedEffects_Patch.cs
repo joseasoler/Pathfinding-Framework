@@ -8,9 +8,9 @@ namespace PathfindingFramework.Patches.TerrainChanges
 	/// Trigger region updates when necessary.
 	/// </summary>
 	[HarmonyPatch(typeof(TerrainGrid), "DoTerrainChangedEffects")]
-	internal static class TerrainGrid_DoTerrainChangedEffects_Patch
+	public static class TerrainGrid_DoTerrainChangedEffects_Patch
 	{
-		internal static void Postfix(Map ___map, IntVec3 c)
+		public static void Postfix(Map ___map, IntVec3 c)
 		{
 			if (___map == null)
 			{

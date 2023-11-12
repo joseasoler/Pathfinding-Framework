@@ -9,9 +9,9 @@ namespace PathfindingFramework.Patches.ModExtensions.TerrainTag
 	/// Update terrain tag graphics if required.
 	/// </summary>
 	[HarmonyPatch(typeof(Pawn_PathFollower), "TryEnterNextPathCell")]
-	internal static class Pawn_PathFollower_TryEnterNextPathCell_Patch
+	public static class Pawn_PathFollower_TryEnterNextPathCell_Patch
 	{
-		private static void Postfix(Pawn ___pawn)
+		public static void Postfix(Pawn ___pawn)
 		{
 			if (___pawn == null || !___pawn.Spawned)
 			{

@@ -9,7 +9,7 @@ using Verse;
 namespace PathfindingFramework.Patches.LocationChoosing
 {
 	[HarmonyPatch(typeof(JobGiver_GetRest), "FindGroundSleepSpotFor")]
-	internal static class JobGiver_GetRest_FindGroundSleepSpotFor_Patch
+	public static class JobGiver_GetRest_FindGroundSleepSpotFor_Patch
 	{
 		/// <summary>
 		/// For some unknown reason, injecting an extra pawn argument during the transpiling always fails.
@@ -17,19 +17,19 @@ namespace PathfindingFramework.Patches.LocationChoosing
 		/// </summary>
 		private static Pawn _pawn;
 
-		private static bool ModifiedTryRandomClosewalkCellNear(IntVec3 _, Map __, int radius, out IntVec3 result,
+		public static bool ModifiedTryRandomClosewalkCellNear(IntVec3 _, Map __, int radius, out IntVec3 result,
 			Predicate<IntVec3> ___)
 		{
 			return LocationFinding.TryRandomClosewalkCellNear(_pawn, radius, out result,
 				cell => !cell.IsForbidden(_pawn) && !_pawn.MovementContext().AvoidWanderAt(cell));
 		}
 
-		private static void Prefix(Pawn pawn)
+		public static void Prefix(Pawn pawn)
 		{
 			_pawn = pawn;
 		}
 
-		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo originalClosewalkMethod =
 				AccessTools.Method(typeof(CellFinder), nameof(CellFinder.TryRandomClosewalkCellNear));

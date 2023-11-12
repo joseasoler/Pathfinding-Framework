@@ -11,9 +11,9 @@ namespace PathfindingFramework.Patches.RegionGeneration
 	/// Certain terrains must be in regions that only contain the same terrain, as described in TerrainRegionType.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionMaker), "FloodFillAndAddCells")]
-	internal static class RegionMaker_FloodFillAndAddCells_Patch
+	public static class RegionMaker_FloodFillAndAddCells_Patch
 	{
-		private static bool TerrainsShouldBelongToSameRegion(TerrainDef lhs, TerrainDef rhs)
+		public static bool TerrainsShouldBelongToSameRegion(TerrainDef lhs, TerrainDef rhs)
 		{
 
 			return
@@ -27,7 +27,7 @@ namespace PathfindingFramework.Patches.RegionGeneration
 				lhs.ExtendedRegionType() == rhs.ExtendedRegionType();
 		}
 
-		private static Predicate<IntVec3> ReplaceRegionFloodFillPredicate(Predicate<IntVec3> original,
+		public static Predicate<IntVec3> ReplaceRegionFloodFillPredicate(Predicate<IntVec3> original,
 			IntVec3 root, Map map)
 		{
 			// RegionTypeUtility_GetExpectedRegionType_Patch makes sure that regions with impassable terrains that are made
@@ -37,7 +37,7 @@ namespace PathfindingFramework.Patches.RegionGeneration
 			return cell => original(cell) && TerrainsShouldBelongToSameRegion(rootTerrain, cell.GetTerrain(map));
 		}
 
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo replaceRegionFloodFillPredicateMethod =
 				AccessTools.Method(typeof(RegionMaker_FloodFillAndAddCells_Patch), nameof(ReplaceRegionFloodFillPredicate));

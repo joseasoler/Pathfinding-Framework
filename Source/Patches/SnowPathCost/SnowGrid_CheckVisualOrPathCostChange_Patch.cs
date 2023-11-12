@@ -7,9 +7,9 @@ namespace PathfindingFramework.Patches.SnowPathCost
 	/// Keeps pathfinding information updated after snow level changes.
 	/// </summary>
 	[HarmonyPatch(typeof(SnowGrid), "CheckVisualOrPathCostChange")]
-	internal static class SnowGrid_CheckVisualOrPathCostChange_Patch
+	public static class SnowGrid_CheckVisualOrPathCostChange_Patch
 	{
-		internal static void Postfix(SnowGrid __instance, IntVec3 c, float oldDepth, float newDepth)
+		public static void Postfix(SnowGrid __instance, IntVec3 c, float oldDepth, float newDepth)
 		{
 			SnowCategory newCategory = SnowUtility.GetSnowCategory(newDepth);
 			if (SnowUtility.GetSnowCategory(oldDepth) == newCategory)

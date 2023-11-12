@@ -11,9 +11,9 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	/// Allow drafted move into impassable terrain if the movement context of the pawns allows it.
 	/// </summary>
 	[HarmonyPatch(typeof(Selector), "MassTakeFirstAutoTakeableOptionOrGoto")]
-	public class Selector_MassTakeFirstAutoTakeableOptionOrGoto_Patch
+	public static class Selector_MassTakeFirstAutoTakeableOptionOrGoto_Patch
 	{
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo standableCellNearOriginalMethod =
 				AccessTools.Method(typeof(CellFinder), nameof(CellFinder.StandableCellNear));

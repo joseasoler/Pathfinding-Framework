@@ -9,9 +9,9 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 	/// Update the pawn movement cache when an apparel with a movement extension is removed.
 	/// </summary>
 	[HarmonyPatch(typeof(Pawn_ApparelTracker), nameof(Pawn_ApparelTracker.Remove))]
-	internal static class Pawn_ApparelTracker_Remove_Patch
+	public static class Pawn_ApparelTracker_Remove_Patch
 	{
-		internal static void Postfix(Pawn ___pawn, Apparel ap)
+		public static void Postfix(Pawn ___pawn, Apparel ap)
 		{
 			if (___pawn.Spawned && ap.def.MovementDef() != null)
 			{

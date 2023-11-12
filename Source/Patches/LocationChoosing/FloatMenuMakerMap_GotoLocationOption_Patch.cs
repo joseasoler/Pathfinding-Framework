@@ -11,9 +11,9 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	/// Allow drafted move into impassable terrain if the movement context of the pawn allows it.
 	/// </summary>
 	[HarmonyPatch(typeof(FloatMenuMakerMap), "GotoLocationOption")]
-	public class FloatMenuMakerMap_GotoLocationOption_Patch
+	public static class FloatMenuMakerMap_GotoLocationOption_Patch
 	{
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo standableCellNearOriginalMethod =
 				AccessTools.Method(typeof(CellFinder), nameof(CellFinder.StandableCellNear));

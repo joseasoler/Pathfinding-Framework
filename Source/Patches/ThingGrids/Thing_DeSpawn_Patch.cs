@@ -3,7 +3,7 @@ using Verse;
 
 namespace PathfindingFramework.Patches.ThingGrids
 {
-	internal class DeSpawnThingState
+	public class DeSpawnThingState
 	{
 		public CellRect Rect;
 		public Map Map;
@@ -13,9 +13,9 @@ namespace PathfindingFramework.Patches.ThingGrids
 	/// Update path costs of things when a thing de-spawns.
 	/// </summary>
 	[HarmonyPatch(typeof(Thing), nameof(Thing.DeSpawn))]
-	internal static class Thing_DeSpawn_Patch
+	public static class Thing_DeSpawn_Patch
 	{
-		internal static void Prefix(Thing __instance, out DeSpawnThingState __state)
+		public static void Prefix(Thing __instance, out DeSpawnThingState __state)
 		{
 			if (__instance.def.pathCost != 0 || __instance.def.passability == Traversability.Impassable)
 			{
@@ -31,7 +31,7 @@ namespace PathfindingFramework.Patches.ThingGrids
 			}
 		}
 
-		internal static void Postfix(DeSpawnThingState __state)
+		public static void Postfix(DeSpawnThingState __state)
 		{
 			if (__state.Map == null)
 			{

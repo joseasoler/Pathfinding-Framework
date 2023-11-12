@@ -18,9 +18,9 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	/// must follow.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionTypeUtility), nameof(RegionTypeUtility.GetExpectedRegionType))]
-	internal static class RegionTypeUtility_GetExpectedRegionType_Patch
+	public static class RegionTypeUtility_GetExpectedRegionType_Patch
 	{
-		internal static void Postfix(ref RegionType __result, IntVec3 c, Map map)
+		public static void Postfix(ref RegionType __result, IntVec3 c, Map map)
 		{
 			if (__result == RegionType.ImpassableFreeAirExchange && c.GetTerrain(map).ExtendedRegionType() > 0)
 			{

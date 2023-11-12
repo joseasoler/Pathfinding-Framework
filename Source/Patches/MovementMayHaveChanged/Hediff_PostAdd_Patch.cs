@@ -8,9 +8,9 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 	/// Update the pawn movement cache when a hediff with a movement extension is added.
 	/// </summary>
 	[HarmonyPatch(typeof(Hediff), nameof(Hediff.PostAdd))]
-	internal static class Hediff_PostAdd_Patch
+	public static class Hediff_PostAdd_Patch
 	{
-		internal static void Postfix(Hediff __instance)
+		public static void Postfix(Hediff __instance)
 		{
 			if (__instance.pawn.Spawned && __instance.def.MovementDef() != null)
 			{

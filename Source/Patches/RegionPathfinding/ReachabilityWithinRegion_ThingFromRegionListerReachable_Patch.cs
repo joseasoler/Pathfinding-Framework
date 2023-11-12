@@ -11,9 +11,9 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	/// Pawns can only reach things in cells they can stand over.
 	/// </summary>
 	[HarmonyPatch(typeof(ReachabilityWithinRegion), nameof(ReachabilityWithinRegion.ThingFromRegionListerReachable))]
-	internal static class ReachabilityWithinRegion_ThingFromRegionListerReachable_Patch
+	public static class ReachabilityWithinRegion_ThingFromRegionListerReachable_Patch
 	{
-		private static void Postfix(ref bool __result, Thing thing, PathEndMode peMode, Pawn traveler)
+		public static void Postfix(ref bool __result, Thing thing, PathEndMode peMode, Pawn traveler)
 		{
 			if (!__result || traveler == null)
 			{

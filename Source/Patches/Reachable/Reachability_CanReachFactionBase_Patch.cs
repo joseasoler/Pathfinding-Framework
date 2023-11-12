@@ -14,14 +14,14 @@ namespace PathfindingFramework.Patches.Reachable
 	/// To prevent this situation, the call to SpawnedPawnsInFaction is replaced to return an empty list.
 	/// </summary>
 	[HarmonyPatch(typeof(Reachability), nameof(Reachability.CanReachFactionBase))]
-	internal static class Reachability_CanReachFactionBase_Patch
+	public static class Reachability_CanReachFactionBase_Patch
 	{
-		private static List<Pawn> IgnoreSpawnedPawns(MapPawns mapPawns, Faction faction)
+		public static List<Pawn> IgnoreSpawnedPawns(MapPawns mapPawns, Faction faction)
 		{
 			return new List<Pawn>();
 		}
 
-		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo originalMethod =
 				AccessTools.Method(typeof(MapPawns), nameof(MapPawns.SpawnedPawnsInFaction));

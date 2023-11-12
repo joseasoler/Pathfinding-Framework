@@ -11,14 +11,14 @@ namespace PathfindingFramework.Patches.CellPathfinding
 	/// When a pawn is moving, use the correct path costs to calculate movement times.
 	/// </summary>
 	[HarmonyPatch(typeof(Pawn_PathFollower), "CostToMoveIntoCell", typeof(Pawn), typeof(IntVec3))]
-	internal static class Pawn_PathFollower_CostToMoveIntoCell_Patch
+	public static class Pawn_PathFollower_CostToMoveIntoCell_Patch
 	{
-		internal static int MoveIntoCellCost(Map _, Pawn pawn, IntVec3 cell)
+		public static int MoveIntoCellCost(Map _, Pawn pawn, IntVec3 cell)
 		{
 			return pawn.MovementContext().MoveIntoCellCost(pawn.Position, cell);
 		}
 
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			bool ignoreInstructions = false;
 			bool inserted = false;

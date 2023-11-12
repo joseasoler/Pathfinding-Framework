@@ -8,9 +8,9 @@ namespace PathfindingFramework.Patches.FirePathCost
 	/// Keeps the fire grid updated after a new fire spawns.
 	/// </summary>
 	[HarmonyPatch(typeof(Fire), nameof(Fire.SpawnSetup))]
-	internal static class Fire_SpawnSetup_Patch
+	public static class Fire_SpawnSetup_Patch
 	{
-		internal static void Postfix(Fire __instance)
+		public static void Postfix(Fire __instance)
 		{
 			if (__instance.parent is Pawn pawn)
 			{

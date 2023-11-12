@@ -8,9 +8,9 @@ namespace PathfindingFramework.Patches.CellPathfinding
 	/// When possible, inject the correct pathing context for each pawn.
 	/// </summary>
 	[HarmonyPatch(typeof(Pathing), nameof(Pathing.For), typeof(TraverseParms))]
-	internal static class Pathing_For_TraverseParms_Patch
+	public static class Pathing_For_TraverseParms_Patch
 	{
-		internal static bool Prefix(ref PathingContext __result, TraverseParms parms)
+		public static bool Prefix(ref PathingContext __result, TraverseParms parms)
 		{
 			PathingContext pathingContext = parms.pawn?.MovementContext()?.PathingContext;
 			if (pathingContext != null)

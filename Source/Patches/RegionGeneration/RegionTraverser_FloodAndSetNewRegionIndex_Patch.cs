@@ -9,9 +9,9 @@ namespace PathfindingFramework.Patches.RegionGeneration
 	/// Besides having the same RegionType, now the UniqueTerrainDef() of all regions must be identical.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionTraverser), nameof(RegionTraverser.FloodAndSetNewRegionIndex))]
-	internal static class RegionTraverser_FloodAndSetNewRegionIndex_Patch
+	public static class RegionTraverser_FloodAndSetNewRegionIndex_Patch
 	{
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			return RegionMergerUtil.PatchRegionMergingPredicate(instructions);
 		}

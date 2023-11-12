@@ -8,9 +8,9 @@ namespace PathfindingFramework.Patches.FirePathCost
 	/// Keeps fire pathfinding information updated after a fire is destroyed.
 	/// </summary>
 	[HarmonyPatch(typeof(Fire), nameof(Fire.DeSpawn))]
-	internal static class Fire_DeSpawn_Patch
+	public static class Fire_DeSpawn_Patch
 	{
-		internal static void Prefix(Fire __instance)
+		public static void Prefix(Fire __instance)
 		{
 			if (__instance.parent is Pawn pawn)
 			{

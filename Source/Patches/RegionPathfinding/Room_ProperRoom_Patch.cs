@@ -9,9 +9,9 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	/// proper rooms.
 	/// </summary>
 	[HarmonyPatch(typeof(Room), nameof(Room.ProperRoom), MethodType.Getter)]
-	internal static class Room_ProperRoom_Patch
+	public static class Room_ProperRoom_Patch
 	{
-		private static void Postfix(Room __instance, List<District> ___districts, ref bool __result)
+		public static void Postfix(Room __instance, List<District> ___districts, ref bool __result)
 		{
 			if (!__result || ___districts.Count > 1)
 			{

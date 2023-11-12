@@ -15,19 +15,19 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 	/// </summary>
 	[HarmonyPatch(typeof(PathFinder), nameof(PathFinder.FindPath), typeof(IntVec3), typeof(LocalTargetInfo),
 		typeof(TraverseParms), typeof(PathEndMode), typeof(PathFinderCostTuning))]
-	internal static class PathFinder_FindPath_Patch
+	public static class PathFinder_FindPath_Patch
 	{
-		private static void AddData(PathFinder instance, string str)
+		public static void AddData(PathFinder instance, string str)
 		{
 			PathFinderErrorReport.AddPathFinderData(instance.map, instance.openList, instance.pathGrid, str);
 		}
 
-		internal static void Prefix(IntVec3 start, LocalTargetInfo dest, TraverseParms traverseParms)
+		public static void Prefix(IntVec3 start, LocalTargetInfo dest, TraverseParms traverseParms)
 		{
 			PathFinderErrorReport.StartEntry(start, dest, traverseParms);
 		}
 
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo startProfilingMethod = AccessTools.Method(typeof(PathFinder), "PfProfilerBeginSample");
 			MethodInfo addDataMethod =
@@ -56,7 +56,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 			}
 		}
 
-		internal static void Postfix()
+		public static void Postfix()
 		{
 			PathFinderErrorReport.FinishEntry();
 		}

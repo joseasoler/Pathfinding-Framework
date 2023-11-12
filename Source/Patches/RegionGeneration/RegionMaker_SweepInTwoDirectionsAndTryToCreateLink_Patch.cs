@@ -18,9 +18,9 @@ namespace PathfindingFramework.Patches.RegionGeneration
 	/// EdgeSpan.UniqueHashCode will return different values for each region and they will not be able to match them.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionMaker), "SweepInTwoDirectionsAndTryToCreateLink")]
-	internal static class RegionMaker_SweepInTwoDirectionsAndTryToCreateLink_Patch
+	public static class RegionMaker_SweepInTwoDirectionsAndTryToCreateLink_Patch
 	{
-		private static RegionType GetExpectedRegionTypeExtended(IntVec3 c, Map map)
+		public static RegionType GetExpectedRegionTypeExtended(IntVec3 c, Map map)
 		{
 			const RegionType combinableRegion = RegionType.Fence | RegionType.Normal;
 			RegionType regionType = c.GetExpectedRegionType(map);
@@ -39,7 +39,7 @@ namespace PathfindingFramework.Patches.RegionGeneration
 			return regionType;
 		}
 
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo getExpectedRegionTypeOriginalMethod =
 				AccessTools.Method(typeof(RegionTypeUtility),

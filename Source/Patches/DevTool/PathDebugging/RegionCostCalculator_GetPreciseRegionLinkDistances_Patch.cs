@@ -14,23 +14,23 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 	/// Add additional information when the region cost calculator Dijkstra stage fails.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionCostCalculator), "GetPreciseRegionLinkDistances")]
-	internal static class RegionCostCalculator_GetPreciseRegionLinkDistances_Patch
+	public static class RegionCostCalculator_GetPreciseRegionLinkDistances_Patch
 	{
 		private static RegionLink _regionLink = null;
 
 		private static int count = 0;
 
-		internal static void Prefix()
+		public static void Prefix()
 		{
 			_regionLink = null;
 		}
 
-		internal static void EnableErrors(RegionLink link)
+		public static void EnableErrors(RegionLink link)
 		{
 			_regionLink = link;
 		}
 
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo logErrorOnceMethod =
 				AccessTools.Method(typeof(Log), nameof(Log.ErrorOnce), new[] { typeof(string), typeof(int) });
@@ -54,7 +54,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 			}
 		}
 
-		internal static void Postfix(Region region, TraverseParms ___traverseParms, IntVec3 ___destinationCell,
+		public static void Postfix(Region region, TraverseParms ___traverseParms, IntVec3 ___destinationCell,
 			Dictionary<RegionLink, IntVec3> ___linkTargetCells, Dictionary<int, float> ___tmpDistances,
 			List<int> ___tmpCellIndices)
 		{

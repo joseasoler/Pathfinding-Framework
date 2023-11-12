@@ -9,14 +9,14 @@ namespace PathfindingFramework.Patches.ModExtensions.Locomotion
 	/// Force a PawnGraphicSet update when the locomotion urgency of a pawn changes. 
 	/// </summary>
 	[HarmonyPatch(typeof(Pawn_JobTracker), "CleanupCurrentJob")]
-	internal static class Pawn_JobTracker_CleanupCurrentJob_Patch
+	public static class Pawn_JobTracker_CleanupCurrentJob_Patch
 	{
-		private static void Prefix(Pawn ___pawn, out LocomotionUrgency __state)
+		public static void Prefix(Pawn ___pawn, out LocomotionUrgency __state)
 		{
 			__state = CurrentUrgencyUtil.Get(___pawn);
 		}
 
-		private static void Postfix(Pawn ___pawn, LocomotionUrgency __state)
+		public static void Postfix(Pawn ___pawn, LocomotionUrgency __state)
 		{
 			if (__state != CurrentUrgencyUtil.Get(___pawn))
 			{

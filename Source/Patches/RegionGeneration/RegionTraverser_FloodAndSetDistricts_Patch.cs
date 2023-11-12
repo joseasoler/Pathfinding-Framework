@@ -11,9 +11,9 @@ namespace PathfindingFramework.Patches.RegionGeneration
 	/// </summary>
 	/// 
 	[HarmonyPatch(typeof(RegionTraverser), nameof(RegionTraverser.FloodAndSetDistricts))]
-	internal static class RegionTraverser_FloodAndSetDistricts_Patch
+	public static class RegionTraverser_FloodAndSetDistricts_Patch
 	{
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			return RegionMergerUtil.PatchRegionMergingPredicate(instructions);
 		}

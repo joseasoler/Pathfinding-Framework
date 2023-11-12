@@ -12,7 +12,7 @@ namespace PathfindingFramework.Patches.Spawning
 	/// Make the manhunter incident execution aware of different movement types.
 	/// </summary>
 	[HarmonyPatch(typeof(IncidentWorker_ManhunterPack), "TryExecuteWorker")]
-	public class IncidentWorker_ManhunterPack_TryExecuteWorker_Patch
+	public static class IncidentWorker_ManhunterPack_TryExecuteWorker_Patch
 	{
 		private static Pawn _lastPawn;
 		private static Pawn _currentPawn;
@@ -34,12 +34,12 @@ namespace PathfindingFramework.Patches.Spawning
 			return result;
 		}
 
-		private static void StoreCurrentPawn(Pawn pawn)
+		public static void StoreCurrentPawn(Pawn pawn)
 		{
 			_currentPawn = pawn;
 		}
 
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			IEnumerable<CodeInstruction> newInstructions =
 				IncidentWorker_ManhunterPack_Util.Transpile_TryFindRandomPawnEntryCell(OpCodes.Ldloc_1, instructions);
@@ -77,7 +77,7 @@ namespace PathfindingFramework.Patches.Spawning
 			}
 		}
 
-		internal static void Postfix()
+		public static void Postfix()
 		{
 			// Clear state for the next execution.
 			_lastPawn = null;

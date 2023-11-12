@@ -8,9 +8,9 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 	/// Report region / region link generation failures after game load / map generation.
 	/// </summary>
 	[HarmonyPatch(typeof(Map), nameof(Map.FinalizeInit))]
-	public class Map_FinalizeInit_DebugPatch
+	public static class Map_FinalizeInit_DebugPatch
 	{
-		internal static void Postfix(Map __instance)
+		public static void Postfix(Map __instance)
 		{
 			// Commented out, as it sometimes cause false positives. When this happens, this code will report a failure, but
 			// later on the manual divergence check will not detect any issues.

@@ -8,9 +8,9 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 	/// Log additional data when a pawn fails to generate a valid path.
 	/// </summary>
 	[HarmonyPatch(typeof(Pawn_PathFollower), "GenerateNewPath")]
-	internal static class Pawn_PathFollower_GenerateNewPath
+	public static class Pawn_PathFollower_GenerateNewPath
 	{
-		internal static void Postfix(Pawn ___pawn, LocalTargetInfo ___destination, PawnPath __result)
+		public static void Postfix(Pawn ___pawn, LocalTargetInfo ___destination, PawnPath __result)
 		{
 			if (__result == PawnPath.NotFound && Settings.Values.LogPathNotFound)
 			{

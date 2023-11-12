@@ -79,7 +79,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 		/// </summary>
 		/// <param name="instructions">Original instructions.</param>
 		/// <returns>New instructions.</returns>
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo movementTypePassableMethod =
 				AccessTools.Method(typeof(Region_Allows_Patch), nameof(MovementTypePassable));

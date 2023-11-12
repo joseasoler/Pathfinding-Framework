@@ -7,9 +7,9 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 	/// Remove the pawn from the PawnMovementCache.
 	/// </summary>
 	[HarmonyPatch(typeof(Pawn), nameof(Pawn.DeSpawn))]
-	internal static class Pawn_DeSpawn_Patch
+	public static class Pawn_DeSpawn_Patch
 	{
-		internal static void Postfix(Pawn __instance)
+		public static void Postfix(Pawn __instance)
 		{
 			__instance.MovementContext() = null;
 		}

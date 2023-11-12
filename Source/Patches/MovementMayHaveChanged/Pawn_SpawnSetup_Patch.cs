@@ -11,9 +11,9 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 	/// Initialize a new graphic context if necessary.
 	/// </summary>
 	[HarmonyPatch(typeof(Pawn), nameof(Pawn.SpawnSetup))]
-	internal static class Pawn_SpawnSetup_Patch
+	public static class Pawn_SpawnSetup_Patch
 	{
-		internal static void Postfix(Pawn __instance)
+		public static void Postfix(Pawn __instance)
 		{
 			PawnMovementUpdater.Update(__instance);
 			// Used to detect current terrain type changes.

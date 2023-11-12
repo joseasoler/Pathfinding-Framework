@@ -8,9 +8,9 @@ namespace PathfindingFramework.Patches.RegionGeneration
 	/// other words, both of them would be passable in vanilla) or if they have exactly the same UniqueTerrainDef.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionAndRoomUpdater), "ShouldBeInTheSameRoom")]
-	internal static class RegionAndRoomUpdater_ShouldBeInTheSameRoom_Patch
+	public static class RegionAndRoomUpdater_ShouldBeInTheSameRoom_Patch
 	{
-		internal static void Postfix(ref bool __result, District a, District b)
+		public static void Postfix(ref bool __result, District a, District b)
 		{
 			if (!__result || a.Regions.Count == 0 || b.Regions.Count == 0)
 			{

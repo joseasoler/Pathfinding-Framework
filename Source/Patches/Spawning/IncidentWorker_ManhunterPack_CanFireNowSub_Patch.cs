@@ -11,9 +11,9 @@ namespace PathfindingFramework.Patches.Spawning
 	/// would fail.
 	/// </summary>
 	[HarmonyPatch(typeof(IncidentWorker_ManhunterPack), "CanFireNowSub")]
-	public class IncidentWorker_ManhunterPack_CanFireNowSub_Patch
+	public static class IncidentWorker_ManhunterPack_CanFireNowSub_Patch
 	{
-		internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			return IncidentWorker_ManhunterPack_Util.Transpile_TryFindRandomPawnEntryCell(OpCodes.Ldloc_1, instructions);
 		}
