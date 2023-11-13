@@ -1,4 +1,5 @@
-﻿using Verse;
+﻿using System.Collections.Generic;
+using Verse;
 
 namespace PathfindingFramework
 {
@@ -7,10 +8,21 @@ namespace PathfindingFramework
 	/// </summary>
 	public class SettingValues
 	{
+		// General tab.
+
 		/// <summary>
 		/// Pawns with a flammability of zero ignore the pathfinding costs of fire.
 		/// </summary>
 		public bool IgnoreFire /* = false*/;
+
+		// Pawn movement tab.
+
+		/// <summary>
+		/// Stores the movementDef override for each thingDef.
+		/// </summary>
+		public Dictionary<string, string> PawnMovementOverrides;
+
+		// Debugging tab.
 
 		/// <summary>
 		/// Enable the inspectors.
@@ -53,10 +65,12 @@ namespace PathfindingFramework
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_Values.Look(ref Values.IgnoreFire, "IgnoreFire");
-			Scribe_Values.Look(ref Values.Inspectors, "Inspectors");
-			Scribe_Values.Look(ref Values.LogPathNotFound, "LogPathNotFound");
-			Scribe_Values.Look(ref Values.DebugLog, "DebugLog");
+			Scribe_Values.Look(ref Values.IgnoreFire, nameof(Values.IgnoreFire));
+			Scribe_Collections.Look(ref Values.PawnMovementOverrides, nameof(Values.PawnMovementOverrides), LookMode.Value,
+				LookMode.Value);
+			Scribe_Values.Look(ref Values.Inspectors, nameof(Values.Inspectors));
+			Scribe_Values.Look(ref Values.LogPathNotFound, nameof(Values.LogPathNotFound));
+			Scribe_Values.Look(ref Values.DebugLog, nameof(Values.DebugLog));
 		}
 	}
 }

@@ -5,6 +5,7 @@
 	<PF_IgnoreFireHover>Creatures that are inherently non-flammable such as mechanoids will move through fire. This setting does not affect pawns that cannot catch fire due to apparel, genes or hediffs.</PF_IgnoreFireHover>
 
 	<PF_PawnMovementTab>Pawn movement</PF_PawnMovementTab>
+	<PF_PawnMovementWarningLabel><![CDATA[<color=#FF0F0F>Warning:</color> To apply these settings, the game must be restarted.]]></PF_PawnMovementWarningLabel>
 
 	<PF_DebuggingTab>Debugging</PF_DebuggingTab>
 	<PF_InspectorLabel>Inspector</PF_InspectorLabel>

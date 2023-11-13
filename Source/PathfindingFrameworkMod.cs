@@ -1,8 +1,9 @@
-using PathfindingFramework.ErrorHandling;
+using System.Collections.Generic;
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
 using PathfindingFramework.PawnGraphic;
+using PathfindingFramework.SettingsUI;
 using PathfindingFramework.TerrainDefInformation;
 using UnityEngine;
 using Verse;
@@ -43,8 +44,11 @@ namespace PathfindingFramework
 		private void InitializeWhenLoadingFinished()
 		{
 			GetSettings<Settings>();
+			Settings.Values.PawnMovementOverrides ??= new Dictionary<string, string>();
 			// Reads and stores the MovementDef granted by MovementExtensions of each Def.
 			MovementExtensionReader.Initialize();
+			// Apply movement type overrides from settings. Must be initialized after GetSettings and MovementExtensionReader.
+			PawnMovementOverrideSettings.Initialize();
 			// Set the indexes of TerrainDefs to use when accessing the path cost arrays of MovementDefs.
 			TerrainMovementIndex.Initialize();
 			// Precalculate movement path costs for each terrain.
