@@ -22,7 +22,7 @@ namespace PathfindingFramework.SettingsUI
 			int humanlikeCompare = humanlikeLhs.CompareTo(humanlikeRhs);
 			if (humanlikeCompare != 0)
 			{
-				return -humanlikeCompare;
+				return humanlikeCompare;
 			}
 
 			bool animalLhs = lhs.race.Animal;
