@@ -41,6 +41,8 @@ namespace PathfindingFramework.MovementDefUtils
 		private static void SetThingDefMovement(ThingDef thingDef, MovementDef movementDef)
 		{
 			thingDef.MovementDef() = movementDef;
+			// Keep the original value to use it for settings reset actions.
+			PawnMovementOverrideSettings.AddOriginal(thingDef, movementDef);
 		}
 
 		private static void SetLifeStageDefMovement(LifeStageDef lifeStageDef, MovementDef movementDef)

@@ -9,6 +9,7 @@ namespace PathfindingFramework
 	/// </summary>
 	public static class PawnMovementOverrideSettings
 	{
+		private static Dictionary<ThingDef, MovementDef> _originalMovementDefs = new();
 		private static Dictionary<string, MovementDef> _movementDefsByDefName;
 
 		/// <summary>
@@ -33,6 +34,11 @@ namespace PathfindingFramework
 			}
 		}
 
+		public static void AddOriginal(ThingDef thingDef, MovementDef movementDef)
+		{
+			_originalMovementDefs[thingDef] = movementDef;
+		}
+
 		/// <summary>
 		/// Movement type currently selected for the provided race.
 		/// </summary>
@@ -46,8 +52,9 @@ namespace PathfindingFramework
 				return cachedMovementDef;
 			}
 
-			MovementDef movementDef = raceDef.MovementDef() ?? MovementDefOf.PF_Movement_Terrestrial;
-			return movementDef;
+			return _originalMovementDefs.TryGetValue(raceDef, out MovementDef originalMovementDef)
+				? originalMovementDef
+				: MovementDefOf.PF_Movement_Terrestrial;
 		}
 	}
 }
