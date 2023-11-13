@@ -44,6 +44,7 @@ namespace PathfindingFramework
 		private void InitializeWhenLoadingFinished()
 		{
 			GetSettings<Settings>();
+			// This value might be null after loading a config which lacks it.
 			Settings.Values.PawnMovementOverrides ??= new Dictionary<string, string>();
 			// Reads and stores the MovementDef granted by MovementExtensions of each Def.
 			MovementExtensionReader.Initialize();

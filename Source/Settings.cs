@@ -20,7 +20,7 @@ namespace PathfindingFramework
 		/// <summary>
 		/// Stores the movementDef override for each thingDef.
 		/// </summary>
-		public Dictionary<string, string> PawnMovementOverrides;
+		public Dictionary<string, string> PawnMovementOverrides = new();
 
 		// Debugging tab.
 
