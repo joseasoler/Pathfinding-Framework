@@ -15,6 +15,12 @@ namespace PathfindingFramework.ModCompatibility
 		public static bool PrepatcherPresent;
 
 		/// <summary>
+		/// Dubs Bad Hygiene
+		/// https://steamcommunity.com/workshop/filedetails/?id=836308268
+		/// </summary>
+		public static Assembly DubsBadHygieneAssembly;
+
+		/// <summary>
 		/// Giddy-Up 2
 		/// https://steamcommunity.com/sharedfiles/filedetails/?id=2934245647
 		/// </summary>
@@ -45,6 +51,16 @@ namespace PathfindingFramework.ModCompatibility
 				Assembly firstAssembly = pack.assemblies.loadedAssemblies[0];
 				switch (packageId)
 				{
+					case "dubwise.dubsbadhygiene":
+						foreach (Assembly assembly in pack.assemblies.loadedAssemblies)
+						{
+							if (assembly.GetName().Name == "BadHygiene")
+							{
+								DubsBadHygieneAssembly = assembly;
+							}
+						}
+
+						break;
 					case "owlchemist.giddyup":
 						GiddyUp2Assembly = firstAssembly;
 						break;
