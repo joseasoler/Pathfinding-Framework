@@ -5,7 +5,7 @@ using Verse;
 
 namespace PathfindingFramework.SettingsUI
 {
-	using PawnMovementEntry = Tuple<PawnKindDef, Texture>;
+	using PawnMovementEntry = Tuple<PawnKindDef, Color, Texture>;
 
 	/// <summary>
 	/// Sorts entries of the pawn movement table. Assumes that all entries are non-null and have a race.

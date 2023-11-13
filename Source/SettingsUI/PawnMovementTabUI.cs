@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using PathfindingFramework.Patches;
 using UnityEngine;
 using Verse;
 
 namespace PathfindingFramework.SettingsUI
 {
-	using PawnMovementEntry = Tuple<PawnKindDef, Texture>;
+	using PawnMovementEntry = Tuple<PawnKindDef, Color, Texture>;
 
 	public class PawnMovementTabUI
 	{
@@ -37,21 +36,27 @@ namespace PathfindingFramework.SettingsUI
 				!ignoreDuplicates.Contains(pawnKindDef.race);
 		}
 
-		private static Texture GetTextureFromPawnKindDef(PawnKindDef pawnKindDef)
+		private static PawnMovementEntry GetPawnMovementEntry(PawnKindDef pawnKindDef)
 		{
-			if (pawnKindDef.lifeStages == null)
+			Color color = Color.white;
+			Texture texture = null;
+			if (pawnKindDef.lifeStages != null)
 			{
-				return null;
+				int lastLifeStageIndex = pawnKindDef.lifeStages.Count - 1;
+				if (lastLifeStageIndex >= 0)
+				{
+					PawnKindLifeStage lastLifeStage = pawnKindDef.lifeStages[lastLifeStageIndex];
+					// See ThingDef.ResolveIcon()
+					Material material = lastLifeStage.bodyGraphicData?.Graphic?.MatEast;
+					if (material != null)
+					{
+						color = material.color;
+						texture = material.mainTexture;
+					}
+				}
 			}
 
-			int lastLifeStageIndex = pawnKindDef.lifeStages.Count - 1;
-			if (lastLifeStageIndex < 0)
-			{
-				return null;
-			}
-
-			PawnKindLifeStage lastLifeStage = pawnKindDef.lifeStages[lastLifeStageIndex];
-			return lastLifeStage.bodyGraphicData?.Graphic?.MatSingle.mainTexture;
+			return new PawnMovementEntry(pawnKindDef, color, texture);
 		}
 
 		private void InitializePawnMovementEntries()
@@ -74,7 +79,7 @@ namespace PathfindingFramework.SettingsUI
 				}
 
 				ignoreDuplicates.Add(pawnKindDef.race);
-				_pawnMovementEntries.Add(new PawnMovementEntry(pawnKindDef, GetTextureFromPawnKindDef(pawnKindDef)));
+				_pawnMovementEntries.Add(GetPawnMovementEntry(pawnKindDef));
 			}
 
 			_pawnMovementEntries.Sort(new ComparePawnMovementEntries());
@@ -108,7 +113,7 @@ namespace PathfindingFramework.SettingsUI
 			}
 		}
 
-		private static void AnimalEntry(PawnKindDef pawnKindDef, Texture texture, Rect rowRect)
+		private static void AnimalEntry(PawnKindDef pawnKindDef, Color color, Texture texture, Rect rowRect)
 		{
 			// First cell: textures use a square space.
 			Rect textureRect = new Rect(rowRect.x, rowRect.y, rowRect.height, rowRect.height);
@@ -128,7 +133,9 @@ namespace PathfindingFramework.SettingsUI
 
 			if (texture != null)
 			{
+				GUI.color = color;
 				GUI.DrawTexture(textureRect, texture);
+				GUI.color = Color.white;
 			}
 
 			Widgets.Label(labelRect, pawnKindDef.race.LabelCap);
@@ -172,7 +179,7 @@ namespace PathfindingFramework.SettingsUI
 			listing.Gap(GenUI.GapSmall);
 
 			bool first = true;
-			foreach (var (raceDef, texture) in _pawnMovementEntries)
+			foreach (var (raceDef, color, texture) in _pawnMovementEntries)
 			{
 				if (first)
 				{
@@ -183,7 +190,7 @@ namespace PathfindingFramework.SettingsUI
 					listing.Gap(animalEntryGap);
 				}
 
-				AnimalEntry(raceDef, texture, listing.GetRect(AnimalEntryHeight));
+				AnimalEntry(raceDef, color, texture, listing.GetRect(AnimalEntryHeight));
 			}
 
 			Text.Anchor = anchorBackup;
