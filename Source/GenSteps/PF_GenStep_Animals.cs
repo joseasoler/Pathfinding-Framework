@@ -26,7 +26,7 @@ namespace PathfindingFramework.GenSteps
 				}
 			}
 
-			while (!map.wildAnimalSpawner.AnimalEcosystemFull)
+			while (!map.wildAnimalSpawner.AnimalEcosystemFull && availableAnimals.Count > 0)
 			{
 				++iterationCount;
 				if (iterationCount >= 10000)
@@ -45,9 +45,11 @@ namespace PathfindingFramework.GenSteps
 						    LocationFinding.CanReachMapEdge(movementDef, map, testCell),
 					    map, 1000, out IntVec3 randomCell))
 				{
-					randomCell = CellFinder.RandomCell(map);
 					Report.Error(
-						$"{typeof(PF_GenStep_Animals)} could not find a random cell for animal type {chosenAnimalDef} using movement type {movementDef}");
+						$"{typeof(PF_GenStep_Animals)} could not find a random cell to spawn animal with PawnKindDef {chosenAnimalDef} using MovementDef {movementDef}");
+					// Remove the chosen animal type from the list to avoid further errors.
+					availableAnimals.Remove(chosenAnimalDef);
+					continue;
 				}
 
 				int randomInRange = chosenAnimalDef.wildGroupSize.RandomInRange;
@@ -61,6 +63,12 @@ namespace PathfindingFramework.GenSteps
 					LocationFinding.TryRandomClosewalkCellNear(pawn, radius, out IntVec3 closeLocation);
 					GenSpawn.Spawn(PawnGenerator.GeneratePawn(chosenAnimalDef), closeLocation, map);
 				}
+			}
+
+			if (availableAnimals.Count == 0)
+			{
+				Report.Error(
+					$"{typeof(PF_GenStep_Animals)} could not finish animal generation because the list of available animals has ended up being empty.");
 			}
 		}
 	}
