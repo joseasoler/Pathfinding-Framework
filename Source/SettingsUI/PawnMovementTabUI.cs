@@ -159,24 +159,28 @@ namespace PathfindingFramework.SettingsUI
 		{
 			const float animalEntryGap = GenUI.GapTiny;
 			InitializePawnMovementEntries();
+			TextAnchor anchorBackup = Text.Anchor;
+			if (Current.ProgramState != ProgramState.Entry)
+			{
+				Text.Anchor = TextAnchor.MiddleCenter;
+				Widgets.Label(inRect, "PF_PawnMovementWarningLabel".Translate());
+				Text.Anchor = anchorBackup;
+				return;
+			}
 
 			Rect outRect = inRect.ContractedBy(GenUI.GapSmall);
 
 			int entryCount = _pawnMovementEntries.Count;
 
 			Rect viewRect = new Rect(0, 0, outRect.width - GenUI.ScrollBarWidth,
-				GenUI.GapWide + GenUI.GapSmall + AnimalEntryHeight * entryCount + animalEntryGap * entryCount);
+				AnimalEntryHeight * entryCount + animalEntryGap * entryCount);
 			Widgets.BeginScrollView(inRect, ref _pawnMovementScrollPosition, viewRect);
 
 			Listing_Standard listing = new Listing_Standard();
 			listing.Begin(viewRect);
 
 
-			TextAnchor anchorBackup = Text.Anchor;
 			Text.Anchor = TextAnchor.MiddleCenter;
-
-			listing.Label("PF_PawnMovementWarningLabel".Translate(), GenUI.GapWide);
-			listing.Gap(GenUI.GapSmall);
 
 			bool first = true;
 			foreach (var (raceDef, color, texture) in _pawnMovementEntries)
