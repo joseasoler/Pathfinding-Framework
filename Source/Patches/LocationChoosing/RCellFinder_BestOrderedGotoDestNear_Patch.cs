@@ -14,11 +14,6 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	[HarmonyPatch]
 	public static class RCellFinder_BestOrderedGotoDestNear_Patch
 	{
-		public static bool CanPawnStandAt(IntVec3 c, Map _, Pawn pawn)
-		{
-			return pawn.MovementContext().CanStandAt(c);
-		}
-
 		public static MethodBase TargetMethod()
 		{
 			foreach (Type nestedType in typeof(RCellFinder).GetNestedTypes(AccessTools.all))
@@ -39,9 +34,7 @@ namespace PathfindingFramework.Patches.LocationChoosing
 		{
 			MethodInfo originalMethod = AccessTools.Method(typeof(GenGrid), nameof(GenGrid.Standable));
 
-			MethodInfo modifiedMethod =
-				AccessTools.Method(typeof(RCellFinder_BestOrderedGotoDestNear_Patch),
-					nameof(CanPawnStandAt));
+			MethodInfo modifiedMethod = AccessTools.Method(typeof(LocationFinding), nameof(LocationFinding.CanPawnStandAt));
 
 			FieldInfo searcherFieldInfo = null;
 

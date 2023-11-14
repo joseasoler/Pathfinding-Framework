@@ -82,6 +82,8 @@
 		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_FindGroundSleepSpotFor_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Pawn_PathFollower_StartPath_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\RCellFinder_BestOrderedGotoDestNear_Patch.cs" />
+		<Compile Include="Patches\LocationChoosing\RCellFinder_TryFindBestExitSpot_Patch.cs" />
+		<Compile Include="Patches\LocationChoosing\RCellFinder_TryFindRandomExitSpot_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Selector_MassTakeFirstAutoTakeableOptionOrGoto_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\DubsBadHygiene\MapComponent_Hygiene_SetWaterCellsCache_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GiddyUp2\ExtendedDataStorage_FinalizeInit_Patch.cs" />

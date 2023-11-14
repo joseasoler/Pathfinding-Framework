@@ -51,6 +51,18 @@ namespace PathfindingFramework
 		}
 
 		/// <summary>
+		/// Intended as a transpiler replacement for GenGrid.Standable.
+		/// </summary>
+		/// <param name="cell">Cell to check.</param>
+		/// <param name="_">Unused.</param>
+		/// <param name="pawn">Pawn making the check.</param>
+		/// <returns>True if the pawn can stand at the given location.</returns>
+		public static bool CanPawnStandAt(IntVec3 cell, Map _, Pawn pawn)
+		{
+			return pawn.MovementContext().CanStandAt(cell);
+		}
+
+		/// <summary>
 		/// A pawn can spawn in a cell if it is in the border, there is a path to the colony, and the movement type allows
 		/// standing up in the cell.
 		/// </summary>
