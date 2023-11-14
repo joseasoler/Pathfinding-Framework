@@ -34,13 +34,17 @@ Yes.
 
 No.
 
+**How can I make humans walk over deep water?**
+
+Go to Options > Mod Settings > Pathfinding Framework. Choose the Pawn Movements tab. Scroll to the end until you see the Human entry. Click on the Terrestrial button and set it to Amphibious.
+
 **Where should I place Pathfinding Framework in my mod list load order?**
 
 As long as the mod does not trigger any load order warnings, it will work fine. Using [RimSort](https://github.com/oceancabbage/RimSort) or [RimPy](https://github.com/rimpy-custom/RimPy/releases) to sort your list should always give optimal results.
 
 **Is this mod compatible with...**
 
-Pathfinding Framework should be compatible with almost every mod. Other pathfinding mods can be found in the table below.
+Pathfinding Framework should be compatible with almost every mod. Other mods can be found in the table below.
 
 | Mod                                                                                                        | Compatible                                                                                                                                                 |
 |------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|

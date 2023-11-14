@@ -58,6 +58,8 @@ In the mod options window of Pathfinding Framework, you can enable an option to 
 
 [h1]Mod compatibility[/h1]
 
+Pathfinding Framework should be compatible with almost every mod. Other mods can be found in the table below.
+
 [table]
 [tr][th]Mod[/th][th]Compatible[/th][/tr]
 [tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2038001322]Biomes! Islands[/url][/td][td]Yes[/td][/tr]
@@ -81,6 +83,10 @@ Yes.
 [h3]Can I safely remove this mod from an existing save?[/h3]
 
 No.
+
+[h3]How can I make humans walk over deep water?[/h3]
+
+Go to Options > Mod Settings > Pathfinding Framework. Choose the Pawn Movements tab. Scroll to the end until you see the Human entry. Click on the Terrestrial button and set it to Amphibious.
 
 [h3]Where should I place Pathfinding Framework in my mod list load order?[/h3]
 
