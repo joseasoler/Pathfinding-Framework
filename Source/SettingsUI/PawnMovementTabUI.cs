@@ -85,12 +85,12 @@ namespace PathfindingFramework.SettingsUI
 			_pawnMovementEntries.Sort(new ComparePawnMovementEntries());
 		}
 
-		private static void SavePawnMovementDef(string raceDefName, string movementDefName)
+		private static void SavePawnMovementDef(ThingDef raceDef, string movementDefName)
 		{
-			Settings.Values.PawnMovementOverrides[raceDefName] = movementDefName;
+			Settings.Values.PawnMovementOverrides[raceDef.defName] = movementDefName;
 		}
 
-		private static IEnumerable<Widgets.DropdownMenuElement<string>> GenerateMovementDefMenu(string raceDefName)
+		private static IEnumerable<Widgets.DropdownMenuElement<string>> GenerateMovementDefMenu(ThingDef raceDef)
 		{
 			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
 			movementDefs.Sort((lhs, rhs) => lhs.priority.CompareTo(rhs.priority));
@@ -98,7 +98,10 @@ namespace PathfindingFramework.SettingsUI
 			for (int movementDefIndex = 0; movementDefIndex < movementDefs.Count; ++movementDefIndex)
 			{
 				MovementDef movementDef = movementDefs[movementDefIndex];
-				if (movementDef == MovementDefOf.PF_Movement_Terrestrial_Unsafe)
+				if (movementDef == MovementDefOf.PF_Movement_Terrestrial_Unsafe ||
+				    // Human-like pawns should not use movement types which fully prevent access to passable tiles.
+				    // At the moment this recommendation is not enforced for custom movement types.
+				    raceDef.race.Humanlike && movementDef == MovementDefOf.PF_Movement_Aquatic)
 				{
 					continue;
 				}
@@ -107,7 +110,7 @@ namespace PathfindingFramework.SettingsUI
 
 				yield return new Widgets.DropdownMenuElement<string>()
 				{
-					option = new FloatMenuOption(movementDef.LabelCap, () => SavePawnMovementDef(raceDefName, movementDefName)),
+					option = new FloatMenuOption(movementDef.LabelCap, () => SavePawnMovementDef(raceDef, movementDefName)),
 					payload = movementDefName
 				};
 			}
@@ -146,7 +149,7 @@ namespace PathfindingFramework.SettingsUI
 			Widgets.Label(modRect, mod);
 
 			MovementDef movementDef = PawnMovementOverrideSettings.CurrentMovementDef(pawnKindDef.race);
-			Widgets.Dropdown(dropdownRect, pawnKindDef.race.defName, _ => movementDef.defName, GenerateMovementDefMenu,
+			Widgets.Dropdown(dropdownRect, pawnKindDef.race, _ => movementDef.defName, GenerateMovementDefMenu,
 				movementDef.LabelCap.ToString());
 
 			if (Mouse.IsOver(rowRect))

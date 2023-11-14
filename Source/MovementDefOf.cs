@@ -9,6 +9,11 @@ namespace PathfindingFramework
 	public static class MovementDefOf
 	{
 		/// <summary>
+		/// Movement type intended for exclusively aquatic creatures.
+		/// </summary>
+		public static MovementDef PF_Movement_Aquatic;
+
+		/// <summary>
 		/// Movement type used by default. Should correspond to vanilla path costs.
 		/// </summary>
 		public static MovementDef PF_Movement_Terrestrial;
