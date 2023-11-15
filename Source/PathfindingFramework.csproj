@@ -40,6 +40,7 @@
 		<Compile Include="HediffsDefOf.cs" />
 		<Compile Include="Hediffs\Hediff_TemporaryMovement.cs" />
 		<Compile Include="JobDefOf.cs" />
+		<Compile Include="Jobs\JobGiver_RelocateAndWander.cs" />
 		<Compile Include="Jobs\JobGiver_SeekSafeTerrain.cs" />
 		<Compile Include="LoadedDataReport.cs" />
 		<Compile Include="LocationFinding.cs" />

@@ -20,13 +20,9 @@ namespace PathfindingFramework.Jobs
 			}
 
 			IntVec3 targetCell = CloseCellWithSafeTerrain(root, pawn.Map, TraverseParms.For(pawn));
-			if (targetCell != IntVec3.Invalid)
-			{
-				return JobMaker.MakeJob(JobDefOf.PF_Job_SeekSafeTerrain, targetCell, 300);
-			}
-
-			return null;
+			return targetCell != IntVec3.Invalid ? JobMaker.MakeJob(JobDefOf.PF_Job_SeekSafeTerrain, targetCell, 300) : null;
 		}
+
 		private static IntVec3 CloseCellWithSafeTerrain(IntVec3 root, Map map, TraverseParms traverseParms)
 		{
 			IntVec3 foundCell = IntVec3.Invalid;

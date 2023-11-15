@@ -161,7 +161,7 @@ namespace PathfindingFramework.MovementContexts
 		{
 			if (MovementDef.ignoreAvoidWander)
 			{
-				return true;
+				return false;
 			}
 
 			TerrainDef terrainDef = TerrainAt(cell);
