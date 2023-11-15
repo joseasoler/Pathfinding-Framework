@@ -19,9 +19,20 @@
 	-->
 	<PathfindingFramework.MovementDef ParentName="PF_Movement_Terrestrial_Base">
 		<defName>PF_Movement_Terrestrial_Unsafe</defName>
-		<priority>500</priority>
+		<priority>1500</priority>
 		<tagCosts>
 			<PF_TerrainTag_WaterDeep>Unsafe</PF_TerrainTag_WaterDeep>
+		</tagCosts>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef>
+		<defName>PF_Movement_Swimming</defName>
+		<label>swimming</label>
+		<description>Adapted for land, these creatures navigate solid terrains with ease. They can wade through shallow waters, and swim clumsily over deeper waters.</description>
+		<priority>1500</priority>
+		<defaultCost>Default</defaultCost>
+		<tagCosts>
+			<PF_TerrainTag_WaterDeep>120</PF_TerrainTag_WaterDeep>
 		</tagCosts>
 	</PathfindingFramework.MovementDef>
 
