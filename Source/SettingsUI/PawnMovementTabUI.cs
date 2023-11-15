@@ -26,16 +26,30 @@ namespace PathfindingFramework.SettingsUI
 		/// </summary>
 		private List<PawnMovementEntry> _pawnMovementEntries;
 
+		/// <summary>
+		/// Checks if a pawnKindDef should appear on the pawn movement settings tab.
+		/// </summary>
+		/// <param name="pawnKindDef">Pawn kind to check.</param>
+		/// <param name="ignoreDuplicates">Used to ignore pawnKindDefs sharing the same pawnKindDef.race.</param>
+		/// <returns>True if this should be a valid entry.</returns>
 		private static bool IsValidPawnKindDef(PawnKindDef pawnKindDef, HashSet<ThingDef> ignoreDuplicates)
 		{
-			// Avoid showing Vehicles Framework pawns.
 			const string vehiclesFrameworkPawnKindDef = "VehicleDef";
 
-			return pawnKindDef.race?.race != null &&
+			return
+				// Ignore invalid entries.
+				pawnKindDef.race?.race != null &&
+				// Do not show vehicles from Vehicles Framework.
 				pawnKindDef.race.GetType().Name != vehiclesFrameworkPawnKindDef &&
+				// Ignore duplicates.
 				!ignoreDuplicates.Contains(pawnKindDef.race);
 		}
 
+		/// <summary>
+		/// Generate pawn movement entry data from a pawnKindDef.
+		/// </summary>
+		/// <param name="pawnKindDef">Pawn kind being generated.</param>
+		/// <returns>Data required to show this entry on the settings tab.</returns>
 		private static PawnMovementEntry GetPawnMovementEntry(PawnKindDef pawnKindDef)
 		{
 			Color color = Color.white;
@@ -59,6 +73,9 @@ namespace PathfindingFramework.SettingsUI
 			return new PawnMovementEntry(pawnKindDef, color, texture);
 		}
 
+		/// <summary>
+		/// Lazy initialization of pawn movement entries.
+		/// </summary>
 		private void InitializePawnMovementEntries()
 		{
 			if (_pawnMovementEntries != null)
@@ -85,11 +102,21 @@ namespace PathfindingFramework.SettingsUI
 			_pawnMovementEntries.Sort(new ComparePawnMovementEntries());
 		}
 
+		/// <summary>
+		/// Helper function to save the new movement type override for a pawn.
+		/// </summary>
+		/// <param name="raceDef">Race of the pawnKindDef.</param>
+		/// <param name="movementDefName">String name of the movementDef.</param>
 		private static void SavePawnMovementDef(ThingDef raceDef, string movementDefName)
 		{
 			Settings.Values.PawnMovementOverrides[raceDef.defName] = movementDefName;
 		}
 
+		/// <summary>
+		/// Generate the dropdown of valid movement types to choose for a pawn.
+		/// </summary>
+		/// <param name="raceDef">Race of the pawnKindDef.</param>
+		/// <returns>Collection of dropdown menu entries.</returns>
 		private static IEnumerable<Widgets.DropdownMenuElement<string>> GenerateMovementDefMenu(ThingDef raceDef)
 		{
 			List<MovementDef> movementDefs = DefDatabase<MovementDef>.AllDefsListForReading;
@@ -98,16 +125,17 @@ namespace PathfindingFramework.SettingsUI
 			for (int movementDefIndex = 0; movementDefIndex < movementDefs.Count; ++movementDefIndex)
 			{
 				MovementDef movementDef = movementDefs[movementDefIndex];
-				if (movementDef == MovementDefOf.PF_Movement_Terrestrial_Unsafe ||
-				    // Human-like pawns should not use movement types which fully prevent access to passable tiles.
-				    // At the moment this recommendation is not enforced for custom movement types.
-				    raceDef.race.Humanlike && movementDef == MovementDefOf.PF_Movement_Aquatic)
+				if (
+					// Avoid showing this internal MovementDef to players.
+					movementDef == MovementDefOf.PF_Movement_Terrestrial_Unsafe ||
+					// Human-like pawns should not use movement types which fully prevent access to passable tiles.
+					// At the moment this recommendation is not enforced for custom movement types.
+					raceDef.race.Humanlike && movementDef == MovementDefOf.PF_Movement_Aquatic)
 				{
 					continue;
 				}
 
 				string movementDefName = movementDef.defName;
-
 				yield return new Widgets.DropdownMenuElement<string>()
 				{
 					option = new FloatMenuOption(movementDef.LabelCap, () => SavePawnMovementDef(raceDef, movementDefName)),
@@ -116,7 +144,14 @@ namespace PathfindingFramework.SettingsUI
 			}
 		}
 
-		private static void AnimalEntry(PawnKindDef pawnKindDef, Color color, Texture texture, Rect rowRect)
+		/// <summary>
+		/// Draw the movement change row for one pawn.
+		/// </summary>
+		/// <param name="pawnKindDef">Pawn to draw.</param>
+		/// <param name="color">Recolor to use for the texture of this pawn.</param>
+		/// <param name="texture">Texture to draw.</param>
+		/// <param name="rowRect">Available area.</param>
+		private static void DrawPawnMovementRow(PawnKindDef pawnKindDef, Color color, Texture texture, Rect rowRect)
 		{
 			// First cell: textures use a square space.
 			Rect textureRect = new Rect(rowRect.x, rowRect.y, rowRect.height, rowRect.height);
@@ -158,10 +193,16 @@ namespace PathfindingFramework.SettingsUI
 			}
 		}
 
+		/// <summary>
+		/// Draw the contents of the pawn movement tab.
+		/// When in-game, it will just draw a warning. This is because the mod does not support regenerating the movement
+		/// contexts of existing pawns to change their movement type. Instead, the user is forced to reload so that
+		/// the movement contexts can regenerate with the new settings.
+		/// </summary>
+		/// <param name="inRect">Available draw area.</param>
 		public void Contents(Rect inRect)
 		{
 			const float animalEntryGap = GenUI.GapTiny;
-			InitializePawnMovementEntries();
 			TextAnchor anchorBackup = Text.Anchor;
 			if (Current.ProgramState != ProgramState.Entry)
 			{
@@ -171,33 +212,33 @@ namespace PathfindingFramework.SettingsUI
 				return;
 			}
 
+			InitializePawnMovementEntries();
 			Rect outRect = inRect.ContractedBy(GenUI.GapSmall);
 
 			int entryCount = _pawnMovementEntries.Count;
 
 			Rect viewRect = new Rect(0, 0, outRect.width - GenUI.ScrollBarWidth,
-				AnimalEntryHeight * entryCount + animalEntryGap * entryCount);
+				(AnimalEntryHeight + animalEntryGap) * entryCount);
 			Widgets.BeginScrollView(inRect, ref _pawnMovementScrollPosition, viewRect);
 
 			Listing_Standard listing = new Listing_Standard();
 			listing.Begin(viewRect);
 
-
 			Text.Anchor = TextAnchor.MiddleCenter;
 
-			bool first = true;
+			float minHeightThreshold = _pawnMovementScrollPosition.y - AnimalEntryHeight;
+			float maxHeightThreshold = _pawnMovementScrollPosition.y + viewRect.height;
 			foreach (var (raceDef, color, texture) in _pawnMovementEntries)
 			{
-				if (first)
+				Rect entryRect = listing.GetRect(AnimalEntryHeight);
+				float currentHeight = entryRect.y;
+				if (currentHeight > minHeightThreshold && currentHeight < maxHeightThreshold)
 				{
-					first = false;
-				}
-				else
-				{
-					listing.Gap(animalEntryGap);
+					// Entries are only processed if they are inside of the viewable area.
+					DrawPawnMovementRow(raceDef, color, texture, entryRect);
 				}
 
-				AnimalEntry(raceDef, color, texture, listing.GetRect(AnimalEntryHeight));
+				listing.Gap(animalEntryGap);
 			}
 
 			Text.Anchor = anchorBackup;

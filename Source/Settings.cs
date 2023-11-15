@@ -18,7 +18,10 @@ namespace PathfindingFramework
 		// Pawn movement tab.
 
 		/// <summary>
-		/// Stores the movementDef override for each thingDef.
+		/// Stores the movementDef override for each pawnKindDef.race ThingDef.
+		/// These are stored as strings to avoid issues when the modlist of a user changes.
+		/// Pawns or movement types that are no longer present are silently ignored, and will be deleted if the settings are
+		/// saved.
 		/// </summary>
 		public Dictionary<string, string> PawnMovementOverrides = new();
 

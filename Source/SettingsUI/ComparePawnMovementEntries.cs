@@ -22,7 +22,8 @@ namespace PathfindingFramework.SettingsUI
 			int humanlikeCompare = humanlikeLhs.CompareTo(humanlikeRhs);
 			if (humanlikeCompare != 0)
 			{
-				return humanlikeCompare;
+				// Human-likes are placed first.
+				return -humanlikeCompare;
 			}
 
 			bool animalLhs = lhs.race.Animal;
@@ -31,6 +32,7 @@ namespace PathfindingFramework.SettingsUI
 			int animalCompare = animalLhs.CompareTo(animalRhs);
 			if (animalCompare != 0)
 			{
+				// Animals are placed next.
 				return -animalCompare;
 			}
 
