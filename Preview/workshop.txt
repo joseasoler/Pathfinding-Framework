@@ -90,7 +90,7 @@ No.
 
 [h3]How can I make humans walk over deep water?[/h3]
 
-Go to Options > Mod Settings > Pathfinding Framework. Choose the Pawn Movements tab. Scroll to the end until you see the Human entry. Click on the Terrestrial button and set it to Swimming.
+While in the main menu of the game, go to Options > Mod Settings > Pathfinding Framework. Choose the Pawn Movements tab. Check the Human entry, which should be close to the beginning of the list. Click on the Terrestrial button and set it to Swimming.
 
 [h3]Where should I place Pathfinding Framework in my mod list load order?[/h3]
 
