@@ -36,7 +36,7 @@ No.
 
 **How can I make humans walk over deep water?**
 
-Go to Options > Mod Settings > Pathfinding Framework. Choose the Pawn Movements tab. Scroll to the end until you see the Human entry. Click on the Terrestrial button and set it to Amphibious.
+Go to Options > Mod Settings > Pathfinding Framework. Choose the Pawn Movements tab. Scroll to the end until you see the Human entry. Click on the Terrestrial button and set it to Swimming.
 
 **Where should I place Pathfinding Framework in my mod list load order?**
 

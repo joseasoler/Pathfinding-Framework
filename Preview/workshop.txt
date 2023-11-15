@@ -56,6 +56,10 @@ In the mod options window of Pathfinding Framework, you can enable an option to 
 
 [img]https://i.imgur.com/Y27AuqA.png[/img]
 
+In the mod settings, you can also customize the movement type used by humans, animals or mechanoids. This feature supports Humanoid Alien Races. To let your colonists walk over deep water, just set the movement type of humans to swimming.
+
+[img]https://i.imgur.com/rwkkedb.png[/img]
+
 [h1]Mod compatibility[/h1]
 
 Pathfinding Framework should be compatible with almost every mod. Other mods can be found in the table below.
@@ -86,7 +90,7 @@ No.
 
 [h3]How can I make humans walk over deep water?[/h3]
 
-Go to Options > Mod Settings > Pathfinding Framework. Choose the Pawn Movements tab. Scroll to the end until you see the Human entry. Click on the Terrestrial button and set it to Amphibious.
+Go to Options > Mod Settings > Pathfinding Framework. Choose the Pawn Movements tab. Scroll to the end until you see the Human entry. Click on the Terrestrial button and set it to Swimming.
 
 [h3]Where should I place Pathfinding Framework in my mod list load order?[/h3]
 
