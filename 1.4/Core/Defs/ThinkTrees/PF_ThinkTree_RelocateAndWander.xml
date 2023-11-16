@@ -10,14 +10,10 @@
 				<li Class="ThinkNode_ConditionalHasFaction">
 					<invert>true</invert>
 					<subNodes>
-						<li Class="ThinkNode_ConditionalStarving">
+						<li Class="ThinkNode_ChancePerHour_Constant">
+							<mtbHours>1</mtbHours>
 							<subNodes>
-								<li Class="ThinkNode_ChancePerHour_Constant">
-									<mtbHours>8</mtbHours>
-									<subNodes>
-										<li Class="PathfindingFramework.Jobs.JobGiver_RelocateAndWander"/>
-									</subNodes>
-								</li>
+								<li Class="PathfindingFramework.Jobs.JobGiver_RelocateAndWander"/>
 							</subNodes>
 						</li>
 					</subNodes>
