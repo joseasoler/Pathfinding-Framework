@@ -7,10 +7,19 @@
 		<insertPriority>300</insertPriority>
 		<thinkRoot Class="ThinkNode_Priority">
 			<subNodes>
-				<li Class="ThinkNode_ChancePerHour_Constant">
-					<mtbHours>8</mtbHours>
+				<li Class="ThinkNode_ConditionalHasFaction">
+					<invert>true</invert>
 					<subNodes>
-						<li Class="PathfindingFramework.Jobs.JobGiver_RelocateAndWander"/>
+						<li Class="ThinkNode_ConditionalStarving">
+							<subNodes>
+								<li Class="ThinkNode_ChancePerHour_Constant">
+									<mtbHours>8</mtbHours>
+									<subNodes>
+										<li Class="PathfindingFramework.Jobs.JobGiver_RelocateAndWander"/>
+									</subNodes>
+								</li>
+							</subNodes>
+						</li>
 					</subNodes>
 				</li>
 			</subNodes>
