@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using PathfindingFramework.ErrorHandling;
 using PathfindingFramework.MovementContexts;
 using PathfindingFramework.Patches;
+using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -50,9 +50,8 @@ namespace PathfindingFramework.Jobs
 			}
 
 			IntVec3 destination = targetRegion.AnyCell;
-			MovementContext context = pawn.MovementContext();
-			if (!context.CanStandAt(destination) || context.AvoidWanderAt(destination) ||
-			    !pawn.CanReach(destination, PathEndMode.OnCell, Danger.None))
+			// tryIndex intentionally kept at 0 to always perform standability checks.
+			if (!RCellFinder.CanWanderToCell(destination, pawn, pawn.Position, null, 0, Danger.None, false, false))
 			{
 				return null;
 			}

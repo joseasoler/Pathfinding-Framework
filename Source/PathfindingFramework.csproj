@@ -209,6 +209,9 @@
 		<!-- Implementation of PF_GenStep_Animals. -->
 		<Publicize Include="Assembly-CSharp:RimWorld.WildAnimalSpawner.CommonalityOfAnimalNow" />
 
+		<!-- JobGiver_RelocateAndWander -->
+		<Publicize Include="Assembly-CSharp:RimWorld.RCellFinder.CanWanderToCell" />
+
 		<!-- PathFinder.FindPath error debugging. -->
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.calcGrid" />
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathFinder.Directions" />
