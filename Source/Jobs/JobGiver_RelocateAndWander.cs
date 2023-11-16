@@ -40,9 +40,10 @@ namespace PathfindingFramework.Jobs
 		{
 			int targetCellCount = targetDistrict.CellCount;
 
-			if (targetDistrict.Regions.Count == 0 || targetCellCount < Region.GridSize * Region.GridSize)
+			if (targetDistrict == pawn.Position.GetDistrict(pawn.Map) || targetDistrict.Regions.Count == 0 ||
+			    targetCellCount < Region.GridSize * Region.GridSize)
 			{
-				// Invalid districts and small districts are ignored.
+				// Invalid districts, small districts and the same district are ignored.
 				return null;
 			}
 
