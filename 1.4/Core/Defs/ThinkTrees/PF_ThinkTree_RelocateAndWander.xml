@@ -11,7 +11,7 @@
 					<invert>true</invert>
 					<subNodes>
 						<li Class="ThinkNode_ChancePerHour_Constant">
-							<mtbHours>1</mtbHours>
+							<mtbHours>8</mtbHours>
 							<subNodes>
 								<li Class="PathfindingFramework.Jobs.JobGiver_RelocateAndWander"/>
 							</subNodes>

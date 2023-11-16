@@ -13,6 +13,9 @@ namespace PathfindingFramework.SettingsUI
 			listing.CheckboxLabeled("PF_IgnoreFireLabel".Translate(), ref Settings.Values.IgnoreFire,
 				"PF_IgnoreFireHover".Translate());
 
+			listing.CheckboxLabeled("PF_WildAnimalRelocationLabel".Translate(), ref Settings.Values.WildAnimalRelocation,
+				"PF_WildAnimalRelocationHover".Translate());
+
 			listing.End();
 		}
 	}

@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using PathfindingFramework.MovementContexts;
-using PathfindingFramework.Patches;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -18,6 +16,11 @@ namespace PathfindingFramework.Jobs
 	{
 		protected override Job TryGiveJob(Pawn pawn)
 		{
+			if (!Settings.Values.WildAnimalRelocation)
+			{
+				return null;
+			}
+
 			District district = pawn.Position.GetDistrict(pawn.Map);
 			if (district == null)
 			{
