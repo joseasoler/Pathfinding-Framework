@@ -66,10 +66,10 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 			Pawn pawn = ___traverseParms.pawn;
 			Map map = pawn?.Map;
 			string pawnName = pawn != null ? pawn.GetUniqueLoadID() : "No pawn";
-			string startCellStr = pawn != null ? pawn.Position.ToString() : "Unknown";
+			string startCellStr = pawn != null ? pawn.Position.ToReportString() : "Unknown";
 			string startRegionStr = pawn != null ? pawn.Position.GetRegion(map).id.ToString() : "Unknown";
 
-			string destCellStr = ___destinationCell.ToString();
+			string destCellStr = ___destinationCell.ToReportString();
 			string destRegionStr = region != null ? region.id.ToString() : "None";
 
 			StringBuilder sb = new StringBuilder();
