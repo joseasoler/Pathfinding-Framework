@@ -30,7 +30,7 @@ namespace PathfindingFramework.ErrorHandling
 			if (pawn != null)
 			{
 				_movementDef = pawn.MovementDef();
-				_avoidFences = pawn.MovementContext().ShouldAvoidFences;
+				_avoidFences = pawn.MovementContext()?.ShouldAvoidFences ?? false;
 				_job = pawn.CurJob;
 			}
 			else
