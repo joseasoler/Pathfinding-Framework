@@ -41,6 +41,11 @@ namespace PathfindingFramework
 		/// <returns>True if the movement allows standing here.</returns>
 		public static bool CanStandAt(MovementDef movementDef, Map map, IntVec3 cell)
 		{
+			if (!cell.InBounds(map))
+			{
+				return false;
+			}
+
 			TerrainDef terrainDef = cell.GetTerrain(map);
 			if (terrainDef == null || !movementDef.CanEnterTerrain(terrainDef))
 			{

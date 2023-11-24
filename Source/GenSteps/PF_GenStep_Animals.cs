@@ -45,7 +45,7 @@ namespace PathfindingFramework.GenSteps
 						    LocationFinding.CanReachMapEdge(movementDef, map, testCell),
 					    map, 1000, out IntVec3 randomCell))
 				{
-					Report.Error(
+					Report.Debug(
 						$"{typeof(PF_GenStep_Animals)} could not find a random cell to spawn animal with PawnKindDef {chosenAnimalDef} using MovementDef {movementDef}");
 					// Remove the chosen animal type from the list to avoid further errors.
 					availableAnimals.Remove(chosenAnimalDef);

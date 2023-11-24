@@ -12,9 +12,14 @@ namespace PathfindingFramework.Jobs
 	{
 		protected override Job TryGiveJob(Pawn pawn)
 		{
+			if (pawn == null || !pawn.Spawned)
+			{
+				return null;
+			}
+
 			IntVec3 root = pawn.Position;
 			MovementContext context = pawn.MovementContext();
-			if (context.CanEnterTerrain(root))
+			if (context == null || context.CanEnterTerrain(root))
 			{
 				return null;
 			}
