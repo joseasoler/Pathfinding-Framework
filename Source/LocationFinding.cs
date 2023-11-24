@@ -18,7 +18,7 @@ namespace PathfindingFramework
 	/// </summary>
 	public static class LocationFinding
 	{
-		private static bool ThingsAllowStandingAt(Map map, IntVec3 cell)
+		public static bool ThingsAllowStandingAt(Map map, IntVec3 cell)
 		{
 			List<Thing> thingList = map.thingGrid.ThingsListAt(cell);
 			for (int index = 0; index < thingList.Count; ++index)
@@ -75,7 +75,7 @@ namespace PathfindingFramework
 		/// <param name="map">Current map.</param>
 		/// <param name="cell">Cell to check.</param>
 		/// <returns>True if the cell is a good spawning point for this movement type.</returns>
-		private static bool CanSpawnAt(MovementDef movementDef, Map map, IntVec3 cell)
+		public static bool CanSpawnAt(MovementDef movementDef, Map map, IntVec3 cell)
 		{
 			return CanStandAt(movementDef, map, cell) && cell.GetDistrict(map).TouchesMapEdge &&
 				(movementDef.ignoreColonyReachability || map.reachability.CanReachColony(cell));
