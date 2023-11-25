@@ -161,6 +161,8 @@ XML lookup, thus running considerably faster than regular XPath operations.
 					<tag>PF_TerrainTag_Lava</tag>
 					<terrainDefs>
 						<li>BiomeCore_Magma</li>
+						<li>BMT_Terrain_Tachylite</li>
+						<!-- Older version of the tachylite def. -->
 						<li>BMT_MagmaStone</li>
 					</terrainDefs>
 				</li>
