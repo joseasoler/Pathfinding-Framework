@@ -120,6 +120,7 @@
 		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_TryExecuteWorker_Patch.cs" />
 		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_Util.cs" />
 		<Compile Include="Patches\Spawning\ManhunterPackIncidentUtility_TryFindManhunterAnimalKind_Patch.cs" />
+		<Compile Include="Patches\Spawning\ScenPart_StartingAnimal_PetWeight_Patch.cs" />
 		<Compile Include="Patches\Spawning\WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch.cs" />
 		<Compile Include="Patches\TranspilerDebugging.cs" />
 		<Compile Include="PatchOperations\AddTagsToTerrainDefs.cs" />
