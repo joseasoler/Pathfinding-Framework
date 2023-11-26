@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using PathfindingFramework.Patches.ModCompatibility.GeologicalLandforms;
 
 namespace PathfindingFramework
 {
@@ -8,6 +9,8 @@ namespace PathfindingFramework
 	/// </summary>
 	public static class Harmony
 	{
+		private static HarmonyLib.Harmony harmonyInstance;
+
 		/// <summary>
 		/// Apply harmony patches to the game.
 		/// </summary>
@@ -18,7 +21,7 @@ namespace PathfindingFramework
 				string path = Path.Combine(Path.GetTempPath(), "PF_Harmony.txt");
 				Environment.SetEnvironmentVariable("HARMONY_LOG_FILE", path);
 				// HarmonyLib.Harmony.DEBUG = true;
-				HarmonyLib.Harmony harmonyInstance = new HarmonyLib.Harmony(PathfindingFrameworkMod.PackageId);
+				harmonyInstance = new HarmonyLib.Harmony(PathfindingFrameworkMod.PackageId);
 				harmonyInstance.PatchAll();
 				Report.Debug("Harmony patching applied.");
 			}
@@ -27,6 +30,11 @@ namespace PathfindingFramework
 				Report.Error("Harmony patching failed:");
 				Report.Error($"{exception}");
 			}
+		}
+
+		public static void LoadingFinished()
+		{
+			GeologicalLandformsHarmony.ApplyPatches(harmonyInstance);
 		}
 	}
 }

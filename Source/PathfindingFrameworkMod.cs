@@ -44,6 +44,10 @@ namespace PathfindingFramework
 		private void InitializeWhenLoadingFinished()
 		{
 			GetSettings<Settings>();
+			// Certain mods such as Geological Landforms dynamically load additional DLLs at a different game load stage.
+			ModAssemblyInfo.LoadingFinished();
+			// Additional Harmony patching that must wait until this stage, due to a dependency with ModAssemblyInfo.LoadingFinished.
+			Harmony.LoadingFinished();
 			// This value might be null after loading a config which lacks it.
 			Settings.Values.PawnMovementOverrides ??= new Dictionary<string, string>();
 			// Reads and stores the MovementDef granted by MovementExtensions of each Def.

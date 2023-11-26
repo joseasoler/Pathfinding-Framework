@@ -21,6 +21,12 @@ namespace PathfindingFramework.ModCompatibility
 		public static Assembly DubsBadHygieneAssembly;
 
 		/// <summary>
+		/// Geological Landforms
+		/// https://steamcommunity.com/sharedfiles/filedetails/?id=2773943594
+		/// </summary>
+		public static Assembly GeologicalLandformsAssembly;
+
+		/// <summary>
 		/// Giddy-Up 2
 		/// https://steamcommunity.com/sharedfiles/filedetails/?id=2934245647
 		/// </summary>
@@ -57,6 +63,7 @@ namespace PathfindingFramework.ModCompatibility
 							if (assembly.GetName().Name == "BadHygiene")
 							{
 								DubsBadHygieneAssembly = assembly;
+								break;
 							}
 						}
 
@@ -72,6 +79,38 @@ namespace PathfindingFramework.ModCompatibility
 						break;
 					case "zetrith.prepatcher":
 						PrepatcherPresent = true;
+						break;
+				}
+			}
+			Report.Debug("Gathered mod assembly information.");
+		}
+
+		/// <summary>
+		/// Obtain the assemblies of mods that load additional DLLs at different gama load stages such as Geological
+		/// Landforms.
+		/// </summary>
+		public static void LoadingFinished()
+		{
+			foreach (ModContentPack pack in LoadedModManager.RunningMods)
+			{
+				if (pack.assemblies.loadedAssemblies.NullOrEmpty())
+				{
+					continue;
+				}
+
+				string packageId = pack.PackageId.ToLower();
+				switch (packageId)
+				{
+					case "m00nl1ght.geologicallandforms":
+						foreach (Assembly assembly in pack.assemblies.loadedAssemblies)
+						{
+							if (assembly.GetName().Name == "GeologicalLandforms")
+							{
+								GeologicalLandformsAssembly = assembly;
+								break;
+							}
+						}
+
 						break;
 				}
 			}
