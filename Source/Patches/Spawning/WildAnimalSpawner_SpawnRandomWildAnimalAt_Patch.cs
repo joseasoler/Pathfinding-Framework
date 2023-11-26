@@ -10,6 +10,9 @@ namespace PathfindingFramework.Patches.Spawning
 {
 	/// <summary>
 	/// When the animal spawning code chooses an incompatible terrain and animal type, switch to a new target cell.
+	/// Prior to this call, Geological Landforms / Biome Transitions ensures that the animal is on a cell that belongs to
+	/// its biome of origin. Although this patch does not respect that limitation, the cases in which this is problematic
+	/// should be minimal.
 	/// </summary>
 	[HarmonyPatch(typeof(WildAnimalSpawner), nameof(WildAnimalSpawner.SpawnRandomWildAnimalAt))]
 	public static class WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch
@@ -41,19 +44,18 @@ namespace PathfindingFramework.Patches.Spawning
 		public static bool TryReplaceAnimalSpawnLocation(PawnKindDef pawnKindDef, Map map, IntVec3 location,
 			int randomInRange, int radius)
 		{
-			Report.ErrorOnce($"TryReplaceAnimalSpawnLocation: {pawnKindDef}");
 			MovementDef movementDef = pawnKindDef.race?.MovementDef();
-			if ((randomInRange <= 0 || movementDef == null) && location.IsValid)
+			if (randomInRange <= 0 || movementDef == null)
 			{
 				return false;
 			}
 
-			// Location might be invalid when this function is called from GenStep_Animals.
-			TerrainDef terrainDef = location.IsValid ? location.GetTerrain(map) : null;
-
-			if (terrainDef != null && movementDef != null &&
-			    movementDef.PathCosts[terrainDef.MovementIndex()] < PathCost.Unsafe.cost)
+			TerrainDef terrainDef = location.GetTerrain(map);
+			if (terrainDef != null &&
+			    movementDef.PathCosts[terrainDef.MovementIndex()] < PathCost.Unsafe.cost &&
+			    LocationFinding.CanReachMapEdge(movementDef, map, location))
 			{
+				// If the animal is on safe terrain and can reach the map edge, this is a good position for it to spawn.
 				return false;
 			}
 

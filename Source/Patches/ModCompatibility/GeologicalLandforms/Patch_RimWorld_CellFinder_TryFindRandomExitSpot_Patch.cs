@@ -3,7 +3,6 @@ using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using PathfindingFramework.ModCompatibility;
-using RimWorld;
 using Verse;
 
 namespace PathfindingFramework.Patches.ModCompatibility.GeologicalLandforms
@@ -25,7 +24,7 @@ namespace PathfindingFramework.Patches.ModCompatibility.GeologicalLandforms
 		public static void Patch(HarmonyLib.Harmony harmonyInstance)
 		{
 			MethodBase originalMethod = TargetMethod();
-			var transpilerMethod =
+			HarmonyMethod transpilerMethod =
 				new HarmonyMethod(AccessTools.Method(typeof(Patch_RimWorld_CellFinder_TryFindRandomExitSpot_Patch),
 					nameof(Transpiler)));
 			harmonyInstance.Patch(originalMethod, transpiler: transpilerMethod);
