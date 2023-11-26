@@ -35,7 +35,6 @@
 		<Compile Include="ErrorHandling\PathFinderErrorReport.cs" />
 		<Compile Include="ErrorHandling\RegionErrorReport.cs" />
 		<Compile Include="ErrorHandling\ToReportStringUtil.cs" />
-		<Compile Include="GenSteps\PF_GenStep_Animals.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="HediffsDefOf.cs" />
 		<Compile Include="Hediffs\Hediff_TemporaryMovement.cs" />
@@ -114,6 +113,7 @@
 		<Compile Include="Patches\RegionPathfinding\Region_Allows_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\Room_ProperRoom_Patch.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
+		<Compile Include="Patches\Spawning\GenStep_Animals_Generate_Patch.cs" />
 		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_CanFireNowSub_Patch.cs" />
 		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_TryExecuteWorker_Patch.cs" />
 		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_Util.cs" />

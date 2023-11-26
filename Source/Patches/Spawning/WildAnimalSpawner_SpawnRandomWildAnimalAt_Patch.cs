@@ -14,25 +14,51 @@ namespace PathfindingFramework.Patches.Spawning
 	[HarmonyPatch(typeof(WildAnimalSpawner), nameof(WildAnimalSpawner.SpawnRandomWildAnimalAt))]
 	public static class WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch
 	{
+		/// <summary>
+		/// By default this patch only generates border positions. If this value is set to true (such as for example during
+		/// map generation) animals can instead generate on any place from where they can reach the border.
+		/// </summary>
+		public static bool GenerateAnywhere = false;
+
+		public static bool TryFindSpawnCell(Map map, PawnKindDef pawnKindDef, out IntVec3 chosenCell)
+		{
+			if (!GenerateAnywhere)
+			{
+				return LocationFinding.TryFindRandomPawnEntryCell(out chosenCell, map, CellFinder.EdgeRoadChance_Animal,
+					true, null, pawnKindDef);
+			}
+
+			MovementDef movementDef = pawnKindDef.race?.MovementDef() ?? MovementDefOf.PF_Movement_Terrestrial;
+
+			bool result = CellFinderLoose.TryGetRandomCellWith(testCell =>
+					LocationFinding.CanStandAt(movementDef, map, testCell) &&
+					LocationFinding.CanReachMapEdge(movementDef, map, testCell),
+				map, 1000, out chosenCell);
+
+			return result;
+		}
+
 		public static bool TryReplaceAnimalSpawnLocation(PawnKindDef pawnKindDef, Map map, IntVec3 location,
 			int randomInRange, int radius)
 		{
+			Report.ErrorOnce($"TryReplaceAnimalSpawnLocation: {pawnKindDef}");
 			MovementDef movementDef = pawnKindDef.race?.MovementDef();
-			if (randomInRange <= 0 || movementDef == null || !location.InBounds(map))
+			if ((randomInRange <= 0 || movementDef == null) && location.IsValid)
 			{
 				return false;
 			}
 
-			TerrainDef terrainDef = location.GetTerrain(map);
+			// Location might be invalid when this function is called from GenStep_Animals.
+			TerrainDef terrainDef = location.IsValid ? location.GetTerrain(map) : null;
 
-			if (movementDef.PathCosts[terrainDef.MovementIndex()] < PathCost.Unsafe.cost)
+			if (terrainDef != null && movementDef != null &&
+			    movementDef.PathCosts[terrainDef.MovementIndex()] < PathCost.Unsafe.cost)
 			{
 				return false;
 			}
 
 			// The animal to spawn cannot stand in the chosen terrain. A new cell must be found.
-			if (!LocationFinding.TryFindRandomPawnEntryCell(out IntVec3 newCell, map, CellFinder.EdgeRoadChance_Animal, true,
-				    null, pawnKindDef))
+			if (!TryFindSpawnCell(map, pawnKindDef, out IntVec3 newCell))
 			{
 				return false;
 			}
