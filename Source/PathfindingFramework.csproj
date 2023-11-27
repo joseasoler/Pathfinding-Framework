@@ -209,9 +209,6 @@
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
-		<!-- Implementation of PF_GenStep_Animals. -->
-		<Publicize Include="Assembly-CSharp:RimWorld.WildAnimalSpawner.CommonalityOfAnimalNow" />
-
 		<!-- JobGiver_RelocateAndWander -->
 		<Publicize Include="Assembly-CSharp:RimWorld.RCellFinder.CanWanderToCell" />
 
