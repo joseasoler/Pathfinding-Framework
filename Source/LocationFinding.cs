@@ -78,7 +78,7 @@ namespace PathfindingFramework
 		public static bool CanSpawnAt(MovementDef movementDef, Map map, IntVec3 cell)
 		{
 			return CanStandAt(movementDef, map, cell) && cell.GetDistrict(map).TouchesMapEdge &&
-				(movementDef.ignoreColonyReachability || map.reachability.CanReachColony(cell));
+			       (movementDef.ignoreColonyReachability || map.reachability.CanReachColony(cell));
 		}
 
 		/// <summary>
@@ -117,35 +117,36 @@ namespace PathfindingFramework
 			return TryRandomClosewalkCellNear(pawn, radius, out IntVec3 result, extraValidator) ? result : pawn.Position;
 		}
 
+		public static bool ValidRandomPawnEntryCell(IntVec3 cell, Map map, MovementDef movementDef, bool allowFogged,
+			Predicate<IntVec3> extraValidator)
+		{
+			return (allowFogged || !cell.Fogged(map)) && CanSpawnAt(movementDef, map, cell) &&
+			       (extraValidator == null || extraValidator(cell));
+		}
+
 		/// <summary>
 		/// Search for a valid entry cell for a pawn with a specific movement type.
 		/// </summary>
-		/// <param name="result">Found cell.</param>
+		/// <param name="foundCell">Found cell.</param>
 		/// <param name="map">Current map</param>
 		/// <param name="roadChance">Probability of spawning on a road.</param>
 		/// <param name="allowFogged">Allow spawning in fogged tiles.</param>
 		/// <param name="extraValidator">Optional extra validation.</param>
 		/// <param name="pawnKindDef">Definition of the pawn.</param>
 		/// <returns>True if a cell was found.</returns>
-		public static bool TryFindRandomPawnEntryCell(out IntVec3 result, Map map, float roadChance,
+		public static bool TryFindRandomPawnEntryCell(out IntVec3 foundCell, Map map, float roadChance,
 			bool allowFogged, Predicate<IntVec3> extraValidator, PawnKindDef pawnKindDef)
 		{
 			MovementDef movementDef = pawnKindDef.race?.MovementDef();
-			if (movementDef == null)
+			if (movementDef != null)
 			{
-				return RCellFinder.TryFindRandomPawnEntryCell(out result, map, roadChance, allowFogged, extraValidator);
+				return CellFinder.TryFindRandomEdgeCellWith((cell =>
+						ValidRandomPawnEntryCell(cell, map, movementDef, allowFogged, extraValidator)), map, roadChance,
+					out foundCell);
 			}
 
-			return CellFinder.TryFindRandomEdgeCellWith((cell =>
-			{
-				bool foggedPrevents = !allowFogged && cell.Fogged(map);
-				if (foggedPrevents || !CanSpawnAt(movementDef, map, cell))
-				{
-					return false;
-				}
-
-				return extraValidator == null || extraValidator(cell);
-			}), map, roadChance, out result);
+			// Resort to vanilla search.
+			return RCellFinder.TryFindRandomPawnEntryCell(out foundCell, map, roadChance, allowFogged, extraValidator);
 		}
 
 		/// <summary>
@@ -203,7 +204,7 @@ namespace PathfindingFramework
 		/// <returns>Standable cell if any was found, otherwise an invalid cell.</returns>
 		public static IntVec3 StandableCellNearForMovementType(IntVec3 cell, Map map, float radius, Pawn pawn)
 		{
-			return StandableCellNearForMovementTypes(cell, map, radius, new List<Pawn> { pawn });
+			return StandableCellNearForMovementTypes(cell, map, radius, new List<Pawn> {pawn});
 		}
 
 		/// <summary>
