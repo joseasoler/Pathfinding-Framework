@@ -135,7 +135,7 @@ namespace PathfindingFramework.PatchOperations
 
 			if (remainingTerrainDefs.Count > 0)
 			{
-				Report.Error(
+				Report.Warning(
 					$"AddTagsToTerrainDefs could not find the following TerrainDefs: {string.Join(", ", remainingTerrainDefs.Keys)}");
 			}
 
