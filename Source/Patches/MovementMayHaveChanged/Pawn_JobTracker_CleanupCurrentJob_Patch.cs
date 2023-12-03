@@ -20,7 +20,7 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 		public static void Postfix(Pawn ___pawn, Job ___curJob, bool __state)
 		{
 			bool currentJobCanBashFences = ___curJob != null && ___curJob.canBashFences;
-			if (___pawn.Spawned && ___pawn.ShouldAvoidFences && currentJobCanBashFences != __state)
+			if (___pawn.Spawned && ___pawn.roping != null && ___pawn.ShouldAvoidFences && currentJobCanBashFences != __state)
 			{
 				PawnMovementUpdater.Update(___pawn);
 			}
