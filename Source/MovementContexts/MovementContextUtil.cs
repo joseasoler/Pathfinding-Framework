@@ -16,8 +16,11 @@ namespace PathfindingFramework.MovementContexts
 		/// <returns>True if this pawn should avoid fences.</returns>
 		public static bool ShouldAvoidFences(Pawn pawn)
 		{
-			return !pawn.MovementDef().penAnimalsDisallowed && pawn.ShouldAvoidFences &&
-				(pawn.CurJob == null || !pawn.CurJob.canBashFences);
+			return
+				pawn.ShouldAvoidFences && (pawn.CurJob == null || !pawn.CurJob.canBashFences) &&
+				// Modded code might trigger calls to this method before the spawning process is finished and the pawn has a
+				// valid MovementDef.
+				pawn.MovementDef() != null && !pawn.MovementDef().penAnimalsDisallowed;
 		}
 
 		/// <summary>
