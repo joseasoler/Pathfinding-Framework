@@ -112,10 +112,16 @@ namespace PathfindingFramework.PawnMovement
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
 		private static void FromRace(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
+			MovementDef overrideMovementDef = PawnMovementOverrideSettings.CurrentMovementDef(pawn.def);
+			if (overrideMovementDef != null)
+			{
+				movementDefs.Add(overrideMovementDef);
+				return;
+			}
+
 			MovementDef movementDef = pawn.def.MovementDef();
 			if (movementDef != null)
 			{
-				movementDefs.Add(movementDef);
 			}
 		}
 
