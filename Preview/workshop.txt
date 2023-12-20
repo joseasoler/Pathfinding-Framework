@@ -68,7 +68,6 @@ Pathfinding Framework should be compatible with almost every mod. Other mods can
 [tr][th]Mod[/th][th]Compatible[/th][/tr]
 [tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2038001322]Biomes! Islands[/url][/td][td]Yes[/td][/tr]
 [tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2603765747]Clean Pathfinding 2[/url][/td][td]Yes[/td][/tr]
-[tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url][/td][td][url=https://github.com/CombatExtended-Continued/CombatExtended/wiki/Frequently-Asked-Questions#does-mod-work-with-combat-extended-does-it-need-a-patch]Link[/url][/td][/tr]
 [tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2934245647]Giddy-Up 2[/url][/td][td]Yes[/td][/tr]
 [tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013]Vanilla Expanded Framework[/url][/td][td]Yes[/td][/tr]
 [tr][td][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3014915404]Vehicles Framework[/url][/td][td]Yes[/td][/tr]
