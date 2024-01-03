@@ -19,7 +19,7 @@ namespace PathfindingFramework
 		/// If this setting is enabled, animals on small walkable zones of the map will occasionally relocate to other zones
 		/// of the map, usually choosing zones that are close by, and larger than the current one.
 		/// </summary>
-		public bool WildAnimalRelocation = true;
+		public bool WildAnimalRelocating /*= false*/;
 
 		// Pawn movement tab.
 
@@ -77,7 +77,7 @@ namespace PathfindingFramework
 
 			// General tab.
 			Scribe_Values.Look(ref Values.IgnoreFire, nameof(Values.IgnoreFire));
-			Scribe_Values.Look(ref Values.WildAnimalRelocation, nameof(Values.WildAnimalRelocation), defaultValue: true);
+			Scribe_Values.Look(ref Values.WildAnimalRelocating, nameof(Values.WildAnimalRelocating), defaultValue: false);
 
 			// Pawn movement tab.
 			Scribe_Collections.Look(ref Values.PawnMovementOverrides, nameof(Values.PawnMovementOverrides), LookMode.Value,

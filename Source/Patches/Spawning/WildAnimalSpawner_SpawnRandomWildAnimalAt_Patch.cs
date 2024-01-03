@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using PathfindingFramework.Jobs;
 using PathfindingFramework.Parse;
 using RimWorld;
 using Verse;
@@ -22,6 +23,8 @@ namespace PathfindingFramework.Patches.Spawning
 		/// map generation) animals can instead generate on any place from where they can reach the border.
 		/// </summary>
 		public static bool GenerateAnywhere = false;
+
+		public static List<Pawn> _animalList;
 
 		public static bool TryFindSpawnCell(Map map, PawnKindDef pawnKindDef, out IntVec3 chosenCell)
 		{
@@ -67,17 +70,28 @@ namespace PathfindingFramework.Patches.Spawning
 
 			// Generate the first pawn in the chosen tile.
 			Pawn pawn = GenSpawn.Spawn(PawnGenerator.GeneratePawn(pawnKindDef), newCell, map) as Pawn;
+			_animalList.Add(pawn);
 			for (int index = 1; index < randomInRange; ++index)
 			{
 				// Use the first pawn to calculate close valid locations.
 				LocationFinding.TryRandomClosewalkCellNear(pawn, radius, out IntVec3 closeLocation);
-				GenSpawn.Spawn(PawnGenerator.GeneratePawn(pawnKindDef), closeLocation, map);
+				_animalList.Add((Pawn)GenSpawn.Spawn(PawnGenerator.GeneratePawn(pawnKindDef), closeLocation, map));
 			}
 
 			return true;
 		}
 
-		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions,
+		private static void StoreAnimal(Pawn pawn)
+		{
+			_animalList.Add(pawn);
+		}
+
+		private static void Prefix()
+		{
+			_animalList = new List<Pawn>();
+		}
+
+		private static IEnumerable<CodeInstruction> ReplaceAnimalSpawnLocations(IEnumerable<CodeInstruction> instructions,
 			ILGenerator generator)
 		{
 			MethodInfo tryReplaceAnimalSpawnLocationMethod =
@@ -117,6 +131,35 @@ namespace PathfindingFramework.Patches.Spawning
 					insertLabel = true;
 				}
 			}
+		}
+
+		private static IEnumerable<CodeInstruction> CollectAnimalList(IEnumerable<CodeInstruction> instructions)
+		{
+			MethodInfo storeAnimalMethod =
+				AccessTools.Method(typeof(WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch), nameof(StoreAnimal));
+
+			foreach (CodeInstruction instruction in instructions)
+			{
+				if (instruction.opcode == OpCodes.Pop)
+				{
+					yield return new CodeInstruction(OpCodes.Call, storeAnimalMethod);
+				}
+				else
+				{
+					yield return instruction;
+				}
+			}
+		}
+
+		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions,
+			ILGenerator generator)
+		{
+			return CollectAnimalList(ReplaceAnimalSpawnLocations(instructions, generator));
+		}
+
+		private static void Postfix()
+		{
+			AnimalRelocationUtil.HandleGroup(_animalList);
 		}
 	}
 }

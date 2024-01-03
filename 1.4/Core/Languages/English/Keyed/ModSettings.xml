@@ -5,7 +5,7 @@
 	<PF_IgnoreFireHover>Creatures that are inherently non-flammable such as mechanoids will move through fire. This setting does not affect pawns that cannot catch fire due to apparel, genes or hediffs.</PF_IgnoreFireHover>
 
 	<PF_WildAnimalRelocationLabel>Wild animal relocation</PF_WildAnimalRelocationLabel>
-	<PF_WildAnimalRelocationHover> If this setting is enabled, animals on small walkable zones of the map will occasionally relocate to other zones of the map, usually choosing zones that are close by, and larger than the current one.</PF_WildAnimalRelocationHover>
+	<PF_WildAnimalRelocationHover> If this setting is enabled, animal groups spawning outside of landmasses or in very small ones will relocate to larger islands.</PF_WildAnimalRelocationHover>
 
 	<PF_PawnMovementTab>Pawn movement</PF_PawnMovementTab>
 	<PF_PawnMovementWarningLabel><![CDATA[<color=#FF0F0F>Warning:</color> These settings cannot be modified in-game. Movement changes can only be applied from the main menu.]]></PF_PawnMovementWarningLabel>
