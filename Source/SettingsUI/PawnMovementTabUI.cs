@@ -90,13 +90,21 @@ namespace PathfindingFramework.SettingsUI
 			for (int pawnIndex = 0; pawnIndex < pawnKindDefs.Count; ++pawnIndex)
 			{
 				PawnKindDef pawnKindDef = pawnKindDefs[pawnIndex];
-				if (!IsValidPawnKindDef(pawnKindDef, ignoreDuplicates))
+				try
 				{
-					continue;
-				}
+					if (!IsValidPawnKindDef(pawnKindDef, ignoreDuplicates))
+					{
+						continue;
+					}
 
-				ignoreDuplicates.Add(pawnKindDef.race);
-				_pawnMovementEntries.Add(GetPawnMovementEntry(pawnKindDef));
+					ignoreDuplicates.Add(pawnKindDef.race);
+					_pawnMovementEntries.Add(GetPawnMovementEntry(pawnKindDef));
+				}
+				catch (Exception exception)
+				{
+					Report.Error($"Pawn movement settings failed to initialize PawnKindDef {pawnKindDef}:");
+					Report.Error($"{exception}");
+				}
 			}
 
 			_pawnMovementEntries.Sort(new ComparePawnMovementEntries());
@@ -228,14 +236,21 @@ namespace PathfindingFramework.SettingsUI
 
 			float minHeightThreshold = _pawnMovementScrollPosition.y - AnimalEntryHeight;
 			float maxHeightThreshold = _pawnMovementScrollPosition.y + viewRect.height;
-			foreach (var (raceDef, color, texture) in _pawnMovementEntries)
+			foreach (var (pawnKindDef, color, texture) in _pawnMovementEntries)
 			{
 				Rect entryRect = listing.GetRect(AnimalEntryHeight);
 				float currentHeight = entryRect.y;
+				// Entries are only processed if they are inside of the viewable area.
 				if (currentHeight > minHeightThreshold && currentHeight < maxHeightThreshold)
 				{
-					// Entries are only processed if they are inside of the viewable area.
-					DrawPawnMovementRow(raceDef, color, texture, entryRect);
+					try
+					{
+						DrawPawnMovementRow(pawnKindDef, color, texture, entryRect);
+					}
+					catch (Exception exception)
+					{
+						Report.ErrorOnce($"Pawn movement settings failed to draw row for PawnKindDef {pawnKindDef}: {exception}");
+					}
 				}
 
 				listing.Gap(animalEntryGap);
