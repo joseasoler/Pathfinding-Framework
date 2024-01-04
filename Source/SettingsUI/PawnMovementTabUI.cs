@@ -27,6 +27,11 @@ namespace PathfindingFramework.SettingsUI
 		private List<PawnMovementEntry> _pawnMovementEntries;
 
 		/// <summary>
+		/// Can filter animals by label, defName, or packageId.
+		/// </summary>
+		private string _filterText;
+
+		/// <summary>
 		/// Checks if a pawnKindDef should appear on the pawn movement settings tab.
 		/// </summary>
 		/// <param name="pawnKindDef">Pawn kind to check.</param>
@@ -186,10 +191,8 @@ namespace PathfindingFramework.SettingsUI
 
 			Widgets.Label(labelRect, pawnKindDef.race.LabelCap);
 
-			string mod = pawnKindDef.modContentPack != null
-				? pawnKindDef.modContentPack.Name
-				: "Unknown".Translate().ToString();
-			Widgets.Label(modRect, mod);
+
+			Widgets.Label(modRect, ModOf(pawnKindDef));
 
 			MovementDef movementDef = PawnMovementOverrideSettings.CurrentMovementDef(pawnKindDef.race);
 			Widgets.Dropdown(dropdownRect, pawnKindDef.race, _ => movementDef.defName, GenerateMovementDefMenu,
@@ -199,6 +202,43 @@ namespace PathfindingFramework.SettingsUI
 			{
 				GUI.DrawTexture(rowRect, TexUI.HighlightSelectedTex);
 			}
+		}
+
+		private static string ModOf(PawnKindDef pawnKindDef)
+		{
+			return pawnKindDef.modContentPack != null
+				? pawnKindDef.modContentPack.Name
+				: "Unknown".Translate().ToString();
+		}
+
+		/// <summary>
+		/// Helper function for a case-insensitive comparison of an arbitrary string against the current filter.
+		/// </summary>
+		/// <param name="str">String to check.</param>
+		/// <returns>True if the string is a match.</returns>
+		private bool FilterMatch(string str)
+		{
+			return str.IndexOf(_filterText, StringComparison.OrdinalIgnoreCase) >= 0;
+		}
+
+		private List<PawnMovementEntry> FilterEntries()
+		{
+			if (_filterText == "")
+			{
+				return _pawnMovementEntries;
+			}
+
+			List<PawnMovementEntry> filteredEntries = new List<PawnMovementEntry>();
+			foreach (PawnMovementEntry entry in _pawnMovementEntries)
+			{
+				PawnKindDef pawnKindDef = entry.Item1;
+				if (FilterMatch(pawnKindDef.race.label) || FilterMatch(pawnKindDef.defName) || FilterMatch(ModOf(pawnKindDef)))
+				{
+					filteredEntries.Add(entry);
+				}
+			}
+
+			return filteredEntries;
 		}
 
 		/// <summary>
@@ -221,9 +261,14 @@ namespace PathfindingFramework.SettingsUI
 			}
 
 			InitializePawnMovementEntries();
+			Rect filterRect = inRect.TopPartPixels(GenUI.GapWide);
+			_filterText = Widgets.TextField(filterRect, _filterText).ToLower();
+
+			inRect = inRect.BottomPartPixels(inRect.height - GenUI.GapWide - GenUI.GapSmall);
 			Rect outRect = inRect.ContractedBy(GenUI.GapSmall);
 
-			int entryCount = _pawnMovementEntries.Count;
+			List<PawnMovementEntry> filteredEntries = FilterEntries();
+			int entryCount = filteredEntries.Count;
 
 			Rect viewRect = new Rect(0, 0, outRect.width - GenUI.ScrollBarWidth,
 				(AnimalEntryHeight + animalEntryGap) * entryCount);
@@ -236,7 +281,7 @@ namespace PathfindingFramework.SettingsUI
 
 			float minHeightThreshold = _pawnMovementScrollPosition.y - AnimalEntryHeight;
 			float maxHeightThreshold = _pawnMovementScrollPosition.y + viewRect.height;
-			foreach (var (pawnKindDef, color, texture) in _pawnMovementEntries)
+			foreach (var (pawnKindDef, color, texture) in filteredEntries)
 			{
 				Rect entryRect = listing.GetRect(AnimalEntryHeight);
 				float currentHeight = entryRect.y;
