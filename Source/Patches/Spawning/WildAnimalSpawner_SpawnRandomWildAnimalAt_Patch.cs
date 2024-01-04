@@ -47,7 +47,7 @@ namespace PathfindingFramework.Patches.Spawning
 		public static bool TryReplaceAnimalSpawnLocation(PawnKindDef pawnKindDef, Map map, IntVec3 location,
 			int randomInRange, int radius)
 		{
-			MovementDef movementDef = pawnKindDef.race?.MovementDef();
+			MovementDef movementDef = PawnMovementOverrideSettings.CurrentMovementDef(pawnKindDef.race);
 			if (randomInRange <= 0 || movementDef == null)
 			{
 				return false;
@@ -75,7 +75,7 @@ namespace PathfindingFramework.Patches.Spawning
 			{
 				// Use the first pawn to calculate close valid locations.
 				LocationFinding.TryRandomClosewalkCellNear(pawn, radius, out IntVec3 closeLocation);
-				_animalList.Add((Pawn)GenSpawn.Spawn(PawnGenerator.GeneratePawn(pawnKindDef), closeLocation, map));
+				_animalList.Add((Pawn) GenSpawn.Spawn(PawnGenerator.GeneratePawn(pawnKindDef), closeLocation, map));
 			}
 
 			return true;
