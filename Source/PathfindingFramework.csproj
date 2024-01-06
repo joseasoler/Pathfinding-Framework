@@ -77,7 +77,6 @@
 		<Compile Include="Patches\DevTool\PathDebugging\Reachability_CanReach_DebugPatch.cs" />
 		<Compile Include="Patches\DevTool\PathDebugging\RegionCostCalculatorWrapper_Init_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathDebugging\RegionCostCalculator_GetPreciseRegionLinkDistances_Patch.cs" />
-		<Compile Include="Patches\LocationChoosing\AnimalPenEnclosureCalculator_EnterRegion_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\FloatMenuMakerMap_GotoLocationOption_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_FindGroundSleepSpotFor_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Pawn_PathFollower_StartPath_Patch.cs" />
