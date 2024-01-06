@@ -97,6 +97,7 @@
 		<Compile Include="Patches\ModExtensions\PawnGraphicSet_ResolveAllGraphics_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Pawn_HealthTracker_SetDead_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\TerrainTag\Pawn_PathFollower_TryEnterNextPathCell_Patch.cs" />
+		<Compile Include="Patches\MovementMayHaveChanged\Pawn_ApparelTracker_TryDrop_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_JobTracker_CleanupCurrentJob_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_JobTracker_StartJob_Patch.cs" />
 		<Compile Include="Patches\PrepatcherNewFields.cs" />
