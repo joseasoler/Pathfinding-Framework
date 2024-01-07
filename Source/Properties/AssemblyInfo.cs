@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Pathfinding Framework")]
-[assembly: AssemblyCopyright("Copyright © 2023 Pathfinding Framework contributors")]
+[assembly: AssemblyCopyright("Copyright © Pathfinding Framework contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
