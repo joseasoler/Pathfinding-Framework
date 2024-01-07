@@ -11,14 +11,14 @@ using Verse.AI;
 namespace PathfindingFramework.Patches.DevTool.PathDebugging
 {
 	/// <summary>
-	/// Add additional information when the region cost calculator Dijkstra stage fails.
+	/// Add additional information when the region cost calculator (Dijkstra) stage fails.
 	/// </summary>
 	[HarmonyPatch(typeof(RegionCostCalculator), "GetPreciseRegionLinkDistances")]
 	public static class RegionCostCalculator_GetPreciseRegionLinkDistances_Patch
 	{
 		private static RegionLink _regionLink = null;
 
-		private static int count = 0;
+		private static int _count = 0;
 
 		public static void Prefix()
 		{
@@ -27,13 +27,16 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 
 		public static void EnableErrors(RegionLink link)
 		{
-			_regionLink = link;
+			if (Settings.Values.LogRegionCalculatorError)
+			{
+				_regionLink = link;
+			}
 		}
 
 		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo logErrorOnceMethod =
-				AccessTools.Method(typeof(Log), nameof(Log.ErrorOnce), new[] { typeof(string), typeof(int) });
+				AccessTools.Method(typeof(Log), nameof(Log.ErrorOnce), new[] {typeof(string), typeof(int)});
 			MethodInfo enableErrorsMethod =
 				AccessTools.Method(typeof(RegionCostCalculator_GetPreciseRegionLinkDistances_Patch), nameof(EnableErrors));
 
@@ -58,7 +61,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 			Dictionary<RegionLink, IntVec3> ___linkTargetCells, Dictionary<int, float> ___tmpDistances,
 			List<int> ___tmpCellIndices)
 		{
-			if (_regionLink == null || count > 10)
+			if (_regionLink == null || _count > 10)
 			{
 				return;
 			}
@@ -134,7 +137,7 @@ namespace PathfindingFramework.Patches.DevTool.PathDebugging
 
 			// Update for next error case.
 			_regionLink = null;
-			++count;
+			++_count;
 		}
 	}
 }

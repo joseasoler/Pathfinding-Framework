@@ -43,6 +43,13 @@ namespace PathfindingFramework
 		/// Keep in mind that this log triggers in many valid cases; enabling it is only recommended for debugging.
 		/// </summary>
 		public bool LogPathNotFound /* = false*/;
+		
+		/// <summary>
+		/// Log additional information when the region cost calculator stage (Dijkstra) fails.
+		/// Keep in mind that this log can be triggered by other mods and issues.Enabling this setting is only recommended
+		/// for debugging.
+		/// </summary>
+		public bool LogRegionCalculatorError /* = false*/;
 
 		/// <summary>
 		/// Write additional debug information to the game log.
@@ -86,6 +93,7 @@ namespace PathfindingFramework
 			// Debugging tab.
 			Scribe_Values.Look(ref Values.Inspectors, nameof(Values.Inspectors));
 			Scribe_Values.Look(ref Values.LogPathNotFound, nameof(Values.LogPathNotFound));
+			Scribe_Values.Look(ref Values.LogRegionCalculatorError, nameof(Values.LogRegionCalculatorError));
 			Scribe_Values.Look(ref Values.DebugLog, nameof(Values.DebugLog));
 		}
 	}

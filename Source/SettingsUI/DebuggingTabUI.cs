@@ -14,6 +14,9 @@ namespace PathfindingFramework.SettingsUI
 				Translations.PF_InspectorHover);
 			listing.CheckboxLabeled(Translations.PF_LogPathNotFoundLabel, ref Settings.Values.LogPathNotFound,
 				Translations.PF_LogPathNotFoundHover);
+			listing.CheckboxLabeled(Translations.PF_LogRegionCalculatorErrorLabel,
+				ref Settings.Values.LogRegionCalculatorError,
+				Translations.PF_LogRegionCalculatorErrorHover);
 			listing.CheckboxLabeled(Translations.PF_DebugLogLabel, ref Settings.Values.DebugLog,
 				Translations.PF_DebugLogHover);
 

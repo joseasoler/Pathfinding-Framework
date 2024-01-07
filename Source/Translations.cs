@@ -31,6 +31,8 @@ namespace PathfindingFramework
 		public static string PF_InspectorLabel;
 		public static string PF_LogPathNotFoundHover;
 		public static string PF_LogPathNotFoundLabel;
+		public static string PF_LogRegionCalculatorErrorHover;
+		public static string PF_LogRegionCalculatorErrorLabel;
 		public static string PF_Movement;
 		public static string PF_MovementCostsLabel;
 		public static string PF_MovementReportText;

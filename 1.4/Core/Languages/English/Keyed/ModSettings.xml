@@ -13,7 +13,9 @@
 	<PF_InspectorLabel>Inspector</PF_InspectorLabel>
 	<PF_InspectorHover>If enabled, the path cost inspector window will appear while Control+Shift+Q is held. The movement costs inspector will appear while Control+Shift+E is held. The region inspector will appear while Control+Shift+R is held.</PF_InspectorHover>
 	<PF_LogPathNotFoundLabel>Log path not found</PF_LogPathNotFoundLabel>
-	<PF_LogPathNotFoundHover>Display a log with additional information when the pathfinder is unable to find a path. Keep in mind that this log triggers in many valid cases; enabling it is only recommended for debugging.</PF_LogPathNotFoundHover>
+	<PF_LogPathNotFoundHover>Display a log with additional information when the pathfinder is unable to find a path. Keep in mind that this log triggers in many valid cases; enabling it is only recommended for debugging or troubleshooting.</PF_LogPathNotFoundHover>
+	<PF_LogRegionCalculatorErrorLabel>Log region calculator errors</PF_LogRegionCalculatorErrorLabel>
+	<PF_LogRegionCalculatorErrorHover>Log additional information when the region cost calculator stage (Dijkstra) fails. Keep in mind that this log can be triggered by other mods and issues. Enabling this setting is only recommended for debugging or troubleshooting.</PF_LogRegionCalculatorErrorHover>
 	<PF_DebugLogLabel>Debug log</PF_DebugLogLabel>
 	<PF_DebugLogHover>Display additional messages in the log. Useful for debugging bugs.</PF_DebugLogHover>
 
