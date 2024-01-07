@@ -69,7 +69,7 @@ namespace PathfindingFramework.MovementDefUtils
 
 			string packageId = thingDef.modContentPack != null
 				? thingDef.modContentPack.PackageIdPlayerFacing
-				: "Unknown".Translate();
+				: Translations.Unknown;
 
 			return movementDef.penAnimalsDisallowed && thingDef.race != null && thingDef.race.FenceBlocked
 				? $"{thingDef.defName}[{packageId}] is a roamer, but has been assigned movement type {movementDef.defName} which disables pen animal pathfinding."

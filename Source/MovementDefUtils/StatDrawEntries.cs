@@ -11,7 +11,7 @@ namespace PathfindingFramework.MovementDefUtils
 	public static class StatDrawEntries
 	{
 		private static void AddStatDrawEntriesFromType<TDefType>(MovementDef movementDef, ref List<StatDrawEntry> entries
-			, string labelId, int displayWithinCategory, Func<TDefType, bool> condition = null) where TDefType : Def
+			, string labelStr, int displayWithinCategory, Func<TDefType, bool> condition = null) where TDefType : Def
 		{
 			List<Dialog_InfoCard.Hyperlink> hyperlinks = new List<Dialog_InfoCard.Hyperlink>();
 
@@ -23,7 +23,7 @@ namespace PathfindingFramework.MovementDefUtils
 
 			if (hyperlinks.Count > 0)
 			{
-				entries.Add(new StatDrawEntry(StatCategoryDefOf.Basics, labelId.Translate(), "", "", displayWithinCategory,
+				entries.Add(new StatDrawEntry(StatCategoryDefOf.Basics, labelStr, "", "", displayWithinCategory,
 					null, hyperlinks));
 			}
 		}
@@ -31,14 +31,15 @@ namespace PathfindingFramework.MovementDefUtils
 		public static List<StatDrawEntry> Get(MovementDef movementDef)
 		{
 			List<StatDrawEntry> entries = new List<StatDrawEntry>();
-			AddStatDrawEntriesFromType<ThingDef>(movementDef, ref entries, "PawnsTabShort", 10,
+			AddStatDrawEntriesFromType<ThingDef>(movementDef, ref entries, Translations.PawnsTabShort, 10,
 				DefsWithMovementType.IsCreature);
-			AddStatDrawEntriesFromType<HediffDef>(movementDef, ref entries, "Health", 20);
-			AddStatDrawEntriesFromType<ThingDef>(movementDef, ref entries, "Apparel", 30, DefsWithMovementType.IsApparel);
+			AddStatDrawEntriesFromType<HediffDef>(movementDef, ref entries, Translations.Health, 20);
+			AddStatDrawEntriesFromType<ThingDef>(movementDef, ref entries, Translations.Apparel, 30,
+				DefsWithMovementType.IsApparel);
 
 			if (ModLister.BiotechInstalled)
 			{
-				AddStatDrawEntriesFromType<GeneDef>(movementDef, ref entries, "Genes", 40);
+				AddStatDrawEntriesFromType<GeneDef>(movementDef, ref entries, Translations.Genes, 40);
 			}
 
 			return entries;

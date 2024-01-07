@@ -43,6 +43,7 @@ namespace PathfindingFramework
 		/// </summary>
 		private void InitializeWhenLoadingFinished()
 		{
+			Translations.Initialize();
 			GetSettings<Settings>();
 			// Certain mods such as Geological Landforms dynamically load additional DLLs at a different game load stage.
 			ModAssemblyInfo.LoadingFinished();

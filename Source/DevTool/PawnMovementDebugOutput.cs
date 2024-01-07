@@ -34,8 +34,8 @@ namespace PathfindingFramework.DevTool
 			dataTable[1, 0] = "Id";
 			dataTable[2, 0] = "Map";
 			dataTable[3, 0] = "Movement";
-			dataTable[4, 0] = "PF_NoFencesMovementLabel".Translate();
-			dataTable[5, 0] = "PF_IgnoreFireMovementLabel".Translate();
+			dataTable[4, 0] = Translations.PF_NoFencesMovementLabel;
+			dataTable[5, 0] = Translations.PF_IgnoreFireMovementLabel;
 
 			for (int inputIndex = 0; inputIndex < input.Count; ++inputIndex)
 			{

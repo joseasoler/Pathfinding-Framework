@@ -208,7 +208,7 @@ namespace PathfindingFramework.SettingsUI
 		{
 			return pawnKindDef.modContentPack != null
 				? pawnKindDef.modContentPack.Name
-				: "Unknown".Translate().ToString();
+				: Translations.Unknown;
 		}
 
 		/// <summary>
@@ -255,7 +255,7 @@ namespace PathfindingFramework.SettingsUI
 			if (Current.ProgramState != ProgramState.Entry)
 			{
 				Text.Anchor = TextAnchor.MiddleCenter;
-				Widgets.Label(inRect, "PF_PawnMovementWarningLabel".Translate());
+				Widgets.Label(inRect, Translations.PF_PawnMovementWarningLabel);
 				Text.Anchor = anchorBackup;
 				return;
 			}

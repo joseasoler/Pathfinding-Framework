@@ -7,6 +7,7 @@ using PathfindingFramework.Patches;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;
+using Verse.Noise;
 
 namespace PathfindingFramework.DevTool
 {
@@ -62,7 +63,7 @@ namespace PathfindingFramework.DevTool
 			}
 
 			bool commonShortcutIsPressed = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) &&
-				(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+			                               (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
 
 			if (!commonShortcutIsPressed)
 			{
@@ -131,26 +132,26 @@ namespace PathfindingFramework.DevTool
 			Text.Anchor = TextAnchor.MiddleLeft;
 			Text.WordWrap = false;
 
-			string titleId;
+			string titleStr;
 			if (_pathCostInspectorActive)
 			{
-				titleId = "PF_PathCostsLabel";
+				titleStr = Translations.PF_PathCostsLabel;
 			}
 			else if (_movementContextInspectorActive)
 			{
-				titleId = "PF_MovementCostsLabel";
+				titleStr = Translations.PF_MovementCostsLabel;
 			}
 			else
 			{
-				titleId = "PF_RegionLabel";
+				titleStr = Translations.PF_RegionLabel;
 			}
 
-			DrawHeader(titleId.Translate());
+			DrawHeader(titleStr);
 			// Draw shared initial properties.
-			DrawRow("PF_CellLabel".Translate(), $"{cell.x}, {cell.z} ({cellIndex})");
+			DrawRow(Translations.PF_CellLabel, $"{cell.x}, {cell.z} ({cellIndex})");
 
 			DrawDivider();
-			DrawRow("Terrain_Label".Translate(), terrainDef.LabelCap);
+			DrawRow(Translations.Terrain_Label, terrainDef.LabelCap);
 
 			if (_pathCostInspectorActive)
 			{
@@ -194,34 +195,34 @@ namespace PathfindingFramework.DevTool
 
 			string basePathCostLabel = (terrainDef.passability != Traversability.Impassable)
 				? terrainDef.pathCost.ToString()
-				: "Impassable".Translate();
-			DrawRow("PF_BasePathCost".Translate(), basePathCostLabel);
+				: Translations.Impassable;
+			DrawRow(Translations.PF_BasePathCost, basePathCostLabel);
 			for (int dataIndex = 0; dataIndex < movementTypeLabels.Count; ++dataIndex)
 			{
-				DrawRow("PF_TerrainCost".Translate(movementTypeLabels[dataIndex]), PathCostLabel(terrainPathCosts[dataIndex]));
+				DrawRow(Translations.PF_TerrainCost.Formatted(movementTypeLabels[dataIndex]),
+					PathCostLabel(terrainPathCosts[dataIndex]));
 			}
 
 			DrawDivider();
-			DrawRow("Snow_Label".Translate(), mapPathCost.snow.ToString());
-			DrawRow("PF_FirePathCostLabel".Translate(), mapPathCost.fire.ToString());
-			DrawRow("PF_ThingsPathCostLabel".Translate(), PathCostLabel(mapPathCost.things));
-			DrawRow("PF_NonIgnoreRepeatersPathCostLabel".Translate(), PathCostLabel(mapPathCost.nonIgnoreRepeaterThings));
-			string hasIgnoreRepeater = mapPathCost.hasIgnoreRepeater ? "Yes" : "No";
-			DrawRow("PF_HasIgnoreRepeatersLabel".Translate(), hasIgnoreRepeater.Translate());
-			string hasDoor = mapPathCost.hasDoor ? "Yes" : "No";
-			DrawRow("PF_HasDoorLabel".Translate(), hasDoor.Translate());
-			string hasFence = mapPathCost.hasFence ? "Yes" : "No";
-			DrawRow("PF_HasFenceLabel".Translate(), hasFence.Translate());
+			DrawRow(Translations.Snow_Label, mapPathCost.snow.ToString());
+			DrawRow(Translations.PF_FirePathCostLabel, mapPathCost.fire.ToString());
+			DrawRow(Translations.PF_ThingsPathCostLabel, PathCostLabel(mapPathCost.things));
+			DrawRow(Translations.PF_NonIgnoreRepeatersPathCostLabel, PathCostLabel(mapPathCost.nonIgnoreRepeaterThings));
+			string hasIgnoreRepeaterStr = mapPathCost.hasIgnoreRepeater ? Translations.Yes : Translations.No;
+			DrawRow(Translations.PF_HasIgnoreRepeatersLabel, hasIgnoreRepeaterStr);
+			string hasDoorStr = mapPathCost.hasDoor ? Translations.Yes : Translations.No;
+			DrawRow(Translations.PF_HasDoorLabel, hasDoorStr);
+			string hasFenceStr = mapPathCost.hasFence ? Translations.Yes : Translations.No;
+			DrawRow(Translations.PF_HasFenceLabel, hasFenceStr);
 		}
 
 		private static void FillMovementContextInspectorWindow(Map map, IntVec3 cell)
 		{
 			DrawDivider();
-			short vanillaNormalCost = (short)map.pathing.Normal.pathGrid.PerceivedPathCostAt(cell);
-			short vanillaFenceCost = (short)map.pathing.FenceBlocked.pathGrid.PerceivedPathCostAt(cell);
-			string vanillaLabel = "PF_VanillaLabel".Translate();
-			DrawRow(vanillaLabel, PathCostLabel(vanillaNormalCost));
-			DrawRow("PF_NoFencesMovementLabel".Translate(vanillaLabel), PathCostLabel(vanillaFenceCost));
+			short vanillaNormalCost = (short) map.pathing.Normal.pathGrid.PerceivedPathCostAt(cell);
+			short vanillaFenceCost = (short) map.pathing.FenceBlocked.pathGrid.PerceivedPathCostAt(cell);
+			DrawRow(Translations.PF_VanillaLabel, PathCostLabel(vanillaNormalCost));
+			DrawRow(Translations.PF_NoFencesMovementLabel, PathCostLabel(vanillaFenceCost));
 
 			DrawDivider();
 			List<MovementContext> activeContexts = map.MovementContextData().ActiveContexts();
@@ -230,17 +231,17 @@ namespace PathfindingFramework.DevTool
 
 			foreach (MovementContext context in activeContexts)
 			{
-				short cost = (short)context.PathingContext.pathGrid.PerceivedPathCostAt(cell);
+				short cost = (short) context.PathingContext.pathGrid.PerceivedPathCostAt(cell);
 				string movementLabelCap = context.MovementDef.LabelCap;
 				List<string> extraLabels = new List<string>();
 				if (context.ShouldAvoidFences)
 				{
-					extraLabels.Add("PF_NoFencesMovementLabel".Translate());
+					extraLabels.Add(Translations.PF_NoFencesMovementLabel);
 				}
 
 				if (context.CanIgnoreFire)
 				{
-					extraLabels.Add("PF_IgnoreFireMovementLabel".Translate());
+					extraLabels.Add(Translations.PF_IgnoreFireMovementLabel);
 				}
 
 				string label = extraLabels.Count == 0
@@ -256,26 +257,26 @@ namespace PathfindingFramework.DevTool
 			Region region = map.regionGrid.GetValidRegionAt(cell);
 			if (region == null)
 			{
-				DrawRow("PF_RegionType".Translate(), "PF_RegionNone".Translate());
+				DrawRow(Translations.PF_RegionType, Translations.PF_RegionNone);
 				return;
 			}
 
 			string regionType = Enum.GetName(typeof(RegionType), region.type);
 
-			DrawRow("PF_RegionId".Translate(), region.id.ToString());
-			DrawRow("PF_RegionType".Translate(), regionType);
-			DrawRow("PF_RegionLinks".Translate(), region.links.Count.ToString());
-			DrawRow("PF_RegionExtentsClose".Translate(), region.extentsClose.ToString());
-			DrawRow("PF_RegionExtentsLimit".Translate(), region.extentsLimit.ToString());
+			DrawRow(Translations.PF_RegionId, region.id.ToString());
+			DrawRow(Translations.PF_RegionType, regionType);
+			DrawRow(Translations.PF_RegionLinks, region.links.Count.ToString());
+			DrawRow(Translations.PF_RegionExtentsClose, region.extentsClose.ToString());
+			DrawRow(Translations.PF_RegionExtentsLimit, region.extentsLimit.ToString());
 			DrawDivider();
 
 			District district = region.District;
 			string districtRegionType = Enum.GetName(typeof(RegionType), district.RegionType);
-			DrawRow("PF_District".Translate(), district.ID.ToString());
-			DrawRow("PF_DistrictRegionType".Translate(), districtRegionType);
-			DrawRow("PF_DistrictRegionCount".Translate(), district.RegionCount.ToString());
-			DrawRow("PF_DistrictCellCount".Translate(), district.CellCount.ToString());
-			DrawRow("PF_DistrictRegionsMapEdge".Translate(), district.numRegionsTouchingMapEdge.ToString());
+			DrawRow(Translations.PF_District, district.ID.ToString());
+			DrawRow(Translations.PF_DistrictRegionType, districtRegionType);
+			DrawRow(Translations.PF_DistrictRegionCount, district.RegionCount.ToString());
+			DrawRow(Translations.PF_DistrictCellCount, district.CellCount.ToString());
+			DrawRow(Translations.PF_DistrictRegionsMapEdge, district.numRegionsTouchingMapEdge.ToString());
 			Room room = district.Room;
 			if (room == null)
 			{
@@ -283,14 +284,14 @@ namespace PathfindingFramework.DevTool
 			}
 
 			DrawDivider();
-			DrawRow("PF_Room".Translate(), room.ID.ToString());
-			string roleStr = room.Role != null ? room.Role.label : "PF_RoomRoleNone".Translate().CapitalizeFirst().ToString();
-			DrawRow("PF_RoomRole".Translate(), roleStr);
-			string properStr = room.ProperRoom ? "Yes" : "No";
-			DrawRow("PF_RoomProper".Translate(), properStr.Translate());
-			string outdoorsStr = room.PsychologicallyOutdoors ? "Yes" : "No";
-			DrawRow("PF_RoomOutdoors".Translate(), outdoorsStr.Translate());
-			DrawRow("PF_RoomDistrictCount".Translate(), room.DistrictCount.ToString());
+			DrawRow(Translations.PF_Room, room.ID.ToString());
+			string roleStr = room.Role != null ? room.Role.label : Translations.PF_RoomRoleNone;
+			DrawRow(Translations.PF_RoomRole, roleStr);
+			string properStr = room.ProperRoom ? Translations.Yes : Translations.No;
+			DrawRow(Translations.PF_RoomProper, properStr);
+			string outdoorsStr = room.PsychologicallyOutdoors ? Translations.Yes : Translations.No;
+			DrawRow(Translations.PF_RoomOutdoors, outdoorsStr);
+			DrawRow(Translations.PF_RoomDistrictCount, room.DistrictCount.ToString());
 		}
 
 		private static void DrawRow(string label, string info)

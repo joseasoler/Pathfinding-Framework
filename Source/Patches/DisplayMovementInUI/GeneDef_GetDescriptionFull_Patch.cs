@@ -15,7 +15,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			if (extension != null)
 			{
 				__result +=
-					$"\n\n{"PF_GrantsMovementType".Translate().CapitalizeFirst().Colorize(ColoredText.TipSectionTitleColor)}\n  - {extension.movementDef.LabelCap}";
+					$"\n\n{Translations.PF_GrantsMovementType.Colorize(ColoredText.TipSectionTitleColor)}\n  - {extension.movementDef.LabelCap}";
 			}
 		}
 	}

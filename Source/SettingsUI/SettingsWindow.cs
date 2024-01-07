@@ -61,14 +61,28 @@ namespace PathfindingFramework.SettingsUI
 			return PathfindingFrameworkMod.Name;
 		}
 
+		private static string GetTabStr(SettingsWindowTab tab)
+		{
+			switch (tab)
+			{
+				case SettingsWindowTab.General:
+					return Translations.PF_GeneralTab;
+				case SettingsWindowTab.PawnMovement:
+					return Translations.PF_PawnMovementTab;
+				case SettingsWindowTab.Debugging:
+					return Translations.PF_DebuggingTab;
+				default:
+					return Translations.Unknown;
+			}
+		}
+
 		private static List<TabRecord> Tabs()
 		{
 			Type enumType = typeof(SettingsWindowTab);
 			List<TabRecord> tabs = new List<TabRecord>();
 			foreach (SettingsWindowTab tab in Enum.GetValues(enumType))
 			{
-				string tabStr = Enum.GetName(enumType, tab);
-				tabs.Add(new TabRecord($"PF_{tabStr}Tab".Translate(), () =>
+				tabs.Add(new TabRecord(GetTabStr(tab), () =>
 				{
 					_tab = tab;
 					_writeSettingsAction();
@@ -108,12 +122,12 @@ namespace PathfindingFramework.SettingsUI
 			float resetY = inRect.height + Window.CloseButSize.y + 3;
 			Rect resetButtonArea = new Rect(resetX, resetY, Window.CloseButSize.x, Window.CloseButSize.y);
 
-			if (Widgets.ButtonText(resetButtonArea, "PF_ResetSettingsLabel".Translate()))
+			if (Widgets.ButtonText(resetButtonArea, Translations.PF_ResetSettingsLabel))
 			{
 				Settings.Reset();
 			}
 
-			TooltipHandler.TipRegion(resetButtonArea, "PF_ResetSettingsHover".Translate());
+			TooltipHandler.TipRegion(resetButtonArea, Translations.PF_ResetSettingsHover);
 		}
 
 		/// <summary>

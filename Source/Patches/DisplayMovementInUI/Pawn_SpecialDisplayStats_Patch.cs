@@ -64,14 +64,16 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			GeneDef xenogeneDef = MovementFromGeneList(pawn.genes.Xenogenes, movementDef);
 			if (xenogeneDef != null)
 			{
-				return new Pair<string, Dialog_InfoCard.Hyperlink?>("PF_GrantedByXenogene".Translate(xenogeneDef.label),
+				return new Pair<string, Dialog_InfoCard.Hyperlink?>(
+					Translations.PF_GrantedByXenogene.Formatted(xenogeneDef.label),
 					new Dialog_InfoCard.Hyperlink(xenogeneDef));
 			}
 
 			GeneDef endogeneDef = MovementFromGeneList(pawn.genes.Endogenes, movementDef);
 			if (endogeneDef != null)
 			{
-				return new Pair<string, Dialog_InfoCard.Hyperlink?>("PF_GrantedByEndogene".Translate(endogeneDef.label),
+				return new Pair<string, Dialog_InfoCard.Hyperlink?>(
+					Translations.PF_GrantedByEndogene.Formatted(endogeneDef.label),
 					new Dialog_InfoCard.Hyperlink(endogeneDef));
 			}
 
@@ -137,7 +139,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 				yield break;
 			}
 
-			List<Dialog_InfoCard.Hyperlink> hyperlinks = new List<Dialog_InfoCard.Hyperlink> { new(movementDef) };
+			List<Dialog_InfoCard.Hyperlink> hyperlinks = new List<Dialog_InfoCard.Hyperlink> {new(movementDef)};
 
 			string extraReportText = "";
 			Pair<string, Dialog_InfoCard.Hyperlink?>? extraReportInfo = GetGrantedByInfo(__instance, movementDef);
@@ -150,13 +152,13 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 				}
 			}
 
-			string reportText = "PF_MovementReportText".Translate();
+			string reportText = Translations.PF_MovementReportText;
 			if (!extraReportText.NullOrEmpty())
 			{
-				reportText += "PF_GrantedBy".Translate(extraReportText);
+				reportText += Translations.PF_GrantedBy.Formatted(extraReportText);
 			}
 
-			yield return new StatDrawEntry(StatCategoryDefOf.BasicsPawn, "PF_Movement".Translate(),
+			yield return new StatDrawEntry(StatCategoryDefOf.BasicsPawn, Translations.PF_Movement,
 				movementDef.LabelCap, reportText, 2501, null, hyperlinks);
 		}
 	}

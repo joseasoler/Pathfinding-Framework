@@ -10,12 +10,12 @@ namespace PathfindingFramework.SettingsUI
 			Listing_Standard listing = new Listing_Standard();
 			listing.Begin(inRect);
 
-			listing.CheckboxLabeled("PF_InspectorLabel".Translate(), ref Settings.Values.Inspectors,
-				"PF_InspectorHover".Translate());
-			listing.CheckboxLabeled("PF_LogPathNotFoundLabel".Translate(), ref Settings.Values.LogPathNotFound,
-				"PF_LogPathNotFoundHover".Translate());
-			listing.CheckboxLabeled("PF_DebugLogLabel".Translate(), ref Settings.Values.DebugLog,
-				"PF_DebugLogHover".Translate());
+			listing.CheckboxLabeled(Translations.PF_InspectorLabel, ref Settings.Values.Inspectors,
+				Translations.PF_InspectorHover);
+			listing.CheckboxLabeled(Translations.PF_LogPathNotFoundLabel, ref Settings.Values.LogPathNotFound,
+				Translations.PF_LogPathNotFoundHover);
+			listing.CheckboxLabeled(Translations.PF_DebugLogLabel, ref Settings.Values.DebugLog,
+				Translations.PF_DebugLogHover);
 
 			listing.End();
 		}

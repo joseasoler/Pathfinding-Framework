@@ -10,11 +10,11 @@ namespace PathfindingFramework.SettingsUI
 			Listing_Standard listing = new Listing_Standard();
 			listing.Begin(inRect);
 
-			listing.CheckboxLabeled("PF_IgnoreFireLabel".Translate(), ref Settings.Values.IgnoreFire,
-				"PF_IgnoreFireHover".Translate());
+			listing.CheckboxLabeled(Translations.PF_IgnoreFireLabel, ref Settings.Values.IgnoreFire,
+				Translations.PF_IgnoreFireHover);
 
-			listing.CheckboxLabeled("PF_WildAnimalRelocationLabel".Translate(), ref Settings.Values.WildAnimalRelocating,
-				"PF_WildAnimalRelocationHover".Translate());
+			listing.CheckboxLabeled(Translations.PF_WildAnimalRelocationLabel, ref Settings.Values.WildAnimalRelocating,
+				Translations.PF_WildAnimalRelocationHover);
 
 			listing.End();
 		}

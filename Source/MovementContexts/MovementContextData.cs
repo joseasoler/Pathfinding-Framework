@@ -137,12 +137,12 @@ namespace PathfindingFramework.MovementContexts
 				List<string> extraLabels = new List<string>();
 				if (context.ShouldAvoidFences)
 				{
-					extraLabels.Add("PF_NoFencesMovementLabel".Translate());
+					extraLabels.Add(Translations.PF_NoFencesMovementLabel);
 				}
 
 				if (context.CanIgnoreFire)
 				{
-					extraLabels.Add("PF_IgnoreFireMovementLabel".Translate());
+					extraLabels.Add(Translations.PF_IgnoreFireMovementLabel);
 				}
 
 				string grid = extraLabels.Count == 0
