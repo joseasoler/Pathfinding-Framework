@@ -15,6 +15,12 @@ namespace PathfindingFramework.ModCompatibility
 		public static bool PrepatcherPresent;
 
 		/// <summary>
+		/// Achtung!
+		/// https://steamcommunity.com/workshop/filedetails/?id=730936602
+		/// </summary>
+		public static Assembly AchtungAssembly;
+
+		/// <summary>
 		/// Dubs Bad Hygiene
 		/// https://steamcommunity.com/workshop/filedetails/?id=836308268
 		/// </summary>
@@ -57,6 +63,17 @@ namespace PathfindingFramework.ModCompatibility
 				Assembly firstAssembly = pack.assemblies.loadedAssemblies[0];
 				switch (packageId)
 				{
+					case "brrainz.achtung":
+						foreach (Assembly assembly in pack.assemblies.loadedAssemblies)
+						{
+							if (assembly.GetName().Name.Contains("Achtung"))
+							{
+								AchtungAssembly = assembly;
+								break;
+							}
+						}
+
+						break;
 					case "dubwise.dubsbadhygiene":
 						foreach (Assembly assembly in pack.assemblies.loadedAssemblies)
 						{
@@ -82,6 +99,7 @@ namespace PathfindingFramework.ModCompatibility
 						break;
 				}
 			}
+
 			Report.Debug("Gathered mod assembly information.");
 		}
 

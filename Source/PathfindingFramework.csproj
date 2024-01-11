@@ -84,6 +84,8 @@
 		<Compile Include="Patches\LocationChoosing\RCellFinder_TryFindBestExitSpot_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\RCellFinder_TryFindRandomExitSpot_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Selector_MassTakeFirstAutoTakeableOptionOrGoto_Patch.cs" />
+		<Compile Include="Patches\ModCompatibility\Achtung\Colonist_UpdateOrderPos_Patch.cs" />
+		<Compile Include="Patches\ModCompatibility\Achtung\Controller_MouseDown_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\DubsBadHygiene\MapComponent_Hygiene_SetWaterCellsCache_Patch.cs" />
 		<Compile Include="Patches\ModCompatibility\GeologicalLandforms\GeologicalLandformsHarmony.cs" />
 		<Compile Include="Patches\ModCompatibility\GeologicalLandforms\Patch_RimWorld_CellFinder_TryFindRandomExitSpot_Patch.cs" />
