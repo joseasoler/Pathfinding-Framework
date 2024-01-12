@@ -46,7 +46,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 
 			Pawn pawn = parms.pawn;
 			TerrainDef regionTerrainDef = region.UniqueTerrainDef();
-			if (pawn == null)
+			if (pawn?.MovementDef() == null)
 			{
 				// When Region.Allows is called without a pawn, assume that the caller wants a result as similar to vanilla as
 				// possible. Disallow regions which have a TerrainDef value which is not passable.
