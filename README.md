@@ -58,6 +58,14 @@ Pathfinding Framework should be compatible with almost every mod. Other mods can
 | [SwimmingKit](https://steamcommunity.com/sharedfiles/filedetails/?id=1542399915)                           | No                                                                                                                                                         |
 | [TerrainMovementKit](https://steamcommunity.com/sharedfiles/filedetails/?id=2048567351)                    | No                                                                                                                                                         |
 
+## Releases
+
+Pathfinding Framework releases can be found at the following places:
+
+**Steam Workshop page:** https://steamcommunity.com/sharedfiles/filedetails/?id=3070914628
+
+**GitHub tags:** https://github.com/joseasoler/Pathfinding-Framework/tags
+
 Troubleshooting
 ---
 
