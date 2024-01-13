@@ -71,7 +71,7 @@ Troubleshooting
 
 Pathfinding Framework includes some useful features for troubleshooting bugs, which can be checked at the [Troubleshooting wiki](https://github.com/joseasoler/Pathfinding-Framework/wiki/Testing-and-troubleshooting).
 
-For bug reports, prefer using the [Discord server](https://discord.gg/HB3KyzStgp) or the [GitHub issue tracker](https://github.com/joseasoler/Pathfinding-Framework/issues).
+The preferred sites for bug reports are the [Discord server](https://discord.gg/HB3KyzStgp) and the [GitHub issue tracker](https://github.com/joseasoler/Pathfinding-Framework/issues).
 
 
 Development
