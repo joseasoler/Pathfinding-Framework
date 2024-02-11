@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Collections.Generic;
+using HarmonyLib;
 using Verse;
 
 namespace PathfindingFramework.Patches.RegionPathfinding
@@ -22,9 +23,31 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	{
 		public static void Postfix(ref RegionType __result, IntVec3 c, Map map)
 		{
-			if (__result == RegionType.ImpassableFreeAirExchange && c.GetTerrain(map).ExtendedRegionType() > 0)
+			bool hasExtendedRegionType = c.InBounds(map) && c.GetTerrain(map).ExtendedRegionType() > 0;
+			if (!hasExtendedRegionType)
+			{
+				return;
+			}
+
+			if (__result == RegionType.ImpassableFreeAirExchange)
 			{
 				__result = RegionType.Normal;
+			}
+			else if (__result == RegionType.None)
+			{
+				// When a passable thing with a fillPercent of 1 is on top of a cell, the vanilla code gives RegionType.Normal.
+				// This needs to be implemented here too, otherwise cells with a terrain impassable for terrestrial pawns
+				// and a thing on top of them do not get a region assigned.
+				List<Thing> thingList = c.GetThingList(map);
+				for (int index = 0; index < thingList.Count; ++index)
+				{
+					Thing thing = thingList[index];
+					if (thing.def.Fillage == FillCategory.Full && thing.def.passability != Traversability.Impassable)
+					{
+						__result = RegionType.Normal;
+						break;
+					}
+				}
 			}
 		}
 	}
