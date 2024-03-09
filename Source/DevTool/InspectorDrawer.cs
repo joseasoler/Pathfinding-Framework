@@ -208,11 +208,11 @@ namespace PathfindingFramework.DevTool
 			DrawRow(Translations.PF_FirePathCostLabel, mapPathCost.fire.ToString());
 			DrawRow(Translations.PF_ThingsPathCostLabel, PathCostLabel(mapPathCost.things));
 			DrawRow(Translations.PF_NonIgnoreRepeatersPathCostLabel, PathCostLabel(mapPathCost.nonIgnoreRepeaterThings));
-			string hasIgnoreRepeaterStr = mapPathCost.hasIgnoreRepeater ? Translations.Yes : Translations.No;
+			string hasIgnoreRepeaterStr = mapPathCost.hasIgnoreRepeater.ToStringYesNo();
 			DrawRow(Translations.PF_HasIgnoreRepeatersLabel, hasIgnoreRepeaterStr);
-			string hasDoorStr = mapPathCost.hasDoor ? Translations.Yes : Translations.No;
+			string hasDoorStr = mapPathCost.hasDoor.ToStringYesNo();
 			DrawRow(Translations.PF_HasDoorLabel, hasDoorStr);
-			string hasFenceStr = mapPathCost.hasFence ? Translations.Yes : Translations.No;
+			string hasFenceStr = mapPathCost.hasFence.ToStringYesNo();
 			DrawRow(Translations.PF_HasFenceLabel, hasFenceStr);
 		}
 
@@ -287,9 +287,9 @@ namespace PathfindingFramework.DevTool
 			DrawRow(Translations.PF_Room, room.ID.ToString());
 			string roleStr = room.Role != null ? room.Role.label : Translations.PF_RoomRoleNone;
 			DrawRow(Translations.PF_RoomRole, roleStr);
-			string properStr = room.ProperRoom ? Translations.Yes : Translations.No;
+			string properStr = room.ProperRoom.ToStringYesNo();
 			DrawRow(Translations.PF_RoomProper, properStr);
-			string outdoorsStr = room.PsychologicallyOutdoors ? Translations.Yes : Translations.No;
+			string outdoorsStr = room.PsychologicallyOutdoors.ToStringYesNo();
 			DrawRow(Translations.PF_RoomOutdoors, outdoorsStr);
 			DrawRow(Translations.PF_RoomDistrictCount, room.DistrictCount.ToString());
 		}

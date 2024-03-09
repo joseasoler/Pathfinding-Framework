@@ -12,13 +12,13 @@ namespace PathfindingFramework.Patches
 	/// </summary>
 	public static class PrepatcherNewFields
 	{
-		private static MovementDef _noPrepatcherMovementDef = null;
-		private static MapPathCostGrid _noPrepatcherMapPathCostGrid = null;
-		private static MovementContext _noPrepatcherMovementContext = null;
-		private static MovementContextData _noPrepatcherMovementContextData = null;
-		private static GraphicContext _noPrepatcherGraphicContext = null;
-		private static TerrainDef _noPrepatcherTerrainDef = null;
-		private static int _noPrepatcherInt = 0;
+		private static MovementDef _noPrepatcherMovementDef;
+		private static MapPathCostGrid _noPrepatcherMapPathCostGrid;
+		private static MovementContext _noPrepatcherMovementContext;
+		private static MovementContextData _noPrepatcherMovementContextData;
+		private static GraphicContext _noPrepatcherGraphicContext;
+		private static TerrainDef _noPrepatcherTerrainDef;
+		private static int _noPrepatcherInt;
 
 		/// <summary>
 		/// Stores the movement type granted by the MovementExtensions of this def.

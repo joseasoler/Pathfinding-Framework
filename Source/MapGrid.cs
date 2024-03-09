@@ -8,14 +8,14 @@ namespace PathfindingFramework
 	public abstract class MapGrid
 	{
 		/// <summary>
-		/// X size of the parent map. Stored to convert cells to indexes and other operations without the parent map.
+		/// X size of the parent map. Stored to convert cells to indexes and do other operations without the parent map.
 		/// </summary>
-		private int _mapSizeX;
+		private readonly int _mapSizeX;
 
 		/// <summary>
 		/// Total number of cells in the current map. Cached for performing InBounds checks without the parent map.
 		/// </summary>
-		public int GridSize;
+		public readonly int GridSize;
 
 		/// <summary>
 		/// Reference to the current map. Intended for access to the thing grid and terrain cost grid.
