@@ -83,13 +83,6 @@ XML lookup, thus running considerably faster than regular XPath operations.
 
 			<li MayRequire="sarg.alphabiomes"> <!-- Alpha Biomes -->
 				<li>
-					<tag>PF_TerrainTag_Lava</tag>
-					<terrainDefs>
-						<li>AB_LiquidLava</li>
-						<li>AB_SolidifiedLava</li>
-					</terrainDefs>
-				</li>
-				<li>
 					<tag>PF_TerrainTag_Gravel</tag>
 					<terrainDefs>
 						<li>AB_Obsidian</li>
@@ -110,6 +103,13 @@ XML lookup, thus running considerably faster than regular XPath operations.
 						<li>AB_ParchedEarth</li>
 						<li>AB_RichCrackedMud</li>
 						<li>GU_MossyRed</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Lava</tag>
+					<terrainDefs>
+						<li>AB_LiquidLava</li>
+						<li>AB_SolidifiedLava</li>
 					</terrainDefs>
 				</li>
 				<li>
@@ -233,6 +233,69 @@ XML lookup, thus running considerably faster than regular XPath operations.
 					</terrainDefs>
 				</li>
 			</li>
+
+			<li MayRequire="SirMashedPotato.Ashlands"> <!-- Mashed's Ashlands -->
+				<li>
+					<tag>PF_TerrainTag_Gravel</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_AshGravel</li>
+						<li>Mashed_Ashlands_AshGravelBlighted</li>
+						<li>Mashed_Ashlands_AshGravelVolcanic</li>
+						<li>Mashed_Ashlands_AshSoilBlighted</li>
+						<li>Mashed_Ashlands_CrackedAshSoilBlighted</li>
+						<li>Mashed_Ashlands_RichAshGravel</li>
+						<li>Mashed_Ashlands_RichAshGravelVolcanic</li>
+						<li>Mashed_Ashlands_ScorchedAshSoilVolcanic</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_AshSoil</li>
+						<li>Mashed_Ashlands_AshSoilVolcanic</li>
+						<li>Mashed_Ashlands_CrackedAshSoilVolcanic</li>
+						<li>Mashed_Ashlands_GrazelandSoil</li>
+						<li>Mashed_Ashlands_MossyAshSoil</li>
+						<li>Mashed_Ashlands_PackedAsh</li>
+						<li>Mashed_Ashlands_PackedAshBlighted</li>
+						<li>Mashed_Ashlands_PackedAshVolcanic</li>
+						<li>Mashed_Ashlands_RichAshSoil</li>
+						<li>Mashed_Ashlands_RichAshSoilVolcanic</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Lava</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_Lava</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Mud</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_AshMud</li>
+						<li>Mashed_Ashlands_AshMudBlighted</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Sand</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_AshDust</li>
+						<li>Mashed_Ashlands_AshSand</li>
+						<li>Mashed_Ashlands_AshSandBlighted</li>
+						<li>Mashed_Ashlands_AshSandVolcanic</li>
+						<li>Mashed_Ashlands_RichAshSand</li>
+						<li>Mashed_Ashlands_RichAshSandVolcanic</li>
+						<li>Mashed_Ashlands_SulphuricSand</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterShallow</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_BlightedSludge</li>
+					</terrainDefs>
+				</li>
+			</li>
+
 		</operations>
 	</Operation>
 
