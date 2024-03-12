@@ -11,7 +11,7 @@ namespace PathfindingFramework.Patches.ModExtensions.MovementMultiplier
 	[HarmonyPatch(typeof(Pawn), "TicksPerMove")]
 	public static class Pawn_TicksPerMove_Patch
 	{
-		public static bool TryGetLocomotionMovementExtensionMultiplier(Pawn pawn, ref float multiplier)
+		private static bool TryGetLocomotionMovementExtensionMultiplier(Pawn pawn, ref float multiplier)
 		{
 			LocomotionMovementExtension locomotionMovementExtension =
 				pawn.def.GetModExtension<LocomotionMovementExtension>();
@@ -29,7 +29,7 @@ namespace PathfindingFramework.Patches.ModExtensions.MovementMultiplier
 			return true;
 		}
 
-		public static bool TryGetTerrainTagMovementExtensionMultiplier(Pawn pawn, ref float multiplier)
+		private static bool TryGetTerrainTagMovementExtensionMultiplier(Pawn pawn, ref float multiplier)
 		{
 			TerrainTagMovementExtension terrainTagMovementExtension =
 				pawn.def.GetModExtension<TerrainTagMovementExtension>();

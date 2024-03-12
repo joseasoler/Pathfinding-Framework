@@ -8,7 +8,7 @@ namespace PathfindingFramework
 	/// </summary>
 
 	[DefOf]
-	public class JobDefOf
+	public static class JobDefOf
 	{
 		/// <summary>
 		/// Force pawns in unsafe terrain to seek safer terrain.

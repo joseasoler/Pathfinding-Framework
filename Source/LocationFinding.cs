@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using PathfindingFramework.MovementContexts;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using RimWorld;
@@ -18,7 +17,7 @@ namespace PathfindingFramework
 	/// </summary>
 	public static class LocationFinding
 	{
-		public static bool ThingsAllowStandingAt(Map map, IntVec3 cell)
+		private static bool ThingsAllowStandingAt(Map map, IntVec3 cell)
 		{
 			List<Thing> thingList = map.thingGrid.ThingsListAt(cell);
 			for (int index = 0; index < thingList.Count; ++index)
@@ -75,7 +74,7 @@ namespace PathfindingFramework
 		/// <param name="map">Current map.</param>
 		/// <param name="cell">Cell to check.</param>
 		/// <returns>True if the cell is a good spawning point for this movement type.</returns>
-		public static bool CanSpawnAt(MovementDef movementDef, Map map, IntVec3 cell)
+		private static bool CanSpawnAt(MovementDef movementDef, Map map, IntVec3 cell)
 		{
 			return CanStandAt(movementDef, map, cell) && cell.GetDistrict(map).TouchesMapEdge &&
 			       (movementDef.ignoreColonyReachability || map.reachability.CanReachColony(cell));
@@ -132,7 +131,7 @@ namespace PathfindingFramework
 			return TryRandomClosewalkCellNear(pawn, radius, out IntVec3 result, extraValidator) ? result : pawn.Position;
 		}
 
-		public static bool ValidRandomPawnEntryCell(IntVec3 cell, Map map, MovementDef movementDef, bool allowFogged,
+		private static bool ValidRandomPawnEntryCell(IntVec3 cell, Map map, MovementDef movementDef, bool allowFogged,
 			Predicate<IntVec3> extraValidator)
 		{
 			return (allowFogged || !cell.Fogged(map)) && CanSpawnAt(movementDef, map, cell) &&

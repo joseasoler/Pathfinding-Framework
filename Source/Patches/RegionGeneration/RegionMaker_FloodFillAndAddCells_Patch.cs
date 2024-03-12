@@ -13,7 +13,7 @@ namespace PathfindingFramework.Patches.RegionGeneration
 	[HarmonyPatch(typeof(RegionMaker), "FloodFillAndAddCells")]
 	public static class RegionMaker_FloodFillAndAddCells_Patch
 	{
-		public static bool TerrainsShouldBelongToSameRegion(TerrainDef lhs, TerrainDef rhs)
+		private static bool TerrainsShouldBelongToSameRegion(TerrainDef lhs, TerrainDef rhs)
 		{
 
 			return

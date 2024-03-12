@@ -8,7 +8,7 @@ namespace PathfindingFramework.Hediffs
 	/// </summary>
 	public class Hediff_TemporaryMovement : Hediff
 	{
-		private TerrainDef _previousTerrain = null;
+		private TerrainDef _previousTerrain;
 
 		public override void PostTick()
 		{

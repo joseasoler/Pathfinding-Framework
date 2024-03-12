@@ -55,7 +55,7 @@ namespace PathfindingFramework.ErrorHandling
 				$"RegionLink[regionA:{regionA}, regionB:{regionB}] -> root:[{link.span.root.x}, {link.span.root.z}], dir:{Enum.GetName(typeof(SpanDirection), link.span.dir)}, len:{link.span.length.ToString()}";
 		}
 
-		public static string ToReportString(this District district)
+		private static string ToReportString(this District district)
 		{
 			if (district == null)
 			{
@@ -65,7 +65,7 @@ namespace PathfindingFramework.ErrorHandling
 			return $"District[id:{district.ID}]";
 		}
 
-		public static string ToReportString(this CellRect rect)
+		private static string ToReportString(this CellRect rect)
 		{
 			return $"Rect[from:[{rect.minX}, {rect.minZ}], to:[{rect.maxX}, {rect.maxZ}]]";
 		}

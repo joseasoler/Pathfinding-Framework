@@ -36,12 +36,11 @@ namespace PathfindingFramework.Parse
 		/// </summary>
 		/// <param name="value">string representation of a short value.</param>
 		/// <returns>short value</returns>
-		public static short ParseShort(string str)
+		private static short ParseShort(string value)
 		{
-			short result;
-			if (!short.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out result))
+			if (!short.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out short result))
 			{
-				Report.Error($"Could not parse short value {str}");
+				Report.Error($"Could not parse short value {value}");
 			}
 
 			return result;

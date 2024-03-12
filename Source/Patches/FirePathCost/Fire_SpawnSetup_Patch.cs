@@ -12,7 +12,7 @@ namespace PathfindingFramework.Patches.FirePathCost
 	{
 		public static void Postfix(Fire __instance)
 		{
-			if (__instance.parent is Pawn pawn)
+			if (__instance.parent is Pawn)
 			{
 				// Ignore fires attached to pawns in pathfinding calculations.
 				return;

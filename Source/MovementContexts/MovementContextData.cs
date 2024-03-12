@@ -3,7 +3,6 @@ using PathfindingFramework.DevTool;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.Patches;
 using Verse;
-using Verse.AI;
 
 namespace PathfindingFramework.MovementContexts
 {

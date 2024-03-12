@@ -1,7 +1,5 @@
-﻿using System;
-using HarmonyLib;
+﻿using HarmonyLib;
 using PathfindingFramework.MovementContexts;
-using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -83,20 +81,6 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 				default:
 					break;
 			}
-
-			/*
-			Map map = traveler.Map;
-			string pawnStr = traveler.GetUniqueLoadID();
-			string startStr = $"[{traveler.Position.x}, {traveler.Position.z}]";
-			string startTerrain = traveler.Position.GetTerrain(map).defName;
-			string destStr = $"[{thing.Position.x}, {thing.Position.z}]";
-			string destTerrain = thing.Position.GetTerrain(map).defName;
-			string targetStr = thing.GetUniqueLoadID();
-			string pathEndMode = Enum.GetName(typeof(PathEndMode), peMode);
-
-			Report.Warning(
-				$"{pawnStr} requests a ThingFromRegionListerReachable from {startStr}[{startTerrain}] to {destStr}[{destTerrain}] to reach {targetStr}. Using path end mode {pathEndMode}. Result is {__result}");
-				*/
 		}
 	}
 }

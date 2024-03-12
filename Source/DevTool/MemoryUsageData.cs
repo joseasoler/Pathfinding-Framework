@@ -34,11 +34,6 @@
 		/// </summary>
 		public const int DictionaryPairSizeWithoutValue = 3 * sizeof(long);
 
-		/// <summary>
-		/// ... And another 8 bytes for the addressed value.
-		/// </summary>
-		public const int DictionaryPairSize = DictionaryPairSizeWithoutValue + sizeof(long);
-
 		public MemoryUsageData(string cache, string map, string grid, int bytes)
 		{
 			Cache = cache;

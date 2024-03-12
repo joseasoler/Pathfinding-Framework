@@ -24,9 +24,9 @@ namespace PathfindingFramework.Patches.Spawning
 		/// </summary>
 		public static bool GenerateAnywhere = false;
 
-		public static List<Pawn> _animalList;
+		private static List<Pawn> _animalList;
 
-		public static bool TryFindSpawnCell(Map map, PawnKindDef pawnKindDef, out IntVec3 chosenCell)
+		private static bool TryFindSpawnCell(Map map, PawnKindDef pawnKindDef, out IntVec3 chosenCell)
 		{
 			if (!GenerateAnywhere)
 			{

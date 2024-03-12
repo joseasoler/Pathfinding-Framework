@@ -15,7 +15,7 @@ namespace PathfindingFramework.Patches.ModCompatibility.GeologicalLandforms
 		private const string TypeName = "Patch_RimWorld_CellFinder";
 		private const string MethodName = "TryFindRandomExitSpot";
 
-		public static MethodBase TargetMethod()
+		private static MethodBase TargetMethod()
 		{
 			return ModCompatibilityUtility.MethodFromAssembly(ModAssemblyInfo.GeologicalLandformsAssembly, TypeName,
 				MethodName);

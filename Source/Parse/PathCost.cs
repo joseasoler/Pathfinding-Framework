@@ -12,7 +12,7 @@ namespace PathfindingFramework.Parse
 		/// <summary>
 		/// Final integer path cost associated with this instance.
 		/// </summary>
-		public short cost;
+		public readonly short cost;
 
 		/// <summary>
 		/// PathCost with a value of PathCostValues.Invalid, pre-initialized for performance reasons.

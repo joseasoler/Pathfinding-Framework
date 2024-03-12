@@ -11,7 +11,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 	[HarmonyPatch(typeof(Pawn), nameof(Pawn.SpecialDisplayStats))]
 	public static class Pawn_SpecialDisplayStats_Patch
 	{
-		public static Pair<string, Dialog_InfoCard.Hyperlink?>? MovementFromApparel(Pawn pawn, MovementDef movementDef)
+		private static Pair<string, Dialog_InfoCard.Hyperlink?>? MovementFromApparel(Pawn pawn, MovementDef movementDef)
 		{
 			List<Apparel> apparelList = pawn.apparel?.WornApparel;
 			if (apparelList == null)
@@ -33,7 +33,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			return null;
 		}
 
-		public static GeneDef MovementFromGeneList(List<Gene> genes,
+		private static GeneDef MovementFromGeneList(List<Gene> genes,
 			MovementDef movementDef)
 		{
 			for (int index = 0; index < genes.Count; ++index)
@@ -54,7 +54,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			return null;
 		}
 
-		public static Pair<string, Dialog_InfoCard.Hyperlink?>? MovementFromGenes(Pawn pawn, MovementDef movementDef)
+		private static Pair<string, Dialog_InfoCard.Hyperlink?>? MovementFromGenes(Pawn pawn, MovementDef movementDef)
 		{
 			if (pawn.genes == null)
 			{
@@ -80,7 +80,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			return null;
 		}
 
-		public static Pair<string, Dialog_InfoCard.Hyperlink?>? MovementFromHediffs(Pawn pawn, MovementDef movementDef)
+		private static Pair<string, Dialog_InfoCard.Hyperlink?>? MovementFromHediffs(Pawn pawn, MovementDef movementDef)
 		{
 			List<Hediff> hediffList = pawn.health?.hediffSet?.hediffs;
 			if (hediffList == null)
@@ -103,8 +103,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			return null;
 		}
 
-
-		public static Pair<string, Dialog_InfoCard.Hyperlink?>? GetGrantedByInfo(Pawn pawn, MovementDef movementDef)
+		private static Pair<string, Dialog_InfoCard.Hyperlink?>? GetGrantedByInfo(Pawn pawn, MovementDef movementDef)
 		{
 			// This function must query potential granted movement types in the same order as PawnMovementUpdater.Update.
 			Pair<string, Dialog_InfoCard.Hyperlink?>? apparelResult = MovementFromApparel(pawn, movementDef);

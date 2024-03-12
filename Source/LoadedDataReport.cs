@@ -28,8 +28,8 @@ namespace PathfindingFramework
 
 		public class MovementDefData : IComparable<MovementDefData>
 		{
-			public string packageId;
-			public string defName;
+			public readonly string packageId;
+			public readonly string defName;
 
 			public MovementDefData(string packageId, string defName)
 			{

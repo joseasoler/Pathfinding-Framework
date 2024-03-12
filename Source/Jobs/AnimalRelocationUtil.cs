@@ -10,8 +10,8 @@ namespace PathfindingFramework.Jobs
 {
 	internal struct DestinationData
 	{
-		public float score;
-		public IntVec3 cell;
+		public readonly float score;
+		public readonly IntVec3 cell;
 
 		public DestinationData(float sc, IntVec3 cll)
 		{

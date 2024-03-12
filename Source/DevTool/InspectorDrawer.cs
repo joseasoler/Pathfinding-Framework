@@ -7,7 +7,6 @@ using PathfindingFramework.Patches;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;
-using Verse.Noise;
 
 namespace PathfindingFramework.DevTool
 {

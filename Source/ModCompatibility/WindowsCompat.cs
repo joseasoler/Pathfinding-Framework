@@ -6,7 +6,7 @@ namespace PathfindingFramework.ModCompatibility
 {
 	public static class WindowsCompat
 	{
-		private static Type BuildingWindowType = null;
+		private static Type BuildingWindowType;
 
 		/// <summary>
 		/// Check for mod presence and initialize required data.

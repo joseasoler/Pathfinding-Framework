@@ -14,7 +14,7 @@ namespace PathfindingFramework.Patches.Spawning
 	[HarmonyPatch(typeof(ManhunterPackIncidentUtility), nameof(ManhunterPackIncidentUtility.TryFindManhunterAnimalKind))]
 	public static class ManhunterPackIncidentUtility_TryFindManhunterAnimalKind_Patch
 	{
-		public static bool HasAccessToWater(int tileID)
+		private static bool HasAccessToWater(int tileID)
 		{
 			WorldGrid grid = Find.WorldGrid;
 			if (!grid.InBounds(tileID))

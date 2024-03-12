@@ -27,7 +27,7 @@ namespace PathfindingFramework.Patches.ModCompatibility.Achtung
 			return ModCompatibilityUtility.MethodFromAssembly(ModAssemblyInfo.AchtungAssembly, TypeName, MethodName);
 		}
 
-		public static FieldInfo ColonistPawnField;
+		private static FieldInfo ColonistPawnField;
 
 		public static bool StandableForColonistsList(IntVec3 cell, Map map, List<object> colonists)
 		{
