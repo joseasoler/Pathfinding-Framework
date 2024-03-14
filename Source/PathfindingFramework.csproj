@@ -78,7 +78,7 @@
 		<Compile Include="Patches\DevTool\PathDebugging\RegionCostCalculatorWrapper_Init_Patch.cs" />
 		<Compile Include="Patches\DevTool\PathDebugging\RegionCostCalculator_GetPreciseRegionLinkDistances_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\FloatMenuMakerMap_GotoLocationOption_Patch.cs" />
-		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_FindGroundSleepSpotFor_Patch.cs" />
+		<Compile Include="Patches\LocationChoosing\JobGiver_GetRest_TryFindGroundSleepSpotFor_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\Pawn_PathFollower_StartPath_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\RCellFinder_BestOrderedGotoDestNear_Patch.cs" />
 		<Compile Include="Patches\LocationChoosing\RCellFinder_TryFindBestExitSpot_Patch.cs" />
@@ -96,7 +96,7 @@
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_CleanupCurrentJob_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Locomotion\Pawn_JobTracker_StartJob_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\MovementMultiplier\Pawn_TicksPerMove_Patch.cs" />
-		<Compile Include="Patches\ModExtensions\PawnGraphicSet_ResolveAllGraphics_Patch.cs" />
+		<Compile Include="Patches\ModExtensions\PawnRenderNode_AnimalPart_GraphicsFor_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\Pawn_HealthTracker_SetDead_Patch.cs" />
 		<Compile Include="Patches\ModExtensions\TerrainTag\Pawn_PathFollower_TryEnterNextPathCell_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_ApparelTracker_TryDrop_Patch.cs" />
@@ -117,11 +117,13 @@
 		<Compile Include="Patches\RegionPathfinding\Region_Allows_Patch.cs" />
 		<Compile Include="Patches\RegionPathfinding\Room_ProperRoom_Patch.cs" />
 		<Compile Include="Patches\SnowPathCost\SnowGrid_CheckVisualOrPathCostChange_Patch.cs" />
+		<Compile Include="Patches\Spawning\AggressiveAnimalIncidentUtility_TryFindAggressiveAnimalKind_Map_Patch.cs" />
+		<Compile Include="Patches\Spawning\AggressiveAnimalIncidentUtility_TryFindAggressiveAnimalKind_Tile_Patch.cs" />
 		<Compile Include="Patches\Spawning\GenStep_Animals_Generate_Patch.cs" />
-		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_CanFireNowSub_Patch.cs" />
-		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_TryExecuteWorker_Patch.cs" />
+		<Compile Include="Patches\Spawning\IncidentWorker_AggressiveAnimals_CanFireNowSub_Patch.cs" />
+		<Compile Include="Patches\Spawning\IncidentWorker_AggressiveAnimals_TryExecuteWorker_Patch.cs" />
 		<Compile Include="Patches\Spawning\IncidentWorker_ManhunterPack_Util.cs" />
-		<Compile Include="Patches\Spawning\ManhunterPackIncidentUtility_TryFindManhunterAnimalKind_Patch.cs" />
+		<Compile Include="Patches\Spawning\AggressiveAnimalIncidentUtility_TryFindAggressiveAnimalKind_Utility.cs" />
 		<Compile Include="Patches\Spawning\ScenPart_StartingAnimal_RandomPets_Patch.cs" />
 		<Compile Include="Patches\Spawning\WildAnimalSpawner_SpawnRandomWildAnimalAt_Patch.cs" />
 		<Compile Include="Patches\TranspilerDebugging.cs" />
@@ -138,7 +140,7 @@
 		<Compile Include="Patches\FirePathCost\Fire_SpawnSetup_Patch.cs" />
 		<Compile Include="Patches\HasDoor\Building_Door_DeSpawn_Patch.cs" />
 		<Compile Include="Patches\HasDoor\Building_Door_SpawnSetup_Patch.cs" />
-		<Compile Include="Patches\CacheLifeCycle\Game_DeinitAndRemoveMap_NewTemp_Patch.cs" />
+		<Compile Include="Patches\CacheLifeCycle\Game_DeinitAndRemoveMap_Patch.cs" />
 		<Compile Include="Patches\CacheLifeCycle\Map_ConstructComponents_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostAdd_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Gene_PostRemove_Patch.cs" />
@@ -245,8 +247,6 @@
 		<!-- MapPathCostGrid implementation. -->
 		<Publicize Include="Assembly-CSharp:Verse.AI.PathGrid.IsPathCostIgnoreRepeater" />
 
-		<!-- Force updates of the PawnGraphicSet. -->
-		<Publicize Include="Assembly-CSharp:Verse.Pawn.drawer" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Patches\ModExtensions\TerrainTag\" />

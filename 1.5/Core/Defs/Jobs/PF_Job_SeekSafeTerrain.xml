@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<JobDef>
+		<defName>PF_Job_SeekSafeTerrain</defName>
+		<driverClass>JobDriver_Goto</driverClass>
+		<reportString>seeking safe terrain.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+</Defs>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<PF_CellLabel>Cell</PF_CellLabel>
+	<!-- Path cost inspector. -->
+	<PF_PathCostsLabel>Path costs</PF_PathCostsLabel>
+	<PF_FirePathCostLabel>Fire</PF_FirePathCostLabel>
+	<PF_ThingsPathCostLabel>Things</PF_ThingsPathCostLabel>
+	<PF_NonIgnoreRepeatersPathCostLabel>Non-ignore repeaters</PF_NonIgnoreRepeatersPathCostLabel>
+	<PF_HasIgnoreRepeatersLabel>Has ignore repeaters</PF_HasIgnoreRepeatersLabel>
+	<PF_HasDoorLabel>Has door</PF_HasDoorLabel>
+	<PF_HasFenceLabel>Has fence</PF_HasFenceLabel>
+	<PF_BasePathCost>Base cost</PF_BasePathCost>
+	<PF_TerrainCost>{0} terrain cost</PF_TerrainCost>
+	<!-- Movement context inspector. -->
+	<PF_MovementCostsLabel>Total movement costs</PF_MovementCostsLabel>
+	<PF_VanillaLabel>Vanilla</PF_VanillaLabel>
+	<PF_IgnoreFireMovementLabel>Ignore fire</PF_IgnoreFireMovementLabel>
+	<PF_NoFencesMovementLabel>Avoid fences</PF_NoFencesMovementLabel>
+	<!-- Region inspector. -->
+	<PF_RegionLabel>Region</PF_RegionLabel>
+	<PF_RegionNone>None</PF_RegionNone>
+	<PF_RegionId>Id</PF_RegionId>
+	<PF_RegionType>Type</PF_RegionType>
+	<PF_RegionLinks>Links count</PF_RegionLinks>
+	<PF_RegionExtentsClose>Extents close</PF_RegionExtentsClose>
+	<PF_RegionExtentsLimit>Extents limit</PF_RegionExtentsLimit>
+	<PF_District>District</PF_District>
+	<PF_DistrictRegionCount>Region count</PF_DistrictRegionCount>
+	<PF_DistrictRegionType>Region type</PF_DistrictRegionType>
+	<PF_DistrictCellCount>Cell count</PF_DistrictCellCount>
+	<PF_DistrictRegionsMapEdge>Regions touching map edge</PF_DistrictRegionsMapEdge>
+	<PF_Room>Room</PF_Room>
+	<PF_RoomRole>Role</PF_RoomRole>
+	<PF_RoomRoleNone>None</PF_RoomRoleNone>
+	<PF_RoomProper>Proper</PF_RoomProper>
+	<PF_RoomOutdoors>Outdoors</PF_RoomOutdoors>
+	<PF_RoomDistrictCount>District count</PF_RoomDistrictCount>
+
+</LanguageData>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<PF_Movement>Movement</PF_Movement>
+	<PF_MovementReportText>Type of movement used by this character to move across the world.</PF_MovementReportText>
+	<PF_GrantedBy>\n\nGranted by: {0}</PF_GrantedBy>
+	<PF_GrantsMovementType>Gives movement type:</PF_GrantsMovementType>
+</LanguageData>

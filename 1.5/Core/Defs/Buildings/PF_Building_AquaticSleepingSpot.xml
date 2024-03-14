@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<ThingDef ParentName="BuildingBase">
+		<!-- Required to keep Biomes! Islands savegame compatible. -->
+		<defName>BMT_AquaticSleepingSpot</defName>
+		<thingClass>Building_Bed</thingClass>
+		<label>aquatic sleeping spot</label>
+		<description>Designates a spot in the water where aquatic beings can rest. Not cozy, and also wet.</description>
+		<size>(1,1)</size>
+		<passability>Standable</passability>
+		<designationCategory>Furniture</designationCategory>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<useHitPoints>False</useHitPoints>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<rotatable>false</rotatable>
+		<terrainAffordanceNeeded>Bridgeable</terrainAffordanceNeeded>
+		<graphicData>
+			<texPath>Buildings/PF_Building_AquaticSleepingSpot</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<uiIconScale>0.80</uiIconScale>
+		<statBases>
+			<WorkToBuild>0</WorkToBuild>
+			<SurgerySuccessChanceFactor>0.7</SurgerySuccessChanceFactor>
+		</statBases>
+		<building>
+			<bed_humanlike>false</bed_humanlike>
+			<bed_showSleeperBody>True</bed_showSleeperBody>
+			<sowTag>SupportPlantsOnly</sowTag>
+			<canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+			<ai_chillDestination>false</ai_chillDestination>
+			<artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+		</building>
+		<comps>
+			<li Class="CompProperties_AssignableToPawn">
+				<drawAssignmentOverlay>false</drawAssignmentOverlay>
+				<compClass>CompAssignableToPawn_Bed</compClass>
+			</li>
+		</comps>
+	</ThingDef>
+
+</Defs>

@@ -4,6 +4,7 @@
 	<author>José Ángel Soler Ortiz</author>
 	<supportedVersions>
 		<li>1.4</li>
+		<li>1.5</li>
 	</supportedVersions>
 	<url>github.com/joseasoler/pathfinding-framework</url>
 	<packageId>pathfinding.framework</packageId>

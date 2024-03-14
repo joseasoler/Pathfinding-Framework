@@ -92,7 +92,7 @@ namespace PathfindingFramework
 		public static bool TryRandomClosewalkCellNearPos(IntVec3 position, Pawn pawn, int radius,
 			out IntVec3 result, Predicate<IntVec3> extraValidator = null)
 		{
-			return CellFinder.TryFindRandomReachableCellNear(position, pawn.Map, radius,
+			return CellFinder.TryFindRandomReachableNearbyCell(position, pawn.Map, radius,
 				TraverseParms.For(pawn, Danger.Deadly, TraverseMode.NoPassClosedDoors).WithFenceblocked(true), c =>
 				{
 					if (!pawn.MovementContext().CanStandAt(c))
@@ -206,19 +206,6 @@ namespace PathfindingFramework
 			}
 
 			return IntVec3.Invalid;
-		}
-
-		/// <summary>
-		/// Pawn aware version of CellFinder.StandableCellNear.
-		/// </summary>
-		/// <param name="cell">Destination cell.</param>
-		/// <param name="map">Map of the cell.</param>
-		/// <param name="radius">Search radius.</param>
-		/// <param name="pawn">Pawn trying to find a standable cell.</param>
-		/// <returns>Standable cell if any was found, otherwise an invalid cell.</returns>
-		public static IntVec3 StandableCellNearForMovementType(IntVec3 cell, Map map, float radius, Pawn pawn)
-		{
-			return StandableCellNearForMovementTypes(cell, map, radius, new List<Pawn> { pawn });
 		}
 
 		/// <summary>

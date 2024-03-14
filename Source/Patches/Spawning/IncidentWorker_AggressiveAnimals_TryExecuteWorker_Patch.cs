@@ -11,8 +11,8 @@ namespace PathfindingFramework.Patches.Spawning
 	/// <summary>
 	/// Make the manhunter incident execution aware of different movement types.
 	/// </summary>
-	[HarmonyPatch(typeof(IncidentWorker_ManhunterPack), "TryExecuteWorker")]
-	public static class IncidentWorker_ManhunterPack_TryExecuteWorker_Patch
+	[HarmonyPatch(typeof(IncidentWorker_AggressiveAnimals), "TryExecuteWorker")]
+	public static class IncidentWorker_AggressiveAnimals_TryExecuteWorker_Patch
 	{
 		private static Pawn _firstPawn;
 		private static Pawn _currentPawn;
@@ -55,7 +55,7 @@ namespace PathfindingFramework.Patches.Spawning
 					nameof(CellFinder.RandomClosewalkCellNear));
 
 			MethodInfo pawnClosewalkMethod =
-				AccessTools.Method(typeof(IncidentWorker_ManhunterPack_TryExecuteWorker_Patch),
+				AccessTools.Method(typeof(IncidentWorker_AggressiveAnimals_TryExecuteWorker_Patch),
 					nameof(AdaptRandomClosewalkCellNear));
 
 			foreach (CodeInstruction instruction in newInstructions)
@@ -75,7 +75,7 @@ namespace PathfindingFramework.Patches.Spawning
 					yield return new CodeInstruction(OpCodes.Dup); // Duplicate pawn currently on the stack.
 
 					MethodInfo objTest =
-						AccessTools.Method(typeof(IncidentWorker_ManhunterPack_TryExecuteWorker_Patch),
+						AccessTools.Method(typeof(IncidentWorker_AggressiveAnimals_TryExecuteWorker_Patch),
 							nameof(StoreCurrentPawn));
 
 					yield return new CodeInstruction(OpCodes.Call, objTest);

@@ -16,14 +16,11 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	{
 		public static MethodBase TargetMethod()
 		{
-			foreach (Type nestedType in typeof(RCellFinder).GetNestedTypes(AccessTools.all))
+			foreach (MethodInfo method in AccessTools.GetDeclaredMethods(typeof(RCellFinder)))
 			{
-				foreach (MethodInfo method in nestedType.GetMethods(AccessTools.all))
+				if (method.Name.Contains("IsGoodDest"))
 				{
-					if (method.Name.Contains(nameof(RCellFinder.BestOrderedGotoDestNear)))
-					{
-						return method;
-					}
+					return method;
 				}
 			}
 

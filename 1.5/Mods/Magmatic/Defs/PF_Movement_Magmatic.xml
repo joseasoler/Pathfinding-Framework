@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../../Schemas/MovementDef.xsd">
+	<!-- Should correspond to vanilla. Used by default if no other type is found. -->
+	<PathfindingFramework.MovementDef>
+
+		<defName>PF_Movement_Magmatic</defName>
+		<label>magmatic</label>
+		<description>Born of fire and earth, these creatures roam the land and swim through molten lava with ease, yet they have an innate aversion to water.</description>
+		<priority>1500</priority>
+		<defaultCost>Default</defaultCost>
+		<tagCosts>
+			<PF_TerrainTag_Lava>0</PF_TerrainTag_Lava>
+			<PF_TerrainTag_WaterChestDeep>Avoid</PF_TerrainTag_WaterChestDeep>
+			<PF_TerrainTag_WaterShallow>Avoid</PF_TerrainTag_WaterShallow>
+		</tagCosts>
+		<ignoreAvoidWander>true</ignoreAvoidWander>
+	</PathfindingFramework.MovementDef>
+
+</Defs>

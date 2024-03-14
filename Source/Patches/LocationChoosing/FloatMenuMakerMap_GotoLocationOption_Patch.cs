@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -13,19 +14,24 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	[HarmonyPatch(typeof(FloatMenuMakerMap), "GotoLocationOption")]
 	public static class FloatMenuMakerMap_GotoLocationOption_Patch
 	{
+		public static IntVec3 StandableCellNearForMovementType(IntVec3 cell, Map map, float radius, Predicate<IntVec3> _,
+			Pawn pawn)
+		{
+			return LocationFinding.StandableCellNearForMovementTypes(cell, map, radius, new List<Pawn> {pawn});
+		}
+
 		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo standableCellNearOriginalMethod =
 				AccessTools.Method(typeof(CellFinder), nameof(CellFinder.StandableCellNear));
 
 			MethodInfo standableCellNearNewMethod =
-				AccessTools.Method(typeof(LocationFinding),
-					nameof(LocationFinding.StandableCellNearForMovementType));
+				AccessTools.Method(typeof(FloatMenuMakerMap_GotoLocationOption_Patch),
+					nameof(StandableCellNearForMovementType));
 
 			foreach (CodeInstruction instruction in instructions)
 			{
-				if (instruction.opcode == OpCodes.Call && instruction.operand is MethodInfo info &&
-				    info == standableCellNearOriginalMethod)
+				if (instruction.Calls(standableCellNearOriginalMethod))
 				{
 					yield return new CodeInstruction(OpCodes.Ldarg_1); // pawn
 					yield return new CodeInstruction(OpCodes.Call, standableCellNearNewMethod);

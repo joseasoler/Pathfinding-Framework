@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PathfindingFramework.PatchOperations.AddSubtreeToMatchingThinkTrees">
+		<subtree>PF_ThinkTree_SeekSafeTerrain</subtree>
+		<addBeforeSubtree>MentalStateCritical</addBeforeSubtree>
+	</Operation>
+</Patch>

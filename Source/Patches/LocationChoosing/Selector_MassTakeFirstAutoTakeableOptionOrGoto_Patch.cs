@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -13,14 +14,20 @@ namespace PathfindingFramework.Patches.LocationChoosing
 	[HarmonyPatch(typeof(Selector), "MassTakeFirstAutoTakeableOptionOrGoto")]
 	public static class Selector_MassTakeFirstAutoTakeableOptionOrGoto_Patch
 	{
+		public static IntVec3 StandableCellNearForMovementTypesDiscardPredicate(IntVec3 cell, Map map, float radius,
+			Predicate<IntVec3> _, List<Pawn> selectedPawns)
+		{
+			return LocationFinding.StandableCellNearForMovementTypes(cell, map, radius, selectedPawns);
+		}
+
 		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo standableCellNearOriginalMethod =
 				AccessTools.Method(typeof(CellFinder), nameof(CellFinder.StandableCellNear));
 
 			MethodInfo standableCellNearNewMethod =
-				AccessTools.Method(typeof(LocationFinding),
-					nameof(LocationFinding.StandableCellNearForMovementTypes));
+				AccessTools.Method(typeof(Selector_MassTakeFirstAutoTakeableOptionOrGoto_Patch),
+					nameof(StandableCellNearForMovementTypesDiscardPredicate));
 
 			foreach (CodeInstruction instruction in instructions)
 			{

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThinkTreeDef>
+		<defName>PF_ThinkTree_SeekSafeTerrain</defName>
+		<thinkRoot Class="ThinkNode_Priority">
+			<subNodes>
+				<li Class="PathfindingFramework.Jobs.JobGiver_SeekSafeTerrain"/>
+			</subNodes>
+		</thinkRoot>
+	</ThinkTreeDef>
+
+</Defs>

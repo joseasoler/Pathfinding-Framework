@@ -10,8 +10,8 @@ namespace PathfindingFramework.Patches.Spawning
 	/// Without this patch, TryFindManhunterAnimalKind could return an aquatic animal and then TryFindRandomPawnEntryCell
 	/// would fail.
 	/// </summary>
-	[HarmonyPatch(typeof(IncidentWorker_ManhunterPack), "CanFireNowSub")]
-	public static class IncidentWorker_ManhunterPack_CanFireNowSub_Patch
+	[HarmonyPatch(typeof(IncidentWorker_AggressiveAnimals), "CanFireNowSub")]
+	public static class IncidentWorker_AggressiveAnimals_CanFireNowSub_Patch
 	{
 		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{

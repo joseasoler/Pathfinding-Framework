@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Adds terrain tags to TerrainDefs. These tags are used to define terrain path costs in MovementDefs.
+
+Abstract TerrainDefs such as WaterDeepBase are used by mods to represent things that are not water, so each individual
+TerrainDef is patched explicitly instead.
+
+Tags for modded terrain are also added here because AddTagsToTerrainDefs guarantees that all tags are added in a single
+XML lookup, thus running considerably faster than regular XPath operations.
+-->
+<Patch>
+
+	<Operation Class="PathfindingFramework.PatchOperations.AddTagsToTerrainDefs">
+		<operations>
+			<li> <!-- Core -->
+				<li>
+					<tag>PF_TerrainTag_Gravel</tag>
+					<terrainDefs>
+						<li>Gravel</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>MossyTerrain</li>
+						<li>Soil</li>
+						<li>SoilRich</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Mud</tag>
+					<terrainDefs>
+						<li>MarshyTerrain</li>
+						<li>Mud</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Sand</tag>
+					<terrainDefs>
+						<li>Sand</li>
+						<li>SoftSand</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterChestDeep</tag>
+					<terrainDefs>
+						<li>WaterMovingChestDeep</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterDeep</tag>
+					<terrainDefs>
+						<li>WaterDeep</li>
+						<li>WaterOceanDeep</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterShallow</tag>
+					<terrainDefs>
+						<li>Marsh</li>
+						<li>WaterMovingShallow</li>
+						<li>WaterOceanShallow</li>
+						<li>WaterShallow</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+			<li MayRequire="sarg.alphaanimals"> <!-- Alpha Animals -->
+				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>AA_PollenSoil</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Sand</tag>
+					<terrainDefs>
+						<li>AA_FertilizedSand</li>
+						<li>AA_SuperiorFertilizedSand</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+			<li MayRequire="sarg.alphabiomes"> <!-- Alpha Biomes -->
+				<li>
+					<tag>PF_TerrainTag_Gravel</tag>
+					<terrainDefs>
+						<li>AB_Obsidian</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>AB_DenseGrass</li>
+						<li>AB_FertileGrassyFlowerySoil</li>
+						<li>AB_GrassyFlowerySoil</li>
+						<li>AB_HardenedGrass</li>
+						<li>AB_HardenedGrassFertile</li>
+						<li>AB_LushGrass</li>
+						<li>AB_MycoticGrass</li>
+						<li>AB_MycoticSoil</li>
+						<li>AB_MycoticSoilRich</li>
+						<li>AB_ParchedEarth</li>
+						<li>AB_RichCrackedMud</li>
+						<li>GU_MossyRed</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Lava</tag>
+					<terrainDefs>
+						<li>AB_LiquidLava</li>
+						<li>AB_SolidifiedLava</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Mud</tag>
+					<terrainDefs>
+						<li>AB_CrackedMud</li>
+						<li>AB_DarkMud</li>
+						<li>AB_DenseMud</li>
+						<li>AB_FertileMud</li>
+						<li>AB_RichSlime</li>
+						<li>AB_Slime</li>
+						<li>AB_SlimeGrass</li>
+						<li>AB_SlimyMud</li>
+						<li>AB_TarMud</li>
+						<li>AB_WebbedMarshyTerrain</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Sand</tag>
+					<terrainDefs>
+						<li>AB_BlackPebbles</li>
+						<li>AB_FineForsakenSand</li>
+						<li>AB_FineSand</li>
+						<li>AB_ForsakenSand</li>
+						<li>AB_GrassySand</li>
+						<li>GU_AlienSand</li>
+						<li>GU_AlienSandFine</li>
+						<li>GU_RichAlienSand</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterShallow</tag>
+					<terrainDefs>
+						<li>AB_FertileMarsh</li>
+						<li>AB_LiquidSlime</li>
+						<li>GU_RedWaterShallow</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterDeep</tag>
+					<terrainDefs>
+						<li>GU_RedWaterDeep</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+			<li MayRequire="BiomesTeam.BiomesCore"> <!-- Biomes! Core -->
+				<li>
+					<tag>PF_TerrainTag_Lava</tag>
+					<terrainDefs>
+						<li>BMT_Magma</li>
+						<li>BMT_Terrain_Tachylite</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Sand</tag>
+					<terrainDefs>
+						<li>BMT_Pebbles</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterDeep</tag>
+					<terrainDefs>
+						<li>BMT_WaterAbyssalDeep</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterShallow</tag>
+					<terrainDefs>
+						<li>BMT_WaterShallowLagoon</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+			<li MayRequire="BiomesTeam.BiomesCaverns"> <!-- Biomes! Caverns -->
+				<li>
+					<tag>PF_TerrainTag_Gravel</tag>
+					<terrainDefs>
+						<li>BMT_MagmaAsh</li>
+						<li>BMT_VolcanicAsh</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+			<li MayRequireAnyOf="Dubwise.DubsBadHygiene,Dubwise.DubsBadHygieneLite"> <!-- Dubs Bad Hygiene, and Dubs Bad Hygiene Lite -->
+				<li>
+					<tag>PF_TerrainTag_WaterShallow</tag>
+					<terrainDefs>
+						<li>PoolWater</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+			<li MayRequire="ReGrowth.BOTR.Core"> <!-- ReGrowth: Core -->
+				<li>
+					<tag>PF_TerrainTag_Lava</tag>
+					<terrainDefs>
+						<li>RG_Lava</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Gravel</tag>
+					<terrainDefs>
+						<li>RG_DepletedGravel</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>RG_AridSoil</li>
+						<li>RG_AspenSoil</li>
+						<li>RG_BoilingSoil</li>
+						<li>RG_BorealSoil</li>
+						<li>RG_DepletedMossy</li>
+						<li>RG_DepletedSoil</li>
+						<li>RG_TemperateSoil</li>
+						<li>RG_TropicalSoil</li>
+						<li>RG_TundraSoil</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+			<li MayRequire="SirMashedPotato.Ashlands"> <!-- Mashed's Ashlands -->
+				<li>
+					<tag>PF_TerrainTag_Gravel</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_AshGravel</li>
+						<li>Mashed_Ashlands_AshGravelBlighted</li>
+						<li>Mashed_Ashlands_AshGravelVolcanic</li>
+						<li>Mashed_Ashlands_AshSoilBlighted</li>
+						<li>Mashed_Ashlands_CrackedAshSoilBlighted</li>
+						<li>Mashed_Ashlands_RichAshGravel</li>
+						<li>Mashed_Ashlands_RichAshGravelVolcanic</li>
+						<li>Mashed_Ashlands_ScorchedAshSoilVolcanic</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_AshSoil</li>
+						<li>Mashed_Ashlands_AshSoilVolcanic</li>
+						<li>Mashed_Ashlands_CrackedAshSoilVolcanic</li>
+						<li>Mashed_Ashlands_GrazelandSoil</li>
+						<li>Mashed_Ashlands_MossyAshSoil</li>
+						<li>Mashed_Ashlands_PackedAsh</li>
+						<li>Mashed_Ashlands_PackedAshBlighted</li>
+						<li>Mashed_Ashlands_PackedAshVolcanic</li>
+						<li>Mashed_Ashlands_RichAshSoil</li>
+						<li>Mashed_Ashlands_RichAshSoilVolcanic</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Lava</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_Lava</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Mud</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_AshMud</li>
+						<li>Mashed_Ashlands_AshMudBlighted</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Sand</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_AshDust</li>
+						<li>Mashed_Ashlands_AshSand</li>
+						<li>Mashed_Ashlands_AshSandBlighted</li>
+						<li>Mashed_Ashlands_AshSandVolcanic</li>
+						<li>Mashed_Ashlands_RichAshSand</li>
+						<li>Mashed_Ashlands_RichAshSandVolcanic</li>
+						<li>Mashed_Ashlands_SulphuricSand</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterShallow</tag>
+					<terrainDefs>
+						<li>Mashed_Ashlands_BlightedSludge</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+		</operations>
+	</Operation>
+
+</Patch>

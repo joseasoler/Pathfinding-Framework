@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../../Schemas/MovementDef.xsd">
+	<PathfindingFramework.MovementDef Name="PF_Movement_Terrestrial_Base" Abstract="True">
+		<label>terrestrial</label>
+		<description>Adapted for land, these creatures navigate solid terrains with ease. While they can wade through shallow waters, deeper expanses prove challenging.</description>
+		<defaultCost>Default</defaultCost>
+	</PathfindingFramework.MovementDef>
+
+	<!-- Should correspond to vanilla. Used by default if no other type is found. -->
+	<PathfindingFramework.MovementDef ParentName="PF_Movement_Terrestrial_Base">
+		<defName>PF_Movement_Terrestrial</defName>
+		<priority>1000</priority>
+	</PathfindingFramework.MovementDef>
+
+	<!--
+	Granted temporarily when a terrestrial creature finds itself in water unexpectedly in specific cases. Currently this
+	only happens with Giddy-Up 2.
+	-->
+	<PathfindingFramework.MovementDef ParentName="PF_Movement_Terrestrial_Base">
+		<defName>PF_Movement_Terrestrial_Unsafe</defName>
+		<priority>1500</priority>
+		<tagCosts>
+			<PF_TerrainTag_WaterDeep>Unsafe</PF_TerrainTag_WaterDeep>
+		</tagCosts>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef>
+		<defName>PF_Movement_Swimming</defName>
+		<label>swimming</label>
+		<description>Adapted for land, these creatures navigate solid terrains with ease. They can wade through shallow waters, and swim clumsily over deeper waters.</description>
+		<priority>1500</priority>
+		<defaultCost>Default</defaultCost>
+		<tagCosts>
+			<PF_TerrainTag_WaterDeep>120</PF_TerrainTag_WaterDeep>
+		</tagCosts>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef Name="PF_Movement_AquaticBase" Abstract="True">
+		<tagCosts>
+			<PF_TerrainTag_WaterDeep>0</PF_TerrainTag_WaterDeep>
+			<PF_TerrainTag_WaterChestDeep>2</PF_TerrainTag_WaterChestDeep>
+			<PF_TerrainTag_WaterShallow>4</PF_TerrainTag_WaterShallow>
+		</tagCosts>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef ParentName="PF_Movement_AquaticBase">
+		<defName>PF_Movement_Aquatic</defName>
+		<label>aquatic</label>
+		<description>Aquatic creatures swim effortlessly through all bodies of water. However, they find themselves out of their element on land.</description>
+		<priority>0</priority>
+		<defaultCost>Unsafe</defaultCost>
+		<penAnimalsDisallowed>true</penAnimalsDisallowed>
+		<manhuntersRequireWater>true</manhuntersRequireWater>
+		<ignoreColonyReachability>true</ignoreColonyReachability>
+		<ignoreAvoidWander>true</ignoreAvoidWander>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef ParentName="PF_Movement_AquaticBase">
+		<defName>PF_Movement_Amphibious</defName>
+		<label>amphibious</label>
+		<description>Equally at home in water and on land, these versatile creatures transition seamlessly between aquatic and terrestrial environments.</description>
+		<priority>2000</priority>
+		<defaultCost>Default</defaultCost>
+		<defaultCostAdd>8</defaultCostAdd>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef>
+		<defName>PF_Movement_Drilling</defName>
+		<label>driller</label>
+		<description>Subterranean navigators, these creatures burrow through soil and sand. However, they steer clear of rocky terrains and water surfaces.</description>
+		<priority>3000</priority>
+		<tagCosts>
+			<PF_TerrainTag_Gravel>16</PF_TerrainTag_Gravel>
+			<PF_TerrainTag_Mud>8</PF_TerrainTag_Mud>
+			<PF_TerrainTag_Ground>2</PF_TerrainTag_Ground>
+			<PF_TerrainTag_Sand>0</PF_TerrainTag_Sand>
+		</tagCosts>
+		<defaultCost>Avoid</defaultCost>
+		<penAnimalsDisallowed>true</penAnimalsDisallowed>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef>
+		<defName>PF_Movement_Digging</defName>
+		<label>digger</label>
+		<description>Specialized for rapid movement beneath the surface, these creatures excel in sand and soil. On other terrains, they move similarly to their terrestrial counterparts.</description>
+		<priority>4000</priority>
+		<tagCosts>
+			<PF_TerrainTag_Ground>0</PF_TerrainTag_Ground>
+			<PF_TerrainTag_Sand>0</PF_TerrainTag_Sand>
+		</tagCosts>
+	</PathfindingFramework.MovementDef>
+
+	<PathfindingFramework.MovementDef>
+		<defName>PF_Movement_Flying</defName>
+		<label>flying</label>
+		<description>Soaring above obstacles, these creatures have the skies as their domain, hovering gracefully over most landscapes.</description>
+		<priority>10000</priority>
+		<tagCosts>
+			<PF_TerrainTag_WaterDeep>0</PF_TerrainTag_WaterDeep>
+			<PF_TerrainTag_WaterChestDeep>0</PF_TerrainTag_WaterChestDeep>
+			<PF_TerrainTag_WaterShallow>0</PF_TerrainTag_WaterShallow>
+		</tagCosts>
+		<defaultCost>0</defaultCost>
+		<ignoreSnow>true</ignoreSnow>
+		<ignoreThings>true</ignoreThings>
+		<penAnimalsDisallowed>true</penAnimalsDisallowed>
+	</PathfindingFramework.MovementDef>
+
+</Defs>

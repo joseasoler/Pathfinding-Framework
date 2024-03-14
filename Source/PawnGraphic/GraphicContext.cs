@@ -45,7 +45,7 @@ namespace PathfindingFramework.PawnGraphic
 				return;
 			}
 
-			// Replicate the random alternate graphic logic in PawnGraphicSet.ResolveAllGraphics().
+			// Replicate the random alternate graphic logic in PawnGraphicUtils.TryGetAlternate().
 			Rand.PushState(_pawn.thingIDNumber ^ 46101);
 			if (Rand.Value <= _pawn.kindDef.alternateGraphicChance)
 			{
@@ -67,11 +67,11 @@ namespace PathfindingFramework.PawnGraphic
 			return _pawn.Spawned && !_pawn.Dead;
 		}
 
-		private void RecalculatePawnGraphicSet()
+		private void SetAllGraphicsDirty()
 		{
 			if (Active())
 			{
-				_pawn.drawer.renderer.graphics.nakedGraphic = null;
+				_pawn.Drawer.renderer.SetAllGraphicsDirty();
 			}
 		}
 
@@ -82,7 +82,7 @@ namespace PathfindingFramework.PawnGraphic
 		{
 			if (_locomotionGraphic != null)
 			{
-				RecalculatePawnGraphicSet();
+				SetAllGraphicsDirty();
 			}
 		}
 
@@ -96,7 +96,7 @@ namespace PathfindingFramework.PawnGraphic
 			if (_terrainTagGraphic != null && _terrainTagGraphic.Affects(previousTerrainDef) !=
 			    _terrainTagGraphic.Affects(currentTerrainDef))
 			{
-				RecalculatePawnGraphicSet();
+				SetAllGraphicsDirty();
 			}
 		}
 
@@ -105,18 +105,18 @@ namespace PathfindingFramework.PawnGraphic
 		/// </summary>
 		public void Death()
 		{
-			_pawn.drawer.renderer.graphics.nakedGraphic = null;
+			_pawn.Drawer.renderer.SetAllGraphicsDirty();
 		}
 
 		/// <summary>
 		/// Obtains the replacement graphic.
 		/// </summary>
-		/// <param name="nakedGraphic">Naked graphic of the pawn without modifications.</param>
+		/// <param name="currentGraphic">Current graphic of the pawn without modifications.</param>
 		/// <param name="extension">Extensions which needs to modify the graphics.</param>
 		/// <returns>New graphic to use.</returns>
-		private Graphic GetExtensionGraphic(Graphic nakedGraphic, GraphicExtension extension)
+		private Graphic GetExtensionGraphic(Graphic currentGraphic, GraphicExtension extension)
 		{
-			// nakedGraphic has already been checked for null value prior to this call.
+			// currentGraphic has already been checked for null value prior to this call.
 
 			Graphic graphic = extension.bodyGraphicData.Graphic;
 			// Alternate graphics are only processed if both lists have the same size.
@@ -129,50 +129,45 @@ namespace PathfindingFramework.PawnGraphic
 			}
 
 			// Return a copy matching the drawSize and shader of the original.
-			return graphic?.GetCopy(nakedGraphic.drawSize, nakedGraphic.Shader);
+			return graphic?.GetCopy(currentGraphic.drawSize, currentGraphic.Shader);
 		}
 
-		private bool TryApplyLocomotionChanges(PawnGraphicSet graphicSet)
+		private Graphic TryGetLocomotionChange(Graphic currentGraphic)
 		{
 			if (_locomotionGraphic == null || !_pawn.pather.Moving)
 			{
 				// Locomotion graphic changes are only applied if the pawn is moving.
-				return false;
+				return null;
 			}
 
 			LocomotionUrgency locomotion = CurrentUrgencyUtil.Get(_pawn);
 
 			if (!_locomotionGraphic.locomotionUrgencies.Contains(locomotion))
 			{
-				return false;
+				return null;
 			}
 
-			graphicSet.nakedGraphic = GetExtensionGraphic(graphicSet.nakedGraphic, _locomotionGraphic);
-
-			return true;
+			return GetExtensionGraphic(currentGraphic, _locomotionGraphic);
 		}
 
-		private void TryApplyTerrainTagChanges(PawnGraphicSet graphicSet)
+		private Graphic TryGetTerrainTagChange(Graphic currentGraphic)
 		{
 			if (_terrainTagGraphic == null || !_terrainTagGraphic.Affects(_pawn.Position.GetTerrain(_pawn.Map)))
 			{
-				return;
+				return null;
 			}
 
-			graphicSet.nakedGraphic = GetExtensionGraphic(graphicSet.nakedGraphic, _terrainTagGraphic);
+			return GetExtensionGraphic(currentGraphic, _terrainTagGraphic);
 		}
 
-		public void ApplyGraphicChanges(PawnGraphicSet graphicSet)
+		public Graphic TryGetGraphicChange(Graphic currentGraphic)
 		{
-			if (!Active() || graphicSet.nakedGraphic == null)
+			if (!Active() || currentGraphic == null)
 			{
-				return;
+				return null;
 			}
 
-			if (!TryApplyLocomotionChanges(graphicSet))
-			{
-				TryApplyTerrainTagChanges(graphicSet);
-			}
+			return TryGetLocomotionChange(currentGraphic) ?? TryGetTerrainTagChange(currentGraphic);
 		}
 	}
 }

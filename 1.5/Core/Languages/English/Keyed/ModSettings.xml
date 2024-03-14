@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<PF_GeneralTab>General</PF_GeneralTab>
+	<PF_IgnoreFireLabel>Non-flammable pawns ignore fire</PF_IgnoreFireLabel>
+	<PF_IgnoreFireHover>Creatures that are inherently non-flammable such as mechanoids will move through fire. This setting does not affect pawns that cannot catch fire due to apparel, genes or hediffs.</PF_IgnoreFireHover>
+	<PF_WildAnimalRelocationLabel>Wild animal relocation</PF_WildAnimalRelocationLabel>
+	<PF_WildAnimalRelocationHover>If this setting is enabled, animal groups spawning outside of landmasses or in very small ones will relocate to larger islands.</PF_WildAnimalRelocationHover>
+
+	<PF_PawnMovementTab>Pawn movement</PF_PawnMovementTab>
+	<PF_PawnMovementWarningLabel><![CDATA[<color=#FF0F0F>Warning:</color> These settings cannot be modified in-game. Movement changes can only be applied from the main menu.]]></PF_PawnMovementWarningLabel>
+
+	<PF_DebuggingTab>Debugging</PF_DebuggingTab>
+	<PF_InspectorLabel>Inspector</PF_InspectorLabel>
+	<PF_InspectorHover>If enabled, the path cost inspector window will appear while Control+Shift+Q is held. The movement costs inspector will appear while Control+Shift+E is held. The region inspector will appear while Control+Shift+R is held.</PF_InspectorHover>
+	<PF_LogPathNotFoundLabel>Log path not found</PF_LogPathNotFoundLabel>
+	<PF_LogPathNotFoundHover>Display a log with additional information when the pathfinder is unable to find a path. Keep in mind that this log triggers in many valid cases; enabling it is only recommended for debugging or troubleshooting.</PF_LogPathNotFoundHover>
+	<PF_LogRegionCalculatorErrorLabel>Log region calculator errors</PF_LogRegionCalculatorErrorLabel>
+	<PF_LogRegionCalculatorErrorHover>Log additional information when the region cost calculator stage (Dijkstra) fails. Keep in mind that this log can be triggered by other mods and issues. Enabling this setting is only recommended for debugging or troubleshooting.</PF_LogRegionCalculatorErrorHover>
+	<PF_DebugLogLabel>Debug log</PF_DebugLogLabel>
+	<PF_DebugLogHover>Display additional messages in the log. Useful for debugging bugs.</PF_DebugLogHover>
+
+	<!-- Translatable strings used by all tabs. -->
+	<PF_ResetSettingsLabel>Reset</PF_ResetSettingsLabel>
+	<PF_ResetSettingsHover>Reset all options of the mod to their default values.</PF_ResetSettingsHover>
+</LanguageData>

@@ -52,7 +52,6 @@ namespace PathfindingFramework.Jobs
 			return district.CellCount < MinimumDistrictSize;
 		}
 
-
 		/// <summary>
 		/// Helper function for a movement-aware wander check.
 		/// </summary>
@@ -70,7 +69,8 @@ namespace PathfindingFramework.Jobs
 			// Movement type aware checks for standability and wander have already been performed.
 			// A tryIndex value above 10 will make the vanilla code ignore these.
 			const int tryIndex = 11;
-			return RCellFinder.CanWanderToCell(destination, pawn, pawn.Position, null, tryIndex, Danger.None, false, false);
+			return RCellFinder.CanWanderToCell(destination, pawn, pawn.Position, null, tryIndex, Danger.None, false, false,
+				false, false);
 		}
 
 		private static List<DestinationData> GetRelocationDestinations(List<Pawn> animalGroup)

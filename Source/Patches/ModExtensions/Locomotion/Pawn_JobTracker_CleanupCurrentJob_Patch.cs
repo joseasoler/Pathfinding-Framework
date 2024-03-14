@@ -6,7 +6,7 @@ using Verse.AI;
 namespace PathfindingFramework.Patches.ModExtensions.Locomotion
 {
 	/// <summary>
-	/// Force a PawnGraphicSet update when the locomotion urgency of a pawn changes. 
+	/// Force a graphics update when the locomotion urgency of a pawn changes. 
 	/// </summary>
 	[HarmonyPatch(typeof(Pawn_JobTracker), "CleanupCurrentJob")]
 	public static class Pawn_JobTracker_CleanupCurrentJob_Patch

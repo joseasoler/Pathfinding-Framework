@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="Alphabeaver" or defName="Duck"]</xpath>
+		<value>
+			<li Class="PathfindingFramework.MovementExtension">
+				<movementDef>PF_Movement_Amphibious</movementDef>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="Bear_Polar"]</xpath>
+		<value>
+			<li Class="PathfindingFramework.MovementExtension">
+				<movementDef>PF_Movement_Swimming</movementDef>
+			</li>
+		</value>
+	</Operation>
+
+</Patch>

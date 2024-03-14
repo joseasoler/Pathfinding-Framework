@@ -8,8 +8,8 @@ using Verse;
 
 namespace PathfindingFramework.Patches.LocationChoosing
 {
-	[HarmonyPatch(typeof(JobGiver_GetRest), "FindGroundSleepSpotFor")]
-	public static class JobGiver_GetRest_FindGroundSleepSpotFor_Patch
+	[HarmonyPatch(typeof(JobGiver_GetRest), "TryFindGroundSleepSpotFor")]
+	public static class JobGiver_GetRest_TryFindGroundSleepSpotFor_Patch
 	{
 		/// <summary>
 		/// For some unknown reason, injecting an extra pawn argument during the transpiling always fails.
@@ -35,7 +35,7 @@ namespace PathfindingFramework.Patches.LocationChoosing
 				AccessTools.Method(typeof(CellFinder), nameof(CellFinder.TryRandomClosewalkCellNear));
 
 			MethodInfo modifiedClosewalkMethod =
-				AccessTools.Method(typeof(JobGiver_GetRest_FindGroundSleepSpotFor_Patch),
+				AccessTools.Method(typeof(JobGiver_GetRest_TryFindGroundSleepSpotFor_Patch),
 					nameof(ModifiedTryRandomClosewalkCellNear));
 
 			foreach (CodeInstruction instruction in instructions)
