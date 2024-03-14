@@ -36,7 +36,6 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 				}
 			}
 
-			Report.Error($"Pawn_SpawnSetup_Patch createContext for {__instance} -> {createContext}");
 			if (createContext)
 			{
 				__instance.GraphicContext() = new GraphicContext(__instance);
