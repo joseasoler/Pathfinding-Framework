@@ -5,7 +5,7 @@
 		<li>1.4</li>
 		<li>1.4/Core</li>
 		<li IfModActive="Ludeon.RimWorld.Biotech">1.4/Biotech</li>
-		<li IfModActive="BiomesTeam.BiomesCore,ReGrowth.BOTR.Core,sarg.alphabiomes">1.4/Mods/Magmatic</li>
+		<li IfModActive="BiomesTeam.BiomesCore,ReGrowth.BOTR.Core,sarg.alphabiomes,SirMashedPotato.Ashlands">1.4/Mods/Magmatic</li>
 	</v1.4>
 	<v1.5>
 		<li>Common</li>
