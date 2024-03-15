@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.MovementContexts;
 using PathfindingFramework.Parse;

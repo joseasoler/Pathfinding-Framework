@@ -1,4 +1,5 @@
 ﻿using System;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.Patches;
 using Verse;
 using Verse.AI;

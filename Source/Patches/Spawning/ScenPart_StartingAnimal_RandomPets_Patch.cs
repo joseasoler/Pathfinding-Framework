@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using HarmonyLib;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.Parse;
 using RimWorld;
 using Verse;

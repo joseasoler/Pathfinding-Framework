@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.PawnGraphic;
 using UnityEngine;
 using Verse;

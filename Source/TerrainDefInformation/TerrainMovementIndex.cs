@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.Patches;
 using Verse;
 
 namespace PathfindingFramework.TerrainDefInformation
 {
 	/// <summary>
-	/// Initialize TerrainDef.MovementIndex. See PrepatcherNewFields for details.
+	/// Initialize TerrainDef.MovementIndex.
 	/// </summary>
 	public static class TerrainMovementIndex
 	{

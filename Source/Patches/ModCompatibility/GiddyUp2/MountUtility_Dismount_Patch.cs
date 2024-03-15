@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using HarmonyLib;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Parse;
 using PathfindingFramework.PawnMovement;

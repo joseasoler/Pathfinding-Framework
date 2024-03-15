@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using PathfindingFramework.ExtensionMethodCaches;
 using RimWorld.Planet;
 using Verse;
 

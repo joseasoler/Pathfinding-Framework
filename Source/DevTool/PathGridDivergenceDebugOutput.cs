@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using LudeonTK;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.MovementContexts;
 using PathfindingFramework.Patches;
 using Verse;

@@ -35,6 +35,8 @@
 		<Compile Include="ErrorHandling\PathFinderErrorReport.cs" />
 		<Compile Include="ErrorHandling\RegionErrorReport.cs" />
 		<Compile Include="ErrorHandling\ToReportStringUtil.cs" />
+		<Compile Include="ExtensionMethodCaches\Methods.cs" />
+		<Compile Include="ExtensionMethodCaches\RefDictionary.cs" />
 		<Compile Include="Harmony.cs" />
 		<Compile Include="HediffsDefOf.cs" />
 		<Compile Include="Hediffs\Hediff_TemporaryMovement.cs" />
@@ -102,7 +104,6 @@
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_ApparelTracker_TryDrop_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_JobTracker_CleanupCurrentJob_Patch.cs" />
 		<Compile Include="Patches\MovementMayHaveChanged\Pawn_JobTracker_StartJob_Patch.cs" />
-		<Compile Include="Patches\PrepatcherNewFields.cs" />
 		<Compile Include="Patches\Reachable\Reachability_CanReachFactionBase_Patch.cs" />
 		<Compile Include="Patches\RegionGeneration\RegionAndRoomUpdater_ShouldBeInTheSameRoom_Patch.cs" />
 		<Compile Include="Patches\RegionGeneration\RegionMaker_FloodFillAndAddCells_Patch.cs" />

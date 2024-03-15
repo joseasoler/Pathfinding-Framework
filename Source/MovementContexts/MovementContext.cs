@@ -1,4 +1,5 @@
 using System;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Parse;

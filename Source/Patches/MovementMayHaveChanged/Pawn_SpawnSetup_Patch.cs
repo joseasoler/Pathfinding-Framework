@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using HarmonyLib;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.PawnGraphic;
 using PathfindingFramework.PawnMovement;
 using Verse;

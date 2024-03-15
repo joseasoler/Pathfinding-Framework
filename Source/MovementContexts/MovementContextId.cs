@@ -1,3 +1,4 @@
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.Patches;
 using Verse;
 

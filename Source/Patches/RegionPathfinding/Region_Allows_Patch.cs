@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.Parse;
 using Verse;
 
@@ -19,7 +20,7 @@ namespace PathfindingFramework.Patches.RegionPathfinding
 	/// RegionMaker_TryGenerateRegionFrom_Patch.
 	///
 	/// * The entire region is composed of cells that have the same TerrainDef.
-	/// * The region has a Prepatcher TerrainDef() field which is set to the mentioned TerrainDef.
+	/// * The region has a TerrainDef() extension method which is set to the mentioned TerrainDef.
 	/// * The region has a RegionType of Normal (passable) as long as at least one movement type can traverse it.
 	/// </summary>
 	[HarmonyPatch(typeof(Region), nameof(Region.Allows))]

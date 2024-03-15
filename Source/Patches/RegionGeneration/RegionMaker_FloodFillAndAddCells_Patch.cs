@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using PathfindingFramework.ExtensionMethodCaches;
 using Verse;
 
 namespace PathfindingFramework.Patches.RegionGeneration

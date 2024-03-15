@@ -1,4 +1,5 @@
 using HarmonyLib;
+using PathfindingFramework.ExtensionMethodCaches;
 using RimWorld;
 using Verse;
 

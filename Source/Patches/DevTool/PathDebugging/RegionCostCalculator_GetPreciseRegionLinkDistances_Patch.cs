@@ -4,6 +4,7 @@ using System.Reflection.Emit;
 using System.Text;
 using HarmonyLib;
 using PathfindingFramework.ErrorHandling;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.MovementContexts;
 using Verse;
 using Verse.AI;

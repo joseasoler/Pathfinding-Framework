@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using LudeonTK;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.Patches;
 using Verse;
@@ -32,7 +33,8 @@ namespace PathfindingFramework.DevTool
 			reports.AddRange(MapPathCostMemoryReport.MemoryReport());
 			foreach (Map map in Find.Maps)
 			{
-				reports.AddRange(map.MovementContextData().MemoryReport());
+				reports.AddRange(map.
+					MovementContextData().MemoryReport());
 			}
 
 			string[,] dataTable = new string[4, reports.Count + 2];
