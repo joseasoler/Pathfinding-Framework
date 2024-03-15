@@ -24,16 +24,8 @@ namespace PathfindingFramework
 		/// <param name="content">Content pack data of this mod.</param>
 		public PathfindingFrameworkMod(ModContentPack content) : base(content)
 		{
-			// Parsers are initialized even if prepatcher is missing to load Defs and Extensions without errors.
 			ParseHandler.Initialize();
 			ModAssemblyInfo.Initialize();
-			if (!ModAssemblyInfo.PrepatcherPresent)
-			{
-				Report.Error(
-					$"Pathfinding Framework requires Prepatcher, but this mod was not found in the modlist. Pathfinding Framework will be disabled.");
-				return;
-			}
-
 			Harmony.Initialize();
 			LongEventHandler.ExecuteWhenFinished(InitializeWhenLoadingFinished);
 		}

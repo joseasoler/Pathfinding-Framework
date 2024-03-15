@@ -1,4 +1,5 @@
-﻿using PathfindingFramework.Patches;
+﻿using PathfindingFramework.ExtensionMethodCaches;
+using PathfindingFramework.Patches;
 using Verse;
 
 namespace PathfindingFramework.Hediffs

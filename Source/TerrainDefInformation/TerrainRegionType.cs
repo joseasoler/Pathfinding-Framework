@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using Verse;

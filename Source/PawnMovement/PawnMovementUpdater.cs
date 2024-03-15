@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Patches;
 using RimWorld;

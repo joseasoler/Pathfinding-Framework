@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using PathfindingFramework.ExtensionMethodCaches;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;

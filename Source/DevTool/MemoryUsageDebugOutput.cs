@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.MapPathCosts;
 using PathfindingFramework.Patches;
 using Verse;

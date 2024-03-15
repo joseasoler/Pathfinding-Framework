@@ -5,20 +5,11 @@ using Prepatcher;
 using RimWorld;
 using Verse;
 
-namespace PathfindingFramework.Patches
+namespace PathfindingFramework.ExtensionMethodCaches
 {
-	/// <summary>
-	/// Defines new fields for some game entities using Prepatcher.
-	/// </summary>
-	public static class PrepatcherNewFields
+	public static class Methods
 	{
-		private static MovementDef _noPrepatcherMovementDef;
-		private static MapPathCostGrid _noPrepatcherMapPathCostGrid;
-		private static MovementContext _noPrepatcherMovementContext;
-		private static MovementContextData _noPrepatcherMovementContextData;
-		private static GraphicContext _noPrepatcherGraphicContext;
-		private static TerrainDef _noPrepatcherTerrainDef;
-		private static int _noPrepatcherInt;
+		private static readonly RefDictionary<MovementDef> _thingDefMovementDefCache = new();
 
 		/// <summary>
 		/// Stores the movement type granted by the MovementExtensions of this def.
@@ -29,8 +20,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this ThingDef thingDef)
 		{
-			return ref _noPrepatcherMovementDef;
+			return ref _thingDefMovementDefCache.Get(thingDef.shortHash);
 		}
+
+		private static readonly RefDictionary<MovementDef> _lifeStageDefMovementDefCache = new();
 
 		/// <summary>
 		/// Stores the movement type granted by the MovementExtensions of this def.
@@ -41,8 +34,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this LifeStageDef lifeStageDef)
 		{
-			return ref _noPrepatcherMovementDef;
+			return ref _lifeStageDefMovementDefCache.Get(lifeStageDef.shortHash);
 		}
+
+		private static readonly RefDictionary<MovementDef> _geneDefMovementDefCache = new();
 
 		/// <summary>
 		/// Stores the movement type granted by the MovementExtensions of this def.
@@ -53,8 +48,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this GeneDef geneDef)
 		{
-			return ref _noPrepatcherMovementDef;
+			return ref _geneDefMovementDefCache.Get(geneDef.shortHash);
 		}
+
+		private static readonly RefDictionary<MovementDef> _hediffDefMovementDefCache = new();
 
 		/// <summary>
 		/// Stores the movement type granted by the MovementExtensions of this def.
@@ -65,8 +62,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this HediffDef hediffDef)
 		{
-			return ref _noPrepatcherMovementDef;
+			return ref _hediffDefMovementDefCache.Get(hediffDef.shortHash);
 		}
+
+		private static readonly RefDictionary<MovementDef> _pawnMovementDefCache = new();
 
 		/// <summary>
 		/// Movement definition currently in use for this pawn.
@@ -77,8 +76,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementDef MovementDef(this Pawn pawn)
 		{
-			return ref _noPrepatcherMovementDef;
+			return ref _pawnMovementDefCache.Get(pawn.thingIDNumber);
 		}
+
+		private static readonly RefDictionary<MovementContext> _pawnMovementContextCache = new();
 
 		/// <summary>
 		/// Movement context data of the current pawn.
@@ -89,8 +90,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementContext MovementContext(this Pawn pawn)
 		{
-			return ref _noPrepatcherMovementContext;
+			return ref _pawnMovementContextCache.Get(pawn.thingIDNumber);
 		}
+
+		private static readonly RefDictionary<GraphicContext> _pawnGraphicContextCache = new();
 
 		/// <summary>
 		/// Graphic context of this pawn, if any.
@@ -100,8 +103,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref GraphicContext GraphicContext(this Pawn pawn)
 		{
-			return ref _noPrepatcherGraphicContext;
+			return ref _pawnGraphicContextCache.Get(pawn.thingIDNumber);
 		}
+
+		private static readonly RefDictionary<TerrainDef> _pawnCurrentTerrainDefCache = new();
 
 		/// <summary>
 		/// Terrain on which this pawn is currently standing on.
@@ -111,8 +116,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref TerrainDef CurrentTerrainDef(this Pawn pawn)
 		{
-			return ref _noPrepatcherTerrainDef;
+			return ref _pawnCurrentTerrainDefCache.Get(pawn.thingIDNumber);
 		}
+
+		private static readonly RefDictionary<MapPathCostGrid> _mapPathCostGridCache = new();
 
 		/// <summary>
 		/// Map path cost grid of a map.
@@ -123,8 +130,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MapPathCostGrid MapPathCostGrid(this Map map)
 		{
-			return ref _noPrepatcherMapPathCostGrid;
+			return ref _mapPathCostGridCache.Get(map.uniqueID);
 		}
+
+		private static readonly RefDictionary<MovementContextData> _mapMovementContextDataCache = new();
 
 		/// <summary>
 		/// Movement context data for all pawns of a map.
@@ -135,8 +144,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref MovementContextData MovementContextData(this Map map)
 		{
-			return ref _noPrepatcherMovementContextData;
+			return ref _mapMovementContextDataCache.Get(map.uniqueID);
 		}
+
+		private static readonly RefDictionary<TerrainDef> _regionUniqueTerrainDef = new();
 
 		/// <summary>
 		/// Certain terrains must belong to regions which only have that terrain type. This field has a value in those
@@ -147,8 +158,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref TerrainDef UniqueTerrainDef(this Region region)
 		{
-			return ref _noPrepatcherTerrainDef;
+			return ref _regionUniqueTerrainDef.Get(region.id);
 		}
+
+		private static readonly RefDictionary<int> _terrainDefMovementIndexCache = new();
 
 		/// <summary>
 		/// Index of this TerrainDef in the array of path costs of MovementDef instances.
@@ -162,8 +175,10 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref int MovementIndex(this TerrainDef terrainDef)
 		{
-			return ref _noPrepatcherInt;
+			return ref _terrainDefMovementIndexCache.Get(terrainDef.shortHash);
 		}
+
+		private static readonly RefDictionary<int> _terrainDefExtendedRegionType = new();
 
 		/// <summary>
 		/// Certain terrains must only sare regions with cells having the same terrain. This is identified by this field
@@ -178,7 +193,7 @@ namespace PathfindingFramework.Patches
 		[PrepatcherField]
 		public static ref int ExtendedRegionType(this TerrainDef terrainDef)
 		{
-			return ref _noPrepatcherInt;
+			return ref _terrainDefExtendedRegionType.Get(terrainDef.shortHash);
 		}
 	}
 }

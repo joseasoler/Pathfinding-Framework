@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.Patches;
 using Verse;
 using Verse.AI;

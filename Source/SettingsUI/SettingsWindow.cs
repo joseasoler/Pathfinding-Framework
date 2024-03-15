@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.Patches;
 using UnityEngine;
 using Verse;

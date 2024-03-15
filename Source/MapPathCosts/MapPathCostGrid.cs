@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
