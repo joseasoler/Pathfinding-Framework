@@ -65,6 +65,39 @@ XML lookup, thus running considerably faster than regular XPath operations.
 				</li>
 			</li>
 
+			<li MayRequire="Mlie.AdvancedBiomes"> <!-- Advanced Biomes (Continued) -->
+				<li>
+					<tag>PF_TerrainTag_Gravel</tag>
+					<terrainDefs>
+						<li>VolcanoObsidian</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>PoisonMossyTerrain</li>
+						<li>PoisonSoil</li>
+						<li>PoisonSoilRich</li>
+						<li>SavannaSoil</li>
+						<li>SavannaSoilRich</li>
+						<li>VolcanoSoil</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_Mud</tag>
+					<terrainDefs>
+						<li>PoisonMarshyTerrain</li>
+						<li>PoisonMud</li>
+					</terrainDefs>
+				</li>
+				<li>
+					<tag>PF_TerrainTag_WaterShallow</tag>
+					<terrainDefs>
+						<li>PoisonMarsh</li>
+					</terrainDefs>
+				</li>
+			</li>
+
 			<li MayRequire="sarg.alphaanimals"> <!-- Alpha Animals -->
 				<li>
 					<tag>PF_TerrainTag_Ground</tag>
