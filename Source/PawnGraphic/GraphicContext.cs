@@ -58,7 +58,6 @@ namespace PathfindingFramework.PawnGraphic
 
 				_alternateGraphicIndex = indexesByWeight.RandomElementByWeight(x => x.Second).First;
 			}
-
 			Rand.PopState();
 		}
 
