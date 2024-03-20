@@ -39,7 +39,7 @@ namespace PathfindingFramework.Patches.LocationChoosing
 			{
 				if (instruction.Calls(originalMethod))
 				{
-					yield return new CodeInstruction(OpCodes.Ldarg_0); // this
+					yield return new CodeInstruction(OpCodes.Ldarg_1); // obj1
 					yield return new CodeInstruction(OpCodes.Ldfld, searcherFieldInfo); // searcher
 					yield return new CodeInstruction(OpCodes.Call, modifiedMethod);
 				}
