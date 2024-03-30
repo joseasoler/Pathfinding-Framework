@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using PathfindingFramework.ExtensionMethodCaches;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.PawnMovement;
 using Verse;
 
@@ -13,7 +13,7 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 	{
 		public static void Postfix(Hediff __instance)
 		{
-			if (__instance.pawn.Spawned && __instance.def.MovementDef() != null)
+			if (__instance.pawn.Spawned && MovementDefDatabase<HediffDef>.Get(__instance.def) != null)
 			{
 				PawnMovementUpdater.Update(__instance.pawn);
 			}

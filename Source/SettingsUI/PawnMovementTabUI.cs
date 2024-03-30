@@ -194,7 +194,8 @@ namespace PathfindingFramework.SettingsUI
 
 			Widgets.Label(modRect, ModOf(pawnKindDef));
 
-			MovementDef movementDef = PawnMovementOverrideSettings.CurrentMovementDef(pawnKindDef.race);
+			MovementDef movementDef = PawnMovementOverrideSettings.CurrentMovementDef(pawnKindDef.race) ??
+			                          MovementDefOf.PF_Movement_Terrestrial;
 			Widgets.Dropdown(dropdownRect, pawnKindDef.race, _ => movementDef.defName, GenerateMovementDefMenu,
 				movementDef.LabelCap.ToString());
 

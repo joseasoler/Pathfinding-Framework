@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using HarmonyLib;
 using PathfindingFramework.ExtensionMethodCaches;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
 using RimWorld;
 using Verse;
@@ -17,7 +18,7 @@ namespace PathfindingFramework.Patches.Spawning
 		{
 			foreach (PawnKindDef pawnKindDef in __result)
 			{
-				MovementDef movementDef = pawnKindDef.race?.MovementDef();
+				MovementDef movementDef = PawnMovementOverrideSettings.CurrentMovementDef(pawnKindDef.race);
 				if (movementDef == null || movementDef.defaultCost.cost < PathCost.Avoid.cost)
 				{
 					yield return pawnKindDef;

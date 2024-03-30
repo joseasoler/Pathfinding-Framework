@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using HarmonyLib;
 using PathfindingFramework.ExtensionMethodCaches;
+using PathfindingFramework.MovementDefUtils;
 using RimWorld;
 using Verse;
 
@@ -23,7 +24,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			for (int index = 0; index < apparelList.Count; ++index)
 			{
 				ThingDef apparelDef = apparelList[index].def;
-				MovementDef extensionMovementDef = apparelDef.MovementDef();
+				MovementDef extensionMovementDef = MovementDefDatabase<ThingDef>.Get(apparelDef);
 				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return new Pair<string, Dialog_InfoCard.Hyperlink?>(apparelDef.label,
@@ -45,7 +46,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 					continue;
 				}
 
-				MovementDef extensionMovementDef = gene.def.MovementDef();
+				MovementDef extensionMovementDef = MovementDefDatabase<GeneDef>.Get(gene.def);
 				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return gene.def;
@@ -93,7 +94,7 @@ namespace PathfindingFramework.Patches.DisplayMovementInUI
 			{
 				HediffDef hediffDef = hediffList[hediffIndex].def;
 
-				MovementDef extensionMovementDef = hediffDef.MovementDef();
+				MovementDef extensionMovementDef = MovementDefDatabase<HediffDef>.Get(hediffDef);
 				if (extensionMovementDef != null && extensionMovementDef == movementDef)
 				{
 					return new Pair<string, Dialog_InfoCard.Hyperlink?>(hediffDef.label,

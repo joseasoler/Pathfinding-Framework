@@ -9,62 +9,6 @@ namespace PathfindingFramework.ExtensionMethodCaches
 {
 	public static class Methods
 	{
-		private static readonly RefDictionary<MovementDef> _thingDefMovementDefCache = new();
-
-		/// <summary>
-		/// Stores the movement type granted by the MovementExtensions of this def.
-		/// This is initialized after the game loads, and never modified afterwards.
-		/// </summary>
-		/// <param name="thingDef">Apparel or pawn race being checked.</param>
-		/// <returns>Movement related to this def.</returns>
-		[PrepatcherField]
-		public static ref MovementDef MovementDef(this ThingDef thingDef)
-		{
-			return ref _thingDefMovementDefCache.Get(thingDef.shortHash);
-		}
-
-		private static readonly RefDictionary<MovementDef> _lifeStageDefMovementDefCache = new();
-
-		/// <summary>
-		/// Stores the movement type granted by the MovementExtensions of this def.
-		/// This is initialized after the game loads, and never modified afterwards.
-		/// </summary>
-		/// <param name="lifeStageDef">Life stage being checked.</param>
-		/// <returns>Movement related to this def.</returns>
-		[PrepatcherField]
-		public static ref MovementDef MovementDef(this LifeStageDef lifeStageDef)
-		{
-			return ref _lifeStageDefMovementDefCache.Get(lifeStageDef.shortHash);
-		}
-
-		private static readonly RefDictionary<MovementDef> _geneDefMovementDefCache = new();
-
-		/// <summary>
-		/// Stores the movement type granted by the MovementExtensions of this def.
-		/// This is initialized after the game loads, and never modified afterwards.
-		/// </summary>
-		/// <param name="geneDef">Gene being checked.</param>
-		/// <returns>Movement related to this def.</returns>
-		[PrepatcherField]
-		public static ref MovementDef MovementDef(this GeneDef geneDef)
-		{
-			return ref _geneDefMovementDefCache.Get(geneDef.shortHash);
-		}
-
-		private static readonly RefDictionary<MovementDef> _hediffDefMovementDefCache = new();
-
-		/// <summary>
-		/// Stores the movement type granted by the MovementExtensions of this def.
-		/// This is initialized after the game loads, and never modified afterwards.
-		/// </summary>
-		/// <param name="hediffDef">Health difference being checked.</param>
-		/// <returns>Movement related to this def.</returns>
-		[PrepatcherField]
-		public static ref MovementDef MovementDef(this HediffDef hediffDef)
-		{
-			return ref _hediffDefMovementDefCache.Get(hediffDef.shortHash);
-		}
-
 		private static readonly RefDictionary<MovementDef> _pawnMovementDefCache = new();
 
 		/// <summary>

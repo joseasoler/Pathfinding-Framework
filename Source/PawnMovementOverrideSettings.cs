@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PathfindingFramework.ExtensionMethodCaches;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Patches;
 using Verse;
 
@@ -10,11 +11,10 @@ namespace PathfindingFramework
 	/// </summary>
 	public static class PawnMovementOverrideSettings
 	{
-		private static Dictionary<ThingDef, MovementDef> _originalMovementDefs = new();
 		private static Dictionary<string, MovementDef> _movementDefsByDefName;
 
 		/// <summary>
-		/// Assumes that GetSettings and MovementExtensionReader.Initialize have been called.
+		/// Assumes that GetSettings and MovementExtensionCache.Initialize have been called.
 		/// </summary>
 		public static void Initialize()
 		{
@@ -24,20 +24,6 @@ namespace PathfindingFramework
 			{
 				_movementDefsByDefName[movementDef.defName] = movementDef;
 			}
-
-			foreach (ThingDef raceDef in DefDatabase<ThingDef>.AllDefsListForReading)
-			{
-				if (Settings.Values.PawnMovementOverrides.TryGetValue(raceDef.defName, out string movementDefName) &&
-				    _movementDefsByDefName.TryGetValue(movementDefName, out MovementDef movementDef))
-				{
-					raceDef.MovementDef() = movementDef;
-				}
-			}
-		}
-
-		public static void AddOriginal(ThingDef thingDef, MovementDef movementDef)
-		{
-			_originalMovementDefs[thingDef] = movementDef;
 		}
 
 		/// <summary>
@@ -53,9 +39,7 @@ namespace PathfindingFramework
 				return cachedMovementDef;
 			}
 
-			return _originalMovementDefs.TryGetValue(raceDef, out MovementDef originalMovementDef)
-				? originalMovementDef
-				: MovementDefOf.PF_Movement_Terrestrial;
+			return MovementDefDatabase<ThingDef>.Get(raceDef);
 		}
 	}
 }

@@ -63,7 +63,8 @@
 		<Compile Include="ModCompatibility\WindowsCompat.cs" />
 		<Compile Include="MovementDefOf.cs" />
 		<Compile Include="MovementDefUtils\MemoryReport.cs" />
-		<Compile Include="MovementDefUtils\MovementExtensionReader.cs" />
+		<Compile Include="MovementDefUtils\MovementDefDatabase.cs" />
+		<Compile Include="MovementDefUtils\MovementExtensionCache.cs" />
 		<Compile Include="MovementDefUtils\MovementDefPathCosts.cs" />
 		<Compile Include="MovementExtension.cs" />
 		<Compile Include="Parse\ParseHandler.cs" />
@@ -248,6 +249,7 @@
 
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="MovementDefDatabase\" />
 	  <Folder Include="Patches\ModExtensions\TerrainTag\" />
 	</ItemGroup>
 	<PropertyGroup>

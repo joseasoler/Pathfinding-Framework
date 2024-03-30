@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using PathfindingFramework.ExtensionMethodCaches;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
-using PathfindingFramework.Patches;
 using RimWorld;
 using Verse;
 
@@ -152,7 +152,7 @@ namespace PathfindingFramework
 		public static bool TryFindRandomPawnEntryCell(out IntVec3 foundCell, Map map, float roadChance,
 			bool allowFogged, Predicate<IntVec3> extraValidator, PawnKindDef pawnKindDef)
 		{
-			MovementDef movementDef = pawnKindDef.race?.MovementDef();
+			MovementDef movementDef = PawnMovementOverrideSettings.CurrentMovementDef(pawnKindDef.race);
 			if (movementDef != null)
 			{
 				return CellFinder.TryFindRandomEdgeCellWith((cell =>

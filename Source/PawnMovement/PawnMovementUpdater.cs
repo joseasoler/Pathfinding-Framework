@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.ModCompatibility;
-using PathfindingFramework.Patches;
+using PathfindingFramework.MovementDefUtils;
 using RimWorld;
 using Verse;
 
@@ -29,7 +29,7 @@ namespace PathfindingFramework.PawnMovement
 			for (int apparelIndex = 0; apparelIndex < apparelList.Count; ++apparelIndex)
 			{
 				ThingDef apparelDef = apparelList[apparelIndex].def;
-				MovementDef movementDef = apparelDef.MovementDef();
+				MovementDef movementDef = MovementDefDatabase<ThingDef>.Get(apparelDef);
 				if (movementDef != null)
 				{
 					movementDefs.Add(movementDef);
@@ -58,7 +58,7 @@ namespace PathfindingFramework.PawnMovement
 					continue;
 				}
 
-				MovementDef movementDef = gene.def.MovementDef();
+				MovementDef movementDef = MovementDefDatabase<GeneDef>.Get(gene.def);
 				if (movementDef != null)
 				{
 					movementDefs.Add(movementDef);
@@ -83,7 +83,7 @@ namespace PathfindingFramework.PawnMovement
 			{
 				var hediff = hediffList[hediffIndex];
 
-				MovementDef movementDef = hediff.def.MovementDef();
+				MovementDef movementDef = MovementDefDatabase<HediffDef>.Get(hediff.def);
 				if (movementDef != null)
 				{
 					movementDefs.Add(movementDef);
@@ -99,7 +99,7 @@ namespace PathfindingFramework.PawnMovement
 		private static void FromLifeStage(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
 			LifeStageDef lifeStageDef = pawn.ageTracker?.CurLifeStage;
-			MovementDef movementDef = lifeStageDef.MovementDef();
+			MovementDef movementDef = MovementDefDatabase<LifeStageDef>.Get(lifeStageDef);
 			if (movementDef != null)
 			{
 				movementDefs.Add(movementDef);
@@ -113,16 +113,10 @@ namespace PathfindingFramework.PawnMovement
 		/// <param name="movementDefs">Set of movement definitions available to the pawn.</param>
 		private static void FromRace(Pawn pawn, ref HashSet<MovementDef> movementDefs)
 		{
-			MovementDef overrideMovementDef = PawnMovementOverrideSettings.CurrentMovementDef(pawn.def);
-			if (overrideMovementDef != null)
-			{
-				movementDefs.Add(overrideMovementDef);
-				return;
-			}
-
-			MovementDef movementDef = pawn.def.MovementDef();
+			MovementDef movementDef = PawnMovementOverrideSettings.CurrentMovementDef(pawn.def);
 			if (movementDef != null)
 			{
+				movementDefs.Add(movementDef);
 			}
 		}
 

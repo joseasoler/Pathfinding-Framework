@@ -4,6 +4,7 @@ using System.Reflection.Emit;
 using HarmonyLib;
 using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.Jobs;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.Parse;
 using RimWorld;
 using Verse;
@@ -35,7 +36,8 @@ namespace PathfindingFramework.Patches.Spawning
 					true, null, pawnKindDef);
 			}
 
-			MovementDef movementDef = pawnKindDef.race?.MovementDef() ?? MovementDefOf.PF_Movement_Terrestrial;
+			MovementDef movementDef =
+				PawnMovementOverrideSettings.CurrentMovementDef(pawnKindDef.race) ?? MovementDefOf.PF_Movement_Terrestrial;
 
 			bool result = CellFinderLoose.TryGetRandomCellWith(testCell =>
 					LocationFinding.CanStandAt(movementDef, map, testCell) &&

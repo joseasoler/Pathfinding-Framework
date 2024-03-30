@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using PathfindingFramework.ExtensionMethodCaches;
+using PathfindingFramework.MovementDefUtils;
 using RimWorld.Planet;
 using Verse;
 
@@ -44,7 +45,7 @@ namespace PathfindingFramework.Patches.Spawning
 			List<PawnKindDef> result = new List<PawnKindDef>();
 			foreach (PawnKindDef animalDef in allAggressiveAnimals)
 			{
-				MovementDef movementDef = animalDef.race.MovementDef();
+				MovementDef movementDef = PawnMovementOverrideSettings.CurrentMovementDef(animalDef.race);
 				if (accessToWater || movementDef == null || !movementDef.manhuntersRequireWater)
 				{
 					result.Add(animalDef);

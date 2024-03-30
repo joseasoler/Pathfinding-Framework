@@ -44,8 +44,8 @@ namespace PathfindingFramework
 			// This value might be null after loading a config which lacks it.
 			Settings.Values.PawnMovementOverrides ??= new Dictionary<string, string>();
 			// Reads and stores the MovementDef granted by MovementExtensions of each Def.
-			MovementExtensionReader.Initialize();
-			// Apply movement type overrides from settings. Must be initialized after GetSettings and MovementExtensionReader.
+			MovementExtensionCache.Initialize();
+			// Apply movement type overrides from settings. Must be initialized after GetSettings and MovementExtensionCache.
 			PawnMovementOverrideSettings.Initialize();
 			// Set the indexes of TerrainDefs to use when accessing the path cost arrays of MovementDefs.
 			TerrainMovementIndex.Initialize();

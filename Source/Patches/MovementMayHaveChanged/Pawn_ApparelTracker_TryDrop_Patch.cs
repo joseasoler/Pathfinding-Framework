@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using PathfindingFramework.ExtensionMethodCaches;
+using PathfindingFramework.MovementDefUtils;
 using PathfindingFramework.PawnMovement;
 using RimWorld;
 using Verse;
@@ -16,7 +17,7 @@ namespace PathfindingFramework.Patches.MovementMayHaveChanged
 	{
 		public static void Postfix(Pawn ___pawn, Apparel ap)
 		{
-			if (___pawn.Spawned && ap.def.MovementDef() != null)
+			if (___pawn.Spawned && MovementDefDatabase<ThingDef>.Get(ap.def) != null)
 			{
 				PawnMovementUpdater.Update(___pawn);
 			}
