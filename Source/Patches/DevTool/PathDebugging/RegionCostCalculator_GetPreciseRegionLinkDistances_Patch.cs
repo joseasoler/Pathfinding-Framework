@@ -5,7 +5,7 @@ using System.Text;
 using HarmonyLib;
 using PathfindingFramework.ErrorHandling;
 using PathfindingFramework.ExtensionMethodCaches;
-using PathfindingFramework.MovementContexts;
+using PathfindingFramework.MapComponents.MovementContexts;
 using Verse;
 using Verse.AI;
 

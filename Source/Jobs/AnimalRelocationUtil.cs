@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PathfindingFramework.ExtensionMethodCaches;
-using PathfindingFramework.MovementContexts;
+using PathfindingFramework.MapComponents.MovementContexts;
 using PathfindingFramework.Patches;
 using RimWorld;
 using Verse;

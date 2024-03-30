@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using PathfindingFramework.DevTool;
 using PathfindingFramework.ExtensionMethodCaches;
-using PathfindingFramework.MapPathCosts;
-using PathfindingFramework.Patches;
+using PathfindingFramework.MapComponents.MapPathCosts;
 using Verse;
 
-namespace PathfindingFramework.MovementContexts
+namespace PathfindingFramework.MapComponents.MovementContexts
 {
 	/// <summary>
 	/// Stores movement context information for all of the pawns of a single map.

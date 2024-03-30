@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using PathfindingFramework.DevTool;
 using PathfindingFramework.ExtensionMethodCaches;
-using PathfindingFramework.Patches;
 using Verse;
 
-namespace PathfindingFramework.MapPathCosts
+namespace PathfindingFramework.MapComponents.MapPathCosts
 {
 	/// <summary>
 	/// Generate a memory usage report of the map path cost grids.
@@ -13,7 +12,7 @@ namespace PathfindingFramework.MapPathCosts
 	{
 		public static List<MemoryUsageData> MemoryReport()
 		{
-			string cacheName = nameof(MapPathCostMemoryReport);
+			const string cacheName = nameof(MapPathCostMemoryReport);
 			List<MemoryUsageData> report = new List<MemoryUsageData>();
 
 			int mapPathCostSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(MapPathCost));

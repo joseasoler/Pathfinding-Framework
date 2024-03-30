@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using PathfindingFramework.ExtensionMethodCaches;
-using PathfindingFramework.MovementContexts;
+using PathfindingFramework.MapComponents.MovementContexts;
 using Verse;
 using Verse.AI;
 

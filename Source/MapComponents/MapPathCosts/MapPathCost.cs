@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace PathfindingFramework.MapPathCosts
+namespace PathfindingFramework.MapComponents.MapPathCosts
 {
 	/// <summary>
 	/// Stores common path costs of a specific cell of the map. These are shared between different movement contexts.

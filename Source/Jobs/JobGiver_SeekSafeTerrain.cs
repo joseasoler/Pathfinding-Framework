@@ -1,5 +1,5 @@
 using PathfindingFramework.ExtensionMethodCaches;
-using PathfindingFramework.MovementContexts;
+using PathfindingFramework.MapComponents.MovementContexts;
 using PathfindingFramework.Patches;
 using Verse;
 using Verse.AI;

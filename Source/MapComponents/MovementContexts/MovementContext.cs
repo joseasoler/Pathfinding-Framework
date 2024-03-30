@@ -1,13 +1,12 @@
 using System;
 using PathfindingFramework.ExtensionMethodCaches;
-using PathfindingFramework.MapPathCosts;
+using PathfindingFramework.MapComponents.MapPathCosts;
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Parse;
-using PathfindingFramework.Patches;
 using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.MovementContexts
+namespace PathfindingFramework.MapComponents.MovementContexts
 {
 	/// <summary>
 	/// Pathing context information to use for specific pawns.

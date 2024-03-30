@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Parse;
-using PathfindingFramework.Patches;
 using Verse;
 using Verse.AI;
 
-namespace PathfindingFramework.MapPathCosts
+namespace PathfindingFramework.MapComponents.MapPathCosts
 {
 	/// <summary>
 	/// Keeps different map path costs up to date. These costs are shared between movement contexts of the same map.

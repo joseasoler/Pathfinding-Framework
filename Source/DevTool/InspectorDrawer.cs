@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using PathfindingFramework.ExtensionMethodCaches;
-using PathfindingFramework.MapPathCosts;
-using PathfindingFramework.MovementContexts;
+using PathfindingFramework.MapComponents.MapPathCosts;
+using PathfindingFramework.MapComponents.MovementContexts;
 using PathfindingFramework.Parse;
 using PathfindingFramework.Patches;
 using RimWorld.Planet;

@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
-using PathfindingFramework.MovementContexts;
+using PathfindingFramework.MapComponents.MovementContexts;
 using Verse;
 using Verse.AI;
 

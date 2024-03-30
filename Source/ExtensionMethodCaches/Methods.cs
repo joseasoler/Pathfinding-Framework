@@ -1,5 +1,5 @@
-using PathfindingFramework.MapPathCosts;
-using PathfindingFramework.MovementContexts;
+using PathfindingFramework.MapComponents.MapPathCosts;
+using PathfindingFramework.MapComponents.MovementContexts;
 using PathfindingFramework.PawnGraphic;
 using Prepatcher;
 using RimWorld;

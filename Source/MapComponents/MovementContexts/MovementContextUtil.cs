@@ -1,8 +1,7 @@
 using PathfindingFramework.ExtensionMethodCaches;
-using PathfindingFramework.Patches;
 using Verse;
 
-namespace PathfindingFramework.MovementContexts
+namespace PathfindingFramework.MapComponents.MovementContexts
 {
 	/// <summary>
 	/// Utility functions used by the movement context feature.
