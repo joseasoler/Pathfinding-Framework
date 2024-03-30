@@ -6,7 +6,8 @@ Abstract TerrainDefs such as WaterDeepBase are used by mods to represent things 
 TerrainDef is patched explicitly instead.
 
 Tags for modded terrain are also added here because AddTagsToTerrainDefs guarantees that all tags are added in a single
-XML lookup, thus running considerably faster than regular XPath operations.
+XML lookup. This requires far less PatchOperations and makes the XML code less verbose. It is also faster than standard
+PatchOperations.
 -->
 <Patch>
 
@@ -213,6 +214,38 @@ XML lookup, thus running considerably faster than regular XPath operations.
 					</terrainDefs>
 				</li>
 				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>RG_AridSoil</li>
+						<li>RG_BorealSoil</li>
+						<li>RG_TemperateSoil</li>
+						<li>RG_TropicalSoil</li>
+						<li>RG_TundraSoil</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+			<li MayRequire="ReGrowth.BOTR.AspenForest"> <!-- ReGrowth: Aspen -->
+				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>RG_AspenSoil</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+			<li MayRequire="ReGrowth.BOTR.BoilingForest"> <!-- ReGrowth: Boiling -->
+				<li>
+					<tag>PF_TerrainTag_Ground</tag>
+					<terrainDefs>
+						<li>RG_BoilingSoil</li>
+					</terrainDefs>
+				</li>
+			</li>
+
+
+			<li MayRequire="ReGrowth.BOTR.Wastelands"> <!-- ReGrowth: Wastelands -->
+				<li>
 					<tag>PF_TerrainTag_Gravel</tag>
 					<terrainDefs>
 						<li>RG_DepletedGravel</li>
@@ -221,15 +254,8 @@ XML lookup, thus running considerably faster than regular XPath operations.
 				<li>
 					<tag>PF_TerrainTag_Ground</tag>
 					<terrainDefs>
-						<li>RG_AridSoil</li>
-						<li>RG_AspenSoil</li>
-						<li>RG_BoilingSoil</li>
-						<li>RG_BorealSoil</li>
 						<li>RG_DepletedMossy</li>
 						<li>RG_DepletedSoil</li>
-						<li>RG_TemperateSoil</li>
-						<li>RG_TropicalSoil</li>
-						<li>RG_TundraSoil</li>
 					</terrainDefs>
 				</li>
 			</li>
