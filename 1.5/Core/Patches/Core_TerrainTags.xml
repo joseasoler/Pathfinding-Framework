@@ -6,7 +6,8 @@ Abstract TerrainDefs such as WaterDeepBase are used by mods to represent things 
 TerrainDef is patched explicitly instead.
 
 Tags for modded terrain are also added here because AddTagsToTerrainDefs guarantees that all tags are added in a single
-XML lookup, thus running considerably faster than regular XPath operations.
+XML lookup. This requires far less PatchOperations and makes the XML code less verbose. It is also faster than standard
+PatchOperations.
 -->
 <Patch>
 
