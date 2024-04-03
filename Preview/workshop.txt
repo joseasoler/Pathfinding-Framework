@@ -6,8 +6,6 @@ Players only need to add this mod to their mod list, along with any other mods o
 
 The framework is designed to play well with other mods and optimized for smooth gameplay.
 
-[b]Wiki:[/b] https://github.com/joseasoler/Pathfinding-Framework/wiki
-
 [b]Discord server:[/b]
 
 [url=https://discord.gg/HB3KyzStgp][img]https://i.imgur.com/tuvp3Yd.png[/img][/url]
@@ -40,7 +38,7 @@ Born of fire and earth, these creatures roam the land and swim through molten la
 
 [h2]Custom movement types[/h2]
 
-It is also possible to define custom movement types using the framework, check the [url=https://github.com/joseasoler/Pathfinding-Framework/wiki]wiki[/url] for details.
+It is also possible to define custom movement types using the framework, check the wiki for details.
 
 [h1]Other features[/h1]
 
@@ -97,16 +95,22 @@ Using RimSort or RimPy to sort your mod list should have optimal results.
 
 [h1]Troubleshooting[/h1]
 
-Pathfinding Framework includes some useful features for troubleshooting bugs, which can be checked at the [url=https://github.com/joseasoler/Pathfinding-Framework/wiki/Testing-and-troubleshooting]troubleshooting wiki[/url]. 
+Pathfinding Framework includes some useful features for troubleshooting bugs, which can be checked at the troubleshooting wiki.
 
-For bug reports, prefer using the [url=https://discord.gg/HB3KyzStgp]Discord server[/url] or the [url=https://github.com/joseasoler/Pathfinding-Framework/issues]GitHub issue tracker[/url].
+All bug reports must provide a HugsLibs log. To obtain one, follow these steps:
+
+1) Subscribe to Log Publisher from HugsLib in the Steam Workshop.
+2) Inside of the game and after experiencing the issue, press Ctrl + F12. This will launch the log publisher.
+3) Click on the "Upload" button.
+4) Press on the "Copy" button to obtain the link to the log.
+5) Paste the log link in your bug report.
+
+If you do not have HugsLib, you can also get a RimWorld log. You can check how to obtain it in section 6 of this link: https://ludeon.com/forums/index.php?topic=513.0
 
 [h1]Credits[/h1]
 
-[b]Project website:[/b] https://github.com/joseasoler/Pathfinding-Framework
-
 • [b]MSeal[/b]: Original implementation of [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2048567351]TerrainMovementKit[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1542399915]SwimmingKit[/url].
 
-• [b][url=https://github.com/joseasoler/]joseasoler[/url][/b]: New implementation of the Pathfinding Framework.
+• [b]joseasoler[/b]: Pathfinding Framework implementation.
 
 • [b][url=https://ko-fi.com/elseud]Elseud[/url][/b]: Preview image.

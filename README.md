@@ -86,7 +86,7 @@ This project encourages community involvement and contributions. Check the [CONT
 
 • [MSeal](https://github.com/MSeal/): Original implementation of [TerrainMovementKit](https://github.com/MSeal/RimworldTerrainMovementKit) and [SwimmingKit](https://github.com/MSeal/RimworldSwimming).
 
-• [joseasoler](https://github.com/joseasoler): New implementation of the Pathfinding Framework.
+• [joseasoler](https://github.com/joseasoler): Pathfinding Framework implementation.
 
 • [Elseud](https://ko-fi.com/elseud): Preview image.
 
