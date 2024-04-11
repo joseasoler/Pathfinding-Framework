@@ -244,36 +244,7 @@ PatchOperations.
 						<li>RG_Lava</li>
 					</terrainDefs>
 				</li>
-				<li>
-					<tag>PF_TerrainTag_Ground</tag>
-					<terrainDefs>
-						<li>RG_AridSoil</li>
-						<li>RG_BorealSoil</li>
-						<li>RG_TemperateSoil</li>
-						<li>RG_TropicalSoil</li>
-						<li>RG_TundraSoil</li>
-					</terrainDefs>
-				</li>
 			</li>
-
-			<li MayRequire="ReGrowth.BOTR.AspenForest"> <!-- ReGrowth: Aspen -->
-				<li>
-					<tag>PF_TerrainTag_Ground</tag>
-					<terrainDefs>
-						<li>RG_AspenSoil</li>
-					</terrainDefs>
-				</li>
-			</li>
-	
-			<li MayRequire="ReGrowth.BOTR.BoilingForest"> <!-- ReGrowth: Boiling -->
-				<li>
-					<tag>PF_TerrainTag_Ground</tag>
-					<terrainDefs>
-						<li>RG_BoilingSoil</li>
-					</terrainDefs>
-				</li>
-			</li>
-
 
 			<li MayRequire="ReGrowth.BOTR.Wastelands"> <!-- ReGrowth: Wastelands -->
 				<li>
