@@ -249,7 +249,6 @@
 
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="MovementDefDatabase\" />
 	  <Folder Include="Patches\ModExtensions\TerrainTag\" />
 	</ItemGroup>
 	<PropertyGroup>
