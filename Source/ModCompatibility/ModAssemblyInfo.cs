@@ -17,6 +17,8 @@ namespace PathfindingFramework.ModCompatibility
 		/// <summary>
 		/// Dubs Bad Hygiene
 		/// https://steamcommunity.com/workshop/filedetails/?id=836308268
+		/// Dubs Bad Hygiene Lite
+		/// https://steamcommunity.com/sharedfiles/filedetails/?id=2570319432
 		/// </summary>
 		public static Assembly DubsBadHygieneAssembly;
 
@@ -41,6 +43,8 @@ namespace PathfindingFramework.ModCompatibility
 		/// <summary>
 		/// Windows
 		/// https://steamcommunity.com/sharedfiles/filedetails/?id=2571189146
+		/// (Dirty) Windows
+		/// https://steamcommunity.com/sharedfiles/filedetails/?id=3220152649
 		/// </summary>
 		public static Assembly Windows;
 
@@ -69,6 +73,7 @@ namespace PathfindingFramework.ModCompatibility
 
 						break;
 					case "dubwise.dubsbadhygiene":
+					case "dubwise.dubsbadhygiene.lite":
 						foreach (Assembly assembly in pack.assemblies.loadedAssemblies)
 						{
 							if (assembly.GetName().Name == "BadHygiene")
@@ -83,6 +88,7 @@ namespace PathfindingFramework.ModCompatibility
 						GiddyUp2Assembly = firstAssembly;
 						break;
 					case "owlchemist.windows":
+					case "anumeric.dirtywindows":
 						Windows = firstAssembly;
 						break;
 					case "vanillaexpanded.vfesecurity":
