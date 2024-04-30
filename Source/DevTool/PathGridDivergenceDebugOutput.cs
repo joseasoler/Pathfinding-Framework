@@ -35,6 +35,7 @@ namespace PathfindingFramework.DevTool
 
 			if (context == null)
 			{
+				Report.Warning("Path grid divergence calculator could not find any pawn with the requested movement type.");
 				return;
 			}
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PathfindingFramework.ErrorHandling;
 using PathfindingFramework.ExtensionMethodCaches;
 using PathfindingFramework.ModCompatibility;
 using PathfindingFramework.Parse;
@@ -41,7 +42,7 @@ namespace PathfindingFramework.MapComponents.MapPathCosts
 			}
 
 			const short centerCellCost = 1000;
-			_mapGrid[cellIndex].fire += (short)(isSpawning ? centerCellCost : -centerCellCost);
+			_mapGrid[cellIndex].fire += (short) (isSpawning ? centerCellCost : -centerCellCost);
 			Map.MovementContextData().UpdateCell(cellIndex);
 
 			IntVec3[] adjacentCells = GenAdj.AdjacentCells;
@@ -56,7 +57,7 @@ namespace PathfindingFramework.MapComponents.MapPathCosts
 				}
 
 				const short adjacentCellCost = 150;
-				_mapGrid[adjacentCellIndex].fire += (short)(isSpawning ? adjacentCellCost : -adjacentCellCost);
+				_mapGrid[adjacentCellIndex].fire += (short) (isSpawning ? adjacentCellCost : -adjacentCellCost);
 				Map.MovementContextData().UpdateCell(adjacentIndex);
 			}
 		}
@@ -99,7 +100,7 @@ namespace PathfindingFramework.MapComponents.MapPathCosts
 
 				int currentThingCost = thing.def.pathCost;
 				short narrowedThingPathCost =
-					currentThingCost > PathCost.Impassable.cost ? PathCost.Impassable.cost : (short)currentThingCost;
+					currentThingCost > PathCost.Impassable.cost ? PathCost.Impassable.cost : (short) currentThingCost;
 				mapPathCostRef.things = Math.Max(mapPathCostRef.things, narrowedThingPathCost);
 
 				if (!PathGrid.IsPathCostIgnoreRepeater(thing.def))
@@ -138,7 +139,7 @@ namespace PathfindingFramework.MapComponents.MapPathCosts
 		public void UpdateSnow(IntVec3 cell, int cost)
 		{
 			int cellIndex = ToIndex(cell);
-			_mapGrid[cellIndex].snow = (sbyte)cost;
+			_mapGrid[cellIndex].snow = (sbyte) cost;
 			Map.MovementContextData().UpdateCell(cellIndex);
 		}
 
@@ -151,7 +152,7 @@ namespace PathfindingFramework.MapComponents.MapPathCosts
 			{
 				float depth = Map.snowGrid.depthGrid[cellIndex];
 				SnowCategory newCategory = SnowUtility.GetSnowCategory(depth);
-				_mapGrid[cellIndex].snow = (sbyte)SnowUtility.MovementTicksAddOn(newCategory);
+				_mapGrid[cellIndex].snow = (sbyte) SnowUtility.MovementTicksAddOn(newCategory);
 				// This function does not need to update the MovementContextData. This is done separately by the caller.
 			}
 		}
